@@ -25,16 +25,36 @@ def test_db():
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
 
-    # Mirror the exact schema from app/database.py
+    # recurring_transactions table (must be created before transactions
+    # so the foreign-key reference is valid with PRAGMA foreign_keys ON)
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS recurring_transactions (
+            id            INTEGER PRIMARY KEY AUTOINCREMENT,
+            type          TEXT    NOT NULL CHECK(type IN ('income', 'expense')),
+            amount        REAL    NOT NULL CHECK(amount > 0),
+            category      TEXT    NOT NULL,
+            description   TEXT    DEFAULT '',
+            frequency     TEXT    NOT NULL CHECK(frequency IN ('weekly', 'monthly')),
+            day_of_week   INTEGER CHECK(day_of_week IS NULL OR (day_of_week >= 0 AND day_of_week <= 6)),
+            day_of_month  INTEGER CHECK(day_of_month IS NULL OR (day_of_month >= 1 AND day_of_month <= 31)),
+            start_date    TEXT    NOT NULL,
+            end_date      TEXT,
+            is_active     INTEGER DEFAULT 1 CHECK(is_active IN (0, 1)),
+            created_at    TEXT    DEFAULT (datetime('now'))
+        )
+    """)
+
+    # transactions table (with recurring_id column referencing recurring_transactions)
     conn.execute("""
         CREATE TABLE IF NOT EXISTS transactions (
-            id          INTEGER PRIMARY KEY AUTOINCREMENT,
-            type        TEXT    NOT NULL CHECK(type IN ('income', 'expense')),
-            amount      REAL    NOT NULL CHECK(amount > 0),
-            category    TEXT    NOT NULL,
-            description TEXT    DEFAULT '',
-            date        TEXT    NOT NULL,
-            created_at  TEXT    DEFAULT (datetime('now'))
+            id            INTEGER PRIMARY KEY AUTOINCREMENT,
+            type          TEXT    NOT NULL CHECK(type IN ('income', 'expense')),
+            amount        REAL    NOT NULL CHECK(amount > 0),
+            category      TEXT    NOT NULL,
+            description   TEXT    DEFAULT '',
+            date          TEXT    NOT NULL,
+            created_at    TEXT    DEFAULT (datetime('now')),
+            recurring_id  INTEGER REFERENCES recurring_transactions(id)
         )
     """)
     conn.commit()
@@ -52,8 +72,9 @@ def client(test_db):
     Because the routers import ``get_db`` with
     ``from app.database import get_db`` (a direct call, *not* FastAPI
     ``Depends``), we must monkey-patch the name **in every module that
-    imported it**.  That means patching both
-    ``app.routers.transactions.get_db`` and ``app.routers.summary.get_db``.
+    imported it**.  That means patching
+    ``app.routers.transactions.get_db``, ``app.routers.summary.get_db``,
+    and ``app.routers.recurring.get_db``.
     """
     _conn, db_path = test_db
 
@@ -64,9 +85,28 @@ def client(test_db):
         conn.execute("PRAGMA foreign_keys = ON")
         return conn
 
-    with (
+    # Guard the recurring router patch so that existing tests still pass
+    # even if app/routers/recurring.py has not been created yet.
+    try:
+        from app.routers import recurring as _recurring_module  # noqa: F401
+        _has_recurring = True
+    except (ImportError, ModuleNotFoundError):
+        _has_recurring = False
+
+    patches = [
         patch("app.routers.transactions.get_db", _test_get_db),
         patch("app.routers.summary.get_db", _test_get_db),
-    ):
+    ]
+    if _has_recurring:
+        patches.append(patch("app.routers.recurring.get_db", _test_get_db))
+
+    # Enter all context managers
+    for p in patches:
+        p.start()
+
+    try:
         with TestClient(app) as c:
             yield c
+    finally:
+        for p in patches:
+            p.stop()

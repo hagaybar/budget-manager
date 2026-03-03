@@ -23,6 +23,13 @@ def page(browser):
         txns = client.get("/api/transactions").json()
         for t in txns:
             client.delete(f"/api/transactions/{t['id']}")
+        # Clean recurring transactions (guarded in case endpoint not yet live)
+        try:
+            recs = client.get("/api/recurring").json()
+            for r in recs:
+                client.delete(f"/api/recurring/{r['id']}")
+        except Exception:
+            pass
     yield pg
     pg.close()
     ctx.close()
@@ -36,6 +43,50 @@ def _add_transaction(page, type_val, amount, category, description, date):
     page.fill('[data-testid="description-input"]', description)
     page.fill('[data-testid="date-input"]', date)
     page.click('[data-testid="submit-btn"]')
+    page.wait_for_timeout(1000)  # Wait for API call and list refresh
+
+
+def _add_recurring(page, type_val, amount, category, description, frequency,
+                   day_value, start_date, end_date=None):
+    """Helper to fill and submit the recurring transaction form.
+
+    Parameters
+    ----------
+    type_val : str
+        "income" or "expense".
+    amount : float | int
+        Recurring amount.
+    category : str
+        Category text.
+    description : str
+        Description text.
+    frequency : str
+        "weekly" or "monthly".
+    day_value : int | str
+        For weekly: the day_of_week value (0=Monday..6=Sunday) to select.
+        For monthly: the day_of_month integer to fill.
+    start_date : str
+        YYYY-MM-DD format start date.
+    end_date : str | None
+        YYYY-MM-DD format end date, or None to leave blank.
+    """
+    page.select_option('[data-testid="rec-type-select"]', type_val)
+    page.fill('[data-testid="rec-amount-input"]', str(amount))
+    page.fill('[data-testid="rec-category-input"]', category)
+    page.fill('[data-testid="rec-description-input"]', description)
+    page.select_option('[data-testid="rec-frequency-select"]', frequency)
+
+    if frequency == "weekly":
+        page.select_option('[data-testid="rec-day-of-week"]', str(day_value))
+    else:
+        page.fill('[data-testid="rec-day-of-month"]', str(day_value))
+
+    page.fill('[data-testid="rec-start-date"]', start_date)
+
+    if end_date:
+        page.fill('[data-testid="rec-end-date"]', end_date)
+
+    page.click('[data-testid="rec-submit-btn"]')
     page.wait_for_timeout(1000)  # Wait for API call and list refresh
 
 
@@ -103,3 +154,83 @@ class TestMonthlySummary:
         expect(page.locator('[data-testid="total-income"]')).to_contain_text("3,000")
         expect(page.locator('[data-testid="total-expenses"]')).to_contain_text("500")
         expect(page.locator('[data-testid="net-balance"]')).to_contain_text("2,500")
+
+
+# ---------------------------------------------------------------------------
+# Currency Display Tests
+# ---------------------------------------------------------------------------
+
+class TestCurrencyDisplay:
+    """Verify that the UI uses the shekel symbol (not dollar)."""
+
+    def test_currency_displays_shekel(self, page):
+        """Add a transaction and verify the shekel symbol appears in the UI."""
+        page.goto(BASE_URL)
+        _add_transaction(page, "income", 1000, "Salary", "Test salary", "2026-03-01")
+        page.wait_for_timeout(1500)
+
+        # The transaction row should show the shekel symbol
+        row = page.locator('[data-testid="transaction-row"]').first
+        row_text = row.inner_text()
+        assert "\u20aa" in row_text, (
+            f"Expected shekel symbol in transaction row, got: {row_text}"
+        )
+        assert "$" not in row_text, (
+            f"Dollar sign should not appear in transaction row, got: {row_text}"
+        )
+
+
+# ---------------------------------------------------------------------------
+# Recurring Transactions UI Tests
+# ---------------------------------------------------------------------------
+
+class TestRecurringUI:
+    """E2E tests for the recurring transactions UI section."""
+
+    def test_recurring_section_visible(self, page):
+        """The recurring transactions section is visible on page load."""
+        page.goto(BASE_URL)
+        section = page.locator('[data-testid="recurring-section"]')
+        expect(section).to_be_visible()
+
+    def test_add_weekly_recurring_via_ui(self, page):
+        """Fill the recurring form (weekly, Friday, 5000, Salary) and submit.
+        Verify a row appears in the recurring list."""
+        page.goto(BASE_URL)
+        _add_recurring(
+            page,
+            type_val="income",
+            amount=5000,
+            category="Salary",
+            description="Weekly pay",
+            frequency="weekly",
+            day_value=4,  # Friday
+            start_date="2026-03-01",
+        )
+        rows = page.locator('[data-testid="recurring-row"]')
+        expect(rows).to_have_count(1)
+        expect(rows.first).to_contain_text("Salary")
+        expect(rows.first).to_contain_text("5,000")
+
+    def test_delete_recurring_via_ui(self, page):
+        """Add a recurring definition, click delete, verify it is removed."""
+        page.goto(BASE_URL)
+        _add_recurring(
+            page,
+            type_val="expense",
+            amount=1200,
+            category="Rent",
+            description="Monthly rent",
+            frequency="monthly",
+            day_value=1,
+            start_date="2026-03-01",
+        )
+        rows = page.locator('[data-testid="recurring-row"]')
+        expect(rows).to_have_count(1)
+
+        # Click the delete button on the recurring row
+        page.click('[data-testid="rec-delete-btn"]')
+        page.wait_for_timeout(1000)
+
+        rows = page.locator('[data-testid="recurring-row"]')
+        expect(rows).to_have_count(0)

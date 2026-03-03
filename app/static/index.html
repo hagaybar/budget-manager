@@ -343,6 +343,48 @@
             margin-left: 0.5rem;
         }
 
+        /* ===== RECURRING ROW ===== */
+        .recurring-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #edf2f7;
+            flex-wrap: wrap;
+        }
+
+        .recurring-row:last-child {
+            border-bottom: none;
+        }
+
+        .rec-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .rec-category {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2d3748;
+        }
+
+        .rec-description {
+            font-size: 0.8rem;
+            color: #718096;
+        }
+
+        .rec-frequency {
+            font-size: 0.78rem;
+            color: #4a5568;
+            flex-shrink: 0;
+        }
+
+        .rec-actions {
+            display: flex;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+
         /* ===== MOBILE RESPONSIVE ===== */
         @media (max-width: 480px) {
             .header h1 {
@@ -377,6 +419,10 @@
 
             .summary-value {
                 font-size: 1.1rem;
+            }
+
+            .recurring-row {
+                gap: 0.5rem;
             }
         }
 
@@ -480,18 +526,89 @@
             <div class="summary-grid">
                 <div class="summary-item income-box">
                     <div class="summary-label">Income</div>
-                    <div class="summary-value income-val" data-testid="total-income" id="totalIncome">$0.00</div>
+                    <div class="summary-value income-val" data-testid="total-income" id="totalIncome">\u20aa0.00</div>
                 </div>
                 <div class="summary-item expense-box">
                     <div class="summary-label">Expenses</div>
-                    <div class="summary-value expense-val" data-testid="total-expenses" id="totalExpenses">$0.00</div>
+                    <div class="summary-value expense-val" data-testid="total-expenses" id="totalExpenses">\u20aa0.00</div>
                 </div>
                 <div class="summary-item net-box">
                     <div class="summary-label">Net Balance</div>
-                    <div class="summary-value net-val" data-testid="net-balance" id="netBalance">$0.00</div>
+                    <div class="summary-value net-val" data-testid="net-balance" id="netBalance">\u20aa0.00</div>
                 </div>
             </div>
             <div class="category-list" id="categoryBreakdown"></div>
+        </div>
+
+        <!-- RECURRING TRANSACTIONS -->
+        <div class="card" data-testid="recurring-section">
+            <div class="card-title">Recurring Transactions</div>
+
+            <!-- Add Recurring Form -->
+            <form data-testid="recurring-form" class="form-grid" id="recurringForm">
+                <div class="form-group">
+                    <label for="rec-type-select">Type</label>
+                    <select id="rec-type-select" data-testid="rec-type-select" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="rec-amount-input">Amount</label>
+                    <input type="number" id="rec-amount-input" data-testid="rec-amount-input"
+                           placeholder="0.00" step="0.01" min="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="rec-category-input">Category</label>
+                    <input type="text" id="rec-category-input" data-testid="rec-category-input"
+                           placeholder="e.g. Rent, Salary" required maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="rec-description-input">Description</label>
+                    <input type="text" id="rec-description-input" data-testid="rec-description-input"
+                           placeholder="Optional note" maxlength="500">
+                </div>
+                <div class="form-group">
+                    <label for="rec-frequency-select">Frequency</label>
+                    <select id="rec-frequency-select" data-testid="rec-frequency-select" required>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                    </select>
+                </div>
+                <div class="form-group" id="dayOfWeekGroup">
+                    <label for="rec-day-of-week">Day of Week</label>
+                    <select id="rec-day-of-week" data-testid="rec-day-of-week">
+                        <option value="0">Monday</option>
+                        <option value="1">Tuesday</option>
+                        <option value="2">Wednesday</option>
+                        <option value="3">Thursday</option>
+                        <option value="4">Friday</option>
+                        <option value="5">Saturday</option>
+                        <option value="6">Sunday</option>
+                    </select>
+                </div>
+                <div class="form-group" id="dayOfMonthGroup" style="display:none;">
+                    <label for="rec-day-of-month">Day of Month</label>
+                    <input type="number" id="rec-day-of-month" data-testid="rec-day-of-month"
+                           min="1" max="31" placeholder="1-31">
+                </div>
+                <div class="form-group">
+                    <label for="rec-start-date">Start Date</label>
+                    <input type="date" id="rec-start-date" data-testid="rec-start-date">
+                </div>
+                <div class="form-group">
+                    <label for="rec-end-date">End Date (optional)</label>
+                    <input type="date" id="rec-end-date" data-testid="rec-end-date">
+                </div>
+                <button type="submit" class="submit-btn" data-testid="rec-submit-btn">
+                    Add Recurring Transaction
+                </button>
+            </form>
+
+            <!-- Recurring Transaction List -->
+            <div data-testid="recurring-list" id="recurringList" style="margin-top: 1rem;">
+                <div class="loading">Loading recurring transactions...</div>
+            </div>
         </div>
 
     </div>
@@ -521,6 +638,13 @@
         const categoryBreakdown = document.getElementById('categoryBreakdown');
         const toast = document.getElementById('toast');
 
+        /* Recurring DOM refs */
+        const recurringForm = document.getElementById('recurringForm');
+        const recFrequencySelect = document.getElementById('rec-frequency-select');
+        const dayOfWeekGroup = document.getElementById('dayOfWeekGroup');
+        const dayOfMonthGroup = document.getElementById('dayOfMonthGroup');
+        const recurringList = document.getElementById('recurringList');
+
         /* ===== INIT ===== */
         function init() {
             // Set default date to today
@@ -536,9 +660,14 @@
             ];
             summaryTitle.textContent = `${monthNames[currentMonth - 1]} ${currentYear} Summary`;
 
+            // Setup frequency toggle
+            recFrequencySelect.addEventListener('change', toggleFrequencyFields);
+            toggleFrequencyFields();
+
             // Load data
             loadTransactions();
             loadSummary();
+            loadRecurring();
         }
 
         /* ===== TOAST ===== */
@@ -586,7 +715,7 @@
             transactionList.innerHTML = transactions.map(tx => `
                 <div class="transaction-row" data-testid="transaction-row" data-id="${tx.id}">
                     <span class="type-badge ${tx.type}">${tx.type}</span>
-                    <span class="tx-amount ${tx.type}">$${formatAmount(tx.amount)}</span>
+                    <span class="tx-amount ${tx.type}">\u20aa${formatAmount(tx.amount)}</span>
                     <div class="tx-details">
                         <div class="tx-category">${escapeHtml(tx.category)}</div>
                         <div class="tx-description">${escapeHtml(tx.description || '')}</div>
@@ -696,9 +825,9 @@
 
         /* ===== RENDER SUMMARY ===== */
         function renderSummary(summary) {
-            totalIncomeEl.textContent = `$${formatAmount(summary.total_income)}`;
-            totalExpensesEl.textContent = `$${formatAmount(summary.total_expenses)}`;
-            netBalanceEl.textContent = `$${formatAmount(summary.net_balance)}`;
+            totalIncomeEl.textContent = `\u20aa${formatAmount(summary.total_income)}`;
+            totalExpensesEl.textContent = `\u20aa${formatAmount(summary.total_expenses)}`;
+            netBalanceEl.textContent = `\u20aa${formatAmount(summary.net_balance)}`;
 
             // Update net balance color
             if (summary.net_balance < 0) {
@@ -715,7 +844,7 @@
                         <div class="category-row">
                             <span class="cat-name">${escapeHtml(cat.category)}</span>
                             <span>
-                                <span class="cat-total">$${formatAmount(cat.total)}</span>
+                                <span class="cat-total">\u20aa${formatAmount(cat.total)}</span>
                                 <span class="cat-count">(${cat.count} txn${cat.count > 1 ? 's' : ''})</span>
                             </span>
                         </div>
@@ -723,6 +852,145 @@
                 `;
             } else {
                 categoryBreakdown.innerHTML = '';
+            }
+        }
+
+        /* ===== RECURRING: Frequency Toggle ===== */
+        function toggleFrequencyFields() {
+            const freq = recFrequencySelect.value;
+            if (freq === 'weekly') {
+                dayOfWeekGroup.style.display = '';
+                dayOfMonthGroup.style.display = 'none';
+            } else {
+                dayOfWeekGroup.style.display = 'none';
+                dayOfMonthGroup.style.display = '';
+            }
+        }
+
+        /* ===== LOAD RECURRING ===== */
+        async function loadRecurring() {
+            try {
+                const res = await fetch(`${API_BASE}/recurring/`);
+                if (!res.ok) throw new Error('Failed to load recurring transactions');
+                const items = await res.json();
+                renderRecurring(items);
+            } catch (err) {
+                recurringList.innerHTML = '<div class="empty-state">Failed to load recurring transactions.</div>';
+                console.error(err);
+            }
+        }
+
+        /* ===== RENDER RECURRING ===== */
+        function renderRecurring(items) {
+            if (items.length === 0) {
+                recurringList.innerHTML = '<div class="empty-state">No recurring transactions yet.</div>';
+                return;
+            }
+
+            const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+            recurringList.innerHTML = items.map(rec => {
+                let freqText = '';
+                if (rec.frequency === 'weekly') {
+                    freqText = `Weekly on ${dayNames[rec.day_of_week]}`;
+                } else {
+                    freqText = `Monthly on day ${rec.day_of_month}`;
+                }
+
+                return `
+                    <div class="recurring-row" data-testid="recurring-row" data-id="${rec.id}">
+                        <span class="type-badge ${rec.type}">${rec.type}</span>
+                        <span class="tx-amount ${rec.type}">\u20aa${formatAmount(rec.amount)}</span>
+                        <div class="rec-info">
+                            <div class="rec-category">${escapeHtml(rec.category)}</div>
+                            <div class="rec-description">${escapeHtml(rec.description || '')}</div>
+                        </div>
+                        <span class="rec-frequency">${freqText}</span>
+                        <div class="rec-actions">
+                            <button class="delete-btn" data-testid="rec-delete-btn" onclick="deleteRecurring(${rec.id})">Delete</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /* ===== ADD RECURRING ===== */
+        recurringForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const freq = recFrequencySelect.value;
+            const data = {
+                type: document.getElementById('rec-type-select').value,
+                amount: parseFloat(document.getElementById('rec-amount-input').value),
+                category: document.getElementById('rec-category-input').value.trim(),
+                description: document.getElementById('rec-description-input').value.trim(),
+                frequency: freq,
+            };
+
+            if (freq === 'weekly') {
+                data.day_of_week = parseInt(document.getElementById('rec-day-of-week').value, 10);
+            } else {
+                data.day_of_month = parseInt(document.getElementById('rec-day-of-month').value, 10);
+            }
+
+            const startDate = document.getElementById('rec-start-date').value;
+            if (startDate) {
+                data.start_date = startDate;
+            }
+
+            const endDate = document.getElementById('rec-end-date').value;
+            if (endDate) {
+                data.end_date = endDate;
+            }
+
+            if (!data.category) {
+                showToast('Category is required', true);
+                return;
+            }
+
+            if (!data.amount || data.amount <= 0) {
+                showToast('Amount must be greater than 0', true);
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/recurring/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!res.ok) {
+                    const err = await res.json();
+                    throw new Error(err.detail || 'Failed to add recurring transaction');
+                }
+
+                showToast('Recurring transaction added!');
+                recurringForm.reset();
+                toggleFrequencyFields();
+                await loadRecurring();
+            } catch (err) {
+                showToast(err.message, true);
+                console.error(err);
+            }
+        });
+
+        /* ===== DELETE RECURRING ===== */
+        async function deleteRecurring(id) {
+            try {
+                const res = await fetch(`${API_BASE}/recurring/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!res.ok && res.status !== 204) {
+                    throw new Error('Failed to delete recurring transaction');
+                }
+
+                showToast('Recurring transaction deleted');
+                await loadRecurring();
+            } catch (err) {
+                showToast(err.message, true);
+                console.error(err);
             }
         }
 

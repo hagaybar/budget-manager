@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from app.database import create_tables
-from app.routers import transactions, summary
+from app.routers import transactions, summary, recurring
 
 
 @asynccontextmanager
@@ -35,6 +35,7 @@ app.add_middleware(
 # Include routers
 app.include_router(transactions.router)
 app.include_router(summary.router)
+app.include_router(recurring.router)
 
 
 @app.get("/")
