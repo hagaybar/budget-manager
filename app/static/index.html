@@ -432,6 +432,35 @@
             }
         }
 
+        /* ===== COLLAPSIBLE CARDS (mobile) ===== */
+        .collapse-toggle {
+            display: none;          /* hidden on desktop by default */
+            float: right;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            user-select: none;
+        }
+
+        .card-title.collapsed .collapse-toggle {
+            transform: rotate(-90deg);
+        }
+
+        .card-body.collapsed {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .collapse-toggle {
+                display: inline-block;  /* show chevron on mobile */
+            }
+
+            .card-title {
+                cursor: pointer;
+                user-select: none;
+            }
+        }
+
         /* ===== LOADING ===== */
         .loading {
             text-align: center;
@@ -478,7 +507,8 @@
 
         <!-- ADD TRANSACTION FORM -->
         <div class="card">
-            <div class="card-title">Add Transaction</div>
+            <div class="card-title">Add Transaction <span class="collapse-toggle" data-testid="collapse-toggle">&#9660;</span></div>
+            <div data-testid="card-body-add-form" class="card-body">
             <form data-testid="add-form" class="form-grid" id="addForm">
                 <div class="form-group">
                     <label for="type-select">Type</label>
@@ -510,19 +540,23 @@
                     Add Transaction
                 </button>
             </form>
+            </div>
         </div>
 
         <!-- TRANSACTION LIST -->
         <div class="card">
-            <div class="card-title">Transactions</div>
+            <div class="card-title">Transactions <span class="collapse-toggle" data-testid="collapse-toggle">&#9660;</span></div>
+            <div data-testid="card-body-transactions" class="card-body">
             <div data-testid="transaction-list" id="transactionList">
                 <div class="loading">Loading transactions...</div>
+            </div>
             </div>
         </div>
 
         <!-- MONTHLY SUMMARY -->
         <div class="card" data-testid="summary-section" id="summarySection">
-            <div class="card-title" id="summaryTitle">Monthly Summary</div>
+            <div class="card-title" id="summaryTitle">Monthly Summary <span class="collapse-toggle" data-testid="collapse-toggle">&#9660;</span></div>
+            <div data-testid="card-body-summary" class="card-body">
             <div class="summary-grid">
                 <div class="summary-item income-box">
                     <div class="summary-label">Income</div>
@@ -538,11 +572,13 @@
                 </div>
             </div>
             <div class="category-list" id="categoryBreakdown"></div>
+            </div>
         </div>
 
         <!-- RECURRING TRANSACTIONS -->
         <div class="card" data-testid="recurring-section">
-            <div class="card-title">Recurring Transactions</div>
+            <div class="card-title">Recurring Transactions <span class="collapse-toggle" data-testid="collapse-toggle">&#9660;</span></div>
+            <div data-testid="card-body-recurring" class="card-body">
 
             <!-- Add Recurring Form -->
             <form data-testid="recurring-form" class="form-grid" id="recurringForm">
@@ -609,6 +645,7 @@
             <div data-testid="recurring-list" id="recurringList" style="margin-top: 1rem;">
                 <div class="loading">Loading recurring transactions...</div>
             </div>
+            </div>
         </div>
 
     </div>
@@ -658,7 +695,10 @@
                 'January', 'February', 'March', 'April', 'May', 'June',
                 'July', 'August', 'September', 'October', 'November', 'December'
             ];
-            summaryTitle.textContent = `${monthNames[currentMonth - 1]} ${currentYear} Summary`;
+            // Preserve the collapse-toggle span inside the title
+            const toggleSpan = summaryTitle.querySelector('.collapse-toggle');
+            summaryTitle.textContent = `${monthNames[currentMonth - 1]} ${currentYear} Summary `;
+            if (toggleSpan) summaryTitle.appendChild(toggleSpan);
 
             // Setup frequency toggle
             recFrequencySelect.addEventListener('change', toggleFrequencyFields);
@@ -994,8 +1034,39 @@
             }
         }
 
+        /* ===== COLLAPSIBLE CARDS (mobile) ===== */
+        function setupCollapsibleCards() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                const title = card.querySelector('.card-title');
+                const body = card.querySelector('.card-body');
+                if (!title || !body) return;
+
+                title.addEventListener('click', () => {
+                    // Only toggle on mobile (max-width 480px)
+                    if (window.innerWidth > 480) return;
+
+                    const isCollapsed = body.classList.toggle('collapsed');
+                    title.classList.toggle('collapsed', isCollapsed);
+                });
+            });
+
+            // On resize, remove collapsed state if switching to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 480) {
+                    document.querySelectorAll('.card-body.collapsed').forEach(b => {
+                        b.classList.remove('collapsed');
+                    });
+                    document.querySelectorAll('.card-title.collapsed').forEach(t => {
+                        t.classList.remove('collapsed');
+                    });
+                }
+            });
+        }
+
         /* ===== START ===== */
         init();
+        setupCollapsibleCards();
     </script>
 </body>
 </html>

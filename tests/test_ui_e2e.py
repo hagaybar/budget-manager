@@ -234,3 +234,83 @@ class TestRecurringUI:
 
         rows = page.locator('[data-testid="recurring-row"]')
         expect(rows).to_have_count(0)
+
+
+# ---------------------------------------------------------------------------
+# Collapsible Card Sections (Mobile) Tests
+# ---------------------------------------------------------------------------
+
+class TestCollapsibleMobile:
+    """E2E tests for collapsible card sections on mobile."""
+
+    def test_sections_collapsible_on_mobile(self, page):
+        """On mobile, clicking a card title collapses/expands its content."""
+        page.set_viewport_size({"width": 375, "height": 667})
+        page.goto(BASE_URL)
+        page.wait_for_timeout(500)
+
+        # The "Add Transaction" card body should start visible
+        add_body = page.locator('[data-testid="card-body-add-form"]')
+        expect(add_body).to_be_visible()
+
+        # Click the card title to collapse
+        page.locator('.card-title').first.click()
+        page.wait_for_timeout(500)
+
+        # After collapse, the card body should be hidden
+        expect(add_body).not_to_be_visible()
+
+        # Click again to expand
+        page.locator('.card-title').first.click()
+        page.wait_for_timeout(500)
+
+        # Should be visible again
+        expect(add_body).to_be_visible()
+
+    def test_sections_expanded_on_desktop(self, page):
+        """On desktop, all sections are always expanded, collapse toggles hidden."""
+        page.set_viewport_size({"width": 1280, "height": 900})
+        page.goto(BASE_URL)
+        page.wait_for_timeout(500)
+
+        # All card bodies should be visible
+        for section in ["add-form", "transactions", "summary", "recurring"]:
+            body = page.locator(f'[data-testid="card-body-{section}"]')
+            expect(body).to_be_visible()
+
+        # Collapse toggles (chevrons) should be hidden on desktop
+        toggles = page.locator('[data-testid="collapse-toggle"]')
+        if toggles.count() > 0:
+            expect(toggles.first).not_to_be_visible()
+
+    def test_collapse_does_not_delete_data(self, page):
+        """Collapsing and expanding a section preserves its data."""
+        # First add a transaction at desktop size
+        page.set_viewport_size({"width": 1280, "height": 900})
+        page.goto(BASE_URL)
+        _add_transaction(page, "income", 999, "TestCat", "Collapse test", "2026-03-01")
+        rows = page.locator('[data-testid="transaction-row"]')
+        expect(rows).to_have_count(1)
+
+        # Switch to mobile
+        page.set_viewport_size({"width": 375, "height": 667})
+        page.wait_for_timeout(500)
+
+        # Get the second card (Transactions), click its title to collapse
+        cards = page.locator('.card')
+        cards.nth(1).locator('.card-title').click()
+        page.wait_for_timeout(500)
+
+        # Body should be hidden
+        tx_body = page.locator('[data-testid="card-body-transactions"]')
+        expect(tx_body).not_to_be_visible()
+
+        # Expand again
+        cards.nth(1).locator('.card-title').click()
+        page.wait_for_timeout(500)
+
+        # Body visible and data still there
+        expect(tx_body).to_be_visible()
+        rows = page.locator('[data-testid="transaction-row"]')
+        expect(rows).to_have_count(1)
+        expect(rows.first).to_contain_text("999")
