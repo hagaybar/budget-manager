@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSC4TP03MQZHWN8BEJAVJKV",
+  "taskId": "run-tests",
+  "invocationKey": "budget-manager-e2e:S000005:run-tests",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "coveragePercent": 96,
+    "errors": 0,
+    "failed": 0,
+    "feedback": null,
+    "passed": 50,
+    "rawOutput": "50 passed in 1.32s. Coverage: 96% total. app/database.py 100%, app/routers/transactions.py 100%, app/routers/summary.py 100%, app/schemas.py 95%, app/main.py 94%",
+    "totalTests": 50
+  },
+  "startedAt": "2026-03-03T08:13:48.506Z",
+  "finishedAt": "2026-03-03T08:13:48.506Z",
+  "value": {
+    "allPassing": true,
+    "coveragePercent": 96,
+    "errors": 0,
+    "failed": 0,
+    "feedback": null,
+    "passed": 50,
+    "rawOutput": "50 passed in 1.32s. Coverage: 96% total. app/database.py 100%, app/routers/transactions.py 100%, app/routers/summary.py 100%, app/schemas.py 95%, app/main.py 94%",
+    "totalTests": 50
+  }
+}

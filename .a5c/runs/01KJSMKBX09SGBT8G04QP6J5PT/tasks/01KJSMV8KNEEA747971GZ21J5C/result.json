@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSMV8KNEEA747971GZ21J5C",
+  "taskId": "run-tests",
+  "invocationKey": "collapsible-mobile:S000003:run-tests",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "e2eTests": {
+      "failed": 0,
+      "passed": 14,
+      "total": 14
+    },
+    "feedback": null,
+    "unitTests": {
+      "failed": 0,
+      "passed": 71,
+      "total": 71
+    }
+  },
+  "startedAt": "2026-03-03T10:46:38.073Z",
+  "finishedAt": "2026-03-03T10:46:38.073Z",
+  "value": {
+    "allPassing": true,
+    "e2eTests": {
+      "failed": 0,
+      "passed": 14,
+      "total": 14
+    },
+    "feedback": null,
+    "unitTests": {
+      "failed": 0,
+      "passed": 71,
+      "total": 71
+    }
+  }
+}

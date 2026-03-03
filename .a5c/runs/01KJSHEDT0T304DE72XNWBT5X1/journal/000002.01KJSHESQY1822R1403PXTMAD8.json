@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T09:46:21.310Z",
+  "data": {
+    "effectId": "01KJSHESQA9TMC1VJMDMK2DW9T",
+    "invocationKey": "currency-and-recurring:S000001:plan-changes",
+    "invocationHash": "3f10336c52b18081750145f76c508a50122ebc661ecbd0fe50530a95712d566c",
+    "stepId": "S000001",
+    "taskId": "plan-changes",
+    "kind": "agent",
+    "label": "planning",
+    "taskDefRef": "tasks/01KJSHESQA9TMC1VJMDMK2DW9T/task.json",
+    "labels": [
+      "planning",
+      "architecture"
+    ]
+  },
+  "checksum": "deee8bcae7b967843e7991664b94c6739512360419094132f46250f882afce6d"
+}

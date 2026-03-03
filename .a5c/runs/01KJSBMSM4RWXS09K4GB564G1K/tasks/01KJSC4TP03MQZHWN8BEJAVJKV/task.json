@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSC4TP03MQZHWN8BEJAVJKV",
+  "taskId": "run-tests",
+  "invocationKey": "budget-manager-e2e:S000005:run-tests",
+  "stepId": "S000005",
+  "kind": "agent",
+  "title": "Run tests (iteration 1)",
+  "description": "Execute pytest with coverage and report results",
+  "labels": [
+    "iteration-1",
+    "run-tests",
+    "testing"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSC4TP03MQZHWN8BEJAVJKV/input.json",
+    "outputJsonPath": "tasks/01KJSC4TP03MQZHWN8BEJAVJKV/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "iteration": 1
+  }
+}

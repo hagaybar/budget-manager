@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSMS1C9Z2D8ZPETWQTVA7CA",
+  "taskId": "implement-collapsible",
+  "invocationKey": "collapsible-mobile:S000002:implement-collapsible",
+  "status": "ok",
+  "result": {
+    "filesModified": [
+      "app/static/index.html"
+    ],
+    "summary": "Collapsible sections already implemented: card-body wrappers with data-testid, collapse-toggle chevrons, display:none for collapsed state, mobile-only toggle via JS/CSS"
+  },
+  "startedAt": "2026-03-03T10:45:30.290Z",
+  "finishedAt": "2026-03-03T10:45:30.290Z",
+  "value": {
+    "filesModified": [
+      "app/static/index.html"
+    ],
+    "summary": "Collapsible sections already implemented: card-body wrappers with data-testid, collapse-toggle chevrons, display:none for collapsed state, mobile-only toggle via JS/CSS"
+  }
+}

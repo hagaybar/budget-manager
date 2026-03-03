@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSMXA58AGEMWGK8DXDRBAQS",
+  "taskId": "verify-commit",
+  "invocationKey": "collapsible-mobile:S000004:verify-commit",
+  "status": "ok",
+  "result": {
+    "commitHash": "5a2f8b3",
+    "committed": true,
+    "screenshots": [
+      "screenshots/mobile_expanded.png",
+      "screenshots/mobile_collapsed.png",
+      "screenshots/mobile_reexpanded.png",
+      "screenshots/desktop_full.png"
+    ]
+  },
+  "startedAt": "2026-03-03T10:48:42.006Z",
+  "finishedAt": "2026-03-03T10:48:42.006Z",
+  "value": {
+    "commitHash": "5a2f8b3",
+    "committed": true,
+    "screenshots": [
+      "screenshots/mobile_expanded.png",
+      "screenshots/mobile_collapsed.png",
+      "screenshots/mobile_reexpanded.png",
+      "screenshots/desktop_full.png"
+    ]
+  }
+}

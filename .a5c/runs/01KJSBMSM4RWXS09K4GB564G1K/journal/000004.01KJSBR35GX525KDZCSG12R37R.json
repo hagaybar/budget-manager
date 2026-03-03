@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T08:06:34.417Z",
+  "data": {
+    "effectId": "01KJSBR34WBK3QA5TWVNJFHD7W",
+    "invocationKey": "budget-manager-e2e:S000002:scaffold-project",
+    "invocationHash": "2ee701d2719f1900b0af82db94bce5e34f85a0a338a7d4541f75acde799250ab",
+    "stepId": "S000002",
+    "taskId": "scaffold-project",
+    "kind": "agent",
+    "label": "scaffold",
+    "taskDefRef": "tasks/01KJSBR34WBK3QA5TWVNJFHD7W/task.json",
+    "labels": [
+      "scaffold",
+      "setup"
+    ]
+  },
+  "checksum": "ce9308d9ba6102afdc7c0d8f5297913c5478fe0423628820556cf21c9edc381a"
+}

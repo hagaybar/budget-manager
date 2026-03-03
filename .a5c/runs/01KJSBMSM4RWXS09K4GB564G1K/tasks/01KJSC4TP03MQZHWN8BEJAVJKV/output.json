@@ -1,0 +1,1 @@
+{"allPassing": true, "totalTests": 50, "passed": 50, "failed": 0, "errors": 0, "coveragePercent": 96, "feedback": null, "rawOutput": "50 passed in 1.32s. Coverage: 96% total. app/database.py 100%, app/routers/transactions.py 100%, app/routers/summary.py 100%, app/schemas.py 95%, app/main.py 94%"}

@@ -1,0 +1,13 @@
+{
+  "runId": "01KJSMKBX09SGBT8G04QP6J5PT",
+  "request": "collapsible-mobile",
+  "processId": "collapsible-mobile",
+  "entrypoint": {
+    "importPath": "../../processes/collapsible-mobile.js",
+    "exportName": "process"
+  },
+  "processPath": "../../processes/collapsible-mobile.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-03-03T10:41:16.712Z",
+  "completionSecret": "6769849c5f56414c9cfb4fd8c524809b"
+}

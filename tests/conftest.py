@@ -85,13 +85,18 @@ def client(test_db):
         conn.execute("PRAGMA foreign_keys = ON")
         return conn
 
-    # Guard the recurring router patch so that existing tests still pass
-    # even if app/routers/recurring.py has not been created yet.
+    # Guard optional router patches
     try:
         from app.routers import recurring as _recurring_module  # noqa: F401
         _has_recurring = True
     except (ImportError, ModuleNotFoundError):
         _has_recurring = False
+
+    try:
+        from app.routers import backup as _backup_module  # noqa: F401
+        _has_backup = True
+    except (ImportError, ModuleNotFoundError):
+        _has_backup = False
 
     patches = [
         patch("app.routers.transactions.get_db", _test_get_db),
@@ -99,6 +104,8 @@ def client(test_db):
     ]
     if _has_recurring:
         patches.append(patch("app.routers.recurring.get_db", _test_get_db))
+    if _has_backup:
+        patches.append(patch("app.routers.backup.get_db", _test_get_db))
 
     # Enter all context managers
     for p in patches:

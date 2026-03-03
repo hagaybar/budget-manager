@@ -1,0 +1,32 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSMS1C9Z2D8ZPETWQTVA7CA",
+  "taskId": "implement-collapsible",
+  "invocationKey": "collapsible-mobile:S000002:implement-collapsible",
+  "stepId": "S000002",
+  "kind": "agent",
+  "title": "Implement collapsible mobile sections",
+  "description": "Add CSS/JS for collapsible card sections on mobile",
+  "labels": [
+    "implementation",
+    "ui"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSMS1C9Z2D8ZPETWQTVA7CA/input.json",
+    "outputJsonPath": "tasks/01KJSMS1C9Z2D8ZPETWQTVA7CA/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "tests": {
+      "newTestCount": 3,
+      "selectors": [
+        "card-body-add-form",
+        "card-body-transactions",
+        "card-body-summary",
+        "card-body-recurring",
+        "collapse-toggle"
+      ],
+      "testFile": "tests/test_ui_e2e.py"
+    }
+  }
+}

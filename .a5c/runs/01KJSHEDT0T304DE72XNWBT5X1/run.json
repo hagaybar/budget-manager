@@ -1,0 +1,13 @@
+{
+  "runId": "01KJSHEDT0T304DE72XNWBT5X1",
+  "request": "currency-and-recurring",
+  "processId": "currency-and-recurring",
+  "entrypoint": {
+    "importPath": "../../processes/currency-and-recurring.js",
+    "exportName": "process"
+  },
+  "processPath": "../../processes/currency-and-recurring.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-03-03T09:46:09.099Z",
+  "completionSecret": "3911e647996851b0a96d7730fc4c3a1d"
+}

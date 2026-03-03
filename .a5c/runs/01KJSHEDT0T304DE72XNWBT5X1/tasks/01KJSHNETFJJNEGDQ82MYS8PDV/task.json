@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSHNETFJJNEGDQ82MYS8PDV",
+  "taskId": "write-tests",
+  "invocationKey": "currency-and-recurring:S000002:write-tests",
+  "stepId": "S000002",
+  "kind": "agent",
+  "title": "TDD: Write tests for currency change and recurring transactions",
+  "description": "Write failing tests first that define expected behavior",
+  "labels": [
+    "tdd",
+    "tests"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSHNETFJJNEGDQ82MYS8PDV/input.json",
+    "outputJsonPath": "tasks/01KJSHNETFJJNEGDQ82MYS8PDV/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "plan": {
+      "apiChanges": [
+        "POST /api/recurring",
+        "GET /api/recurring",
+        "GET /api/recurring/{id}",
+        "PUT /api/recurring/{id}",
+        "DELETE /api/recurring/{id}",
+        "POST /api/recurring/{id}/generate"
+      ],
+      "dbChanges": [
+        "Add recurring_transactions table",
+        "Add recurring_id to transactions table"
+      ],
+      "planFile": "ENHANCEMENT_PLAN.md",
+      "testChanges": [
+        "Update conftest.py for recurring table",
+        "New test_recurring.py (22 tests)",
+        "New test_recurring_models.py",
+        "Update test_ui_e2e.py with recurring UI tests"
+      ],
+      "uiChanges": [
+        "Currency $ to ₪ in all UI locations",
+        "Recurring Transactions section with form and list",
+        "Frequency toggle (weekly/monthly day selector)"
+      ]
+    }
+  }
+}

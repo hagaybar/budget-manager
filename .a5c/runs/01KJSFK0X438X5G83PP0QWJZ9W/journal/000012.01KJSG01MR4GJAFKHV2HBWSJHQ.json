@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T09:20:49.305Z",
+  "data": {
+    "effectId": "01KJSG01M466J8G43T5NYKFTDW",
+    "invocationKey": "ui-tdd:S000006:visual-verify-commit",
+    "invocationHash": "854232f99d8608e0e0f36f2543e4e2c40a847ae165e39105c381f1fa9905a710",
+    "stepId": "S000006",
+    "taskId": "visual-verify-commit",
+    "kind": "agent",
+    "label": "visual-verify",
+    "taskDefRef": "tasks/01KJSG01M466J8G43T5NYKFTDW/task.json",
+    "labels": [
+      "visual-verify",
+      "commit",
+      "final"
+    ]
+  },
+  "checksum": "cbecf1ebd85a2a9ae95214d9c860b3c3eee35c0ffa62b76cfc57e79509af5296"
+}

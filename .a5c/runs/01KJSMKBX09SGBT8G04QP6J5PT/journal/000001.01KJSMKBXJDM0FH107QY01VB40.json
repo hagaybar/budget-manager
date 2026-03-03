@@ -1,0 +1,14 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-03-03T10:41:16.722Z",
+  "data": {
+    "runId": "01KJSMKBX09SGBT8G04QP6J5PT",
+    "processId": "collapsible-mobile",
+    "entrypoint": {
+      "importPath": "../../processes/collapsible-mobile.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json"
+  },
+  "checksum": "09833784c4cd66955d9fb25ecf7d866b71e0ba9185d8f6127a6cbc6f59e3feaa"
+}

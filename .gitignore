@@ -4,7 +4,10 @@ __pycache__/
 .venv/
 venv/
 *.db
-.a5c/
+.a5c/node_modules/
+.a5c/package-lock.json
+screenshots/
+backups/
 .pytest_cache/
 htmlcov/
 .coverage

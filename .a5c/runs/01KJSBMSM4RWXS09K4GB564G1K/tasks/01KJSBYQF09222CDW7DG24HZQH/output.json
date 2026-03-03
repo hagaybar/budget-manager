@@ -1,0 +1,1 @@
+{"testFiles": ["tests/conftest.py", "tests/test_transactions.py", "tests/test_summary.py", "tests/test_models.py"], "testCount": 50, "coverageTargets": ["app/database.py", "app/schemas.py", "app/routers/transactions.py", "app/routers/summary.py", "app/main.py"]}

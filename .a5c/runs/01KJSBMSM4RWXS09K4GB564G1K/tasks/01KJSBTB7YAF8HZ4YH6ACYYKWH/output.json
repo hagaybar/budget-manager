@@ -1,0 +1,1 @@
+{"filesCreated": ["app/database.py", "app/schemas.py", "app/routers/transactions.py", "app/routers/summary.py", "app/main.py"], "filesModified": [], "endpointsImplemented": ["POST /api/transactions", "GET /api/transactions", "GET /api/transactions/{id}", "PUT /api/transactions/{id}", "DELETE /api/transactions/{id}", "GET /api/summary/monthly", "GET /"], "committed": true}

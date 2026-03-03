@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSC5ETN0AKTQ4R31QVSFGQS",
+  "taskId": "deliver-project",
+  "invocationKey": "budget-manager-e2e:S000006:deliver-project",
+  "status": "ok",
+  "result": {
+    "commitHash": "af83b1c",
+    "committed": true,
+    "finalTestsPassing": true,
+    "readmeCreated": true,
+    "summary": "Budget Manager API delivered: 6 REST endpoints, SQLite persistence, 50 tests passing with 96% coverage"
+  },
+  "startedAt": "2026-03-03T08:15:33.014Z",
+  "finishedAt": "2026-03-03T08:15:33.014Z",
+  "value": {
+    "commitHash": "af83b1c",
+    "committed": true,
+    "finalTestsPassing": true,
+    "readmeCreated": true,
+    "summary": "Budget Manager API delivered: 6 REST endpoints, SQLite persistence, 50 tests passing with 96% coverage"
+  }
+}

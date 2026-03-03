@@ -1,0 +1,14 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-03-03T08:04:46.385Z",
+  "data": {
+    "runId": "01KJSBMSM4RWXS09K4GB564G1K",
+    "processId": "budget-manager-e2e",
+    "entrypoint": {
+      "importPath": "../../processes/budget-manager-e2e.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json"
+  },
+  "checksum": "bb0a7c67f12a78dab62462894b2d5309e2eb7489bfb28c46aad75fb585c6cc9b"
+}

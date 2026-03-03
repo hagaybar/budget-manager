@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T09:53:59.929Z",
+  "data": {
+    "effectId": "01KJSHWSK5R5XN60DRSMGARTTE",
+    "invocationKey": "currency-and-recurring:S000003:implement-changes",
+    "invocationHash": "4aea4c254136b75b7cd9255d3205638caae6bdf90a9a0a16bf3300c1a24c834c",
+    "stepId": "S000003",
+    "taskId": "implement-changes",
+    "kind": "agent",
+    "label": "implementation",
+    "taskDefRef": "tasks/01KJSHWSK5R5XN60DRSMGARTTE/task.json",
+    "labels": [
+      "implementation",
+      "backend",
+      "frontend"
+    ]
+  },
+  "checksum": "f69381080a2b830e5a955006d2b1478f877b2eb78af5736fcb3d06019f6d6113"
+}

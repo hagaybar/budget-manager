@@ -1,0 +1,1 @@
+{"testFiles": ["tests/test_ui_e2e.py"], "testCount": 7, "selectors": ["app-title", "add-form", "type-select", "amount-input", "category-input", "description-input", "date-input", "submit-btn", "transaction-list", "transaction-row", "delete-btn", "summary-section", "total-income", "total-expenses", "net-balance"]}

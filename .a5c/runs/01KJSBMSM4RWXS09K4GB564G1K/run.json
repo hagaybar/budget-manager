@@ -1,0 +1,13 @@
+{
+  "runId": "01KJSBMSM4RWXS09K4GB564G1K",
+  "request": "budget-manager-e2e",
+  "processId": "budget-manager-e2e",
+  "entrypoint": {
+    "importPath": "../../processes/budget-manager-e2e.js",
+    "exportName": "process"
+  },
+  "processPath": "../../processes/budget-manager-e2e.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-03-03T08:04:46.368Z",
+  "completionSecret": "1cd6fb95e46d3c28c816fca324289abe"
+}

@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T08:13:31.744Z",
+  "data": {
+    "effectId": "01KJSC4TP03MQZHWN8BEJAVJKV",
+    "invocationKey": "budget-manager-e2e:S000005:run-tests",
+    "invocationHash": "b584cc233adb231b466ca76311570256b5b60b2cb1edeb15a839769934031e26",
+    "stepId": "S000005",
+    "taskId": "run-tests",
+    "kind": "agent",
+    "label": "testing",
+    "taskDefRef": "tasks/01KJSC4TP03MQZHWN8BEJAVJKV/task.json",
+    "labels": [
+      "testing",
+      "run-tests",
+      "iteration-1"
+    ]
+  },
+  "checksum": "e29e060594341d468cd00bdcff0b08a1736665ff661401fec645df8674ec2997"
+}

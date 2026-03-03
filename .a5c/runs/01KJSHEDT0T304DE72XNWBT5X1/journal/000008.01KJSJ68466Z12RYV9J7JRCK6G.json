@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T09:59:09.702Z",
+  "data": {
+    "effectId": "01KJSJ683JQDEGXZM1WG58QMFD",
+    "invocationKey": "currency-and-recurring:S000004:run-all-tests",
+    "invocationHash": "f82aaf05ea81f56c69b4ae14257a5c83afe16eccb5b417298f97c416520529d7",
+    "stepId": "S000004",
+    "taskId": "run-all-tests",
+    "kind": "agent",
+    "label": "testing",
+    "taskDefRef": "tasks/01KJSJ683JQDEGXZM1WG58QMFD/task.json",
+    "labels": [
+      "testing",
+      "iteration-1"
+    ]
+  },
+  "checksum": "b7b1f5ed4320b5edac691196e5676abda92920fbb0d42b6bfdd348f617be318c"
+}

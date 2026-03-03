@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSFKH0FZG1FE8ZARAWKFR02",
+  "taskId": "write-e2e-tests",
+  "invocationKey": "ui-tdd:S000001:write-e2e-tests",
+  "status": "ok",
+  "result": {
+    "selectors": [
+      "app-title",
+      "add-form",
+      "type-select",
+      "amount-input",
+      "category-input",
+      "description-input",
+      "date-input",
+      "submit-btn",
+      "transaction-list",
+      "transaction-row",
+      "delete-btn",
+      "summary-section",
+      "total-income",
+      "total-expenses",
+      "net-balance"
+    ],
+    "testCount": 7,
+    "testFiles": [
+      "tests/test_ui_e2e.py"
+    ]
+  },
+  "startedAt": "2026-03-03T09:15:15.228Z",
+  "finishedAt": "2026-03-03T09:15:15.228Z",
+  "value": {
+    "selectors": [
+      "app-title",
+      "add-form",
+      "type-select",
+      "amount-input",
+      "category-input",
+      "description-input",
+      "date-input",
+      "submit-btn",
+      "transaction-list",
+      "transaction-row",
+      "delete-btn",
+      "summary-section",
+      "total-income",
+      "total-expenses",
+      "net-balance"
+    ],
+    "testCount": 7,
+    "testFiles": [
+      "tests/test_ui_e2e.py"
+    ]
+  }
+}

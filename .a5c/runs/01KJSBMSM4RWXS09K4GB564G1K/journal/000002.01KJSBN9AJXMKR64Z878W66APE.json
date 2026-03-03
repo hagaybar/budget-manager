@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T08:05:02.419Z",
+  "data": {
+    "effectId": "01KJSBN97PME9BD1HYBSB13NFR",
+    "invocationKey": "budget-manager-e2e:S000001:architecture-planning",
+    "invocationHash": "83e36689330584709917b5554d66fced88b280bfc1e9536421b01a0bad76d592",
+    "stepId": "S000001",
+    "taskId": "architecture-planning",
+    "kind": "agent",
+    "label": "planning",
+    "taskDefRef": "tasks/01KJSBN97PME9BD1HYBSB13NFR/task.json",
+    "labels": [
+      "planning",
+      "architecture"
+    ]
+  },
+  "checksum": "0e982f73c02f07293700a0cf48a23c0aae7c99b18733b61620f50ca6636dc8cc"
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSFZ3R9SVEMKYJ8MV17H05A",
+  "taskId": "run-playwright-tests",
+  "invocationKey": "ui-tdd:S000005:run-playwright-tests",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "failed": 0,
+    "feedback": null,
+    "passed": 7,
+    "rawOutput": "7 passed in 12.46s",
+    "totalTests": 7
+  },
+  "startedAt": "2026-03-03T09:20:44.670Z",
+  "finishedAt": "2026-03-03T09:20:44.670Z",
+  "value": {
+    "allPassing": true,
+    "failed": 0,
+    "feedback": null,
+    "passed": 7,
+    "rawOutput": "7 passed in 12.46s",
+    "totalTests": 7
+  }
+}

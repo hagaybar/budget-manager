@@ -1,0 +1,7 @@
+{
+  "planFile": "ENHANCEMENT_PLAN.md",
+  "dbChanges": ["Add recurring_transactions table", "Add recurring_id to transactions table"],
+  "apiChanges": ["POST /api/recurring", "GET /api/recurring", "GET /api/recurring/{id}", "PUT /api/recurring/{id}", "DELETE /api/recurring/{id}", "POST /api/recurring/{id}/generate"],
+  "uiChanges": ["Currency $ to ₪ in all UI locations", "Recurring Transactions section with form and list", "Frequency toggle (weekly/monthly day selector)"],
+  "testChanges": ["Update conftest.py for recurring table", "New test_recurring.py (22 tests)", "New test_recurring_models.py", "Update test_ui_e2e.py with recurring UI tests"]
+}

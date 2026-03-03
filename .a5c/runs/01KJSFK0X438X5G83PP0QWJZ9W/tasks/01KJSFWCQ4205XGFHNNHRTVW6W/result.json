@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSFWCQ4205XGFHNNHRTVW6W",
+  "taskId": "run-playwright-tests",
+  "invocationKey": "ui-tdd:S000003:run-playwright-tests",
+  "status": "ok",
+  "result": {
+    "allPassing": false,
+    "failed": 2,
+    "feedback": "2 tests fail because UI formats amounts as currency ($1,000.00) but tests check for plain numbers (1000, 3000, 500, 2500). Fix tests to match formatted amounts: use to_contain_text('1,000') instead of to_contain_text('1000'), and to_contain_text('3,000') instead of to_contain_text('3000'), etc.",
+    "passed": 5,
+    "rawOutput": "5 passed, 2 failed in 22.80s",
+    "totalTests": 7
+  },
+  "startedAt": "2026-03-03T09:19:29.892Z",
+  "finishedAt": "2026-03-03T09:19:29.892Z",
+  "value": {
+    "allPassing": false,
+    "failed": 2,
+    "feedback": "2 tests fail because UI formats amounts as currency ($1,000.00) but tests check for plain numbers (1000, 3000, 500, 2500). Fix tests to match formatted amounts: use to_contain_text('1,000') instead of to_contain_text('1000'), and to_contain_text('3,000') instead of to_contain_text('3000'), etc.",
+    "passed": 5,
+    "rawOutput": "5 passed, 2 failed in 22.80s",
+    "totalTests": 7
+  }
+}

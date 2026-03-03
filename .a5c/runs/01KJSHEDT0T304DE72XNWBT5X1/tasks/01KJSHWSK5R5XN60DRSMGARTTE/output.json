@@ -1,0 +1,5 @@
+{
+  "filesCreated": ["app/routers/recurring.py"],
+  "filesModified": ["app/database.py", "app/schemas.py", "app/main.py", "app/static/index.html"],
+  "summary": "Implemented currency change ($ to ₪), recurring transactions backend (CRUD + generate), and recurring UI section"
+}

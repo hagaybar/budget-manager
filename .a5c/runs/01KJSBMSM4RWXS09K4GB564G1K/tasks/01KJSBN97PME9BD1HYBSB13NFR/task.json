@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSBN97PME9BD1HYBSB13NFR",
+  "taskId": "architecture-planning",
+  "invocationKey": "budget-manager-e2e:S000001:architecture-planning",
+  "stepId": "S000001",
+  "kind": "agent",
+  "title": "Architecture & Planning → TASK_PLAN.md",
+  "description": "Design architecture, database schema, and API endpoints for the budget manager app",
+  "labels": [
+    "architecture",
+    "planning"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSBN97PME9BD1HYBSB13NFR/input.json",
+    "outputJsonPath": "tasks/01KJSBN97PME9BD1HYBSB13NFR/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "requirements": [
+      "Simple CRUD for expenses/income (create, read, update, delete transactions)",
+      "Each transaction has: type (income/expense), amount, category, description, date",
+      "Monthly summary logic: total income, total expenses, net balance, category breakdowns",
+      "Persistent storage using SQLite",
+      "RESTful API with proper HTTP status codes and error handling",
+      "Pydantic validation for request/response schemas",
+      "100% test coverage of core business logic"
+    ],
+    "stack": "Python/FastAPI/SQLite"
+  }
+}

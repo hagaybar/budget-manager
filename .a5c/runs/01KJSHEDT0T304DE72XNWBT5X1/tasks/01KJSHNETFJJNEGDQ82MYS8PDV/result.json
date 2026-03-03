@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSHNETFJJNEGDQ82MYS8PDV",
+  "taskId": "write-tests",
+  "invocationKey": "currency-and-recurring:S000002:write-tests",
+  "status": "ok",
+  "result": {
+    "newTestCount": 25,
+    "selectors": [
+      "recurring-section",
+      "recurring-form",
+      "rec-type-select",
+      "rec-amount-input",
+      "rec-category-input",
+      "rec-description-input",
+      "rec-frequency-select",
+      "rec-day-of-week",
+      "rec-day-of-month",
+      "rec-start-date",
+      "rec-end-date",
+      "rec-submit-btn",
+      "recurring-list",
+      "recurring-row",
+      "rec-delete-btn",
+      "rec-generate-btn"
+    ],
+    "testFiles": [
+      "tests/conftest.py",
+      "tests/test_recurring.py",
+      "tests/test_ui_e2e.py"
+    ],
+    "updatedTestCount": 8
+  },
+  "startedAt": "2026-03-03T09:53:55.109Z",
+  "finishedAt": "2026-03-03T09:53:55.109Z",
+  "value": {
+    "newTestCount": 25,
+    "selectors": [
+      "recurring-section",
+      "recurring-form",
+      "rec-type-select",
+      "rec-amount-input",
+      "rec-category-input",
+      "rec-description-input",
+      "rec-frequency-select",
+      "rec-day-of-week",
+      "rec-day-of-month",
+      "rec-start-date",
+      "rec-end-date",
+      "rec-submit-btn",
+      "recurring-list",
+      "recurring-row",
+      "rec-delete-btn",
+      "rec-generate-btn"
+    ],
+    "testFiles": [
+      "tests/conftest.py",
+      "tests/test_recurring.py",
+      "tests/test_ui_e2e.py"
+    ],
+    "updatedTestCount": 8
+  }
+}

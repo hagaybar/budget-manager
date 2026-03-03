@@ -1,0 +1,6 @@
+{
+  "testFiles": ["tests/conftest.py", "tests/test_recurring.py", "tests/test_ui_e2e.py"],
+  "newTestCount": 25,
+  "updatedTestCount": 8,
+  "selectors": ["recurring-section", "recurring-form", "rec-type-select", "rec-amount-input", "rec-category-input", "rec-description-input", "rec-frequency-select", "rec-day-of-week", "rec-day-of-month", "rec-start-date", "rec-end-date", "rec-submit-btn", "recurring-list", "recurring-row", "rec-delete-btn", "rec-generate-btn"]
+}

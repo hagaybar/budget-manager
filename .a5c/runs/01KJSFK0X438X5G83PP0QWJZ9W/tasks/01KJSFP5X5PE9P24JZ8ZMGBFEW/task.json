@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSFP5X5PE9P24JZ8ZMGBFEW",
+  "taskId": "implement-ui",
+  "invocationKey": "ui-tdd:S000002:implement-ui",
+  "stepId": "S000002",
+  "kind": "agent",
+  "title": "Implement mobile-friendly UI",
+  "description": "Build the HTML/CSS/JS frontend served by FastAPI",
+  "labels": [
+    "frontend",
+    "implementation",
+    "ui"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSFP5X5PE9P24JZ8ZMGBFEW/input.json",
+    "outputJsonPath": "tasks/01KJSFP5X5PE9P24JZ8ZMGBFEW/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "tests": {
+      "selectors": [
+        "app-title",
+        "add-form",
+        "type-select",
+        "amount-input",
+        "category-input",
+        "description-input",
+        "date-input",
+        "submit-btn",
+        "transaction-list",
+        "transaction-row",
+        "delete-btn",
+        "summary-section",
+        "total-income",
+        "total-expenses",
+        "net-balance"
+      ],
+      "testCount": 7,
+      "testFiles": [
+        "tests/test_ui_e2e.py"
+      ]
+    }
+  }
+}

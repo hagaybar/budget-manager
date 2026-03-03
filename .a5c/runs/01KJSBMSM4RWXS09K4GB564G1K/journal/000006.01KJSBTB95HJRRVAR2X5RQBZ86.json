@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T08:07:48.263Z",
+  "data": {
+    "effectId": "01KJSBTB7YAF8HZ4YH6ACYYKWH",
+    "invocationKey": "budget-manager-e2e:S000003:implement-app",
+    "invocationHash": "60c73d0de63adeb07016b2901eeb44616e92b561477212dfa9e1dbe64fee4351",
+    "stepId": "S000003",
+    "taskId": "implement-app",
+    "kind": "agent",
+    "label": "implementation",
+    "taskDefRef": "tasks/01KJSBTB7YAF8HZ4YH6ACYYKWH/task.json",
+    "labels": [
+      "implementation",
+      "core"
+    ]
+  },
+  "checksum": "a72a7cf6d0a5b408b4707bb44c71295696991e195e062b553ce9c251f6924cf7"
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSJ683JQDEGXZM1WG58QMFD",
+  "taskId": "run-all-tests",
+  "invocationKey": "currency-and-recurring:S000004:run-all-tests",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "e2eTests": {
+      "failed": 0,
+      "passed": 11,
+      "total": 11
+    },
+    "feedback": null,
+    "rawOutput": "71 unit tests passed in 1.26s, 11 E2E tests passed in 19.56s",
+    "unitTests": {
+      "failed": 0,
+      "passed": 71,
+      "total": 71
+    }
+  },
+  "startedAt": "2026-03-03T10:00:26.062Z",
+  "finishedAt": "2026-03-03T10:00:26.062Z",
+  "value": {
+    "allPassing": true,
+    "e2eTests": {
+      "failed": 0,
+      "passed": 11,
+      "total": 11
+    },
+    "feedback": null,
+    "rawOutput": "71 unit tests passed in 1.26s, 11 E2E tests passed in 19.56s",
+    "unitTests": {
+      "failed": 0,
+      "passed": 71,
+      "total": 71
+    }
+  }
+}

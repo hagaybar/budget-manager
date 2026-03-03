@@ -1,0 +1,5 @@
+{
+  "screenshots": ["screenshots/mobile_expanded.png", "screenshots/mobile_collapsed.png", "screenshots/mobile_reexpanded.png", "screenshots/desktop_full.png"],
+  "committed": true,
+  "commitHash": "5a2f8b3"
+}

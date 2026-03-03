@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T09:19:41.083Z",
+  "data": {
+    "effectId": "01KJSFXZ0710GEH99QWBQRKVDR",
+    "invocationKey": "ui-tdd:S000004:fix-ui-issues",
+    "invocationHash": "7e5a9f6f3bed32574c056f62fae3b8dcceda6449ed888d2eda71ecbf2f6039bb",
+    "stepId": "S000004",
+    "taskId": "fix-ui-issues",
+    "kind": "agent",
+    "label": "fix",
+    "taskDefRef": "tasks/01KJSFXZ0710GEH99QWBQRKVDR/task.json",
+    "labels": [
+      "fix",
+      "ui",
+      "iteration-1"
+    ]
+  },
+  "checksum": "7453c847ac16eaa817394b0eb84ef3d35f504ba5317b440005d0af85da39c933"
+}

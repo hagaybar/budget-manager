@@ -1,0 +1,15 @@
+{
+  "appName": "budget_manager",
+  "stack": "Python/FastAPI/SQLite",
+  "requirements": [
+    "Simple CRUD for expenses/income (create, read, update, delete transactions)",
+    "Each transaction has: type (income/expense), amount, category, description, date",
+    "Monthly summary logic: total income, total expenses, net balance, category breakdowns",
+    "Persistent storage using SQLite",
+    "RESTful API with proper HTTP status codes and error handling",
+    "Pydantic validation for request/response schemas",
+    "100% test coverage of core business logic"
+  ],
+  "targetTestPasses": true,
+  "maxTestIterations": 4
+}

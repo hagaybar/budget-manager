@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSMKKDBYKJN67VTKS9FSNCJ",
+  "taskId": "write-collapsible-tests",
+  "invocationKey": "collapsible-mobile:S000001:write-collapsible-tests",
+  "status": "ok",
+  "result": {
+    "newTestCount": 3,
+    "selectors": [
+      "card-body-add-form",
+      "card-body-transactions",
+      "card-body-summary",
+      "card-body-recurring",
+      "collapse-toggle"
+    ],
+    "testFile": "tests/test_ui_e2e.py"
+  },
+  "startedAt": "2026-03-03T10:44:17.517Z",
+  "finishedAt": "2026-03-03T10:44:17.517Z",
+  "value": {
+    "newTestCount": 3,
+    "selectors": [
+      "card-body-add-form",
+      "card-body-transactions",
+      "card-body-summary",
+      "card-body-recurring",
+      "collapse-toggle"
+    ],
+    "testFile": "tests/test_ui_e2e.py"
+  }
+}

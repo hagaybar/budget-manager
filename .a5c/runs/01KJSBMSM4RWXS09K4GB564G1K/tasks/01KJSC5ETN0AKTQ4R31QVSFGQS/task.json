@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSC5ETN0AKTQ4R31QVSFGQS",
+  "taskId": "deliver-project",
+  "invocationKey": "budget-manager-e2e:S000006:deliver-project",
+  "stepId": "S000006",
+  "kind": "agent",
+  "title": "Deliver: README + final_delivery commit",
+  "description": "Finalize README with setup instructions, create final_delivery git commit",
+  "labels": [
+    "delivery",
+    "final"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSC5ETN0AKTQ4R31QVSFGQS/input.json",
+    "outputJsonPath": "tasks/01KJSC5ETN0AKTQ4R31QVSFGQS/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "plan": {
+      "endpoints": [
+        "POST /api/transactions",
+        "GET /api/transactions",
+        "GET /api/transactions/{id}",
+        "PUT /api/transactions/{id}",
+        "DELETE /api/transactions/{id}",
+        "GET /api/summary/monthly"
+      ],
+      "fileStructure": [
+        "app/__init__.py",
+        "app/main.py",
+        "app/database.py",
+        "app/models.py",
+        "app/schemas.py",
+        "app/routers/__init__.py",
+        "app/routers/transactions.py",
+        "app/routers/summary.py",
+        "tests/__init__.py",
+        "tests/conftest.py",
+        "tests/test_transactions.py",
+        "tests/test_summary.py",
+        "tests/test_models.py",
+        "requirements.txt",
+        "README.md",
+        "TASK_PLAN.md"
+      ],
+      "models": [
+        "TransactionCreate",
+        "TransactionUpdate",
+        "TransactionResponse",
+        "MonthlySummary",
+        "CategoryBreakdown"
+      ],
+      "summary": "Complete architecture plan for budget_manager with FastAPI, SQLite, and full test coverage",
+      "tables": [
+        "transactions"
+      ]
+    },
+    "stack": "Python/FastAPI/SQLite",
+    "testIterations": 1,
+    "testsPassing": true
+  }
+}

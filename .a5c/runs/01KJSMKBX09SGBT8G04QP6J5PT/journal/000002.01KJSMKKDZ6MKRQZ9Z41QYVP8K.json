@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T10:41:24.415Z",
+  "data": {
+    "effectId": "01KJSMKKDBYKJN67VTKS9FSNCJ",
+    "invocationKey": "collapsible-mobile:S000001:write-collapsible-tests",
+    "invocationHash": "59941d8feeb85d4919cbed4d7fcc3b787c88a1a1064edb4bdacd1d0fc411c37a",
+    "stepId": "S000001",
+    "taskId": "write-collapsible-tests",
+    "kind": "agent",
+    "label": "tdd",
+    "taskDefRef": "tasks/01KJSMKKDBYKJN67VTKS9FSNCJ/task.json",
+    "labels": [
+      "tdd",
+      "tests"
+    ]
+  },
+  "checksum": "2142368fe5bc8fc5c3bf9f252eff6c89458f81e7f6907c6444b22f9a76eaf05c"
+}

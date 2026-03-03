@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSFXZ0710GEH99QWBQRKVDR",
+  "taskId": "fix-ui-issues",
+  "invocationKey": "ui-tdd:S000004:fix-ui-issues",
+  "stepId": "S000004",
+  "kind": "agent",
+  "title": "Fix UI issues (iteration 1)",
+  "description": "Fix failing E2E tests by updating UI or test code",
+  "labels": [
+    "fix",
+    "iteration-1",
+    "ui"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSFXZ0710GEH99QWBQRKVDR/input.json",
+    "outputJsonPath": "tasks/01KJSFXZ0710GEH99QWBQRKVDR/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "iteration": 1,
+    "testResults": {
+      "allPassing": false,
+      "failed": 2,
+      "feedback": "2 tests fail because UI formats amounts as currency ($1,000.00) but tests check for plain numbers (1000, 3000, 500, 2500). Fix tests to match formatted amounts: use to_contain_text('1,000') instead of to_contain_text('1000'), and to_contain_text('3,000') instead of to_contain_text('3000'), etc.",
+      "passed": 5,
+      "rawOutput": "5 passed, 2 failed in 22.80s",
+      "totalTests": 7
+    }
+  }
+}

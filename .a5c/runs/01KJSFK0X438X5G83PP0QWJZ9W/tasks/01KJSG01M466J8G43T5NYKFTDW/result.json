@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSG01M466J8G43T5NYKFTDW",
+  "taskId": "visual-verify-commit",
+  "invocationKey": "ui-tdd:S000006:visual-verify-commit",
+  "status": "ok",
+  "result": {
+    "commitHash": "8e92872",
+    "committed": true,
+    "screenshots": [
+      "screenshots/ui_desktop.png",
+      "screenshots/ui_mobile.png",
+      "screenshots/ui_summary.png"
+    ]
+  },
+  "startedAt": "2026-03-03T09:23:29.196Z",
+  "finishedAt": "2026-03-03T09:23:29.196Z",
+  "value": {
+    "commitHash": "8e92872",
+    "committed": true,
+    "screenshots": [
+      "screenshots/ui_desktop.png",
+      "screenshots/ui_mobile.png",
+      "screenshots/ui_summary.png"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T08:13:52.367Z",
+  "data": {
+    "effectId": "01KJSC5ETN0AKTQ4R31QVSFGQS",
+    "invocationKey": "budget-manager-e2e:S000006:deliver-project",
+    "invocationHash": "1d8112968c53a22564365e316648b983ebb1016ab25c574521ac55b21d3eabf5",
+    "stepId": "S000006",
+    "taskId": "deliver-project",
+    "kind": "agent",
+    "label": "delivery",
+    "taskDefRef": "tasks/01KJSC5ETN0AKTQ4R31QVSFGQS/task.json",
+    "labels": [
+      "delivery",
+      "final"
+    ]
+  },
+  "checksum": "fd0659acc2af680964898e2e7e16fa0105c2ddc79b5fdf3cb54ab152b57d880a"
+}

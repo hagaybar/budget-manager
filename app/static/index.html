@@ -44,6 +44,30 @@
             letter-spacing: -0.02em;
         }
 
+        .header-actions {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .header-btn {
+            padding: 0.35rem 0.75rem;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-family: inherit;
+        }
+
+        .header-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
         .header p {
             font-size: 0.85rem;
             opacity: 0.85;
@@ -501,6 +525,15 @@
     <header class="header">
         <h1 data-testid="app-title">Budget Manager</h1>
         <p>Track your income &amp; expenses</p>
+        <div class="header-actions">
+            <button class="header-btn" onclick="saveBackup()">Save Backup</button>
+            <button class="header-btn" onclick="showRestoreDialog()">Restore Backup</button>
+            <button class="header-btn" onclick="exportData()">Export JSON</button>
+            <label class="header-btn" style="margin:0">
+                Import JSON
+                <input type="file" accept=".json" onchange="importData(event)" style="display:none">
+            </label>
+        </div>
     </header>
 
     <div class="container">
@@ -1032,6 +1065,97 @@
                 showToast(err.message, true);
                 console.error(err);
             }
+        }
+
+        /* ===== BACKUP / RESTORE ===== */
+        async function saveBackup() {
+            try {
+                const res = await fetch(`${API_BASE}/backup/save`, { method: 'POST' });
+                if (!res.ok) throw new Error('Failed to save backup');
+                const data = await res.json();
+                showToast(`Backup saved: ${data.transactions_count} transactions, ${data.recurring_count} recurring`);
+            } catch (err) {
+                showToast(err.message, true);
+            }
+        }
+
+        async function showRestoreDialog() {
+            try {
+                const res = await fetch(`${API_BASE}/backup/list`);
+                if (!res.ok) throw new Error('Failed to list backups');
+                const data = await res.json();
+
+                if (data.backups.length === 0) {
+                    showToast('No backups found. Save a backup first.', true);
+                    return;
+                }
+
+                const options = data.backups.map(b =>
+                    `${b.filename} (${b.transactions_count} txns, ${b.recurring_count} recurring)`
+                ).join('\n');
+
+                const choice = prompt(
+                    `Available backups:\n\n${options}\n\nEnter the filename to restore (e.g. backup_20260303_120000.json):`
+                );
+
+                if (!choice || !choice.trim()) return;
+
+                if (!confirm(`This will replace ALL current data with the backup. Continue?`)) return;
+
+                const restoreRes = await fetch(`${API_BASE}/backup/restore/${choice.trim()}`, { method: 'POST' });
+                if (!restoreRes.ok) {
+                    const err = await restoreRes.json();
+                    throw new Error(err.detail || 'Restore failed');
+                }
+                const result = await restoreRes.json();
+                showToast(`Restored: ${result.transactions_count} transactions, ${result.recurring_count} recurring`);
+                await Promise.all([loadTransactions(), loadSummary(), loadRecurring()]);
+            } catch (err) {
+                showToast(err.message, true);
+            }
+        }
+
+        function exportData() {
+            fetch(`${API_BASE}/backup/export`)
+                .then(res => res.json())
+                .then(data => {
+                    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `budget_export_${new Date().toISOString().slice(0,10)}.json`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                    showToast('Data exported!');
+                })
+                .catch(err => showToast(err.message, true));
+        }
+
+        async function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!confirm('This will replace ALL current data with the imported file. Continue?')) {
+                event.target.value = '';
+                return;
+            }
+
+            try {
+                const text = await file.text();
+                const data = JSON.parse(text);
+                const res = await fetch(`${API_BASE}/backup/import`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (!res.ok) throw new Error('Import failed');
+                const result = await res.json();
+                showToast(`Imported: ${result.transactions_count} transactions, ${result.recurring_count} recurring`);
+                await Promise.all([loadTransactions(), loadSummary(), loadRecurring()]);
+            } catch (err) {
+                showToast(err.message, true);
+            }
+            event.target.value = '';
         }
 
         /* ===== COLLAPSIBLE CARDS (mobile) ===== */

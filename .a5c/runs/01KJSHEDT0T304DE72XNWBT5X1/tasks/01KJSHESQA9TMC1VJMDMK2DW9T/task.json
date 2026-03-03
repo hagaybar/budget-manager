@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSHESQA9TMC1VJMDMK2DW9T",
+  "taskId": "plan-changes",
+  "invocationKey": "currency-and-recurring:S000001:plan-changes",
+  "stepId": "S000001",
+  "kind": "agent",
+  "title": "Plan currency change and recurring transactions feature",
+  "description": "Analyze existing code and design schema/API/UI changes",
+  "labels": [
+    "architecture",
+    "planning"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSHESQA9TMC1VJMDMK2DW9T/input.json",
+    "outputJsonPath": "tasks/01KJSHESQA9TMC1VJMDMK2DW9T/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "features": [
+      "Change all currency display from $ (USD) to ₪ (ILS / ש\"ח)",
+      "Add recurring transactions: weekly (specific day) or monthly (specific date)",
+      "Recurring transactions have: type, amount, category, description, frequency, day_of_week/day_of_month, start_date, end_date (optional/nullable)",
+      "Auto-generate transaction instances from recurring definitions",
+      "UI for managing recurring transactions"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSFKH0FZG1FE8ZARAWKFR02",
+  "taskId": "write-e2e-tests",
+  "invocationKey": "ui-tdd:S000001:write-e2e-tests",
+  "stepId": "S000001",
+  "kind": "agent",
+  "title": "TDD: Write Playwright E2E tests for UI",
+  "description": "Write failing tests first that define expected UI behavior",
+  "labels": [
+    "playwright",
+    "tdd",
+    "tests"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSFKH0FZG1FE8ZARAWKFR02/input.json",
+    "outputJsonPath": "tasks/01KJSFKH0FZG1FE8ZARAWKFR02/result.json"
+  },
+  "inputs": {
+    "apiEndpoints": [
+      "POST /api/transactions",
+      "GET /api/transactions",
+      "GET /api/transactions/{id}",
+      "PUT /api/transactions/{id}",
+      "DELETE /api/transactions/{id}",
+      "GET /api/summary/monthly"
+    ],
+    "appName": "budget_manager"
+  }
+}

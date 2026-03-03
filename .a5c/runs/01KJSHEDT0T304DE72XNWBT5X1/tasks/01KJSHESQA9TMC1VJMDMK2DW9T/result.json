@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSHESQA9TMC1VJMDMK2DW9T",
+  "taskId": "plan-changes",
+  "invocationKey": "currency-and-recurring:S000001:plan-changes",
+  "status": "ok",
+  "result": {
+    "apiChanges": [
+      "POST /api/recurring",
+      "GET /api/recurring",
+      "GET /api/recurring/{id}",
+      "PUT /api/recurring/{id}",
+      "DELETE /api/recurring/{id}",
+      "POST /api/recurring/{id}/generate"
+    ],
+    "dbChanges": [
+      "Add recurring_transactions table",
+      "Add recurring_id to transactions table"
+    ],
+    "planFile": "ENHANCEMENT_PLAN.md",
+    "testChanges": [
+      "Update conftest.py for recurring table",
+      "New test_recurring.py (22 tests)",
+      "New test_recurring_models.py",
+      "Update test_ui_e2e.py with recurring UI tests"
+    ],
+    "uiChanges": [
+      "Currency $ to ₪ in all UI locations",
+      "Recurring Transactions section with form and list",
+      "Frequency toggle (weekly/monthly day selector)"
+    ]
+  },
+  "startedAt": "2026-03-03T09:49:54.211Z",
+  "finishedAt": "2026-03-03T09:49:54.211Z",
+  "value": {
+    "apiChanges": [
+      "POST /api/recurring",
+      "GET /api/recurring",
+      "GET /api/recurring/{id}",
+      "PUT /api/recurring/{id}",
+      "DELETE /api/recurring/{id}",
+      "POST /api/recurring/{id}/generate"
+    ],
+    "dbChanges": [
+      "Add recurring_transactions table",
+      "Add recurring_id to transactions table"
+    ],
+    "planFile": "ENHANCEMENT_PLAN.md",
+    "testChanges": [
+      "Update conftest.py for recurring table",
+      "New test_recurring.py (22 tests)",
+      "New test_recurring_models.py",
+      "Update test_ui_e2e.py with recurring UI tests"
+    ],
+    "uiChanges": [
+      "Currency $ to ₪ in all UI locations",
+      "Recurring Transactions section with form and list",
+      "Frequency toggle (weekly/monthly day selector)"
+    ]
+  }
+}

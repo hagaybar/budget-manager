@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSMXA58AGEMWGK8DXDRBAQS",
+  "taskId": "verify-commit",
+  "invocationKey": "collapsible-mobile:S000004:verify-commit",
+  "stepId": "S000004",
+  "kind": "agent",
+  "title": "Visual verification + screenshots + commit",
+  "description": "Take mobile screenshots showing collapsible sections and commit",
+  "labels": [
+    "commit",
+    "final",
+    "visual-verify"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSMXA58AGEMWGK8DXDRBAQS/input.json",
+    "outputJsonPath": "tasks/01KJSMXA58AGEMWGK8DXDRBAQS/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "testsPassing": true
+  }
+}

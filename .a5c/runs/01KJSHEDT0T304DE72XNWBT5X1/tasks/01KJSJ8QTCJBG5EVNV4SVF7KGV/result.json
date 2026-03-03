@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSJ8QTCJBG5EVNV4SVF7KGV",
+  "taskId": "visual-verify-commit",
+  "invocationKey": "currency-and-recurring:S000005:visual-verify-commit",
+  "status": "ok",
+  "result": {
+    "commitHash": "9eaf9fb",
+    "committed": true,
+    "screenshots": [
+      "screenshots/currency_desktop.png",
+      "screenshots/recurring_desktop.png",
+      "screenshots/recurring_mobile.png"
+    ]
+  },
+  "startedAt": "2026-03-03T10:03:08.539Z",
+  "finishedAt": "2026-03-03T10:03:08.539Z",
+  "value": {
+    "commitHash": "9eaf9fb",
+    "committed": true,
+    "screenshots": [
+      "screenshots/currency_desktop.png",
+      "screenshots/recurring_desktop.png",
+      "screenshots/recurring_mobile.png"
+    ]
+  }
+}

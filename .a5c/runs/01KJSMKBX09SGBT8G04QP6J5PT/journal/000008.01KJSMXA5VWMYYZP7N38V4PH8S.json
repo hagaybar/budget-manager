@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T10:46:42.619Z",
+  "data": {
+    "effectId": "01KJSMXA58AGEMWGK8DXDRBAQS",
+    "invocationKey": "collapsible-mobile:S000004:verify-commit",
+    "invocationHash": "e3765b54f74307646fbca9b503b12421b270dab0253eeb0439e1faf42423b0fd",
+    "stepId": "S000004",
+    "taskId": "verify-commit",
+    "kind": "agent",
+    "label": "visual-verify",
+    "taskDefRef": "tasks/01KJSMXA58AGEMWGK8DXDRBAQS/task.json",
+    "labels": [
+      "visual-verify",
+      "commit",
+      "final"
+    ]
+  },
+  "checksum": "d8d3824a5c30e0ec6a036dd57fad1750d02e4f2a4b4b011bff77ad860211bc3d"
+}

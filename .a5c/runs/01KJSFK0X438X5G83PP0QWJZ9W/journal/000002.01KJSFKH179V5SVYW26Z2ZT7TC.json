@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T09:13:59.079Z",
+  "data": {
+    "effectId": "01KJSFKH0FZG1FE8ZARAWKFR02",
+    "invocationKey": "ui-tdd:S000001:write-e2e-tests",
+    "invocationHash": "ae4ffb5c723795960a4fc3c5a48c8735c397e6c5fc317c2c5668b774f6e81b42",
+    "stepId": "S000001",
+    "taskId": "write-e2e-tests",
+    "kind": "agent",
+    "label": "tdd",
+    "taskDefRef": "tasks/01KJSFKH0FZG1FE8ZARAWKFR02/task.json",
+    "labels": [
+      "tdd",
+      "tests",
+      "playwright"
+    ]
+  },
+  "checksum": "926db21b552ff6292052d83c3c2945360d11aa64ff51881b908c6962b0b00e65"
+}

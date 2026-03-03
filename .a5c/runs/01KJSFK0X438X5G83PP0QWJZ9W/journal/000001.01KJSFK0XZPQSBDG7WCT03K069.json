@@ -1,0 +1,14 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-03-03T09:13:42.592Z",
+  "data": {
+    "runId": "01KJSFK0X438X5G83PP0QWJZ9W",
+    "processId": "ui-tdd",
+    "entrypoint": {
+      "importPath": "../../processes/ui-tdd.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json"
+  },
+  "checksum": "5b56519843f6bb80a6d607f5b42af75df68a750145ec446dc4783d7a77cd27a9"
+}

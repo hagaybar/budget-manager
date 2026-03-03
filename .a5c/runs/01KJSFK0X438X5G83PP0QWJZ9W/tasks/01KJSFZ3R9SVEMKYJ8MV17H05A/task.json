@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSFZ3R9SVEMKYJ8MV17H05A",
+  "taskId": "run-playwright-tests",
+  "invocationKey": "ui-tdd:S000005:run-playwright-tests",
+  "stepId": "S000005",
+  "kind": "agent",
+  "title": "Run Playwright E2E tests (iteration 2)",
+  "description": "Execute Playwright tests against the live UI",
+  "labels": [
+    "iteration-2",
+    "playwright",
+    "testing"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSFZ3R9SVEMKYJ8MV17H05A/input.json",
+    "outputJsonPath": "tasks/01KJSFZ3R9SVEMKYJ8MV17H05A/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "iteration": 2
+  }
+}

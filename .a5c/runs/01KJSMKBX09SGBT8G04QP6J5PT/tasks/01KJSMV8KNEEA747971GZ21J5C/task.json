@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSMV8KNEEA747971GZ21J5C",
+  "taskId": "run-tests",
+  "invocationKey": "collapsible-mobile:S000003:run-tests",
+  "stepId": "S000003",
+  "kind": "agent",
+  "title": "Run all tests (iteration 1)",
+  "description": "Run unit + E2E tests and report results",
+  "labels": [
+    "iteration-1",
+    "testing"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSMV8KNEEA747971GZ21J5C/input.json",
+    "outputJsonPath": "tasks/01KJSMV8KNEEA747971GZ21J5C/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "iteration": 1
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "filesModified": ["app/static/index.html"],
+  "summary": "Collapsible sections already implemented: card-body wrappers with data-testid, collapse-toggle chevrons, display:none for collapsed state, mobile-only toggle via JS/CSS"
+}

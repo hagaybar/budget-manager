@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSJ683JQDEGXZM1WG58QMFD",
+  "taskId": "run-all-tests",
+  "invocationKey": "currency-and-recurring:S000004:run-all-tests",
+  "stepId": "S000004",
+  "kind": "agent",
+  "title": "Run all tests (iteration 1)",
+  "description": "Run both unit tests and Playwright E2E tests",
+  "labels": [
+    "iteration-1",
+    "testing"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSJ683JQDEGXZM1WG58QMFD/input.json",
+    "outputJsonPath": "tasks/01KJSJ683JQDEGXZM1WG58QMFD/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "iteration": 1
+  }
+}

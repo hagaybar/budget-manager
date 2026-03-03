@@ -14,16 +14,25 @@ def browser():
         b.close()
 
 
+@pytest.fixture(scope="module")
+def _saved_data():
+    """Save user data before E2E tests, restore after all tests complete."""
+    with httpx.Client(base_url=BASE_URL, follow_redirects=True) as client:
+        backup = client.get("/api/backup/export").json()
+    yield backup
+    with httpx.Client(base_url=BASE_URL, follow_redirects=True) as client:
+        client.post("/api/backup/import", json=backup)
+
+
 @pytest.fixture
-def page(browser):
+def page(browser, _saved_data):
     ctx = browser.new_context(viewport={"width": 1280, "height": 900})
     pg = ctx.new_page()
-    # Clean DB before each test
+    # Clean DB before each test (test isolation)
     with httpx.Client(base_url=BASE_URL, follow_redirects=True) as client:
         txns = client.get("/api/transactions").json()
         for t in txns:
             client.delete(f"/api/transactions/{t['id']}")
-        # Clean recurring transactions (guarded in case endpoint not yet live)
         try:
             recs = client.get("/api/recurring").json()
             for r in recs:

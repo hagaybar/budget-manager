@@ -1,0 +1,7 @@
+{
+  "allPassing": true,
+  "unitTests": { "total": 71, "passed": 71, "failed": 0 },
+  "e2eTests": { "total": 11, "passed": 11, "failed": 0 },
+  "feedback": null,
+  "rawOutput": "71 unit tests passed in 1.26s, 11 E2E tests passed in 19.56s"
+}

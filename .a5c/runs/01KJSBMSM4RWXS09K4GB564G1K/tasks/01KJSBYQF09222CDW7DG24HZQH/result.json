@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSBYQF09222CDW7DG24HZQH",
+  "taskId": "write-tests",
+  "invocationKey": "budget-manager-e2e:S000004:write-tests",
+  "status": "ok",
+  "result": {
+    "coverageTargets": [
+      "app/database.py",
+      "app/schemas.py",
+      "app/routers/transactions.py",
+      "app/routers/summary.py",
+      "app/main.py"
+    ],
+    "testCount": 50,
+    "testFiles": [
+      "tests/conftest.py",
+      "tests/test_transactions.py",
+      "tests/test_summary.py",
+      "tests/test_models.py"
+    ]
+  },
+  "startedAt": "2026-03-03T08:13:28.207Z",
+  "finishedAt": "2026-03-03T08:13:28.207Z",
+  "value": {
+    "coverageTargets": [
+      "app/database.py",
+      "app/schemas.py",
+      "app/routers/transactions.py",
+      "app/routers/summary.py",
+      "app/main.py"
+    ],
+    "testCount": 50,
+    "testFiles": [
+      "tests/conftest.py",
+      "tests/test_transactions.py",
+      "tests/test_summary.py",
+      "tests/test_models.py"
+    ]
+  }
+}

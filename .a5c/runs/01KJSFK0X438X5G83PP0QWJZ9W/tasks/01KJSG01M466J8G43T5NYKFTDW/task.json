@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSG01M466J8G43T5NYKFTDW",
+  "taskId": "visual-verify-commit",
+  "invocationKey": "ui-tdd:S000006:visual-verify-commit",
+  "stepId": "S000006",
+  "kind": "agent",
+  "title": "Visual verification + screenshots + commit",
+  "description": "Take screenshots of final UI on mobile and desktop viewports, then commit",
+  "labels": [
+    "commit",
+    "final",
+    "visual-verify"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSG01M466J8G43T5NYKFTDW/input.json",
+    "outputJsonPath": "tasks/01KJSG01M466J8G43T5NYKFTDW/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "testIterations": 2,
+    "testsPassing": true
+  }
+}

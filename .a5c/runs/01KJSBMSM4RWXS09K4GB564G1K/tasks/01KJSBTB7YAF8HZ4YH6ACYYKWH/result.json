@@ -1,0 +1,49 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KJSBTB7YAF8HZ4YH6ACYYKWH",
+  "taskId": "implement-app",
+  "invocationKey": "budget-manager-e2e:S000003:implement-app",
+  "status": "ok",
+  "result": {
+    "committed": true,
+    "endpointsImplemented": [
+      "POST /api/transactions",
+      "GET /api/transactions",
+      "GET /api/transactions/{id}",
+      "PUT /api/transactions/{id}",
+      "DELETE /api/transactions/{id}",
+      "GET /api/summary/monthly",
+      "GET /"
+    ],
+    "filesCreated": [
+      "app/database.py",
+      "app/schemas.py",
+      "app/routers/transactions.py",
+      "app/routers/summary.py",
+      "app/main.py"
+    ],
+    "filesModified": []
+  },
+  "startedAt": "2026-03-03T08:10:06.908Z",
+  "finishedAt": "2026-03-03T08:10:06.908Z",
+  "value": {
+    "committed": true,
+    "endpointsImplemented": [
+      "POST /api/transactions",
+      "GET /api/transactions",
+      "GET /api/transactions/{id}",
+      "PUT /api/transactions/{id}",
+      "DELETE /api/transactions/{id}",
+      "GET /api/summary/monthly",
+      "GET /"
+    ],
+    "filesCreated": [
+      "app/database.py",
+      "app/schemas.py",
+      "app/routers/transactions.py",
+      "app/routers/summary.py",
+      "app/main.py"
+    ],
+    "filesModified": []
+  }
+}

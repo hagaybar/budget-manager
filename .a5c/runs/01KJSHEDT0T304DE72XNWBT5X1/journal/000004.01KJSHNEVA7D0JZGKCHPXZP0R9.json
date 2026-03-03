@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T09:49:59.531Z",
+  "data": {
+    "effectId": "01KJSHNETFJJNEGDQ82MYS8PDV",
+    "invocationKey": "currency-and-recurring:S000002:write-tests",
+    "invocationHash": "f5d96a5ba0902bc8b7451b64c1671e9f44531cc142b6c690b26f2c22efe2b982",
+    "stepId": "S000002",
+    "taskId": "write-tests",
+    "kind": "agent",
+    "label": "tdd",
+    "taskDefRef": "tasks/01KJSHNETFJJNEGDQ82MYS8PDV/task.json",
+    "labels": [
+      "tdd",
+      "tests"
+    ]
+  },
+  "checksum": "7f4ea58e8248bb1f72467c1601d339e0cc0992ea5f1926eb874d76a37f97d6b8"
+}

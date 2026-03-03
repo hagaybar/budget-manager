@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T10:44:22.558Z",
+  "data": {
+    "effectId": "01KJSMS1C9Z2D8ZPETWQTVA7CA",
+    "invocationKey": "collapsible-mobile:S000002:implement-collapsible",
+    "invocationHash": "0001322de467ef54826252ceb023e3d4259e4cdfcf045408f47ee211f090c1d5",
+    "stepId": "S000002",
+    "taskId": "implement-collapsible",
+    "kind": "agent",
+    "label": "implementation",
+    "taskDefRef": "tasks/01KJSMS1C9Z2D8ZPETWQTVA7CA/task.json",
+    "labels": [
+      "implementation",
+      "ui"
+    ]
+  },
+  "checksum": "3be6efb6c3b91a97b5239d5491b8d417998987a4bc018b71060f76ad84e2593d"
+}

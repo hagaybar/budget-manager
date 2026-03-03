@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T09:15:26.008Z",
+  "data": {
+    "effectId": "01KJSFP5X5PE9P24JZ8ZMGBFEW",
+    "invocationKey": "ui-tdd:S000002:implement-ui",
+    "invocationHash": "24c7c2b970e9208e373eacb7f03b9cd6513d79324fa5011b673d87a21ec69eb3",
+    "stepId": "S000002",
+    "taskId": "implement-ui",
+    "kind": "agent",
+    "label": "implementation",
+    "taskDefRef": "tasks/01KJSFP5X5PE9P24JZ8ZMGBFEW/task.json",
+    "labels": [
+      "implementation",
+      "ui",
+      "frontend"
+    ]
+  },
+  "checksum": "97b9acf2837b45b798e0ab83f2b2c51b4b729d98f2d19167f578b690050aec19"
+}

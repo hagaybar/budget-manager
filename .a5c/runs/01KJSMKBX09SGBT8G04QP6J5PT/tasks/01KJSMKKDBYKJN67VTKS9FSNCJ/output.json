@@ -1,0 +1,5 @@
+{
+  "testFile": "tests/test_ui_e2e.py",
+  "newTestCount": 3,
+  "selectors": ["card-body-add-form", "card-body-transactions", "card-body-summary", "card-body-recurring", "collapse-toggle"]
+}

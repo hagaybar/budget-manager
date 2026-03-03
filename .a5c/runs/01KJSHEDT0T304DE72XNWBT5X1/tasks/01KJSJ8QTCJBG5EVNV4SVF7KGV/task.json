@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSJ8QTCJBG5EVNV4SVF7KGV",
+  "taskId": "visual-verify-commit",
+  "invocationKey": "currency-and-recurring:S000005:visual-verify-commit",
+  "stepId": "S000005",
+  "kind": "agent",
+  "title": "Visual verification + screenshots + commit",
+  "description": "Take screenshots of updated UI and commit all changes",
+  "labels": [
+    "commit",
+    "final",
+    "visual-verify"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSJ8QTCJBG5EVNV4SVF7KGV/input.json",
+    "outputJsonPath": "tasks/01KJSJ8QTCJBG5EVNV4SVF7KGV/result.json"
+  },
+  "inputs": {
+    "appName": "budget_manager",
+    "testIterations": 1,
+    "testsPassing": true
+  }
+}
