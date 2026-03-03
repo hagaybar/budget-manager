@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Manager</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                         "Helvetica Neue", Arial, sans-serif;
+            background: #f0f4f8;
+            color: #2d3748;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+            color: #fff;
+            padding: 1.25rem 1rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(26, 54, 93, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 0.2rem;
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* ===== CARD ===== */
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1a365d;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        /* ===== FORM ===== */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.6rem 0.75rem;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            color: #2d3748;
+            background: #fff;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #4299e1;
+            box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+        }
+
+        .submit-btn {
+            grid-column: 1 / -1;
+            padding: 0.75rem;
+            background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.2s;
+            margin-top: 0.25rem;
+        }
+
+        .submit-btn:hover {
+            box-shadow: 0 4px 12px rgba(43, 108, 176, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* ===== TRANSACTION LIST ===== */
+        .transaction-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #edf2f7;
+            flex-wrap: wrap;
+        }
+
+        .transaction-row:last-child {
+            border-bottom: none;
+        }
+
+        .type-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            flex-shrink: 0;
+        }
+
+        .type-badge.income {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .type-badge.expense {
+            background: #fed7d7;
+            color: #822727;
+        }
+
+        .tx-amount {
+            font-size: 1.05rem;
+            font-weight: 700;
+            min-width: 70px;
+        }
+
+        .tx-amount.income {
+            color: #276749;
+        }
+
+        .tx-amount.expense {
+            color: #c53030;
+        }
+
+        .tx-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .tx-category {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #2d3748;
+        }
+
+        .tx-description {
+            font-size: 0.8rem;
+            color: #718096;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tx-date {
+            font-size: 0.78rem;
+            color: #a0aec0;
+            flex-shrink: 0;
+        }
+
+        .delete-btn {
+            padding: 0.35rem 0.65rem;
+            background: #fff5f5;
+            color: #c53030;
+            border: 1.5px solid #feb2b2;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            flex-shrink: 0;
+        }
+
+        .delete-btn:hover {
+            background: #c53030;
+            color: #fff;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        /* ===== SUMMARY ===== */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-item {
+            text-align: center;
+            padding: 0.75rem 0.5rem;
+            border-radius: 10px;
+            background: #f7fafc;
+        }
+
+        .summary-item.income-box {
+            background: #f0fff4;
+            border: 1px solid #c6f6d5;
+        }
+
+        .summary-item.expense-box {
+            background: #fff5f5;
+            border: 1px solid #fed7d7;
+        }
+
+        .summary-item.net-box {
+            background: #ebf8ff;
+            border: 1px solid #bee3f8;
+        }
+
+        .summary-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #718096;
+            margin-bottom: 0.25rem;
+        }
+
+        .summary-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .summary-value.income-val {
+            color: #276749;
+        }
+
+        .summary-value.expense-val {
+            color: #c53030;
+        }
+
+        .summary-value.net-val {
+            color: #2b6cb0;
+        }
+
+        .summary-value.net-val.negative {
+            color: #c53030;
+        }
+
+        /* Category breakdown */
+        .category-list {
+            margin-top: 0.75rem;
+        }
+
+        .category-list h4 {
+            font-size: 0.85rem;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .category-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.4rem 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .category-row:last-child {
+            border-bottom: none;
+        }
+
+        .cat-name {
+            font-weight: 500;
+            color: #4a5568;
+        }
+
+        .cat-total {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .cat-count {
+            font-size: 0.75rem;
+            color: #a0aec0;
+            margin-left: 0.5rem;
+        }
+
+        /* ===== MOBILE RESPONSIVE ===== */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.25rem;
+            }
+
+            .container {
+                padding: 0.75rem;
+            }
+
+            .card {
+                padding: 1rem;
+                border-radius: 10px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .transaction-row {
+                gap: 0.5rem;
+            }
+
+            .tx-amount {
+                font-size: 0.95rem;
+                min-width: auto;
+            }
+
+            .summary-value {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (min-width: 481px) and (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* ===== LOADING ===== */
+        .loading {
+            text-align: center;
+            padding: 1rem;
+            color: #a0aec0;
+            font-style: italic;
+        }
+
+        /* ===== TOAST NOTIFICATION ===== */
+        .toast {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1a365d;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            z-index: 200;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.error {
+            background: #c53030;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <h1 data-testid="app-title">Budget Manager</h1>
+        <p>Track your income &amp; expenses</p>
+    </header>
+
+    <div class="container">
+
+        <!-- ADD TRANSACTION FORM -->
+        <div class="card">
+            <div class="card-title">Add Transaction</div>
+            <form data-testid="add-form" class="form-grid" id="addForm">
+                <div class="form-group">
+                    <label for="type-select">Type</label>
+                    <select id="type-select" data-testid="type-select" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amount-input">Amount</label>
+                    <input type="number" id="amount-input" data-testid="amount-input"
+                           placeholder="0.00" step="0.01" min="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="category-input">Category</label>
+                    <input type="text" id="category-input" data-testid="category-input"
+                           placeholder="e.g. Salary, Rent" required maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="description-input">Description</label>
+                    <input type="text" id="description-input" data-testid="description-input"
+                           placeholder="Optional note" maxlength="500">
+                </div>
+                <div class="form-group">
+                    <label for="date-input">Date</label>
+                    <input type="date" id="date-input" data-testid="date-input" required>
+                </div>
+                <button type="submit" class="submit-btn" data-testid="submit-btn">
+                    Add Transaction
+                </button>
+            </form>
+        </div>
+
+        <!-- TRANSACTION LIST -->
+        <div class="card">
+            <div class="card-title">Transactions</div>
+            <div data-testid="transaction-list" id="transactionList">
+                <div class="loading">Loading transactions...</div>
+            </div>
+        </div>
+
+        <!-- MONTHLY SUMMARY -->
+        <div class="card" data-testid="summary-section" id="summarySection">
+            <div class="card-title" id="summaryTitle">Monthly Summary</div>
+            <div class="summary-grid">
+                <div class="summary-item income-box">
+                    <div class="summary-label">Income</div>
+                    <div class="summary-value income-val" data-testid="total-income" id="totalIncome">$0.00</div>
+                </div>
+                <div class="summary-item expense-box">
+                    <div class="summary-label">Expenses</div>
+                    <div class="summary-value expense-val" data-testid="total-expenses" id="totalExpenses">$0.00</div>
+                </div>
+                <div class="summary-item net-box">
+                    <div class="summary-label">Net Balance</div>
+                    <div class="summary-value net-val" data-testid="net-balance" id="netBalance">$0.00</div>
+                </div>
+            </div>
+            <div class="category-list" id="categoryBreakdown"></div>
+        </div>
+
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        /* ===== STATE ===== */
+        const API_BASE = '/api';
+        const now = new Date();
+        let currentYear = now.getFullYear();
+        let currentMonth = now.getMonth() + 1; // 1-based
+
+        /* ===== DOM REFS ===== */
+        const addForm = document.getElementById('addForm');
+        const typeSelect = document.getElementById('type-select');
+        const amountInput = document.getElementById('amount-input');
+        const categoryInput = document.getElementById('category-input');
+        const descriptionInput = document.getElementById('description-input');
+        const dateInput = document.getElementById('date-input');
+        const transactionList = document.getElementById('transactionList');
+        const totalIncomeEl = document.getElementById('totalIncome');
+        const totalExpensesEl = document.getElementById('totalExpenses');
+        const netBalanceEl = document.getElementById('netBalance');
+        const summaryTitle = document.getElementById('summaryTitle');
+        const categoryBreakdown = document.getElementById('categoryBreakdown');
+        const toast = document.getElementById('toast');
+
+        /* ===== INIT ===== */
+        function init() {
+            // Set default date to today
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            dateInput.value = `${yyyy}-${mm}-${dd}`;
+
+            // Update summary title
+            const monthNames = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            summaryTitle.textContent = `${monthNames[currentMonth - 1]} ${currentYear} Summary`;
+
+            // Load data
+            loadTransactions();
+            loadSummary();
+        }
+
+        /* ===== TOAST ===== */
+        let toastTimeout;
+        function showToast(message, isError = false) {
+            clearTimeout(toastTimeout);
+            toast.textContent = message;
+            toast.className = 'toast' + (isError ? ' error' : '');
+            // Trigger reflow for animation
+            void toast.offsetWidth;
+            toast.classList.add('show');
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        /* ===== FORMAT HELPERS ===== */
+        function formatAmount(amount) {
+            return parseFloat(amount).toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        /* ===== LOAD TRANSACTIONS ===== */
+        async function loadTransactions() {
+            try {
+                const res = await fetch(`${API_BASE}/transactions/`);
+                if (!res.ok) throw new Error('Failed to load transactions');
+                const transactions = await res.json();
+                renderTransactions(transactions);
+            } catch (err) {
+                transactionList.innerHTML = '<div class="empty-state">Failed to load transactions.</div>';
+                console.error(err);
+            }
+        }
+
+        /* ===== RENDER TRANSACTIONS ===== */
+        function renderTransactions(transactions) {
+            if (transactions.length === 0) {
+                transactionList.innerHTML = '<div class="empty-state">No transactions yet. Add one above!</div>';
+                return;
+            }
+
+            transactionList.innerHTML = transactions.map(tx => `
+                <div class="transaction-row" data-testid="transaction-row" data-id="${tx.id}">
+                    <span class="type-badge ${tx.type}">${tx.type}</span>
+                    <span class="tx-amount ${tx.type}">$${formatAmount(tx.amount)}</span>
+                    <div class="tx-details">
+                        <div class="tx-category">${escapeHtml(tx.category)}</div>
+                        <div class="tx-description">${escapeHtml(tx.description || '')}</div>
+                    </div>
+                    <span class="tx-date">${tx.date}</span>
+                    <button class="delete-btn" data-testid="delete-btn" onclick="deleteTransaction(${tx.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        /* ===== HTML ESCAPE ===== */
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        /* ===== ADD TRANSACTION ===== */
+        addForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const data = {
+                type: typeSelect.value,
+                amount: parseFloat(amountInput.value),
+                category: categoryInput.value.trim(),
+                description: descriptionInput.value.trim(),
+                date: dateInput.value
+            };
+
+            if (!data.category) {
+                showToast('Category is required', true);
+                return;
+            }
+
+            if (!data.amount || data.amount <= 0) {
+                showToast('Amount must be greater than 0', true);
+                return;
+            }
+
+            if (!data.date) {
+                showToast('Date is required', true);
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/transactions/`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!res.ok) {
+                    const err = await res.json();
+                    throw new Error(err.detail || 'Failed to add transaction');
+                }
+
+                showToast('Transaction added!');
+
+                // Reset form
+                addForm.reset();
+                // Restore default date
+                const yyyy = now.getFullYear();
+                const mm = String(now.getMonth() + 1).padStart(2, '0');
+                const dd = String(now.getDate()).padStart(2, '0');
+                dateInput.value = `${yyyy}-${mm}-${dd}`;
+
+                // Refresh
+                await Promise.all([loadTransactions(), loadSummary()]);
+            } catch (err) {
+                showToast(err.message, true);
+                console.error(err);
+            }
+        });
+
+        /* ===== DELETE TRANSACTION ===== */
+        async function deleteTransaction(id) {
+            try {
+                const res = await fetch(`${API_BASE}/transactions/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!res.ok && res.status !== 204) {
+                    throw new Error('Failed to delete transaction');
+                }
+
+                showToast('Transaction deleted');
+                await Promise.all([loadTransactions(), loadSummary()]);
+            } catch (err) {
+                showToast(err.message, true);
+                console.error(err);
+            }
+        }
+
+        /* ===== LOAD SUMMARY ===== */
+        async function loadSummary() {
+            try {
+                const res = await fetch(
+                    `${API_BASE}/summary/monthly?year=${currentYear}&month=${currentMonth}`
+                );
+                if (!res.ok) throw new Error('Failed to load summary');
+                const summary = await res.json();
+                renderSummary(summary);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        /* ===== RENDER SUMMARY ===== */
+        function renderSummary(summary) {
+            totalIncomeEl.textContent = `$${formatAmount(summary.total_income)}`;
+            totalExpensesEl.textContent = `$${formatAmount(summary.total_expenses)}`;
+            netBalanceEl.textContent = `$${formatAmount(summary.net_balance)}`;
+
+            // Update net balance color
+            if (summary.net_balance < 0) {
+                netBalanceEl.classList.add('negative');
+            } else {
+                netBalanceEl.classList.remove('negative');
+            }
+
+            // Category breakdown
+            if (summary.categories && summary.categories.length > 0) {
+                categoryBreakdown.innerHTML = `
+                    <h4>Category Breakdown</h4>
+                    ${summary.categories.map(cat => `
+                        <div class="category-row">
+                            <span class="cat-name">${escapeHtml(cat.category)}</span>
+                            <span>
+                                <span class="cat-total">$${formatAmount(cat.total)}</span>
+                                <span class="cat-count">(${cat.count} txn${cat.count > 1 ? 's' : ''})</span>
+                            </span>
+                        </div>
+                    `).join('')}
+                `;
+            } else {
+                categoryBreakdown.innerHTML = '';
+            }
+        }
+
+        /* ===== START ===== */
+        init();
+    </script>
+</body>
+</html>

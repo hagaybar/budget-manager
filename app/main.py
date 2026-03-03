@@ -3,6 +3,8 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from app.database import create_tables
 from app.routers import transactions, summary
 
@@ -37,5 +39,9 @@ app.include_router(summary.router)
 
 @app.get("/")
 def root():
-    """Root endpoint returning API info."""
-    return {"message": "Budget Manager API", "docs": "/docs"}
+    """Serve the Budget Manager UI."""
+    return FileResponse("app/static/index.html")
+
+
+# Mount static files AFTER routers so API routes take priority
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
