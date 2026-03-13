@@ -4,10 +4,20 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+    <!-- Background circle -->
     <path
-        android:fillColor="#007ACC"
-        android:pathData="M54,54m-30,0a30,30 0,1 1,60 0a30,30 0,1 1,-60 0" />
+        android:fillColor="#1B5E20"
+        android:pathData="M54,54m-34,0a34,34 0,1 1,68 0a34,34 0,1 1,-68 0" />
+    <!-- Inner circle -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M54,54m-28,0a28,28 0,1 1,56 0a28,28 0,1 1,-56 0" />
+    <!-- Shekel symbol ₪ stylized -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M45,42h18v3h-18zM45,48h18v3h-18zM45,54h18v3h-18zM45,60h12v3h-12z" />
+        android:pathData="M42,40 L42,64 L46,64 L46,48 C46,45 48,44 50,44 C52,44 53,45 53,48 L53,64 L57,64 L57,48 C57,45 59,44 61,44 C63,44 64,45 64,48 L64,64 L68,64 L68,40 L64,40 L64,42 C63,40.5 61.5,40 60,40 C57.5,40 55.5,41.5 55,44 C54,41.5 52,40 49,40 C47.5,40 46,40.5 45,42 L45,40 Z" />
+    <!-- Upward arrow (growth) -->
+    <path
+        android:fillColor="#A5D6A7"
+        android:pathData="M54,30 L60,37 L56,37 L56,40 L52,40 L52,37 L48,37 Z" />
 </vector>
