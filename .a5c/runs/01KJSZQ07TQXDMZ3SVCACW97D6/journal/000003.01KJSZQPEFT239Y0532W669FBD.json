@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T13:55:52.911Z",
+  "data": {
+    "effectId": "01KJSZQPE98AW5BDX616M4JMDK",
+    "invocationKey": "owasp-security-review:S000002:sca-scan",
+    "invocationHash": "5c40daa6c1b5fd02e73558e5f6d2a41546edbe36f006254251dfe25d75fc990e",
+    "stepId": "S000002",
+    "taskId": "sca-scan",
+    "kind": "agent",
+    "label": "sca",
+    "taskDefRef": "tasks/01KJSZQPE98AW5BDX616M4JMDK/task.json",
+    "labels": [
+      "sca",
+      "sbom",
+      "dependencies"
+    ]
+  },
+  "checksum": "4417c44222453a1ddc097bb57d01ef574440ef722fe26243a1a4c387ad173bcb"
+}

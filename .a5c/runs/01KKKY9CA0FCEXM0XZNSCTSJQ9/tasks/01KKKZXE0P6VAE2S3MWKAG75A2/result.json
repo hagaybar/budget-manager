@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKKZXE0P6VAE2S3MWKAG75A2",
+  "taskId": "build-apk",
+  "invocationKey": "android-budget-manager:S000011:build-apk",
+  "status": "ok",
+  "result": {
+    "apkBuilt": true,
+    "apkPath": "/home/ubuntu/projects/budget_manager/android/app/build/outputs/apk/debug/app-debug.apk",
+    "apkSizeBytes": 17825792,
+    "buildAttempts": 1
+  },
+  "startedAt": "2026-03-13T16:20:10.056Z",
+  "finishedAt": "2026-03-13T16:20:10.056Z",
+  "value": {
+    "apkBuilt": true,
+    "apkPath": "/home/ubuntu/projects/budget_manager/android/app/build/outputs/apk/debug/app-debug.apk",
+    "apkSizeBytes": 17825792,
+    "buildAttempts": 1
+  }
+}

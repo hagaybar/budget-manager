@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T20:35:39.917Z",
+  "data": {
+    "effectId": "01KKMEJX7T7WZ9F61AF9YY1YV2",
+    "invocationKey": "recurring-auto-generation:S000005:build-and-release",
+    "invocationHash": "3609e79a1eb3ce47a99f64c5d15fa55f0d4726d011a4a63041520a0c617af3d9",
+    "stepId": "S000005",
+    "taskId": "build-and-release",
+    "kind": "agent",
+    "label": "Version bump, build APK, publish GitHub release v1.1.0",
+    "taskDefRef": "tasks/01KKMEJX7T7WZ9F61AF9YY1YV2/task.json"
+  },
+  "checksum": "4c2216ba8e8cc3428f2885b71d007dcb5711a98d191d0afe287bf1007f09e40e"
+}

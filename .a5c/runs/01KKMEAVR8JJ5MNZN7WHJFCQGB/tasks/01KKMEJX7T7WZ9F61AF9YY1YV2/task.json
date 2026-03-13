@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KKMEJX7T7WZ9F61AF9YY1YV2",
+  "taskId": "build-and-release",
+  "invocationKey": "recurring-auto-generation:S000005:build-and-release",
+  "stepId": "S000005",
+  "kind": "agent",
+  "title": "Version bump, build APK, publish GitHub release v1.1.0",
+  "io": {
+    "inputJsonPath": "tasks/01KKMEJX7T7WZ9F61AF9YY1YV2/input.json",
+    "outputJsonPath": "tasks/01KKMEJX7T7WZ9F61AF9YY1YV2/output.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "githubRepo": "hagaybar/budget-manager",
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

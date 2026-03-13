@@ -40,4 +40,7 @@ interface RecurringTransactionDao {
 
     @Query("SELECT * FROM recurring_transactions ORDER BY id ASC")
     suspend fun getAll(): List<RecurringTransactionEntity>
+
+    @Query("SELECT * FROM recurring_transactions WHERE is_active = 1 ORDER BY id ASC")
+    suspend fun getActive(): List<RecurringTransactionEntity>
 }

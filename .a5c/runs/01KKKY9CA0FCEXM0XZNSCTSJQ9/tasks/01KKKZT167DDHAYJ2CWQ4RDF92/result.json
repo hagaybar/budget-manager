@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKKZT167DDHAYJ2CWQ4RDF92",
+  "taskId": "implement-navigation",
+  "invocationKey": "android-budget-manager:S000009:implement-navigation",
+  "status": "ok",
+  "result": {
+    "compiles": true,
+    "filesCreated": [],
+    "navigationRoutes": [
+      "sign_in",
+      "transactions",
+      "transactions/add_edit?id={id}",
+      "summary",
+      "recurring",
+      "settings"
+    ]
+  },
+  "startedAt": "2026-03-13T16:18:28.764Z",
+  "finishedAt": "2026-03-13T16:18:28.764Z",
+  "value": {
+    "compiles": true,
+    "filesCreated": [],
+    "navigationRoutes": [
+      "sign_in",
+      "transactions",
+      "transactions/add_edit?id={id}",
+      "summary",
+      "recurring",
+      "settings"
+    ]
+  }
+}

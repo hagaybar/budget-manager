@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKKYYERKT9YT2BMG3DWRA3BY",
+  "taskId": "write-data-tests",
+  "invocationKey": "android-budget-manager:S000003:write-data-tests",
+  "status": "ok",
+  "result": {
+    "testCount": 20,
+    "testFiles": [
+      "TransactionRepositoryTest.kt",
+      "RecurringRepositoryTest.kt",
+      "SummaryCalculationTest.kt"
+    ]
+  },
+  "startedAt": "2026-03-13T16:05:28.615Z",
+  "finishedAt": "2026-03-13T16:05:28.615Z",
+  "value": {
+    "testCount": 20,
+    "testFiles": [
+      "TransactionRepositoryTest.kt",
+      "RecurringRepositoryTest.kt",
+      "SummaryCalculationTest.kt"
+    ]
+  }
+}

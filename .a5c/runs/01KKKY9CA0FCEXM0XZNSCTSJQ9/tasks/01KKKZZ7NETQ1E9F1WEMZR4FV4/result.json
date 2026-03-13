@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKKZZ7NETQ1E9F1WEMZR4FV4",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "android-budget-manager:S000012:__sdk.breakpoint",
+  "status": "ok",
+  "result": {
+    "answer": "Push only, no release. User wants to push code to GitHub but skip the release creation.",
+    "approved": true
+  },
+  "startedAt": "2026-03-13T17:33:27.110Z",
+  "finishedAt": "2026-03-13T17:33:27.110Z",
+  "value": {
+    "answer": "Push only, no release. User wants to push code to GitHub but skip the release creation.",
+    "approved": true
+  }
+}

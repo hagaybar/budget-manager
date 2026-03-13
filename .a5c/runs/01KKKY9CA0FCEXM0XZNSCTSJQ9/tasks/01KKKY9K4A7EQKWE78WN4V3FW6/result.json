@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKKY9K4A7EQKWE78WN4V3FW6",
+  "taskId": "architecture-planning",
+  "invocationKey": "android-budget-manager:S000001:architecture-planning",
+  "status": "ok",
+  "result": {
+    "daos": [
+      "TransactionDao",
+      "RecurringTransactionDao"
+    ],
+    "dependencies": [
+      "androidx.compose:compose-bom:2024.02.00",
+      "androidx.compose.material3:material3",
+      "androidx.room:room-runtime:2.6.1",
+      "androidx.room:room-ktx:2.6.1",
+      "com.google.dagger:hilt-android:2.50",
+      "androidx.hilt:hilt-navigation-compose:1.1.0",
+      "androidx.navigation:navigation-compose:2.7.7",
+      "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3",
+      "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2",
+      "androidx.credentials:credentials:1.2.2",
+      "com.google.android.libraries.identity.googleid:googleid:1.1.0",
+      "androidx.datastore:datastore-preferences:1.0.0",
+      "androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0"
+    ],
+    "entities": [
+      "TransactionEntity",
+      "RecurringTransactionEntity"
+    ],
+    "screens": [
+      "SignInScreen",
+      "TransactionListScreen",
+      "AddEditTransactionScreen",
+      "MonthlySummaryScreen",
+      "RecurringScreen",
+      "SettingsScreen"
+    ],
+    "summary": "Complete Android architecture planned with Kotlin, Jetpack Compose, Material Design 3, Room DB, Hilt DI, and Coroutines/Flow. Clean architecture with data/domain/ui layers, repository pattern, reactive DAOs, Google Sign-In with guest mode, JSON backup/restore, ILS currency, swipe-to-delete, and bottom navigation.",
+    "viewModels": [
+      "TransactionListViewModel",
+      "AddEditTransactionViewModel",
+      "MonthlySummaryViewModel",
+      "RecurringViewModel",
+      "SettingsViewModel",
+      "AuthViewModel"
+    ]
+  },
+  "startedAt": "2026-03-13T15:53:25.170Z",
+  "finishedAt": "2026-03-13T15:53:25.170Z",
+  "value": {
+    "daos": [
+      "TransactionDao",
+      "RecurringTransactionDao"
+    ],
+    "dependencies": [
+      "androidx.compose:compose-bom:2024.02.00",
+      "androidx.compose.material3:material3",
+      "androidx.room:room-runtime:2.6.1",
+      "androidx.room:room-ktx:2.6.1",
+      "com.google.dagger:hilt-android:2.50",
+      "androidx.hilt:hilt-navigation-compose:1.1.0",
+      "androidx.navigation:navigation-compose:2.7.7",
+      "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3",
+      "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2",
+      "androidx.credentials:credentials:1.2.2",
+      "com.google.android.libraries.identity.googleid:googleid:1.1.0",
+      "androidx.datastore:datastore-preferences:1.0.0",
+      "androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0"
+    ],
+    "entities": [
+      "TransactionEntity",
+      "RecurringTransactionEntity"
+    ],
+    "screens": [
+      "SignInScreen",
+      "TransactionListScreen",
+      "AddEditTransactionScreen",
+      "MonthlySummaryScreen",
+      "RecurringScreen",
+      "SettingsScreen"
+    ],
+    "summary": "Complete Android architecture planned with Kotlin, Jetpack Compose, Material Design 3, Room DB, Hilt DI, and Coroutines/Flow. Clean architecture with data/domain/ui layers, repository pattern, reactive DAOs, Google Sign-In with guest mode, JSON backup/restore, ILS currency, swipe-to-delete, and bottom navigation.",
+    "viewModels": [
+      "TransactionListViewModel",
+      "AddEditTransactionViewModel",
+      "MonthlySummaryViewModel",
+      "RecurringViewModel",
+      "SettingsViewModel",
+      "AuthViewModel"
+    ]
+  }
+}

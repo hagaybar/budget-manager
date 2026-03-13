@@ -1,0 +1,21 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T16:05:33.148Z",
+  "data": {
+    "effectId": "01KKKZ4A9MSM2SDCJCPF6KTE88",
+    "invocationKey": "android-budget-manager:S000004:implement-data-layer",
+    "invocationHash": "c3017bcf8055c578fbf4d46f3001ce88ce90dab3a8b097583483675f1c8008b1",
+    "stepId": "S000004",
+    "taskId": "implement-data-layer",
+    "kind": "agent",
+    "label": "tdd",
+    "taskDefRef": "tasks/01KKKZ4A9MSM2SDCJCPF6KTE88/task.json",
+    "labels": [
+      "tdd",
+      "green",
+      "data-layer",
+      "implementation"
+    ]
+  },
+  "checksum": "867dd98ef5e0ea22443d1b6567b1dd27b41a614d8e96060117a6a3c990b733cc"
+}

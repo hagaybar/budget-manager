@@ -1,0 +1,14 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-03-13T20:31:16.252Z",
+  "data": {
+    "runId": "01KKMEAVR8JJ5MNZN7WHJFCQGB",
+    "processId": "recurring-auto-generation",
+    "entrypoint": {
+      "importPath": "../../processes/recurring-auto-generation.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json"
+  },
+  "checksum": "826031ce0709028fb783d4e15d8b58678619ba34ae242046bd359e3d3eb41421"
+}

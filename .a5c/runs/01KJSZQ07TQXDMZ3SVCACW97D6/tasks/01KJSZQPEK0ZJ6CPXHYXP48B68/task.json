@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSZQPEK0ZJ6CPXHYXP48B68",
+  "taskId": "secrets-scan",
+  "invocationKey": "owasp-security-review:S000003:secrets-scan",
+  "stepId": "S000003",
+  "kind": "agent",
+  "title": "Secrets Scan — Hardcoded Credentials & Sensitive Data",
+  "labels": [
+    "secrets",
+    "sensitive-data"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSZQPEK0ZJ6CPXHYXP48B68/input.json",
+    "outputJsonPath": "tasks/01KJSZQPEK0ZJ6CPXHYXP48B68/result.json"
+  },
+  "inputs": {
+    "codebasePath": "/home/ubuntu/projects/budget_manager",
+    "projectName": "budget-manager"
+  }
+}

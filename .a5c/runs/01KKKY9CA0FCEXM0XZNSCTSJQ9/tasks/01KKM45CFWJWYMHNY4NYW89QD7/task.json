@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KKM45CFWJWYMHNY4NYW89QD7",
+  "taskId": "deliver-to-github",
+  "invocationKey": "android-budget-manager:S000013:deliver-to-github",
+  "stepId": "S000013",
+  "kind": "agent",
+  "title": "Phase 9: Push to GitHub & Create Release",
+  "labels": [
+    "delivery",
+    "github",
+    "release"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KKM45CFWJWYMHNY4NYW89QD7/input.json",
+    "outputJsonPath": "tasks/01KKM45CFWJWYMHNY4NYW89QD7/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "apkPath": "/home/ubuntu/projects/budget_manager/android/app/build/outputs/apk/debug/app-debug.apk",
+    "appName": "BudgetManager",
+    "githubRepo": "hagaybar/budget-manager",
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

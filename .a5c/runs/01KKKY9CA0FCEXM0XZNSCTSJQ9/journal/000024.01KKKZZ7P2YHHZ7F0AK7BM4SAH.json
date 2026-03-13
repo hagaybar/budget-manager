@@ -1,0 +1,18 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T16:20:15.170Z",
+  "data": {
+    "effectId": "01KKKZZ7NETQ1E9F1WEMZR4FV4",
+    "invocationKey": "android-budget-manager:S000012:__sdk.breakpoint",
+    "invocationHash": "5eee4438d23e10cd669af715eed96ed8eb04f6a726aa2dc1ca1d98f1c9fe47c6",
+    "stepId": "S000012",
+    "taskId": "__sdk.breakpoint",
+    "kind": "breakpoint",
+    "label": "breakpoint",
+    "taskDefRef": "tasks/01KKKZZ7NETQ1E9F1WEMZR4FV4/task.json",
+    "labels": [
+      "breakpoint"
+    ]
+  },
+  "checksum": "59d2b2e1fccaf0b389c25ef0fe8866d00ad911629ed8169274f5bf829d9ce869"
+}

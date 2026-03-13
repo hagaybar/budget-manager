@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T13:55:52.899Z",
+  "data": {
+    "effectId": "01KJSZQPDE44XPXRZA6E62YTKK",
+    "invocationKey": "owasp-security-review:S000001:sast-scan",
+    "invocationHash": "19f07dab6d13d36ca88aaf710a5d4c332b18ce88b969420544ea349bffc9888d",
+    "stepId": "S000001",
+    "taskId": "sast-scan",
+    "kind": "agent",
+    "label": "sast",
+    "taskDefRef": "tasks/01KJSZQPDE44XPXRZA6E62YTKK/task.json",
+    "labels": [
+      "sast",
+      "owasp"
+    ]
+  },
+  "checksum": "ec2931b37d6a980f139d0ff2e8cbaf456e8e234f7e095f5fac6099ef7a7ba4ec"
+}

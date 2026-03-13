@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSZQPDE44XPXRZA6E62YTKK",
+  "taskId": "sast-scan",
+  "invocationKey": "owasp-security-review:S000001:sast-scan",
+  "stepId": "S000001",
+  "kind": "agent",
+  "title": "SAST — Static Application Security Testing",
+  "labels": [
+    "owasp",
+    "sast"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSZQPDE44XPXRZA6E62YTKK/input.json",
+    "outputJsonPath": "tasks/01KJSZQPDE44XPXRZA6E62YTKK/result.json"
+  },
+  "inputs": {
+    "codebasePath": "/home/ubuntu/projects/budget_manager",
+    "projectName": "budget-manager",
+    "techStack": {
+      "database": "sqlite3",
+      "framework": "fastapi",
+      "frontend": "vanilla-js-spa",
+      "language": "python",
+      "server": "uvicorn",
+      "testing": "pytest",
+      "validation": "pydantic-v2"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T20:32:49.014Z",
+  "data": {
+    "effectId": "01KKMEDPB26RY8FWZ1G7BNEWST",
+    "invocationKey": "recurring-auto-generation:S000002:build-and-verify",
+    "invocationHash": "27935d53f3b578f5f6d7e66c6dda109675e634cb3f2bafddd7d91abb85ca692b",
+    "stepId": "S000002",
+    "taskId": "build-and-verify",
+    "kind": "agent",
+    "label": "Build and verify (worker - iteration 1)",
+    "taskDefRef": "tasks/01KKMEDPB26RY8FWZ1G7BNEWST/task.json"
+  },
+  "checksum": "9063b9e768ee6692344c3fd720ce25fe7991f1d2e4a6b37a60869ac483e38152"
+}

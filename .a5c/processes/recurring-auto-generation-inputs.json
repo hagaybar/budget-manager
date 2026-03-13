@@ -1,0 +1,12 @@
+{
+  "projectDir": "/home/ubuntu/projects/budget_manager",
+  "androidDir": "/home/ubuntu/projects/budget_manager/android",
+  "packageName": "com.budgetmanager.app",
+  "githubRepo": "hagaybar/budget-manager",
+  "maxConvergenceIterations": 3,
+  "features": [
+    "WorkManager background worker that runs daily to auto-generate transactions from active recurring templates",
+    "Next occurrence display on each recurring transaction card showing when it will next take effect",
+    "Bump version to 1.1.0, build APK, and publish GitHub release"
+  ]
+}

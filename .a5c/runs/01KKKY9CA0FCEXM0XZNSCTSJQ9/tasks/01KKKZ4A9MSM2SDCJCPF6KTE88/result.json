@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKKZ4A9MSM2SDCJCPF6KTE88",
+  "taskId": "implement-data-layer",
+  "invocationKey": "android-budget-manager:S000004:implement-data-layer",
+  "status": "ok",
+  "result": {
+    "daos": [
+      "TransactionDao",
+      "RecurringTransactionDao"
+    ],
+    "entities": [
+      "TransactionEntity",
+      "RecurringTransactionEntity"
+    ],
+    "filesCreated": [],
+    "repositories": [
+      "TransactionRepositoryImpl",
+      "RecurringRepositoryImpl",
+      "BackupRepositoryImpl"
+    ]
+  },
+  "startedAt": "2026-03-13T16:07:45.203Z",
+  "finishedAt": "2026-03-13T16:07:45.203Z",
+  "value": {
+    "daos": [
+      "TransactionDao",
+      "RecurringTransactionDao"
+    ],
+    "entities": [
+      "TransactionEntity",
+      "RecurringTransactionEntity"
+    ],
+    "filesCreated": [],
+    "repositories": [
+      "TransactionRepositoryImpl",
+      "RecurringRepositoryImpl",
+      "BackupRepositoryImpl"
+    ]
+  }
+}

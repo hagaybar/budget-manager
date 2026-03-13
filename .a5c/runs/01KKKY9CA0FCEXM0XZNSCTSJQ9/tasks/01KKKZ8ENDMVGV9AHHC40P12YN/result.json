@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKKZ8ENDMVGV9AHHC40P12YN",
+  "taskId": "build-and-test",
+  "invocationKey": "android-budget-manager:S000005:build-and-test",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "errors": [],
+    "failed": 0,
+    "feedback": null,
+    "passed": 20,
+    "rawOutput": "BUILD SUCCESSFUL in 4s",
+    "totalTests": 20
+  },
+  "startedAt": "2026-03-13T16:08:12.619Z",
+  "finishedAt": "2026-03-13T16:08:12.619Z",
+  "value": {
+    "allPassing": true,
+    "errors": [],
+    "failed": 0,
+    "feedback": null,
+    "passed": 20,
+    "rawOutput": "BUILD SUCCESSFUL in 4s",
+    "totalTests": 20
+  }
+}

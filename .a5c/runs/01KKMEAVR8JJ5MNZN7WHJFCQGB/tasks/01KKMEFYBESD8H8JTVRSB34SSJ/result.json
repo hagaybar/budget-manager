@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKMEFYBESD8H8JTVRSB34SSJ",
+  "taskId": "implement-next-occurrence",
+  "invocationKey": "recurring-auto-generation:S000003:implement-next-occurrence",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "domain/util/RecurringUtils.kt"
+    ],
+    "filesModified": [
+      "ui/screens/recurring/RecurringScreen.kt"
+    ],
+    "implemented": true
+  },
+  "startedAt": "2026-03-13T20:35:15.521Z",
+  "finishedAt": "2026-03-13T20:35:15.521Z",
+  "value": {
+    "filesCreated": [
+      "domain/util/RecurringUtils.kt"
+    ],
+    "filesModified": [
+      "ui/screens/recurring/RecurringScreen.kt"
+    ],
+    "implemented": true
+  }
+}

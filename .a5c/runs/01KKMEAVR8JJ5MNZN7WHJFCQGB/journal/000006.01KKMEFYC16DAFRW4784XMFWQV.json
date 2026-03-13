@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T20:34:02.754Z",
+  "data": {
+    "effectId": "01KKMEFYBESD8H8JTVRSB34SSJ",
+    "invocationKey": "recurring-auto-generation:S000003:implement-next-occurrence",
+    "invocationHash": "d688e9a03c0df73b45dbb8e8ea4fc274d779a8f8bf401a9538923db59a4e645c",
+    "stepId": "S000003",
+    "taskId": "implement-next-occurrence",
+    "kind": "agent",
+    "label": "Add next occurrence display to recurring transaction cards",
+    "taskDefRef": "tasks/01KKMEFYBESD8H8JTVRSB34SSJ/task.json"
+  },
+  "checksum": "1c90c96666b76426b86d6599a1b18b227aa7aa912d287a8801127ea02c6f1f78"
+}

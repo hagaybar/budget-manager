@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKM45CFWJWYMHNY4NYW89QD7",
+  "taskId": "deliver-to-github",
+  "invocationKey": "android-budget-manager:S000013:deliver-to-github",
+  "status": "ok",
+  "result": {
+    "committed": true,
+    "pushed": true,
+    "releaseCreated": false,
+    "releaseUrl": "N/A - user requested push only, no release"
+  },
+  "startedAt": "2026-03-13T17:34:14.308Z",
+  "finishedAt": "2026-03-13T17:34:14.308Z",
+  "value": {
+    "committed": true,
+    "pushed": true,
+    "releaseCreated": false,
+    "releaseUrl": "N/A - user requested push only, no release"
+  }
+}

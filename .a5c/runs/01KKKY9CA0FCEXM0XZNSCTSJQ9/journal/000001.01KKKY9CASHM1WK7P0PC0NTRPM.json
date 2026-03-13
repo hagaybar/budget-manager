@@ -1,0 +1,14 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-03-13T15:50:50.458Z",
+  "data": {
+    "runId": "01KKKY9CA0FCEXM0XZNSCTSJQ9",
+    "processId": "android-budget-manager",
+    "entrypoint": {
+      "importPath": "../../processes/android-budget-manager.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json"
+  },
+  "checksum": "b679ee0a8d537438a2fde9ef16a921aaf55d0fa2a3063958192bd1b82353fcdb"
+}

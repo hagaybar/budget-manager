@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T16:19:16.138Z",
+  "data": {
+    "effectId": "01KKKZXE0P6VAE2S3MWKAG75A2",
+    "invocationKey": "android-budget-manager:S000011:build-apk",
+    "invocationHash": "90ac275b37a61c79ad7bf0a26dcc392e2d6483501f6a2c432fcb33e75e6ac639",
+    "stepId": "S000011",
+    "taskId": "build-apk",
+    "kind": "agent",
+    "label": "build",
+    "taskDefRef": "tasks/01KKKZXE0P6VAE2S3MWKAG75A2/task.json",
+    "labels": [
+      "build",
+      "apk",
+      "delivery"
+    ]
+  },
+  "checksum": "f0f7db3380607fee63d87662231104037763992ab8b00373f10dcf3890477d3b"
+}

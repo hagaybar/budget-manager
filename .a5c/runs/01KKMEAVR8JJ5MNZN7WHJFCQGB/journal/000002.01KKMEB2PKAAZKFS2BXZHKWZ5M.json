@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T20:31:23.348Z",
+  "data": {
+    "effectId": "01KKMEB2NV0F3SWPYV1EZVH2Y7",
+    "invocationKey": "recurring-auto-generation:S000001:implement-worker",
+    "invocationHash": "bd2a7a83ab919f13cf7220b8819de99568c4da9ca922af654ab0e2f9c65a2d77",
+    "stepId": "S000001",
+    "taskId": "implement-worker",
+    "kind": "agent",
+    "label": "Implement WorkManager recurring transaction auto-generation",
+    "taskDefRef": "tasks/01KKMEB2NV0F3SWPYV1EZVH2Y7/task.json"
+  },
+  "checksum": "adc34f91cd8adf08e84f6bb0b3862df9f2885b6ab377f3861db40755d912a230"
+}

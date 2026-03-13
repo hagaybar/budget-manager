@@ -1,0 +1,14 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-03-03T13:55:30.196Z",
+  "data": {
+    "runId": "01KJSZQ07TQXDMZ3SVCACW97D6",
+    "processId": "owasp-security-review",
+    "entrypoint": {
+      "importPath": "../../processes/owasp-security-review.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json"
+  },
+  "checksum": "1f9a3bda5d1b91f8215726eb4bae08967ab9ad28f8a9362b4d4c847e2008b161"
+}

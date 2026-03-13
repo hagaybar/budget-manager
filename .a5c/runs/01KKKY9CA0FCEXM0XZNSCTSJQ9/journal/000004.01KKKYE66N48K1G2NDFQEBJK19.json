@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T15:53:28.021Z",
+  "data": {
+    "effectId": "01KKKYE6617NF0WWCZNY2XXF8K",
+    "invocationKey": "android-budget-manager:S000002:scaffold-android-project",
+    "invocationHash": "0bf256ee000c12e9d1391c4568804baa06f6cd6cf0538d13995ee860e8651e3e",
+    "stepId": "S000002",
+    "taskId": "scaffold-android-project",
+    "kind": "agent",
+    "label": "scaffold",
+    "taskDefRef": "tasks/01KKKYE6617NF0WWCZNY2XXF8K/task.json",
+    "labels": [
+      "scaffold",
+      "android",
+      "gradle"
+    ]
+  },
+  "checksum": "3443ef03ea16137c154e36a74b549b3fc0583def656e054154433b29d83c9fe1"
+}

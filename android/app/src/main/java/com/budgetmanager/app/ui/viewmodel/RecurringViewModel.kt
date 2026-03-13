@@ -95,5 +95,6 @@ class RecurringViewModel @Inject constructor(
     }
 
     fun showAddDialog() = _uiState.update { it.copy(showAddDialog = true) }
+    fun showEditDialog(recurring: RecurringTransaction) = _uiState.update { it.copy(editingRecurring = recurring) }
     fun dismissDialog() = _uiState.update { it.copy(showAddDialog = false, editingRecurring = null) }
 }

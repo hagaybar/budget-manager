@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T15:50:57.442Z",
+  "data": {
+    "effectId": "01KKKY9K4A7EQKWE78WN4V3FW6",
+    "invocationKey": "android-budget-manager:S000001:architecture-planning",
+    "invocationHash": "1de17923d6e23f18289c81b90997e7481f859463404269d88103d99bbf5c5d09",
+    "stepId": "S000001",
+    "taskId": "architecture-planning",
+    "kind": "agent",
+    "label": "planning",
+    "taskDefRef": "tasks/01KKKY9K4A7EQKWE78WN4V3FW6/task.json",
+    "labels": [
+      "planning",
+      "android",
+      "architecture"
+    ]
+  },
+  "checksum": "f21771ab25bac117dec3a460302e7e8f8c5deaeeff46040bbc944abf2e47f29d"
+}

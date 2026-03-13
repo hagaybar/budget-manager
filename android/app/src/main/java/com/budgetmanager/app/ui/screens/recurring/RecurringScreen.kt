@@ -1,5 +1,6 @@
 package com.budgetmanager.app.ui.screens.recurring
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
@@ -27,6 +30,7 @@ import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -36,8 +40,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableDoubleStateOf
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -49,6 +51,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.budgetmanager.app.domain.model.Frequency
 import com.budgetmanager.app.domain.model.RecurringTransaction
 import com.budgetmanager.app.domain.model.TransactionType
+import com.budgetmanager.app.domain.util.formatNextOccurrence
+import com.budgetmanager.app.domain.util.getNextOccurrence
 import com.budgetmanager.app.ui.components.AmountText
 import com.budgetmanager.app.ui.components.EmptyStateView
 import com.budgetmanager.app.ui.viewmodel.RecurringViewModel
@@ -60,6 +64,7 @@ fun RecurringScreen(
     viewModel: RecurringViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    var viewingRecurring by remember { mutableStateOf<RecurringTransaction?>(null) }
 
     Scaffold(
         floatingActionButton = {
@@ -92,6 +97,7 @@ fun RecurringScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 4.dp)
+                                .clickable { viewingRecurring = recurring }
                         ) {
                             Row(
                                 modifier = Modifier
@@ -110,6 +116,21 @@ fun RecurringScreen(
                                         Text(recurring.description, style = MaterialTheme.typography.bodySmall)
                                     }
                                     AmountText(amount = recurring.amount, type = recurring.type)
+                                    Spacer(modifier = Modifier.height(4.dp))
+                                    val nextDate = getNextOccurrence(recurring)
+                                    if (nextDate != null) {
+                                        Text(
+                                            text = "Next: ${formatNextOccurrence(nextDate)}",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.primary
+                                        )
+                                    } else {
+                                        Text(
+                                            text = "Paused",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
                                 }
                                 Switch(
                                     checked = recurring.isActive,
@@ -123,28 +144,147 @@ fun RecurringScreen(
         }
     }
 
-    // Add Recurring Dialog
+    // View Detail Dialog
+    viewingRecurring?.let { recurring ->
+        ViewRecurringDialog(
+            recurring = recurring,
+            onDismiss = { viewingRecurring = null },
+            onEdit = {
+                viewingRecurring = null
+                viewModel.showEditDialog(recurring)
+            },
+            onDelete = {
+                viewingRecurring = null
+                viewModel.delete(recurring.id)
+            }
+        )
+    }
+
+    // Add Dialog
     if (uiState.showAddDialog) {
-        AddRecurringDialog(
+        RecurringFormDialog(
+            title = "Add Recurring Transaction",
+            existing = null,
             onDismiss = { viewModel.dismissDialog() },
             onSave = { recurring -> viewModel.create(recurring) }
         )
+    }
+
+    // Edit Dialog
+    uiState.editingRecurring?.let { recurring ->
+        RecurringFormDialog(
+            title = "Edit Recurring Transaction",
+            existing = recurring,
+            onDismiss = { viewModel.dismissDialog() },
+            onSave = { updated -> viewModel.update(updated) }
+        )
+    }
+}
+
+@Composable
+fun ViewRecurringDialog(
+    recurring: RecurringTransaction,
+    onDismiss: () -> Unit,
+    onEdit: () -> Unit,
+    onDelete: () -> Unit
+) {
+    var showDeleteConfirm by remember { mutableStateOf(false) }
+
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(recurring.category, modifier = Modifier.weight(1f))
+                IconButton(onClick = onEdit) {
+                    Icon(Icons.Default.Edit, contentDescription = "Edit", tint = MaterialTheme.colorScheme.primary)
+                }
+                IconButton(onClick = { showDeleteConfirm = true }) {
+                    Icon(Icons.Default.Delete, contentDescription = "Delete", tint = MaterialTheme.colorScheme.error)
+                }
+            }
+        },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                DetailRow("Type", recurring.type.value.replaceFirstChar { it.uppercase() })
+                DetailRow("Amount", "₪ ${"%.2f".format(recurring.amount)}")
+                DetailRow("Frequency", recurring.frequency.value.replaceFirstChar { it.uppercase() })
+                if (recurring.frequency == Frequency.MONTHLY && recurring.dayOfMonth != null) {
+                    DetailRow("Day of Month", recurring.dayOfMonth.toString())
+                }
+                if (recurring.frequency == Frequency.WEEKLY && recurring.dayOfWeek != null) {
+                    val dayNames = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+                    DetailRow("Day of Week", dayNames.getOrElse(recurring.dayOfWeek) { "Unknown" })
+                }
+                if (recurring.description.isNotBlank()) {
+                    DetailRow("Description", recurring.description)
+                }
+                DetailRow("Start Date", recurring.startDate)
+                DetailRow("Status", if (recurring.isActive) "Active" else "Inactive")
+                val nextDate = getNextOccurrence(recurring)
+                if (nextDate != null) {
+                    DetailRow("Next Occurrence", formatNextOccurrence(nextDate))
+                }
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Close")
+            }
+        }
+    )
+
+    if (showDeleteConfirm) {
+        AlertDialog(
+            onDismissRequest = { showDeleteConfirm = false },
+            title = { Text("Delete Recurring Transaction") },
+            text = { Text("Are you sure you want to delete \"${recurring.category}\"? This cannot be undone.") },
+            confirmButton = {
+                TextButton(onClick = {
+                    showDeleteConfirm = false
+                    onDelete()
+                }) {
+                    Text("Delete", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDeleteConfirm = false }) {
+                    Text("Cancel")
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun DetailRow(label: String, value: String) {
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Text(label, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(value, style = MaterialTheme.typography.bodyMedium)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AddRecurringDialog(
+fun RecurringFormDialog(
+    title: String,
+    existing: RecurringTransaction?,
     onDismiss: () -> Unit,
     onSave: (RecurringTransaction) -> Unit
 ) {
-    var type by remember { mutableStateOf(TransactionType.EXPENSE) }
-    var amountText by remember { mutableStateOf("") }
-    var category by remember { mutableStateOf("") }
-    var description by remember { mutableStateOf("") }
-    var frequency by remember { mutableStateOf(Frequency.MONTHLY) }
-    var dayOfMonth by remember { mutableStateOf("1") }
-    var dayOfWeek by remember { mutableStateOf("0") }
+    var type by remember { mutableStateOf(existing?.type ?: TransactionType.EXPENSE) }
+    var amountText by remember { mutableStateOf(existing?.amount?.let { "%.2f".format(it) } ?: "") }
+    var category by remember { mutableStateOf(existing?.category ?: "") }
+    var description by remember { mutableStateOf(existing?.description ?: "") }
+    var frequency by remember { mutableStateOf(existing?.frequency ?: Frequency.MONTHLY) }
+    var dayOfMonth by remember { mutableStateOf(existing?.dayOfMonth?.toString() ?: "1") }
+    var dayOfWeek by remember { mutableStateOf(existing?.dayOfWeek?.toString() ?: "0") }
     var amountError by remember { mutableStateOf(false) }
     var categoryError by remember { mutableStateOf(false) }
 
@@ -152,7 +292,7 @@ fun AddRecurringDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("Add Recurring Transaction") },
+        title = { Text(title) },
         text = {
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState()),
@@ -258,6 +398,7 @@ fun AddRecurringDialog(
                 if (category.isBlank()) { categoryError = true; return@TextButton }
 
                 val recurring = RecurringTransaction(
+                    id = existing?.id ?: 0,
                     type = type,
                     amount = amount,
                     category = category.trim(),
@@ -265,7 +406,9 @@ fun AddRecurringDialog(
                     frequency = frequency,
                     dayOfWeek = if (frequency == Frequency.WEEKLY) (dayOfWeek.toIntOrNull() ?: 0) else null,
                     dayOfMonth = if (frequency == Frequency.MONTHLY) (dayOfMonth.toIntOrNull() ?: 1) else null,
-                    startDate = LocalDate.now().toString()
+                    startDate = existing?.startDate ?: LocalDate.now().toString(),
+                    isActive = existing?.isActive ?: true,
+                    createdAt = existing?.createdAt ?: ""
                 )
                 onSave(recurring)
             }) {

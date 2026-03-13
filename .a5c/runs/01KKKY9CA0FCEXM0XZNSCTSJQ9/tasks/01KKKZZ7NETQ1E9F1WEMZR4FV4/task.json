@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KKKZZ7NETQ1E9F1WEMZR4FV4",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "android-budget-manager:S000012:__sdk.breakpoint",
+  "stepId": "S000012",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Android APK built for BudgetManager. Data layer converged in 1 iterations, full build in 1 iterations. APK at: /home/ubuntu/projects/budget_manager/android/app/build/outputs/apk/debug/app-debug.apk. Ready to push to GitHub and create release?",
+      "title": "APK Build Review"
+    },
+    "requestedAt": "2026-03-13T16:20:15.150Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Android APK built for BudgetManager. Data layer converged in 1 iterations, full build in 1 iterations. APK at: /home/ubuntu/projects/budget_manager/android/app/build/outputs/apk/debug/app-debug.apk. Ready to push to GitHub and create release?",
+      "title": "APK Build Review"
+    },
+    "requestedAt": "2026-03-13T16:20:15.150Z"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KKKYYERKT9YT2BMG3DWRA3BY",
+  "taskId": "write-data-tests",
+  "invocationKey": "android-budget-manager:S000003:write-data-tests",
+  "stepId": "S000003",
+  "kind": "agent",
+  "title": "Phase 3a: Write Data Layer Tests (TDD Red) - iteration 1",
+  "labels": [
+    "data-layer",
+    "red",
+    "tdd",
+    "testing"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KKKYYERKT9YT2BMG3DWRA3BY/input.json",
+    "outputJsonPath": "tasks/01KKKYYERKT9YT2BMG3DWRA3BY/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "appName": "BudgetManager",
+    "iteration": 1,
+    "packageName": "com.budgetmanager.app",
+    "plan": {
+      "daos": [
+        "TransactionDao",
+        "RecurringTransactionDao"
+      ],
+      "dependencies": [
+        "androidx.compose:compose-bom:2024.02.00",
+        "androidx.compose.material3:material3",
+        "androidx.room:room-runtime:2.6.1",
+        "androidx.room:room-ktx:2.6.1",
+        "com.google.dagger:hilt-android:2.50",
+        "androidx.hilt:hilt-navigation-compose:1.1.0",
+        "androidx.navigation:navigation-compose:2.7.7",
+        "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3",
+        "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2",
+        "androidx.credentials:credentials:1.2.2",
+        "com.google.android.libraries.identity.googleid:googleid:1.1.0",
+        "androidx.datastore:datastore-preferences:1.0.0",
+        "androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0"
+      ],
+      "entities": [
+        "TransactionEntity",
+        "RecurringTransactionEntity"
+      ],
+      "screens": [
+        "SignInScreen",
+        "TransactionListScreen",
+        "AddEditTransactionScreen",
+        "MonthlySummaryScreen",
+        "RecurringScreen",
+        "SettingsScreen"
+      ],
+      "summary": "Complete Android architecture planned with Kotlin, Jetpack Compose, Material Design 3, Room DB, Hilt DI, and Coroutines/Flow. Clean architecture with data/domain/ui layers, repository pattern, reactive DAOs, Google Sign-In with guest mode, JSON backup/restore, ILS currency, swipe-to-delete, and bottom navigation.",
+      "viewModels": [
+        "TransactionListViewModel",
+        "AddEditTransactionViewModel",
+        "MonthlySummaryViewModel",
+        "RecurringViewModel",
+        "SettingsViewModel",
+        "AuthViewModel"
+      ]
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKKZM802464ZCGVZFN5QS6FC",
+  "taskId": "implement-screens",
+  "invocationKey": "android-budget-manager:S000008:implement-screens",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "TransactionListScreen.kt",
+      "AddEditTransactionScreen.kt",
+      "TransactionListViewModel.kt"
+    ],
+    "screens": [
+      "TransactionListScreen",
+      "AddEditTransactionScreen",
+      "MonthlySummaryScreen",
+      "RecurringScreen",
+      "SettingsScreen"
+    ],
+    "viewModels": [
+      "TransactionListViewModel",
+      "AddEditTransactionViewModel",
+      "MonthlySummaryViewModel",
+      "RecurringViewModel",
+      "SettingsViewModel"
+    ]
+  },
+  "startedAt": "2026-03-13T16:17:21.359Z",
+  "finishedAt": "2026-03-13T16:17:21.359Z",
+  "value": {
+    "filesCreated": [
+      "TransactionListScreen.kt",
+      "AddEditTransactionScreen.kt",
+      "TransactionListViewModel.kt"
+    ],
+    "screens": [
+      "TransactionListScreen",
+      "AddEditTransactionScreen",
+      "MonthlySummaryScreen",
+      "RecurringScreen",
+      "SettingsScreen"
+    ],
+    "viewModels": [
+      "TransactionListViewModel",
+      "AddEditTransactionViewModel",
+      "MonthlySummaryViewModel",
+      "RecurringViewModel",
+      "SettingsViewModel"
+    ]
+  }
+}

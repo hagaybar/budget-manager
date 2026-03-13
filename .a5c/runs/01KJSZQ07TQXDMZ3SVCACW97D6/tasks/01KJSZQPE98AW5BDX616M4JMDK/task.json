@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KJSZQPE98AW5BDX616M4JMDK",
+  "taskId": "sca-scan",
+  "invocationKey": "owasp-security-review:S000002:sca-scan",
+  "stepId": "S000002",
+  "kind": "agent",
+  "title": "SCA — Software Composition Analysis & SBOM Risk",
+  "labels": [
+    "dependencies",
+    "sbom",
+    "sca"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KJSZQPE98AW5BDX616M4JMDK/input.json",
+    "outputJsonPath": "tasks/01KJSZQPE98AW5BDX616M4JMDK/result.json"
+  },
+  "inputs": {
+    "codebasePath": "/home/ubuntu/projects/budget_manager",
+    "projectName": "budget-manager",
+    "techStack": {
+      "database": "sqlite3",
+      "framework": "fastapi",
+      "frontend": "vanilla-js-spa",
+      "language": "python",
+      "server": "uvicorn",
+      "testing": "pytest",
+      "validation": "pydantic-v2"
+    }
+  }
+}

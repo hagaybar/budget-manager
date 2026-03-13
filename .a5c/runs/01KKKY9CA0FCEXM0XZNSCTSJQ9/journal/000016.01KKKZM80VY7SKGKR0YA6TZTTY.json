@@ -1,0 +1,21 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T16:14:15.068Z",
+  "data": {
+    "effectId": "01KKKZM802464ZCGVZFN5QS6FC",
+    "invocationKey": "android-budget-manager:S000008:implement-screens",
+    "invocationHash": "3369b2beab5cccd055c067c81ed7d4fc7845406d89cc9210183046d069ace736",
+    "stepId": "S000008",
+    "taskId": "implement-screens",
+    "kind": "agent",
+    "label": "ui",
+    "taskDefRef": "tasks/01KKKZM802464ZCGVZFN5QS6FC/task.json",
+    "labels": [
+      "ui",
+      "screens",
+      "viewmodels",
+      "compose"
+    ]
+  },
+  "checksum": "781f58bd702c077f94c9f55e4d7cd8bd0cd9bb2a1048781e1aea721211ec31c0"
+}

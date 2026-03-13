@@ -1,0 +1,21 @@
+{
+  "appName": "BudgetManager",
+  "packageName": "com.budgetmanager.app",
+  "githubRepo": "hagaybar/budget-manager",
+  "projectDir": "/home/ubuntu/projects/budget_manager",
+  "androidDir": "/home/ubuntu/projects/budget_manager/android",
+  "maxConvergenceIterations": 5,
+  "features": [
+    "Google Sign-In authentication (with Continue as Guest for testing)",
+    "Transaction CRUD (income/expense with type, amount, category, description, date)",
+    "Monthly summary with category breakdowns and net balance",
+    "Recurring transactions (weekly/monthly with generate)",
+    "Backup/restore and export/import (JSON)",
+    "Currency: Israeli New Shekel (₪)",
+    "Material Design 3 with dynamic colors and light/dark mode",
+    "Bottom navigation (Transactions, Summary, Recurring, Settings)",
+    "Swipe-to-delete transactions",
+    "Date picker for transaction dates",
+    "Filter transactions by type, category, date range"
+  ]
+}

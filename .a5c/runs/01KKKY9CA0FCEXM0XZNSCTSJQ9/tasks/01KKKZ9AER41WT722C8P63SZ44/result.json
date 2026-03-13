@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KKKZ9AER41WT722C8P63SZ44",
+  "taskId": "implement-auth",
+  "invocationKey": "android-budget-manager:S000006:implement-auth",
+  "status": "ok",
+  "result": {
+    "authFlow": "AuthState sealed class with SignedIn/SignedOut/Loading. Google Sign-In demo mode + Continue as Guest. DataStore persistence. SettingsScreen shows user info with Sign Out.",
+    "filesCreated": [
+      "AuthState.kt",
+      "GoogleSignInManager.kt",
+      "SignInScreen.kt",
+      "AuthViewModel.kt",
+      "SettingsScreen.kt",
+      "SettingsViewModel.kt"
+    ]
+  },
+  "startedAt": "2026-03-13T16:10:32.630Z",
+  "finishedAt": "2026-03-13T16:10:32.630Z",
+  "value": {
+    "authFlow": "AuthState sealed class with SignedIn/SignedOut/Loading. Google Sign-In demo mode + Continue as Guest. DataStore persistence. SettingsScreen shows user info with Sign Out.",
+    "filesCreated": [
+      "AuthState.kt",
+      "GoogleSignInManager.kt",
+      "SignInScreen.kt",
+      "AuthViewModel.kt",
+      "SettingsScreen.kt",
+      "SettingsViewModel.kt"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KKKZXE0P6VAE2S3MWKAG75A2",
+  "taskId": "build-apk",
+  "invocationKey": "android-budget-manager:S000011:build-apk",
+  "stepId": "S000011",
+  "kind": "agent",
+  "title": "Phase 7: Build Debug APK",
+  "labels": [
+    "apk",
+    "build",
+    "delivery"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KKKZXE0P6VAE2S3MWKAG75A2/input.json",
+    "outputJsonPath": "tasks/01KKKZXE0P6VAE2S3MWKAG75A2/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "appName": "BudgetManager"
+  }
+}

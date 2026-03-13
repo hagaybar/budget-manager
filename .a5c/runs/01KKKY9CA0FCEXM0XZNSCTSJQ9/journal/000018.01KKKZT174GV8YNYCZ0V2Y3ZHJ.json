@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T16:17:24.708Z",
+  "data": {
+    "effectId": "01KKKZT167DDHAYJ2CWQ4RDF92",
+    "invocationKey": "android-budget-manager:S000009:implement-navigation",
+    "invocationHash": "1164b349303cdeffa2d3b8b03708e572cb37e54bf2bb5e683acd4af59bfa55ac",
+    "stepId": "S000009",
+    "taskId": "implement-navigation",
+    "kind": "agent",
+    "label": "navigation",
+    "taskDefRef": "tasks/01KKKZT167DDHAYJ2CWQ4RDF92/task.json",
+    "labels": [
+      "navigation",
+      "integration",
+      "mainactivity"
+    ]
+  },
+  "checksum": "42893e6fa718cabe2bbd588bf7f8b2d9ad285759b2cab5e85d62129c11f19e90"
+}

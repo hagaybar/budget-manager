@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-03T13:55:52.921Z",
+  "data": {
+    "effectId": "01KJSZQPEK0ZJ6CPXHYXP48B68",
+    "invocationKey": "owasp-security-review:S000003:secrets-scan",
+    "invocationHash": "bd72eb0bb0c902babd217ebd1047abe0834fd1a575e782e4907afc97345e58bc",
+    "stepId": "S000003",
+    "taskId": "secrets-scan",
+    "kind": "agent",
+    "label": "secrets",
+    "taskDefRef": "tasks/01KJSZQPEK0ZJ6CPXHYXP48B68/task.json",
+    "labels": [
+      "secrets",
+      "sensitive-data"
+    ]
+  },
+  "checksum": "72e3a4737204508be2fda1f457598b7268bb58f32c904cfb70f96800e09609a3"
+}

@@ -1,0 +1,1 @@
+{"filesCreated": ["AuthState.kt", "GoogleSignInManager.kt", "SignInScreen.kt", "AuthViewModel.kt", "SettingsScreen.kt", "SettingsViewModel.kt"], "authFlow": "AuthState sealed class with SignedIn/SignedOut/Loading. Google Sign-In demo mode + Continue as Guest. DataStore persistence. SettingsScreen shows user info with Sign Out."}

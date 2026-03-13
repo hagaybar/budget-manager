@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KKKY9K4A7EQKWE78WN4V3FW6",
+  "taskId": "architecture-planning",
+  "invocationKey": "android-budget-manager:S000001:architecture-planning",
+  "stepId": "S000001",
+  "kind": "agent",
+  "title": "Phase 1: Architecture & Planning for Android App",
+  "labels": [
+    "android",
+    "architecture",
+    "planning"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KKKY9K4A7EQKWE78WN4V3FW6/input.json",
+    "outputJsonPath": "tasks/01KKKY9K4A7EQKWE78WN4V3FW6/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "appName": "BudgetManager",
+    "features": [
+      "Google Sign-In authentication (with Continue as Guest for testing)",
+      "Transaction CRUD (income/expense with type, amount, category, description, date)",
+      "Monthly summary with category breakdowns and net balance",
+      "Recurring transactions (weekly/monthly with generate)",
+      "Backup/restore and export/import (JSON)",
+      "Currency: Israeli New Shekel (₪)",
+      "Material Design 3 with dynamic colors and light/dark mode",
+      "Bottom navigation (Transactions, Summary, Recurring, Settings)",
+      "Swipe-to-delete transactions",
+      "Date picker for transaction dates",
+      "Filter transactions by type, category, date range"
+    ],
+    "packageName": "com.budgetmanager.app",
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

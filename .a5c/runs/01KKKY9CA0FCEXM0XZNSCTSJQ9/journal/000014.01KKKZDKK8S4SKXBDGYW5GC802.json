@@ -1,0 +1,21 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T16:10:37.544Z",
+  "data": {
+    "effectId": "01KKKZDKHYNBNMKQTXSAXPNPGQ",
+    "invocationKey": "android-budget-manager:S000007:implement-theme",
+    "invocationHash": "72b9e79662666fa885444f6673c8226aba1aa5e7ad184a622bf6239aa995eba2",
+    "stepId": "S000007",
+    "taskId": "implement-theme",
+    "kind": "agent",
+    "label": "ui",
+    "taskDefRef": "tasks/01KKKZDKHYNBNMKQTXSAXPNPGQ/task.json",
+    "labels": [
+      "ui",
+      "theme",
+      "material3",
+      "composables"
+    ]
+  },
+  "checksum": "526502f8e7e5f10be2e112085ef3c53c569092a7279e455dc58ff96db48aa0e3"
+}

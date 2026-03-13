@@ -1,0 +1,13 @@
+{
+  "runId": "01KKMEAVR8JJ5MNZN7WHJFCQGB",
+  "request": "recurring-auto-generation",
+  "processId": "recurring-auto-generation",
+  "entrypoint": {
+    "importPath": "../../processes/recurring-auto-generation.js",
+    "exportName": "process"
+  },
+  "processPath": "../../processes/recurring-auto-generation.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-03-13T20:31:16.242Z",
+  "completionProof": "ec0d39ec09f697577f3b6135e1dfac96"
+}

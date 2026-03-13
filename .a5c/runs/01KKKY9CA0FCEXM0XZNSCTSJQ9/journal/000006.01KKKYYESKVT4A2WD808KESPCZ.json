@@ -1,0 +1,21 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T16:02:21.107Z",
+  "data": {
+    "effectId": "01KKKYYERKT9YT2BMG3DWRA3BY",
+    "invocationKey": "android-budget-manager:S000003:write-data-tests",
+    "invocationHash": "92f6afdd681c5442f5cdaa9c076dba79339f7f0bec8e04853252c4a41bc8012a",
+    "stepId": "S000003",
+    "taskId": "write-data-tests",
+    "kind": "agent",
+    "label": "tdd",
+    "taskDefRef": "tasks/01KKKYYERKT9YT2BMG3DWRA3BY/task.json",
+    "labels": [
+      "tdd",
+      "red",
+      "data-layer",
+      "testing"
+    ]
+  },
+  "checksum": "290ef93318451940109b97283f3ac6ac132639e09cafa74d2031c2fb46462379"
+}

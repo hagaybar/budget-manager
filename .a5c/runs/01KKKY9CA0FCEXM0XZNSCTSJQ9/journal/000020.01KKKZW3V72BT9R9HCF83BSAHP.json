@@ -1,0 +1,21 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T16:18:32.936Z",
+  "data": {
+    "effectId": "01KKKZW3TMXZRMHMBDBAN6AERP",
+    "invocationKey": "android-budget-manager:S000010:build-and-test",
+    "invocationHash": "b099118e5102b34c855263b785fe84bec8f2f2f2e3d77b88b85a09417cb7adea",
+    "stepId": "S000010",
+    "taskId": "build-and-test",
+    "kind": "agent",
+    "label": "build",
+    "taskDefRef": "tasks/01KKKZW3TMXZRMHMBDBAN6AERP/task.json",
+    "labels": [
+      "build",
+      "test",
+      "full",
+      "iteration-1"
+    ]
+  },
+  "checksum": "a344c4de43069028fed6d981239eb56f479b50fe61e6224575158b0ed8e0d790"
+}

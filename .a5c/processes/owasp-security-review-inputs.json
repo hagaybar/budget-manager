@@ -1,0 +1,13 @@
+{
+  "projectName": "budget-manager",
+  "codebasePath": "/home/ubuntu/projects/budget_manager",
+  "techStack": {
+    "language": "python",
+    "framework": "fastapi",
+    "database": "sqlite3",
+    "validation": "pydantic-v2",
+    "frontend": "vanilla-js-spa",
+    "server": "uvicorn",
+    "testing": "pytest"
+  }
+}

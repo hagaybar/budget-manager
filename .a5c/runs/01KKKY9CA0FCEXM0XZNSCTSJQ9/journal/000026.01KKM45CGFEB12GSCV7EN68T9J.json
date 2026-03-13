@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-13T17:33:31.024Z",
+  "data": {
+    "effectId": "01KKM45CFWJWYMHNY4NYW89QD7",
+    "invocationKey": "android-budget-manager:S000013:deliver-to-github",
+    "invocationHash": "0decb517718a82bbbf0c49ecf0fdb492e4be77a017b2637adf9c4e0e1c691417",
+    "stepId": "S000013",
+    "taskId": "deliver-to-github",
+    "kind": "agent",
+    "label": "delivery",
+    "taskDefRef": "tasks/01KKM45CFWJWYMHNY4NYW89QD7/task.json",
+    "labels": [
+      "delivery",
+      "github",
+      "release"
+    ]
+  },
+  "checksum": "ae21eacda9672d43f8ddd3814438c0cedad299bb357ab1846c76c74f7b003b83"
+}
