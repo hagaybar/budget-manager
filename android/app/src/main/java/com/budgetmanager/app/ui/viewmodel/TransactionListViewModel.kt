@@ -2,8 +2,10 @@ package com.budgetmanager.app.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import android.util.Log
 import com.budgetmanager.app.data.repository.TransactionRepository
 import com.budgetmanager.app.domain.model.Transaction
+import com.budgetmanager.app.domain.usecase.GenerateRecurringTransactionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TransactionListViewModel @Inject constructor(
-    private val repository: TransactionRepository
+    private val repository: TransactionRepository,
+    private val generateRecurringTransactions: GenerateRecurringTransactionsUseCase
 ) : ViewModel() {
 
     data class UiState(
@@ -37,8 +40,30 @@ class TransactionListViewModel @Inject constructor(
     private var transactionJob: Job? = null
 
     init {
+        generateRecurringTransactionsEagerly()
         loadTransactions()
         loadCategories()
+    }
+
+    /**
+     * Eagerly generates any pending recurring transactions for today.
+     * This ensures transactions are up-to-date when the user opens the app,
+     * without relying solely on WorkManager which may be delayed by Doze mode
+     * or battery optimization. The operation is idempotent — duplicate checks
+     * prevent creating the same transaction twice.
+     */
+    private fun generateRecurringTransactionsEagerly() {
+        viewModelScope.launch {
+            try {
+                val created = generateRecurringTransactions()
+                if (created > 0) {
+                    Log.d("TransactionListVM", "Eagerly generated $created recurring transaction(s)")
+                }
+            } catch (e: Exception) {
+                Log.w("TransactionListVM", "Failed to generate recurring transactions", e)
+                // Non-fatal: WorkManager will handle it as a fallback
+            }
+        }
     }
 
     private fun loadTransactions() {
