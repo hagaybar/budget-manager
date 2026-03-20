@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BudgetManager</string>
-    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID.apps.googleusercontent.com</string>
+    <string name="default_web_client_id">214706207516-7hacrst6j76oe43a50qkv25q2v9omgdr.apps.googleusercontent.com</string>
 
     <!-- Settings screen -->
     <string name="settings_title">Settings</string>
