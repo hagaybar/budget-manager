@@ -1,0 +1,6 @@
+{
+  "projectDir": "/home/ubuntu/projects/budget_manager",
+  "androidDir": "/home/ubuntu/projects/budget_manager/android",
+  "packageName": "com.budgetmanager.app",
+  "maxConvergenceIterations": 4
+}

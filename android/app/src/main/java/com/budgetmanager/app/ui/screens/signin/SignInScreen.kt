@@ -1,7 +1,10 @@
 package com.budgetmanager.app.ui.screens.signin
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,11 +40,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.budgetmanager.app.R
 import com.budgetmanager.app.auth.AuthState
 import com.budgetmanager.app.ui.viewmodel.AuthViewModel
 
@@ -51,6 +56,8 @@ fun SignInScreen(
     viewModel: AuthViewModel = hiltViewModel()
 ) {
     val authState by viewModel.authState.collectAsState()
+    val signInError by viewModel.signInError.collectAsState()
+    val isSigningIn by viewModel.isSigningIn.collectAsState()
     val context = LocalContext.current
 
     var visible by remember { mutableStateOf(false) }
@@ -132,7 +139,7 @@ fun SignInScreen(
 
             // Title
             Text(
-                text = "Budget Manager",
+                text = stringResource(R.string.signin_app_title),
                 style = MaterialTheme.typography.headlineLarge.copy(
                     fontWeight = FontWeight.Bold,
                     fontSize = 32.sp
@@ -141,7 +148,7 @@ fun SignInScreen(
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Track expenses, manage budgets,\nand take control of your finances",
+                text = stringResource(R.string.signin_app_subtitle),
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.White.copy(alpha = 0.85f),
                 textAlign = TextAlign.Center,
@@ -152,12 +159,39 @@ fun SignInScreen(
 
             // Currency badge
             Text(
-                text = "₪ ILS",
+                text = stringResource(R.string.signin_currency_badge),
                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
                 color = Color.White.copy(alpha = 0.7f)
             )
 
-            Spacer(modifier = Modifier.weight(0.4f))
+            Spacer(modifier = Modifier.weight(0.3f))
+
+            // Error message
+            AnimatedVisibility(
+                visible = signInError != null,
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
+                signInError?.let { error ->
+                    Text(
+                        text = error,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color(0xFFFFCDD2),
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                Color.Black.copy(alpha = 0.2f),
+                                RoundedCornerShape(8.dp)
+                            )
+                            .padding(12.dp)
+                    )
+                }
+            }
+
+            if (signInError != null) {
+                Spacer(modifier = Modifier.height(16.dp))
+            }
 
             // Buttons
             when (authState) {
@@ -166,7 +200,10 @@ fun SignInScreen(
                 }
                 else -> {
                     Button(
-                        onClick = { viewModel.signInWithGoogle(context) },
+                        onClick = {
+                            viewModel.clearError()
+                            viewModel.signInWithGoogle(context)
+                        },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(52.dp),
@@ -174,12 +211,23 @@ fun SignInScreen(
                             containerColor = Color.White,
                             contentColor = MaterialTheme.colorScheme.primary
                         ),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(12.dp),
+                        enabled = !isSigningIn
                     ) {
-                        Text(
-                            "Sign in with Google",
-                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
-                        )
+                        if (isSigningIn) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(24.dp),
+                                color = MaterialTheme.colorScheme.primary,
+                                strokeWidth = 2.dp
+                            )
+                        } else {
+                            Text(
+                                stringResource(R.string.signin_google_button),
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            )
+                        }
                     }
 
                     Spacer(modifier = Modifier.height(12.dp))
@@ -192,10 +240,11 @@ fun SignInScreen(
                         colors = ButtonDefaults.outlinedButtonColors(
                             contentColor = Color.White
                         ),
-                        shape = RoundedCornerShape(12.dp)
+                        shape = RoundedCornerShape(12.dp),
+                        enabled = !isSigningIn
                     ) {
                         Text(
-                            "Continue as Guest",
+                            stringResource(R.string.signin_guest_button),
                             style = MaterialTheme.typography.titleMedium
                         )
                     }
