@@ -1,6 +1,7 @@
 package com.budgetmanager.app.ui.components
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CalendarToday
 import androidx.compose.material3.Icon
@@ -19,25 +20,32 @@ fun DatePickerField(
     label: String = "Date",
     onClick: (() -> Unit)? = null
 ) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(label) },
+    Box(
         modifier = modifier.then(
             if (onClick != null) Modifier.clickable { onClick() } else Modifier
-        ),
-        readOnly = true,
-        trailingIcon = {
-            Icon(
-                imageVector = Icons.Default.CalendarToday,
-                contentDescription = "Select date"
-            )
-        },
-        singleLine = true,
-        shape = MaterialTheme.shapes.small,
-        colors = OutlinedTextFieldDefaults.colors(
-            focusedBorderColor = MaterialTheme.colorScheme.primary,
-            unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
         )
-    )
+    ) {
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+            label = { Text(label) },
+            modifier = Modifier.matchParentSize(),
+            enabled = false,
+            readOnly = true,
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Default.CalendarToday,
+                    contentDescription = "Select date"
+                )
+            },
+            singleLine = true,
+            shape = MaterialTheme.shapes.small,
+            colors = OutlinedTextFieldDefaults.colors(
+                disabledTextColor = MaterialTheme.colorScheme.onSurface,
+                disabledBorderColor = MaterialTheme.colorScheme.outlineVariant,
+                disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                disabledTrailingIconColor = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        )
+    }
 }
