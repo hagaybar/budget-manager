@@ -19,6 +19,6 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
     data object BudgetManagement : Screen("budget_management", "Manage Budgets", Icons.Default.AccountBalance)
 
     companion object {
-        val bottomNavItems = listOf(Transactions, Summary, Recurring, Settings)
+        val bottomNavItems by lazy { listOf(Transactions, Summary, Recurring, Settings) }
     }
 }

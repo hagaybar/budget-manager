@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
  * Recreates transactions and recurring_transactions tables with proper FK constraints,
  * since SQLite's ALTER TABLE cannot add foreign keys.
  */
-private fun recreateTablesWithForeignKeys(db: SupportSQLiteDatabase) {
+private fun recreateTablesWithForeignKeys(db: SupportSQLiteDatabase, hasBudgetId: Boolean = true) {
     // Recreate recurring_transactions with FK constraint on budget_id
     // (must be done before transactions, since transactions has FK to recurring_transactions)
     db.execSQL("""
@@ -31,7 +31,7 @@ private fun recreateTablesWithForeignKeys(db: SupportSQLiteDatabase) {
     """)
     db.execSQL("""
         INSERT INTO `recurring_transactions_new` (`id`, `type`, `amount`, `category`, `description`, `frequency`, `day_of_week`, `day_of_month`, `start_date`, `end_date`, `is_active`, `created_at`, `budget_id`)
-        SELECT `id`, `type`, `amount`, `category`, `description`, `frequency`, `day_of_week`, `day_of_month`, `start_date`, `end_date`, `is_active`, `created_at`, COALESCE(`budget_id`, 0)
+        SELECT `id`, `type`, `amount`, `category`, `description`, `frequency`, `day_of_week`, `day_of_month`, `start_date`, `end_date`, `is_active`, `created_at`, ${if (hasBudgetId) "COALESCE(`budget_id`, 0)" else "0"}
         FROM `recurring_transactions`
     """)
     db.execSQL("DROP TABLE `recurring_transactions`")
@@ -58,7 +58,7 @@ private fun recreateTablesWithForeignKeys(db: SupportSQLiteDatabase) {
     """)
     db.execSQL("""
         INSERT INTO `transactions_new` (`id`, `type`, `amount`, `category`, `description`, `date`, `created_at`, `recurring_id`, `budget_id`)
-        SELECT `id`, `type`, `amount`, `category`, `description`, `date`, `created_at`, `recurring_id`, COALESCE(`budget_id`, 0)
+        SELECT `id`, `type`, `amount`, `category`, `description`, `date`, `created_at`, `recurring_id`, ${if (hasBudgetId) "COALESCE(`budget_id`, 0)" else "0"}
         FROM `transactions`
     """)
     db.execSQL("DROP TABLE `transactions`")
@@ -95,8 +95,8 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
                OR EXISTS (SELECT 1 FROM `recurring_transactions` LIMIT 1)
         """)
 
-        // 3. Recreate tables with proper FK constraints
-        recreateTablesWithForeignKeys(db)
+        // 3. Recreate tables with proper FK constraints (old tables don't have budget_id)
+        recreateTablesWithForeignKeys(db, hasBudgetId = false)
 
         // 4. Link existing data to the default budget
         db.execSQL("""
