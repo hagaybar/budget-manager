@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.budgetmanager.app.data.repository.TransactionRepository
+import com.budgetmanager.app.domain.manager.ActiveBudgetManager
 import com.budgetmanager.app.domain.model.Transaction
 import com.budgetmanager.app.domain.model.TransactionType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AddEditTransactionViewModel @Inject constructor(
     private val repository: TransactionRepository,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
+    private val activeBudgetManager: ActiveBudgetManager
 ) : ViewModel() {
 
     data class UiState(
@@ -29,6 +31,7 @@ class AddEditTransactionViewModel @Inject constructor(
         val category: String = "",
         val description: String = "",
         val date: LocalDate = LocalDate.now(),
+        val budgetId: Long = 0,
         val isSaving: Boolean = false,
         val saveSuccess: Boolean = false,
         val error: String? = null
@@ -54,7 +57,8 @@ class AddEditTransactionViewModel @Inject constructor(
                     amount = transaction.amount.toString(),
                     category = transaction.category,
                     description = transaction.description,
-                    date = LocalDate.parse(transaction.date)
+                    date = LocalDate.parse(transaction.date),
+                    budgetId = transaction.budgetId
                 )
             }
         }
@@ -81,13 +85,21 @@ class AddEditTransactionViewModel @Inject constructor(
         _uiState.update { it.copy(isSaving = true) }
         viewModelScope.launch {
             try {
+                val budgetId = if (state.isEditMode) {
+                    // Preserve existing budgetId when editing
+                    state.budgetId
+                } else {
+                    // Use current active budget for new transactions
+                    activeBudgetManager.getActiveBudgetId()
+                }
                 val transaction = Transaction(
                     id = if (state.isEditMode) state.transactionId else 0,
                     type = state.type,
                     amount = amount,
                     category = state.category.trim(),
                     description = state.description.trim(),
-                    date = state.date.toString()
+                    date = state.date.toString(),
+                    budgetId = budgetId
                 )
                 if (state.isEditMode) {
                     repository.update(transaction)

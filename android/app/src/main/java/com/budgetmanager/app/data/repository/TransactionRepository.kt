@@ -17,4 +17,17 @@ interface TransactionRepository {
     suspend fun getAll(): List<Transaction>
     suspend fun deleteAll()
     suspend fun insertAll(transactions: List<Transaction>)
+
+    // Budget-scoped queries
+    fun observeAllByBudget(budgetId: Long): Flow<List<Transaction>>
+    fun observeFilteredByBudget(
+        budgetId: Long,
+        type: String?,
+        category: String?,
+        dateFrom: String?,
+        dateTo: String?
+    ): Flow<List<Transaction>>
+    fun observeCategoriesByBudget(budgetId: Long): Flow<List<String>>
+    fun getMonthlySummaryByBudget(budgetId: Long, year: Int, month: Int): Flow<MonthlySummary>
+    suspend fun assignOrphanedToBudget(budgetId: Long): Int
 }

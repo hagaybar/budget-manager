@@ -8,5 +8,6 @@ data class Transaction(
     val description: String = "",
     val date: String,
     val createdAt: String = "",
-    val recurringId: Long? = null
+    val recurringId: Long? = null,
+    val budgetId: Long = 0
 )

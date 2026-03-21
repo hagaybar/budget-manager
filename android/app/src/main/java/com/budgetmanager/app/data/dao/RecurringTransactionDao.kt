@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface RecurringTransactionDao {
 
+    // ── Unscoped queries (kept for backup/export across all budgets) ──
+
     @Query("SELECT * FROM recurring_transactions ORDER BY created_at DESC")
     fun observeAll(): Flow<List<RecurringTransactionEntity>>
 
@@ -19,6 +21,19 @@ interface RecurringTransactionDao {
 
     @Query("SELECT * FROM recurring_transactions WHERE id = :id")
     fun observeById(id: Long): Flow<RecurringTransactionEntity?>
+
+    // ── Budget-scoped queries ──
+
+    @Query("SELECT * FROM recurring_transactions WHERE budget_id = :budgetId ORDER BY created_at DESC")
+    fun observeAllByBudget(budgetId: Long): Flow<List<RecurringTransactionEntity>>
+
+    @Query("SELECT * FROM recurring_transactions WHERE budget_id = :budgetId AND is_active = 1 ORDER BY created_at DESC")
+    fun observeActiveByBudget(budgetId: Long): Flow<List<RecurringTransactionEntity>>
+
+    @Query("SELECT * FROM recurring_transactions WHERE budget_id = :budgetId AND is_active = 1 ORDER BY id ASC")
+    suspend fun getActiveByBudget(budgetId: Long): List<RecurringTransactionEntity>
+
+    // ── Mutations & non-scoped reads (shared across all budgets) ──
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(recurring: RecurringTransactionEntity): Long
@@ -43,4 +58,7 @@ interface RecurringTransactionDao {
 
     @Query("SELECT * FROM recurring_transactions WHERE is_active = 1 ORDER BY id ASC")
     suspend fun getActive(): List<RecurringTransactionEntity>
+
+    @Query("UPDATE recurring_transactions SET budget_id = :budgetId WHERE budget_id = 0")
+    suspend fun assignOrphanedToBudget(budgetId: Long): Int
 }

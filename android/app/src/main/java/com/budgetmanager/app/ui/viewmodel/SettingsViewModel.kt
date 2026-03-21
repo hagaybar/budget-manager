@@ -13,6 +13,8 @@ import com.budgetmanager.app.R
 import com.budgetmanager.app.auth.AuthState
 import com.budgetmanager.app.auth.GoogleSignInManager
 import com.budgetmanager.app.data.repository.BackupRepository
+import com.budgetmanager.app.data.repository.BudgetRepository
+import com.budgetmanager.app.domain.manager.ActiveBudgetManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -34,7 +36,9 @@ private val Context.backupDataStore: DataStore<Preferences> by preferencesDataSt
 class SettingsViewModel @Inject constructor(
     @ApplicationContext private val context: Context,
     private val backupRepository: BackupRepository,
-    private val googleSignInManager: GoogleSignInManager
+    private val googleSignInManager: GoogleSignInManager,
+    private val budgetRepository: BudgetRepository,
+    private val activeBudgetManager: ActiveBudgetManager
 ) : ViewModel() {
 
     data class UiState(
@@ -143,6 +147,23 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 backupRepository.importFromUri(uri)
+
+                // After restore, sync ActiveBudgetManager with the restored data
+                val activeBudget = budgetRepository.getActiveBudget()
+                if (activeBudget != null) {
+                    activeBudgetManager.setActiveBudgetId(activeBudget.id)
+                } else {
+                    // No active budget flagged; fall back to first available budget
+                    val allBudgets = budgetRepository.getAll()
+                    val firstBudget = allBudgets.firstOrNull()
+                    if (firstBudget != null) {
+                        budgetRepository.setActiveBudget(firstBudget.id)
+                        activeBudgetManager.setActiveBudgetId(firstBudget.id)
+                    } else {
+                        activeBudgetManager.setActiveBudgetId(0L)
+                    }
+                }
+
                 _uiState.update { it.copy(isImporting = false) }
                 _snackbarEvents.emit(
                     SnackbarEvent.Success(context.getString(R.string.import_success))

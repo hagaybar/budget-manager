@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import android.util.Log
 import com.budgetmanager.app.data.repository.TransactionRepository
+import com.budgetmanager.app.domain.manager.ActiveBudgetManager
 import com.budgetmanager.app.domain.model.Transaction
 import com.budgetmanager.app.domain.usecase.GenerateRecurringTransactionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class TransactionListViewModel @Inject constructor(
     private val repository: TransactionRepository,
-    private val generateRecurringTransactions: GenerateRecurringTransactionsUseCase
+    private val generateRecurringTransactions: GenerateRecurringTransactionsUseCase,
+    private val activeBudgetManager: ActiveBudgetManager
 ) : ViewModel() {
 
     data class UiState(
@@ -38,11 +40,24 @@ class TransactionListViewModel @Inject constructor(
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     private var transactionJob: Job? = null
+    private var categoriesJob: Job? = null
 
     init {
         generateRecurringTransactionsEagerly()
-        loadTransactions()
-        loadCategories()
+        observeActiveBudget()
+    }
+
+    /**
+     * Observes the active budget and reloads transactions whenever it changes.
+     */
+    private fun observeActiveBudget() {
+        viewModelScope.launch {
+            activeBudgetManager.observeActiveBudgetId().collect { budgetId ->
+                _uiState.update { it.copy(isLoading = true) }
+                loadTransactions()
+                loadCategories()
+            }
+        }
     }
 
     /**
@@ -70,10 +85,19 @@ class TransactionListViewModel @Inject constructor(
         transactionJob?.cancel()
         transactionJob = viewModelScope.launch {
             val state = _uiState.value
-            repository.observeFiltered(
-                state.filterType, state.filterCategory,
-                state.filterDateFrom, state.filterDateTo
-            ).catch { e ->
+            val budgetId = activeBudgetManager.getActiveBudgetId()
+            if (budgetId > 0) {
+                repository.observeFilteredByBudget(
+                    budgetId,
+                    state.filterType, state.filterCategory,
+                    state.filterDateFrom, state.filterDateTo
+                )
+            } else {
+                repository.observeFiltered(
+                    state.filterType, state.filterCategory,
+                    state.filterDateFrom, state.filterDateTo
+                )
+            }.catch { e ->
                 _uiState.update { it.copy(error = e.message, isLoading = false, isRefreshing = false) }
             }.collect { transactions ->
                 _uiState.update { it.copy(transactions = transactions, isLoading = false, isRefreshing = false) }
@@ -82,8 +106,15 @@ class TransactionListViewModel @Inject constructor(
     }
 
     private fun loadCategories() {
-        viewModelScope.launch {
-            repository.observeCategories().collect { categories ->
+        categoriesJob?.cancel()
+        categoriesJob = viewModelScope.launch {
+            val budgetId = activeBudgetManager.getActiveBudgetId()
+            val categoriesFlow = if (budgetId > 0) {
+                repository.observeCategoriesByBudget(budgetId)
+            } else {
+                repository.observeCategories()
+            }
+            categoriesFlow.collect { categories ->
                 _uiState.update { it.copy(availableCategories = categories) }
             }
         }

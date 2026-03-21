@@ -3,11 +3,14 @@ package com.budgetmanager.app.data.repository
 import android.content.Context
 import android.net.Uri
 import androidx.room.withTransaction
+import com.budgetmanager.app.data.dao.BudgetDao
 import com.budgetmanager.app.data.dao.RecurringTransactionDao
 import com.budgetmanager.app.data.dao.TransactionDao
 import com.budgetmanager.app.data.db.BudgetDatabase
+import com.budgetmanager.app.data.entity.BudgetEntity
 import com.budgetmanager.app.data.entity.RecurringTransactionEntity
 import com.budgetmanager.app.data.entity.TransactionEntity
+import com.budgetmanager.app.domain.model.BackupBudget
 import com.budgetmanager.app.domain.model.BackupData
 import com.budgetmanager.app.domain.model.BackupRecurringTransaction
 import com.budgetmanager.app.domain.model.BackupTransaction
@@ -23,7 +26,8 @@ class BackupRepositoryImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val database: BudgetDatabase,
     private val transactionDao: TransactionDao,
-    private val recurringDao: RecurringTransactionDao
+    private val recurringDao: RecurringTransactionDao,
+    private val budgetDao: BudgetDao
 ) : BackupRepository {
 
     private val json = Json { prettyPrint = true; ignoreUnknownKeys = true }
@@ -31,11 +35,13 @@ class BackupRepositoryImpl @Inject constructor(
     override suspend fun exportToJson(): BackupData {
         val transactions = transactionDao.getAll()
         val recurring = recurringDao.getAll()
+        val budgets = budgetDao.getAll()
 
         return BackupData(
             createdAt = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
             transactions = transactions.map { it.toBackup() },
-            recurringTransactions = recurring.map { it.toBackup() }
+            recurringTransactions = recurring.map { it.toBackup() },
+            budgets = budgets.map { it.toBackup() }
         )
     }
 
@@ -43,6 +49,12 @@ class BackupRepositoryImpl @Inject constructor(
         database.withTransaction {
             transactionDao.deleteAll()
             recurringDao.deleteAll()
+            budgetDao.deleteAll()
+
+            // Import budgets first (FK parent)
+            if (data.budgets.isNotEmpty()) {
+                budgetDao.insertAll(data.budgets.map { it.toEntity() })
+            }
 
             recurringDao.insertAll(data.recurringTransactions.map { it.toEntity() })
             transactionDao.insertAll(data.transactions.map { it.toEntity() })
@@ -96,31 +108,46 @@ class BackupRepositoryImpl @Inject constructor(
             require(rtx.startDate.isNotBlank()) { "Recurring transaction missing start date." }
             require(rtx.amount > 0) { "Recurring transaction has invalid amount." }
         }
+
+        // Validate budgets if present
+        data.budgets.forEach { budget ->
+            require(budget.name.isNotBlank()) { "Budget missing name field." }
+        }
     }
 
     private fun TransactionEntity.toBackup() = BackupTransaction(
         id = id, type = type, amount = amount, category = category,
         description = description, date = date, createdAt = createdAt,
-        recurringId = recurringId
+        recurringId = recurringId, budgetId = budgetId
     )
 
     private fun RecurringTransactionEntity.toBackup() = BackupRecurringTransaction(
         id = id, type = type, amount = amount, category = category,
         description = description, frequency = frequency, dayOfWeek = dayOfWeek,
         dayOfMonth = dayOfMonth, startDate = startDate, endDate = endDate,
-        isActive = isActive, createdAt = createdAt
+        isActive = isActive, createdAt = createdAt, budgetId = budgetId
+    )
+
+    private fun BudgetEntity.toBackup() = BackupBudget(
+        id = id, name = name, description = description, currency = currency,
+        monthlyTarget = monthlyTarget, isActive = isActive, createdAt = createdAt
     )
 
     private fun BackupTransaction.toEntity() = TransactionEntity(
         id = id, type = type, amount = amount, category = category,
         description = description, date = date, createdAt = createdAt,
-        recurringId = recurringId
+        recurringId = recurringId, budgetId = budgetId
     )
 
     private fun BackupRecurringTransaction.toEntity() = RecurringTransactionEntity(
         id = id, type = type, amount = amount, category = category,
         description = description, frequency = frequency, dayOfWeek = dayOfWeek,
         dayOfMonth = dayOfMonth, startDate = startDate, endDate = endDate,
-        isActive = isActive, createdAt = createdAt
+        isActive = isActive, createdAt = createdAt, budgetId = budgetId
+    )
+
+    private fun BackupBudget.toEntity() = BudgetEntity(
+        id = id, name = name, description = description, currency = currency,
+        monthlyTarget = monthlyTarget, isActive = isActive, createdAt = createdAt
     )
 }

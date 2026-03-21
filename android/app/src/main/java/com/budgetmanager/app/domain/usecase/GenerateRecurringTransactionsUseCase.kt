@@ -52,7 +52,8 @@ class GenerateRecurringTransactionsUseCase @Inject constructor(
                 category = recurring.category,
                 description = recurring.description,
                 date = todayStr,
-                recurringId = recurring.id
+                recurringId = recurring.id,
+                budgetId = recurring.budgetId
             )
             transactionDao.insert(transaction)
             createdCount++

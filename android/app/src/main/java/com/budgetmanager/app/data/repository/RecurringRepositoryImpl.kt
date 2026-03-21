@@ -84,7 +84,8 @@ class RecurringRepositoryImpl @Inject constructor(
                         category = recurring.category,
                         description = recurring.description,
                         date = dateStr,
-                        recurringId = recurringId
+                        recurringId = recurringId,
+                        budgetId = recurring.budgetId
                     )
                     val id = transactionDao.insert(entity)
                     generated.add(
@@ -95,7 +96,8 @@ class RecurringRepositoryImpl @Inject constructor(
                             category = recurring.category,
                             description = recurring.description,
                             date = dateStr,
-                            recurringId = recurringId
+                            recurringId = recurringId,
+                            budgetId = recurring.budgetId
                         )
                     )
                 }
@@ -104,6 +106,17 @@ class RecurringRepositoryImpl @Inject constructor(
         }
         return generated
     }
+
+    // ── Budget-scoped implementations ──
+
+    override fun observeAllByBudget(budgetId: Long): Flow<List<RecurringTransaction>> =
+        recurringDao.observeAllByBudget(budgetId).map { entities -> entities.map { it.toDomain() } }
+
+    override fun observeActiveByBudget(budgetId: Long): Flow<List<RecurringTransaction>> =
+        recurringDao.observeActiveByBudget(budgetId).map { entities -> entities.map { it.toDomain() } }
+
+    override suspend fun assignOrphanedToBudget(budgetId: Long): Int =
+        recurringDao.assignOrphanedToBudget(budgetId)
 
     private fun RecurringTransactionEntity.toDomain() = RecurringTransaction(
         id = id,
@@ -117,7 +130,8 @@ class RecurringRepositoryImpl @Inject constructor(
         startDate = startDate,
         endDate = endDate,
         isActive = isActive == 1,
-        createdAt = createdAt
+        createdAt = createdAt,
+        budgetId = budgetId
     )
 
     private fun RecurringTransaction.toEntity() = RecurringTransactionEntity(
@@ -132,6 +146,7 @@ class RecurringRepositoryImpl @Inject constructor(
         startDate = startDate,
         endDate = endDate,
         isActive = if (isActive) 1 else 0,
-        createdAt = createdAt
+        createdAt = createdAt,
+        budgetId = budgetId
     )
 }

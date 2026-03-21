@@ -2,14 +2,24 @@ package com.budgetmanager.app.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "recurring_transactions",
+    foreignKeys = [
+        ForeignKey(
+            entity = BudgetEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["budget_id"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ],
     indices = [
         Index(value = ["is_active"]),
-        Index(value = ["frequency"])
+        Index(value = ["frequency"]),
+        Index(value = ["budget_id"])
     ]
 )
 data class RecurringTransactionEntity(
@@ -47,5 +57,8 @@ data class RecurringTransactionEntity(
     val isActive: Int = 1,
 
     @ColumnInfo(name = "created_at", defaultValue = "CURRENT_TIMESTAMP")
-    val createdAt: String = ""
+    val createdAt: String = "",
+
+    @ColumnInfo(name = "budget_id", defaultValue = "0")
+    val budgetId: Long = 0
 )

@@ -9,7 +9,8 @@ data class BackupData(
     val createdAt: String,
     val transactions: List<BackupTransaction>,
     @SerialName("recurring_transactions")
-    val recurringTransactions: List<BackupRecurringTransaction>
+    val recurringTransactions: List<BackupRecurringTransaction>,
+    val budgets: List<BackupBudget> = emptyList()
 )
 
 @Serializable
@@ -23,7 +24,9 @@ data class BackupTransaction(
     @SerialName("created_at")
     val createdAt: String = "",
     @SerialName("recurring_id")
-    val recurringId: Long? = null
+    val recurringId: Long? = null,
+    @SerialName("budget_id")
+    val budgetId: Long = 0
 )
 
 @Serializable
@@ -44,6 +47,22 @@ data class BackupRecurringTransaction(
     val endDate: String? = null,
     @SerialName("is_active")
     val isActive: Int = 1,
+    @SerialName("created_at")
+    val createdAt: String = "",
+    @SerialName("budget_id")
+    val budgetId: Long = 0
+)
+
+@Serializable
+data class BackupBudget(
+    val id: Long,
+    val name: String,
+    val description: String = "",
+    val currency: String = "ILS",
+    @SerialName("monthly_target")
+    val monthlyTarget: Double? = null,
+    @SerialName("is_active")
+    val isActive: Int = 0,
     @SerialName("created_at")
     val createdAt: String = ""
 )

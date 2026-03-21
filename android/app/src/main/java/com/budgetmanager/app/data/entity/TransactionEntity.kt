@@ -14,13 +14,20 @@ import androidx.room.PrimaryKey
             parentColumns = ["id"],
             childColumns = ["recurring_id"],
             onDelete = ForeignKey.SET_NULL
+        ),
+        ForeignKey(
+            entity = BudgetEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["budget_id"],
+            onDelete = ForeignKey.CASCADE
         )
     ],
     indices = [
         Index(value = ["date"]),
         Index(value = ["type"]),
         Index(value = ["category"]),
-        Index(value = ["recurring_id"])
+        Index(value = ["recurring_id"]),
+        Index(value = ["budget_id"])
     ]
 )
 data class TransactionEntity(
@@ -46,5 +53,8 @@ data class TransactionEntity(
     val createdAt: String = "",
 
     @ColumnInfo(name = "recurring_id")
-    val recurringId: Long? = null
+    val recurringId: Long? = null,
+
+    @ColumnInfo(name = "budget_id", defaultValue = "0")
+    val budgetId: Long = 0
 )

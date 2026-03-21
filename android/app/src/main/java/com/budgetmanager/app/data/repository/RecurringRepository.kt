@@ -16,4 +16,9 @@ interface RecurringRepository {
     suspend fun deleteAll()
     suspend fun insertAll(recurring: List<RecurringTransaction>)
     suspend fun generateTransactions(recurringId: Long, startDate: String, endDate: String): List<Transaction>
+
+    // Budget-scoped queries
+    fun observeAllByBudget(budgetId: Long): Flow<List<RecurringTransaction>>
+    fun observeActiveByBudget(budgetId: Long): Flow<List<RecurringTransaction>>
+    suspend fun assignOrphanedToBudget(budgetId: Long): Int
 }

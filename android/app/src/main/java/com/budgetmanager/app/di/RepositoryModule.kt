@@ -2,6 +2,8 @@ package com.budgetmanager.app.di
 
 import com.budgetmanager.app.data.repository.BackupRepository
 import com.budgetmanager.app.data.repository.BackupRepositoryImpl
+import com.budgetmanager.app.data.repository.BudgetRepository
+import com.budgetmanager.app.data.repository.BudgetRepositoryImpl
 import com.budgetmanager.app.data.repository.RecurringRepository
 import com.budgetmanager.app.data.repository.RecurringRepositoryImpl
 import com.budgetmanager.app.data.repository.TransactionRepository
@@ -33,4 +35,10 @@ abstract class RepositoryModule {
     abstract fun bindBackupRepository(
         impl: BackupRepositoryImpl
     ): BackupRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindBudgetRepository(
+        impl: BudgetRepositoryImpl
+    ): BudgetRepository
 }

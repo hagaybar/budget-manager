@@ -83,6 +83,54 @@ class TransactionRepositoryImpl @Inject constructor(
     override suspend fun insertAll(transactions: List<Transaction>) =
         transactionDao.insertAll(transactions.map { it.toEntity() })
 
+    // ── Budget-scoped implementations ──
+
+    override fun observeAllByBudget(budgetId: Long): Flow<List<Transaction>> =
+        transactionDao.observeAllByBudget(budgetId).map { entities -> entities.map { it.toDomain() } }
+
+    override fun observeCategoriesByBudget(budgetId: Long): Flow<List<String>> =
+        transactionDao.observeCategoriesByBudget(budgetId)
+
+    override suspend fun assignOrphanedToBudget(budgetId: Long): Int =
+        transactionDao.assignOrphanedToBudget(budgetId)
+
+    override fun observeFilteredByBudget(
+        budgetId: Long,
+        type: String?,
+        category: String?,
+        dateFrom: String?,
+        dateTo: String?
+    ): Flow<List<Transaction>> =
+        transactionDao.observeFilteredByBudget(budgetId, type, category, dateFrom, dateTo)
+            .map { entities -> entities.map { it.toDomain() } }
+
+    override fun getMonthlySummaryByBudget(budgetId: Long, year: Int, month: Int): Flow<MonthlySummary> {
+        val startDate = String.format("%04d-%02d-01", year, month)
+        val endDate = String.format("%04d-%02d-31", year, month)
+
+        return combine(
+            transactionDao.getMonthlyTotalsByBudget(budgetId, startDate, endDate),
+            transactionDao.getMonthlyCategoryBreakdownByBudget(budgetId, startDate, endDate)
+        ) { totals, breakdowns ->
+            MonthlySummary(
+                year = year,
+                month = month,
+                totalIncome = totals.totalIncome,
+                totalExpenses = totals.totalExpenses,
+                netBalance = totals.totalIncome - totals.totalExpenses,
+                transactionCount = totals.transactionCount,
+                categoryBreakdowns = breakdowns.map { agg ->
+                    CategoryBreakdown(
+                        category = agg.category,
+                        type = TransactionType.fromString(agg.type),
+                        total = agg.total,
+                        count = agg.count
+                    )
+                }
+            )
+        }
+    }
+
     private fun TransactionEntity.toDomain() = Transaction(
         id = id,
         type = TransactionType.fromString(type),
@@ -91,7 +139,8 @@ class TransactionRepositoryImpl @Inject constructor(
         description = description,
         date = date,
         createdAt = createdAt,
-        recurringId = recurringId
+        recurringId = recurringId,
+        budgetId = budgetId
     )
 
     private fun Transaction.toEntity() = TransactionEntity(
@@ -102,6 +151,7 @@ class TransactionRepositoryImpl @Inject constructor(
         description = description,
         date = date,
         createdAt = createdAt,
-        recurringId = recurringId
+        recurringId = recurringId,
+        budgetId = budgetId
     )
 }

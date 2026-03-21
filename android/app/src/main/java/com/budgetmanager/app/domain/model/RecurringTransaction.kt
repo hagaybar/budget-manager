@@ -12,5 +12,6 @@ data class RecurringTransaction(
     val startDate: String,
     val endDate: String? = null,
     val isActive: Boolean = true,
-    val createdAt: String = ""
+    val createdAt: String = "",
+    val budgetId: Long = 0
 )

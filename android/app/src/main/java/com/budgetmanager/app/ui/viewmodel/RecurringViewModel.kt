@@ -3,8 +3,10 @@ package com.budgetmanager.app.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.budgetmanager.app.data.repository.RecurringRepository
+import com.budgetmanager.app.domain.manager.ActiveBudgetManager
 import com.budgetmanager.app.domain.model.RecurringTransaction
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -15,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecurringViewModel @Inject constructor(
-    private val repository: RecurringRepository
+    private val repository: RecurringRepository,
+    private val activeBudgetManager: ActiveBudgetManager
 ) : ViewModel() {
 
     data class UiState(
@@ -30,13 +33,33 @@ class RecurringViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
+    private var recurringJob: Job? = null
+
     init {
-        loadRecurring()
+        observeActiveBudget()
+    }
+
+    /**
+     * Observes the active budget and reloads recurring transactions whenever it changes.
+     */
+    private fun observeActiveBudget() {
+        viewModelScope.launch {
+            activeBudgetManager.observeActiveBudgetId().collect { budgetId ->
+                _uiState.update { it.copy(isLoading = true) }
+                loadRecurring()
+            }
+        }
     }
 
     private fun loadRecurring() {
-        viewModelScope.launch {
-            repository.observeAll()
+        recurringJob?.cancel()
+        recurringJob = viewModelScope.launch {
+            val budgetId = activeBudgetManager.getActiveBudgetId()
+            if (budgetId > 0) {
+                repository.observeAllByBudget(budgetId)
+            } else {
+                repository.observeAll()
+            }
                 .catch { e -> _uiState.update { it.copy(error = e.message, isLoading = false) } }
                 .collect { list ->
                     _uiState.update { it.copy(recurringTransactions = list, isLoading = false) }
@@ -47,7 +70,8 @@ class RecurringViewModel @Inject constructor(
     fun create(recurring: RecurringTransaction) {
         viewModelScope.launch {
             try {
-                repository.create(recurring)
+                val budgetId = activeBudgetManager.getActiveBudgetId()
+                repository.create(recurring.copy(budgetId = budgetId))
                 _uiState.update { it.copy(showAddDialog = false) }
             } catch (e: Exception) {
                 _uiState.update { it.copy(error = e.message) }
