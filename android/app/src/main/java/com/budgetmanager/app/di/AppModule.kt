@@ -7,7 +7,6 @@ import com.budgetmanager.app.data.dao.RecurringTransactionDao
 import com.budgetmanager.app.data.dao.TransactionDao
 import com.budgetmanager.app.data.db.BudgetDatabase
 import com.budgetmanager.app.data.db.MIGRATION_1_2
-import com.budgetmanager.app.domain.manager.ActiveBudgetManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,9 +45,4 @@ object AppModule {
         return database.budgetDao()
     }
 
-    @Provides
-    @Singleton
-    fun provideActiveBudgetManager(@ApplicationContext context: Context): ActiveBudgetManager {
-        return ActiveBudgetManager(context)
-    }
 }

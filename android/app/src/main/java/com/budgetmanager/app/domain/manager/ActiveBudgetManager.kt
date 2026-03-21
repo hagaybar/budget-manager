@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -34,13 +33,16 @@ class ActiveBudgetManager @Inject constructor(
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    private val _activeBudgetId = MutableStateFlow(
-        runBlocking {
-            context.activeBudgetDataStore.data
+    private val _activeBudgetId = MutableStateFlow(0L)
+
+    init {
+        scope.launch {
+            val storedId = context.activeBudgetDataStore.data
                 .map { prefs -> prefs[KEY_ACTIVE_BUDGET_ID] ?: 0L }
                 .first()
+            _activeBudgetId.value = storedId
         }
-    )
+    }
 
     fun observeActiveBudgetId(): StateFlow<Long> = _activeBudgetId.asStateFlow()
 
