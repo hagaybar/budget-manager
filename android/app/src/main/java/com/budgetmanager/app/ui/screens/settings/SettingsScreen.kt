@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Login
@@ -52,6 +53,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.budgetmanager.app.R
 import com.budgetmanager.app.auth.AuthState
+import com.budgetmanager.app.ui.theme.CornerRadius
+import com.budgetmanager.app.ui.theme.Spacing
 import com.budgetmanager.app.ui.viewmodel.SettingsViewModel
 
 @Composable
@@ -102,6 +105,7 @@ fun SettingsScreen(
     if (uiState.showImportConfirmation) {
         AlertDialog(
             onDismissRequest = { viewModel.dismissImportConfirmation() },
+            shape = RoundedCornerShape(CornerRadius.large),
             icon = {
                 Icon(
                     imageVector = Icons.Default.CloudDownload,
@@ -139,7 +143,7 @@ fun SettingsScreen(
                 .fillMaxSize()
                 .padding(padding)
                 .verticalScroll(rememberScrollState())
-                .padding(16.dp)
+                .padding(horizontal = Spacing.lg, vertical = Spacing.lg)
         ) {
             Text(
                 text = stringResource(R.string.settings_title),
@@ -147,16 +151,17 @@ fun SettingsScreen(
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Spacing.xl))
 
             // --- Account Section ---
             SectionHeader(title = stringResource(R.string.settings_section_account))
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Spacing.sm))
 
             Card(
                 modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(CornerRadius.medium),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                 )
             ) {
                 when (val auth = uiState.authState) {
@@ -165,7 +170,7 @@ fun SettingsScreen(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp),
+                                .padding(Spacing.lg),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
@@ -177,7 +182,7 @@ fun SettingsScreen(
                                 else
                                     MaterialTheme.colorScheme.primary
                             )
-                            Spacer(modifier = Modifier.width(16.dp))
+                            Spacer(modifier = Modifier.width(Spacing.lg))
                             Column(modifier = Modifier.weight(1f)) {
                                 Text(
                                     text = auth.name,
@@ -195,8 +200,8 @@ fun SettingsScreen(
                             }
                         }
                         HorizontalDivider(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+                            modifier = Modifier.padding(horizontal = Spacing.lg),
+                            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
                         )
                         if (isGuest) {
                             // Guest mode: show "Sign In with Google" instead of "Sign Out"
@@ -204,7 +209,7 @@ fun SettingsScreen(
                                 onClick = { onNavigateToSignIn() },
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(horizontal = 8.dp, vertical = 4.dp),
+                                    .padding(horizontal = Spacing.sm, vertical = Spacing.xs),
                                 colors = ButtonDefaults.textButtonColors(
                                     contentColor = MaterialTheme.colorScheme.primary
                                 )
@@ -214,8 +219,11 @@ fun SettingsScreen(
                                     contentDescription = null,
                                     modifier = Modifier.size(18.dp)
                                 )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(stringResource(R.string.settings_sign_in))
+                                Spacer(modifier = Modifier.width(Spacing.sm))
+                                Text(
+                                    text = stringResource(R.string.settings_sign_in),
+                                    style = MaterialTheme.typography.labelLarge
+                                )
                             }
                         } else {
                             // Signed-in user: show "Sign Out"
@@ -223,7 +231,7 @@ fun SettingsScreen(
                                 onClick = { viewModel.signOut() },
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(horizontal = 8.dp, vertical = 4.dp),
+                                    .padding(horizontal = Spacing.sm, vertical = Spacing.xs),
                                 colors = ButtonDefaults.textButtonColors(
                                     contentColor = MaterialTheme.colorScheme.error
                                 )
@@ -233,8 +241,11 @@ fun SettingsScreen(
                                     contentDescription = null,
                                     modifier = Modifier.size(18.dp)
                                 )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(stringResource(R.string.settings_sign_out))
+                                Spacer(modifier = Modifier.width(Spacing.sm))
+                                Text(
+                                    text = stringResource(R.string.settings_sign_out),
+                                    style = MaterialTheme.typography.labelLarge
+                                )
                             }
                         }
                     }
@@ -242,7 +253,7 @@ fun SettingsScreen(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(24.dp),
+                                .padding(Spacing.xl),
                             contentAlignment = Alignment.Center
                         ) {
                             CircularProgressIndicator(modifier = Modifier.size(24.dp))
@@ -252,7 +263,7 @@ fun SettingsScreen(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp),
+                                .padding(Spacing.lg),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Icon(
@@ -261,7 +272,7 @@ fun SettingsScreen(
                                 modifier = Modifier.size(48.dp),
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
-                            Spacer(modifier = Modifier.width(16.dp))
+                            Spacer(modifier = Modifier.width(Spacing.lg))
                             Column {
                                 Text(
                                     text = stringResource(R.string.settings_guest),
@@ -276,14 +287,14 @@ fun SettingsScreen(
                             }
                         }
                         HorizontalDivider(
-                            modifier = Modifier.padding(horizontal = 16.dp),
-                            color = MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+                            modifier = Modifier.padding(horizontal = Spacing.lg),
+                            color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.5f)
                         )
                         TextButton(
                             onClick = { onNavigateToSignIn() },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 8.dp, vertical = 4.dp),
+                                .padding(horizontal = Spacing.sm, vertical = Spacing.xs),
                             colors = ButtonDefaults.textButtonColors(
                                 contentColor = MaterialTheme.colorScheme.primary
                             )
@@ -293,28 +304,32 @@ fun SettingsScreen(
                                 contentDescription = null,
                                 modifier = Modifier.size(18.dp)
                             )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(stringResource(R.string.settings_sign_in))
+                            Spacer(modifier = Modifier.width(Spacing.sm))
+                            Text(
+                                text = stringResource(R.string.settings_sign_in),
+                                style = MaterialTheme.typography.labelLarge
+                            )
                         }
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Spacing.xl))
 
             // --- Backup Section ---
             SectionHeader(title = stringResource(R.string.settings_section_backup))
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Spacing.sm))
 
             Card(
                 modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(CornerRadius.medium),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                 )
             ) {
                 Column(
-                    modifier = Modifier.padding(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    modifier = Modifier.padding(Spacing.lg),
+                    verticalArrangement = Arrangement.spacedBy(Spacing.md)
                 ) {
                     Text(
                         text = stringResource(R.string.settings_backup_description),
@@ -325,7 +340,7 @@ fun SettingsScreen(
                     uiState.lastBackupDate?.let { date ->
                         Text(
                             text = stringResource(R.string.settings_last_backup, date),
-                            style = MaterialTheme.typography.bodySmall,
+                            style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.Medium,
                             color = MaterialTheme.colorScheme.primary
                         )
@@ -337,7 +352,12 @@ fun SettingsScreen(
                             exportLauncher.launch(viewModel.getSuggestedBackupFilename())
                         },
                         modifier = Modifier.fillMaxWidth(),
-                        enabled = !uiState.isExporting && !uiState.isImporting
+                        enabled = !uiState.isExporting && !uiState.isImporting,
+                        shape = RoundedCornerShape(CornerRadius.medium),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        )
                     ) {
                         if (uiState.isExporting) {
                             CircularProgressIndicator(
@@ -345,16 +365,22 @@ fun SettingsScreen(
                                 strokeWidth = 2.dp,
                                 color = MaterialTheme.colorScheme.onPrimary
                             )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(stringResource(R.string.settings_exporting))
+                            Spacer(modifier = Modifier.width(Spacing.sm))
+                            Text(
+                                text = stringResource(R.string.settings_exporting),
+                                style = MaterialTheme.typography.labelLarge
+                            )
                         } else {
                             Icon(
                                 imageVector = Icons.Default.CloudUpload,
                                 contentDescription = null,
                                 modifier = Modifier.size(18.dp)
                             )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(stringResource(R.string.settings_export_data))
+                            Spacer(modifier = Modifier.width(Spacing.sm))
+                            Text(
+                                text = stringResource(R.string.settings_export_data),
+                                style = MaterialTheme.typography.labelLarge
+                            )
                         }
                     }
 
@@ -364,44 +390,52 @@ fun SettingsScreen(
                             importLauncher.launch(arrayOf("application/json"))
                         },
                         modifier = Modifier.fillMaxWidth(),
-                        enabled = !uiState.isImporting && !uiState.isExporting
+                        enabled = !uiState.isImporting && !uiState.isExporting,
+                        shape = RoundedCornerShape(CornerRadius.medium)
                     ) {
                         if (uiState.isImporting) {
                             CircularProgressIndicator(
                                 modifier = Modifier.size(18.dp),
                                 strokeWidth = 2.dp
                             )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(stringResource(R.string.settings_importing))
+                            Spacer(modifier = Modifier.width(Spacing.sm))
+                            Text(
+                                text = stringResource(R.string.settings_importing),
+                                style = MaterialTheme.typography.labelLarge
+                            )
                         } else {
                             Icon(
                                 imageVector = Icons.Default.CloudDownload,
                                 contentDescription = null,
                                 modifier = Modifier.size(18.dp)
                             )
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text(stringResource(R.string.settings_import_data))
+                            Spacer(modifier = Modifier.width(Spacing.sm))
+                            Text(
+                                text = stringResource(R.string.settings_import_data),
+                                style = MaterialTheme.typography.labelLarge
+                            )
                         }
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Spacing.xl))
 
             // --- About Section ---
             SectionHeader(title = stringResource(R.string.settings_section_about))
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(Spacing.sm))
 
             Card(
                 modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(CornerRadius.medium),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceVariant
+                    containerColor = MaterialTheme.colorScheme.surfaceContainerLow
                 )
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(Spacing.lg),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
@@ -410,7 +444,7 @@ fun SettingsScreen(
                         modifier = Modifier.size(24.dp),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                    Spacer(modifier = Modifier.width(16.dp))
+                    Spacer(modifier = Modifier.width(Spacing.lg))
                     Column {
                         Text(
                             text = stringResource(R.string.app_name),
@@ -426,7 +460,7 @@ fun SettingsScreen(
                 }
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(Spacing.lg))
         }
     }
 }
@@ -435,9 +469,9 @@ fun SettingsScreen(
 private fun SectionHeader(title: String) {
     Text(
         text = title,
-        style = MaterialTheme.typography.titleSmall,
+        style = MaterialTheme.typography.labelLarge,
         fontWeight = FontWeight.Bold,
         color = MaterialTheme.colorScheme.primary,
-        modifier = Modifier.padding(start = 4.dp)
+        modifier = Modifier.padding(start = Spacing.xs)
     )
 }

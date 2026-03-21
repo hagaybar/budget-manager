@@ -1,7 +1,6 @@
 package com.budgetmanager.app.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +16,6 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -33,7 +31,20 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.budgetmanager.app.domain.model.Budget
 import com.budgetmanager.app.domain.util.currencySymbol
+import com.budgetmanager.app.ui.theme.Spacing
 
+/**
+ * Refined budget selector dropdown with design system typography and spacing.
+ *
+ * Displays the active budget name as a tappable button. When expanded, shows
+ * all budgets with their currency badges and a "Manage Budgets" action item.
+ *
+ * @param budgets              available budgets to choose from
+ * @param activeBudget         currently selected budget (highlighted in bold)
+ * @param onBudgetSelected     callback with the selected budget ID
+ * @param onManageBudgetsClick callback to navigate to budget management
+ * @param modifier             outer modifier
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BudgetSelectorDropdown(
@@ -41,18 +52,18 @@ fun BudgetSelectorDropdown(
     activeBudget: Budget?,
     onBudgetSelected: (Long) -> Unit,
     onManageBudgetsClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var expanded by remember { mutableStateOf(false) }
 
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = { expanded = !expanded },
-        modifier = modifier
+        modifier = modifier,
     ) {
         TextButton(
             onClick = { },
-            modifier = Modifier.menuAnchor()
+            modifier = Modifier.menuAnchor(),
         ) {
             Text(
                 text = activeBudget?.name ?: "Select Budget",
@@ -60,18 +71,19 @@ fun BudgetSelectorDropdown(
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onSurface,
             )
+            Spacer(modifier = Modifier.width(Spacing.xs))
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
                 contentDescription = "Select budget",
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }
 
         ExposedDropdownMenu(
             expanded = expanded,
-            onDismissRequest = { expanded = false }
+            onDismissRequest = { expanded = false },
         ) {
             budgets.forEach { budget ->
                 DropdownMenuItem(
@@ -79,7 +91,7 @@ fun BudgetSelectorDropdown(
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
+                            verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Text(
                                 text = budget.name,
@@ -88,18 +100,21 @@ fun BudgetSelectorDropdown(
                                     FontWeight.Bold else FontWeight.Normal,
                                 modifier = Modifier.weight(1f),
                                 maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
+                                overflow = TextOverflow.Ellipsis,
                             )
-                            Spacer(modifier = Modifier.width(8.dp))
+                            Spacer(modifier = Modifier.width(Spacing.sm))
                             Surface(
                                 color = MaterialTheme.colorScheme.secondaryContainer,
-                                shape = MaterialTheme.shapes.small
+                                shape = MaterialTheme.shapes.extraSmall,
                             ) {
                                 Text(
                                     text = currencySymbol(budget.currency),
                                     style = MaterialTheme.typography.labelSmall,
                                     color = MaterialTheme.colorScheme.onSecondaryContainer,
-                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                    modifier = Modifier.padding(
+                                        horizontal = Spacing.sm,
+                                        vertical = 2.dp,
+                                    ),
                                 )
                             }
                         }
@@ -107,12 +122,19 @@ fun BudgetSelectorDropdown(
                     onClick = {
                         onBudgetSelected(budget.id)
                         expanded = false
-                    }
+                    },
+                    contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                        horizontal = Spacing.lg,
+                        vertical = Spacing.md,
+                    ),
                 )
             }
 
             if (budgets.isNotEmpty()) {
-                HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = Spacing.xs),
+                    color = MaterialTheme.colorScheme.outlineVariant,
+                )
             }
 
             DropdownMenuItem(
@@ -122,20 +144,24 @@ fun BudgetSelectorDropdown(
                             imageVector = Icons.Default.Settings,
                             contentDescription = null,
                             modifier = Modifier.size(18.dp),
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.primary,
                         )
-                        Spacer(modifier = Modifier.width(8.dp))
+                        Spacer(modifier = Modifier.width(Spacing.sm))
                         Text(
                             text = "Manage Budgets",
                             style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.primary
+                            color = MaterialTheme.colorScheme.primary,
                         )
                     }
                 },
                 onClick = {
                     expanded = false
                     onManageBudgetsClick()
-                }
+                },
+                contentPadding = androidx.compose.foundation.layout.PaddingValues(
+                    horizontal = Spacing.lg,
+                    vertical = Spacing.md,
+                ),
             )
         }
     }

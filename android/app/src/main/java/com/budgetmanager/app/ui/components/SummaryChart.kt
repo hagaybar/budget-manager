@@ -2,7 +2,6 @@ package com.budgetmanager.app.ui.components
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -26,10 +24,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.budgetmanager.app.domain.model.CategoryBreakdown
 import com.budgetmanager.app.domain.model.TransactionType
-import com.budgetmanager.app.ui.theme.ExpenseRed
-import com.budgetmanager.app.ui.theme.ExpenseRedDark
-import com.budgetmanager.app.ui.theme.IncomeGreen
-import com.budgetmanager.app.ui.theme.IncomeGreenDark
+import com.budgetmanager.app.ui.theme.LocalFinanceColors
+import com.budgetmanager.app.ui.theme.Spacing
 
 @Composable
 fun SummaryChart(
@@ -37,7 +33,7 @@ fun SummaryChart(
     modifier: Modifier = Modifier
 ) {
     val maxAmount = breakdowns.maxOfOrNull { it.total } ?: 1.0
-    val isDark = isSystemInDarkTheme()
+    val financeColors = LocalFinanceColors.current
 
     var animationTriggered by remember { mutableStateOf(false) }
     LaunchedEffect(breakdowns) {
@@ -45,8 +41,8 @@ fun SummaryChart(
     }
 
     Column(
-        modifier = modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
+        modifier = modifier.padding(Spacing.lg),
+        verticalArrangement = Arrangement.spacedBy(Spacing.md)
     ) {
         breakdowns.forEachIndexed { index, breakdown ->
             val targetProgress = (breakdown.total / maxAmount).toFloat()
@@ -58,11 +54,9 @@ fun SummaryChart(
                 ),
                 label = "progress_$index"
             )
-            val barColor = when {
-                breakdown.type == TransactionType.INCOME && isDark -> IncomeGreenDark
-                breakdown.type == TransactionType.INCOME -> IncomeGreen
-                isDark -> ExpenseRedDark
-                else -> ExpenseRed
+            val barColor = when (breakdown.type) {
+                TransactionType.INCOME -> financeColors.income
+                TransactionType.EXPENSE -> financeColors.expense
             }
 
             Column {
@@ -84,13 +78,13 @@ fun SummaryChart(
                         showSign = false
                     )
                 }
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(Spacing.xs))
                 LinearProgressIndicator(
                     progress = { animatedProgress },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(8.dp)
-                        .clip(RoundedCornerShape(4.dp)),
+                        .clip(MaterialTheme.shapes.extraSmall),
                     color = barColor,
                     trackColor = MaterialTheme.colorScheme.surfaceVariant,
                 )

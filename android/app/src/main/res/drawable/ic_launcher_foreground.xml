@@ -1,23 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Budget Manager adaptive icon foreground.
+    Design: A clean, stylized wallet with a card slot and three ascending
+    bar-chart lines — communicates "finance + growth" at a glance.
+    White on the Deep Trust Blue (#2B5EA7) background.
+    Canvas: 108x108dp with safe zone inset 18dp each side (72x72 visible area).
+-->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Background circle -->
-    <path
-        android:fillColor="#1B5E20"
-        android:pathData="M54,54m-34,0a34,34 0,1 1,68 0a34,34 0,1 1,-68 0" />
-    <!-- Inner circle -->
-    <path
-        android:fillColor="#2E7D32"
-        android:pathData="M54,54m-28,0a28,28 0,1 1,56 0a28,28 0,1 1,-56 0" />
-    <!-- Shekel symbol ₪ stylized -->
+
+    <!-- Wallet body — rounded rectangle -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M42,40 L42,64 L46,64 L46,48 C46,45 48,44 50,44 C52,44 53,45 53,48 L53,64 L57,64 L57,48 C57,45 59,44 61,44 C63,44 64,45 64,48 L64,64 L68,64 L68,40 L64,40 L64,42 C63,40.5 61.5,40 60,40 C57.5,40 55.5,41.5 55,44 C54,41.5 52,40 49,40 C47.5,40 46,40.5 45,42 L45,40 Z" />
-    <!-- Upward arrow (growth) -->
+        android:pathData="
+            M30,36
+            Q30,32 34,32
+            L74,32
+            Q78,32 78,36
+            L78,72
+            Q78,76 74,76
+            L34,76
+            Q30,76 30,72
+            Z" />
+
+    <!-- Wallet flap fold — subtle horizontal divider near top -->
     <path
-        android:fillColor="#A5D6A7"
-        android:pathData="M54,30 L60,37 L56,37 L56,40 L52,40 L52,37 L48,37 Z" />
+        android:fillColor="#2B5EA7"
+        android:fillAlpha="0.15"
+        android:pathData="M30,43 L78,43 L78,45 L30,45 Z" />
+
+    <!-- Card slot on right side — rounded notch -->
+    <path
+        android:fillColor="#2B5EA7"
+        android:fillAlpha="0.18"
+        android:pathData="
+            M65,49
+            Q65,47 67,47
+            L78,47
+            L78,59
+            L67,59
+            Q65,59 65,57
+            Z" />
+
+    <!-- Clasp dot inside card slot -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M71,53m-2.2,0a2.2,2.2 0,1 1,4.4 0a2.2,2.2 0,1 1,-4.4 0" />
+
+    <!-- Three ascending bars (mini chart) — inside wallet body -->
+    <path
+        android:fillColor="#2B5EA7"
+        android:fillAlpha="0.22"
+        android:pathData="M37,70 L37,63 L41,63 L41,70 Z" />
+    <path
+        android:fillColor="#2B5EA7"
+        android:fillAlpha="0.22"
+        android:pathData="M44,70 L44,57 L48,57 L48,70 Z" />
+    <path
+        android:fillColor="#2B5EA7"
+        android:fillAlpha="0.22"
+        android:pathData="M51,70 L51,51 L55,51 L55,70 Z" />
+
 </vector>

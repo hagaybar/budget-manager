@@ -1,5 +1,8 @@
 package com.budgetmanager.app.ui.components
 
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.EaseInOutCubic
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,87 +27,123 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.budgetmanager.app.domain.model.Transaction
 import com.budgetmanager.app.domain.model.TransactionType
+import com.budgetmanager.app.ui.theme.Elevation
+import com.budgetmanager.app.ui.theme.LocalFinanceColors
+import com.budgetmanager.app.ui.theme.Spacing
 
+/**
+ * Premium transaction card with semantic coloring and clean hierarchy.
+ *
+ * Layout:
+ * ```
+ * [ icon ]  Category  (recurring badge)        Amount
+ *           Description (if any)                Date
+ * ```
+ *
+ * Uses design system spacing tokens, FinanceColors for the type
+ * indicator icon, and surfaceContainerLow for the card background.
+ */
 @Composable
 fun TransactionCard(
     transaction: Transaction,
     modifier: Modifier = Modifier,
-    onClick: (() -> Unit)? = null
+    onClick: (() -> Unit)? = null,
 ) {
+    val financeColors = LocalFinanceColors.current
+
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .animateContentSize(
+                animationSpec = tween(
+                    durationMillis = 250,
+                    easing = EaseInOutCubic
+                )
+            ),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
         ),
+        shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 1.dp
+            defaultElevation = Elevation.low,
         ),
-        onClick = { onClick?.invoke() }
+        onClick = { onClick?.invoke() },
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(Spacing.lg),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
-            // Type indicator icon
+            // -- Type indicator icon --
+            val iconTint = when (transaction.type) {
+                TransactionType.INCOME -> financeColors.income
+                TransactionType.EXPENSE -> financeColors.expense
+            }
             Icon(
-                imageVector = if (transaction.type == TransactionType.INCOME)
-                    Icons.Default.ArrowUpward else Icons.Default.ArrowDownward,
+                imageVector = when (transaction.type) {
+                    TransactionType.INCOME -> Icons.Default.ArrowUpward
+                    TransactionType.EXPENSE -> Icons.Default.ArrowDownward
+                },
                 contentDescription = transaction.type.value,
-                tint = if (transaction.type == TransactionType.INCOME)
-                    MaterialTheme.colorScheme.secondary
-                else MaterialTheme.colorScheme.error,
-                modifier = Modifier.size(24.dp)
+                tint = iconTint,
+                modifier = Modifier.size(24.dp),
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(Spacing.md))
 
-            // Category, description, date
+            // -- Category + description --
             Column(modifier = Modifier.weight(1f)) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    horizontalArrangement = Arrangement.spacedBy(Spacing.xs),
                 ) {
                     Text(
                         text = transaction.category,
                         style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
                     if (transaction.recurringId != null) {
                         Icon(
                             imageVector = Icons.Default.Repeat,
                             contentDescription = "Recurring",
                             tint = MaterialTheme.colorScheme.outline,
-                            modifier = Modifier.size(14.dp)
+                            modifier = Modifier.size(14.dp),
                         )
                     }
                 }
+
                 if (transaction.description.isNotBlank()) {
                     Spacer(modifier = Modifier.height(2.dp))
                     Text(
                         text = transaction.description,
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        maxLines = 1
+                        maxLines = 1,
                     )
                 }
+            }
+
+            Spacer(modifier = Modifier.width(Spacing.sm))
+
+            // -- Amount + date --
+            Column(
+                horizontalAlignment = Alignment.End,
+            ) {
+                AmountText(
+                    amount = transaction.amount,
+                    type = transaction.type,
+                    size = AmountSize.Small,
+                )
+
                 Spacer(modifier = Modifier.height(2.dp))
+
                 Text(
                     text = transaction.date,
                     style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.outline
+                    color = MaterialTheme.colorScheme.outline,
                 )
             }
-
-            Spacer(modifier = Modifier.width(8.dp))
-
-            // Amount
-            AmountText(
-                amount = transaction.amount,
-                type = transaction.type,
-                style = MaterialTheme.typography.titleMedium
-            )
         }
     }
 }

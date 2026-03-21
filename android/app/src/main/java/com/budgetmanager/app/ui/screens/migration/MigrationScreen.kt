@@ -9,22 +9,23 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,6 +41,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.budgetmanager.app.ui.screens.budget.commonCurrencies
+import com.budgetmanager.app.ui.theme.CornerRadius
+import com.budgetmanager.app.ui.theme.Spacing
 import com.budgetmanager.app.ui.viewmodel.MigrationViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,16 +65,16 @@ fun MigrationScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
-                .padding(24.dp),
+                .padding(horizontal = Spacing.xl, vertical = Spacing.xl),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(Spacing.xxxl))
 
             if (uiState.migrationComplete) {
                 // Success state
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(Spacing.lg)
                 ) {
                     Icon(
                         imageVector = Icons.Default.CheckCircle,
@@ -94,17 +97,26 @@ fun MigrationScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
-                    Spacer(modifier = Modifier.height(24.dp))
+                    Spacer(modifier = Modifier.height(Spacing.xl))
 
                     Button(
                         onClick = onMigrationComplete,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(CornerRadius.medium),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        )
                     ) {
-                        Text("Continue")
+                        Text(
+                            text = "Continue",
+                            style = MaterialTheme.typography.labelLarge,
+                            modifier = Modifier.padding(vertical = Spacing.xs)
+                        )
                     }
                 }
             } else {
-                // Header
+                // Header icon
                 Icon(
                     imageVector = Icons.Default.AccountBalance,
                     contentDescription = null,
@@ -112,7 +124,7 @@ fun MigrationScreen(
                     tint = MaterialTheme.colorScheme.primary
                 )
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Spacing.lg))
 
                 Text(
                     text = "Welcome to Multi-Budget!",
@@ -121,7 +133,7 @@ fun MigrationScreen(
                     textAlign = TextAlign.Center
                 )
 
-                Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(Spacing.md))
 
                 Text(
                     text = "Your existing transactions will be imported into your first named budget.",
@@ -130,12 +142,12 @@ fun MigrationScreen(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(Spacing.xxl))
 
                 // Budget form (inline, not dialog)
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    verticalArrangement = Arrangement.spacedBy(Spacing.lg)
                 ) {
                     // Name
                     OutlinedTextField(
@@ -144,7 +156,12 @@ fun MigrationScreen(
                         label = { Text("Budget Name") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
-                        isError = uiState.error == "Budget name is required"
+                        isError = uiState.error == "Budget name is required",
+                        shape = RoundedCornerShape(CornerRadius.small),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
+                        )
                     )
 
                     // Description
@@ -154,7 +171,12 @@ fun MigrationScreen(
                         label = { Text("Description (optional)") },
                         minLines = 2,
                         maxLines = 4,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(CornerRadius.small),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
+                        )
                     )
 
                     // Currency
@@ -170,7 +192,12 @@ fun MigrationScreen(
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(currencyExpanded) },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .menuAnchor()
+                                .menuAnchor(),
+                            shape = RoundedCornerShape(CornerRadius.small),
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                                unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
+                            )
                         )
                         ExposedDropdownMenu(
                             expanded = currencyExpanded,
@@ -195,13 +222,18 @@ fun MigrationScreen(
                         label = { Text("Monthly Target (optional)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                         singleLine = true,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(CornerRadius.small),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
+                        )
                     )
                 }
 
                 // Error message
                 uiState.error?.let { error ->
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(Spacing.sm))
                     Text(
                         text = error,
                         style = MaterialTheme.typography.bodySmall,
@@ -209,13 +241,18 @@ fun MigrationScreen(
                     )
                 }
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(Spacing.xxl))
 
-                // Import button
+                // Import button — prominent FilledButton
                 Button(
                     onClick = { viewModel.performMigration() },
                     modifier = Modifier.fillMaxWidth(),
-                    enabled = !uiState.isMigrating
+                    enabled = !uiState.isMigrating,
+                    shape = RoundedCornerShape(CornerRadius.medium),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary
+                    )
                 ) {
                     if (uiState.isMigrating) {
                         CircularProgressIndicator(
@@ -223,14 +260,21 @@ fun MigrationScreen(
                             strokeWidth = 2.dp,
                             color = MaterialTheme.colorScheme.onPrimary
                         )
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text("Importing...")
+                        Spacer(modifier = Modifier.height(Spacing.sm))
+                        Text(
+                            text = "Importing...",
+                            style = MaterialTheme.typography.labelLarge
+                        )
                     } else {
-                        Text("Import & Get Started")
+                        Text(
+                            text = "Import & Get Started",
+                            style = MaterialTheme.typography.labelLarge,
+                            modifier = Modifier.padding(vertical = Spacing.xs)
+                        )
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Spacing.lg))
             }
         }
     }

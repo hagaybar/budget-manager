@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ReceiptLong
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,45 +21,80 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.budgetmanager.app.ui.theme.Spacing
 
+/**
+ * Polished empty state with icon, title, description, and optional action button.
+ *
+ * Uses design system spacing and typography tokens throughout.
+ *
+ * @param title       primary message shown below the icon
+ * @param modifier    outer modifier for the containing Box
+ * @param icon        Material icon displayed at top (defaults to ReceiptLong)
+ * @param description secondary explanatory text (optional)
+ * @param actionLabel label for the optional action button
+ * @param onAction    callback when the action button is tapped
+ */
 @Composable
 fun EmptyStateView(
-    message: String,
+    title: String,
     modifier: Modifier = Modifier,
     icon: ImageVector = Icons.Outlined.ReceiptLong,
-    subtitle: String? = null
+    description: String? = null,
+    actionLabel: String? = null,
+    onAction: (() -> Unit)? = null,
 ) {
     Box(
         modifier = modifier
             .fillMaxSize()
-            .padding(32.dp),
-        contentAlignment = Alignment.Center
+            .padding(Spacing.xxl),
+        contentAlignment = Alignment.Center,
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Icon(
                 imageVector = icon,
                 contentDescription = null,
                 modifier = Modifier.size(72.dp),
-                tint = MaterialTheme.colorScheme.outlineVariant
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
-            Spacer(modifier = Modifier.height(16.dp))
+
+            Spacer(modifier = Modifier.height(Spacing.lg))
+
             Text(
-                text = message,
+                text = title,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
-            if (subtitle != null) {
-                Spacer(modifier = Modifier.height(8.dp))
+
+            if (description != null) {
+                Spacer(modifier = Modifier.height(Spacing.sm))
                 Text(
-                    text = subtitle,
+                    text = description,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.outline,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
                 )
+            }
+
+            if (actionLabel != null && onAction != null) {
+                Spacer(modifier = Modifier.height(Spacing.xl))
+                Button(
+                    onClick = onAction,
+                    shape = MaterialTheme.shapes.small,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary,
+                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                    ),
+                ) {
+                    Text(
+                        text = actionLabel,
+                        style = MaterialTheme.typography.labelLarge,
+                    )
+                }
             }
         }
     }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base app theme — dark variant -->
+    <style name="Theme.BudgetManager" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@color/surface_dark</item>
+        <item name="android:navigationBarColor">@color/surface_dark</item>
+        <item name="android:windowBackground">@color/background_dark</item>
+    </style>
+
+    <!--
+        Splash screen theme — dark variant.
+        Uses darker primary container so the splash feels native to dark mode.
+    -->
+    <style name="Theme.BudgetManager.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/primary_dark</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.BudgetManager</item>
+    </style>
+
+</resources>

@@ -10,31 +10,39 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.outlined.Repeat
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -45,8 +53,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.budgetmanager.app.domain.model.Frequency
 import com.budgetmanager.app.domain.model.RecurringTransaction
@@ -54,7 +62,12 @@ import com.budgetmanager.app.domain.model.TransactionType
 import com.budgetmanager.app.domain.util.formatNextOccurrence
 import com.budgetmanager.app.domain.util.getNextOccurrence
 import com.budgetmanager.app.ui.components.AmountText
+import com.budgetmanager.app.ui.components.AmountSize
 import com.budgetmanager.app.ui.components.EmptyStateView
+import com.budgetmanager.app.ui.components.LoadingState
+import com.budgetmanager.app.ui.theme.CornerRadius
+import com.budgetmanager.app.ui.theme.LocalFinanceColors
+import com.budgetmanager.app.ui.theme.Spacing
 import com.budgetmanager.app.ui.viewmodel.RecurringViewModel
 import java.time.LocalDate
 
@@ -65,80 +78,164 @@ fun RecurringScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     var viewingRecurring by remember { mutableStateOf<RecurringTransaction?>(null) }
+    val financeColors = LocalFinanceColors.current
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(onClick = { viewModel.showAddDialog() }) {
+            FloatingActionButton(
+                onClick = { viewModel.showAddDialog() },
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                shape = RoundedCornerShape(CornerRadius.extraLarge)
+            ) {
                 Icon(Icons.Default.Add, contentDescription = "Add Recurring")
             }
         }
     ) { padding ->
         when {
             uiState.isLoading -> {
-                Box(
-                    modifier = Modifier.fillMaxSize().padding(padding),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
+                LoadingState(
+                    modifier = Modifier.padding(padding),
+                    label = "Loading recurring transactions..."
+                )
             }
             uiState.recurringTransactions.isEmpty() && !uiState.showAddDialog -> {
-                EmptyStateView(message = "No recurring transactions.\nTap + to add one.")
+                EmptyStateView(
+                    icon = Icons.Outlined.Repeat,
+                    title = "No recurring transactions",
+                    description = "Tap + to add your first recurring transaction."
+                )
             }
             else -> {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(padding)
-                        .padding(horizontal = 16.dp)
+                        .padding(horizontal = Spacing.lg),
+                    verticalArrangement = Arrangement.spacedBy(Spacing.sm)
                 ) {
+                    item { Spacer(modifier = Modifier.height(Spacing.xs)) }
                     items(uiState.recurringTransactions, key = { it.id }) { recurring ->
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(vertical = 4.dp)
-                                .clickable { viewingRecurring = recurring }
+                                .clickable { viewingRecurring = recurring },
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceContainerLow
+                            ),
+                            shape = RoundedCornerShape(CornerRadius.medium)
                         ) {
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(16.dp),
+                                    .padding(Spacing.lg),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Column(modifier = Modifier.weight(1f)) {
-                                    Text(recurring.category, style = MaterialTheme.typography.titleMedium)
-                                    Spacer(modifier = Modifier.height(4.dp))
+                                    // Category title
                                     Text(
-                                        "${recurring.frequency.value} - ${recurring.type.value}",
-                                        style = MaterialTheme.typography.bodySmall
+                                        text = recurring.category,
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.SemiBold
                                     )
-                                    if (recurring.description.isNotBlank()) {
-                                        Text(recurring.description, style = MaterialTheme.typography.bodySmall)
+
+                                    Spacer(modifier = Modifier.height(Spacing.xs))
+
+                                    // Frequency badge as styled chip
+                                    Row(
+                                        horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Surface(
+                                            color = MaterialTheme.colorScheme.secondaryContainer,
+                                            shape = MaterialTheme.shapes.extraSmall
+                                        ) {
+                                            Text(
+                                                text = recurring.frequency.value.replaceFirstChar { it.uppercase() },
+                                                style = MaterialTheme.typography.labelSmall,
+                                                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                                                modifier = Modifier.padding(
+                                                    horizontal = Spacing.sm,
+                                                    vertical = Spacing.xs
+                                                )
+                                            )
+                                        }
+
+                                        // Type badge
+                                        Surface(
+                                            color = if (recurring.type == TransactionType.INCOME)
+                                                financeColors.income.copy(alpha = 0.12f)
+                                            else
+                                                financeColors.expense.copy(alpha = 0.12f),
+                                            shape = MaterialTheme.shapes.extraSmall
+                                        ) {
+                                            Text(
+                                                text = recurring.type.value.replaceFirstChar { it.uppercase() },
+                                                style = MaterialTheme.typography.labelSmall,
+                                                color = if (recurring.type == TransactionType.INCOME)
+                                                    financeColors.income
+                                                else
+                                                    financeColors.expense,
+                                                modifier = Modifier.padding(
+                                                    horizontal = Spacing.sm,
+                                                    vertical = Spacing.xs
+                                                )
+                                            )
+                                        }
                                     }
-                                    AmountText(amount = recurring.amount, type = recurring.type)
-                                    Spacer(modifier = Modifier.height(4.dp))
+
+                                    if (recurring.description.isNotBlank()) {
+                                        Spacer(modifier = Modifier.height(Spacing.xs))
+                                        Text(
+                                            text = recurring.description,
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+
+                                    Spacer(modifier = Modifier.height(Spacing.sm))
+
+                                    // Amount
+                                    AmountText(
+                                        amount = recurring.amount,
+                                        type = recurring.type,
+                                        size = AmountSize.Small
+                                    )
+
+                                    Spacer(modifier = Modifier.height(Spacing.xs))
+
+                                    // Next occurrence
                                     val nextDate = getNextOccurrence(recurring)
                                     if (nextDate != null) {
                                         Text(
                                             text = "Next: ${formatNextOccurrence(nextDate)}",
-                                            style = MaterialTheme.typography.bodySmall,
+                                            style = MaterialTheme.typography.labelSmall,
                                             color = MaterialTheme.colorScheme.primary
                                         )
                                     } else {
                                         Text(
                                             text = "Paused",
-                                            style = MaterialTheme.typography.bodySmall,
+                                            style = MaterialTheme.typography.labelSmall,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
                                     }
                                 }
+
+                                // Active/inactive toggle
                                 Switch(
                                     checked = recurring.isActive,
-                                    onCheckedChange = { viewModel.toggleActive(recurring.id) }
+                                    onCheckedChange = { viewModel.toggleActive(recurring.id) },
+                                    colors = SwitchDefaults.colors(
+                                        checkedThumbColor = MaterialTheme.colorScheme.primary,
+                                        checkedTrackColor = MaterialTheme.colorScheme.primaryContainer,
+                                        uncheckedThumbColor = MaterialTheme.colorScheme.outline,
+                                        uncheckedTrackColor = MaterialTheme.colorScheme.surfaceVariant
+                                    )
                                 )
                             }
                         }
                     }
+                    item { Spacer(modifier = Modifier.height(Spacing.sm)) }
                 }
             }
         }
@@ -192,25 +289,38 @@ fun ViewRecurringDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
+        shape = RoundedCornerShape(CornerRadius.large),
         title = {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(recurring.category, modifier = Modifier.weight(1f))
+                Text(
+                    text = recurring.category,
+                    modifier = Modifier.weight(1f),
+                    style = MaterialTheme.typography.titleLarge
+                )
                 IconButton(onClick = onEdit) {
-                    Icon(Icons.Default.Edit, contentDescription = "Edit", tint = MaterialTheme.colorScheme.primary)
+                    Icon(
+                        Icons.Default.Edit,
+                        contentDescription = "Edit",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
                 }
                 IconButton(onClick = { showDeleteConfirm = true }) {
-                    Icon(Icons.Default.Delete, contentDescription = "Delete", tint = MaterialTheme.colorScheme.error)
+                    Icon(
+                        Icons.Default.Delete,
+                        contentDescription = "Delete",
+                        tint = MaterialTheme.colorScheme.error
+                    )
                 }
             }
         },
         text = {
-            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(Spacing.sm)) {
                 DetailRow("Type", recurring.type.value.replaceFirstChar { it.uppercase() })
-                DetailRow("Amount", "₪ ${"%.2f".format(recurring.amount)}")
+                DetailRow("Amount", "\u20AA ${"%.2f".format(recurring.amount)}")
                 DetailRow("Frequency", recurring.frequency.value.replaceFirstChar { it.uppercase() })
                 if (recurring.frequency == Frequency.MONTHLY && recurring.dayOfMonth != null) {
                     DetailRow("Day of Month", recurring.dayOfMonth.toString())
@@ -240,6 +350,7 @@ fun ViewRecurringDialog(
     if (showDeleteConfirm) {
         AlertDialog(
             onDismissRequest = { showDeleteConfirm = false },
+            shape = RoundedCornerShape(CornerRadius.large),
             title = { Text("Delete Recurring Transaction") },
             text = { Text("Are you sure you want to delete \"${recurring.category}\"? This cannot be undone.") },
             confirmButton = {
@@ -262,11 +373,21 @@ fun ViewRecurringDialog(
 @Composable
 fun DetailRow(label: String, value: String) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = Spacing.xs),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Text(label, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Text(value, style = MaterialTheme.typography.bodyMedium)
+        Text(
+            text = label,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Text(
+            text = value,
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.Medium
+        )
     }
 }
 
@@ -288,27 +409,80 @@ fun RecurringFormDialog(
     var amountError by remember { mutableStateOf(false) }
     var categoryError by remember { mutableStateOf(false) }
 
+    val financeColors = LocalFinanceColors.current
     val dayOfWeekNames = listOf("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(title) },
+        shape = RoundedCornerShape(CornerRadius.large),
+        title = {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge
+            )
+        },
         text = {
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                verticalArrangement = Arrangement.spacedBy(Spacing.lg)
             ) {
-                // Type toggle
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                // Type toggle with FinanceColors
+                Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
                     FilterChip(
                         selected = type == TransactionType.INCOME,
                         onClick = { type = TransactionType.INCOME },
-                        label = { Text("Income") }
+                        label = { Text("Income") },
+                        leadingIcon = if (type == TransactionType.INCOME) {
+                            {
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                                )
+                            }
+                        } else null,
+                        shape = MaterialTheme.shapes.small,
+                        colors = FilterChipDefaults.filterChipColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                            labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            selectedContainerColor = financeColors.income.copy(alpha = 0.12f),
+                            selectedLabelColor = financeColors.income,
+                            selectedLeadingIconColor = financeColors.income
+                        ),
+                        border = FilterChipDefaults.filterChipBorder(
+                            borderColor = MaterialTheme.colorScheme.outlineVariant,
+                            selectedBorderColor = financeColors.income.copy(alpha = 0.5f),
+                            enabled = true,
+                            selected = type == TransactionType.INCOME
+                        )
                     )
                     FilterChip(
                         selected = type == TransactionType.EXPENSE,
                         onClick = { type = TransactionType.EXPENSE },
-                        label = { Text("Expense") }
+                        label = { Text("Expense") },
+                        leadingIcon = if (type == TransactionType.EXPENSE) {
+                            {
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                                )
+                            }
+                        } else null,
+                        shape = MaterialTheme.shapes.small,
+                        colors = FilterChipDefaults.filterChipColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                            labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            selectedContainerColor = financeColors.expense.copy(alpha = 0.12f),
+                            selectedLabelColor = financeColors.expense,
+                            selectedLeadingIconColor = financeColors.expense
+                        ),
+                        border = FilterChipDefaults.filterChipBorder(
+                            borderColor = MaterialTheme.colorScheme.outlineVariant,
+                            selectedBorderColor = financeColors.expense.copy(alpha = 0.5f),
+                            enabled = true,
+                            selected = type == TransactionType.EXPENSE
+                        )
                     )
                 }
 
@@ -316,11 +490,17 @@ fun RecurringFormDialog(
                 OutlinedTextField(
                     value = amountText,
                     onValueChange = { amountText = it; amountError = false },
-                    label = { Text("Amount (₪)") },
+                    label = { Text("Amount (\u20AA)") },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                     isError = amountError,
                     supportingText = if (amountError) {{ Text("Enter a valid amount > 0") }} else null,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    shape = RoundedCornerShape(CornerRadius.small),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = MaterialTheme.colorScheme.primary,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
+                    )
                 )
 
                 // Category
@@ -330,7 +510,13 @@ fun RecurringFormDialog(
                     label = { Text("Category") },
                     isError = categoryError,
                     supportingText = if (categoryError) {{ Text("Category is required") }} else null,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    shape = RoundedCornerShape(CornerRadius.small),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = MaterialTheme.colorScheme.primary,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
+                    )
                 )
 
                 // Description
@@ -338,20 +524,72 @@ fun RecurringFormDialog(
                     value = description,
                     onValueChange = { description = it },
                     label = { Text("Description (optional)") },
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
+                    singleLine = true,
+                    shape = RoundedCornerShape(CornerRadius.small),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = MaterialTheme.colorScheme.primary,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
+                    )
                 )
 
                 // Frequency toggle
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
                     FilterChip(
                         selected = frequency == Frequency.MONTHLY,
                         onClick = { frequency = Frequency.MONTHLY },
-                        label = { Text("Monthly") }
+                        label = { Text("Monthly") },
+                        leadingIcon = if (frequency == Frequency.MONTHLY) {
+                            {
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                                )
+                            }
+                        } else null,
+                        shape = MaterialTheme.shapes.small,
+                        colors = FilterChipDefaults.filterChipColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                            labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                            selectedLabelColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                            selectedLeadingIconColor = MaterialTheme.colorScheme.onSecondaryContainer
+                        ),
+                        border = FilterChipDefaults.filterChipBorder(
+                            borderColor = MaterialTheme.colorScheme.outlineVariant,
+                            selectedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
+                            enabled = true,
+                            selected = frequency == Frequency.MONTHLY
+                        )
                     )
                     FilterChip(
                         selected = frequency == Frequency.WEEKLY,
                         onClick = { frequency = Frequency.WEEKLY },
-                        label = { Text("Weekly") }
+                        label = { Text("Weekly") },
+                        leadingIcon = if (frequency == Frequency.WEEKLY) {
+                            {
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(FilterChipDefaults.IconSize)
+                                )
+                            }
+                        } else null,
+                        shape = MaterialTheme.shapes.small,
+                        colors = FilterChipDefaults.filterChipColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+                            labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                            selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+                            selectedLabelColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                            selectedLeadingIconColor = MaterialTheme.colorScheme.onSecondaryContainer
+                        ),
+                        border = FilterChipDefaults.filterChipBorder(
+                            borderColor = MaterialTheme.colorScheme.outlineVariant,
+                            selectedBorderColor = MaterialTheme.colorScheme.secondaryContainer,
+                            enabled = true,
+                            selected = frequency == Frequency.WEEKLY
+                        )
                     )
                 }
 
@@ -362,7 +600,13 @@ fun RecurringFormDialog(
                         onValueChange = { dayOfMonth = it },
                         label = { Text("Day of month (1-31)") },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        shape = RoundedCornerShape(CornerRadius.small),
+                        colors = OutlinedTextFieldDefaults.colors(
+                            focusedBorderColor = MaterialTheme.colorScheme.primary,
+                            unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
+                        )
                     )
                 } else {
                     var expanded by remember { mutableStateOf(false) }
@@ -377,7 +621,14 @@ fun RecurringFormDialog(
                             readOnly = true,
                             label = { Text("Day of week") },
                             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
-                            modifier = Modifier.fillMaxWidth().menuAnchor()
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .menuAnchor(),
+                            shape = RoundedCornerShape(CornerRadius.small),
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedBorderColor = MaterialTheme.colorScheme.primary,
+                                unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
+                            )
                         )
                         ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                             dayOfWeekNames.forEachIndexed { index, name ->

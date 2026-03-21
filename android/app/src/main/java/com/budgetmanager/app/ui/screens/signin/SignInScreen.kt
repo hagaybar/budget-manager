@@ -6,6 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,16 +39,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.budgetmanager.app.R
 import com.budgetmanager.app.auth.AuthState
+import com.budgetmanager.app.ui.theme.CornerRadius
+import com.budgetmanager.app.ui.theme.Spacing
 import com.budgetmanager.app.ui.viewmodel.AuthViewModel
 
 @Composable
@@ -59,6 +60,8 @@ fun SignInScreen(
     val signInError by viewModel.signInError.collectAsState()
     val isSigningIn by viewModel.isSigningIn.collectAsState()
     val context = LocalContext.current
+
+    val colorScheme = MaterialTheme.colorScheme
 
     var visible by remember { mutableStateOf(false) }
     val alpha by animateFloatAsState(
@@ -75,33 +78,36 @@ fun SignInScreen(
         }
     }
 
+    // Use primaryContainer as gradient anchor — it's dark in dark mode and light
+    // in light mode, so onPrimaryContainer always provides good contrast.
+    val gradientForeground = colorScheme.onPrimaryContainer
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
                     colors = listOf(
-                        MaterialTheme.colorScheme.primary,
-                        MaterialTheme.colorScheme.primaryContainer,
-                        MaterialTheme.colorScheme.surface
+                        colorScheme.primaryContainer,
+                        colorScheme.surface,
                     )
                 )
             )
     ) {
-        // Decorative circles
+        // Decorative circles using gradient foreground color
         Canvas(modifier = Modifier.fillMaxSize()) {
             drawCircle(
-                color = Color.White.copy(alpha = 0.05f),
+                color = gradientForeground.copy(alpha = 0.06f),
                 radius = 200f,
                 center = Offset(size.width * 0.8f, size.height * 0.15f)
             )
             drawCircle(
-                color = Color.White.copy(alpha = 0.08f),
+                color = gradientForeground.copy(alpha = 0.09f),
                 radius = 150f,
                 center = Offset(size.width * 0.15f, size.height * 0.3f)
             )
             drawCircle(
-                color = Color.White.copy(alpha = 0.04f),
+                color = gradientForeground.copy(alpha = 0.05f),
                 radius = 300f,
                 center = Offset(size.width * 0.5f, size.height * 0.85f)
             )
@@ -110,20 +116,20 @@ fun SignInScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(32.dp)
+                .padding(horizontal = Spacing.xxl, vertical = Spacing.xxl)
                 .alpha(alpha),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             Spacer(modifier = Modifier.weight(0.3f))
 
-            // Icon
+            // App icon
             Box(
                 modifier = Modifier
                     .size(100.dp)
                     .background(
-                        Color.White.copy(alpha = 0.2f),
-                        RoundedCornerShape(24.dp)
+                        gradientForeground.copy(alpha = 0.15f),
+                        RoundedCornerShape(CornerRadius.extraLarge),
                     ),
                 contentAlignment = Alignment.Center
             ) {
@@ -131,37 +137,40 @@ fun SignInScreen(
                     imageVector = Icons.Default.AccountBalance,
                     contentDescription = null,
                     modifier = Modifier.size(56.dp),
-                    tint = Color.White
+                    tint = gradientForeground,
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(Spacing.xl))
 
-            // Title
+            // App title
             Text(
                 text = stringResource(R.string.signin_app_title),
-                style = MaterialTheme.typography.headlineLarge.copy(
+                style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.Bold,
-                    fontSize = 32.sp
                 ),
-                color = Color.White
+                color = gradientForeground,
             )
-            Spacer(modifier = Modifier.height(8.dp))
+
+            Spacer(modifier = Modifier.height(Spacing.sm))
+
+            // Subtitle
             Text(
                 text = stringResource(R.string.signin_app_subtitle),
                 style = MaterialTheme.typography.bodyLarge,
-                color = Color.White.copy(alpha = 0.85f),
+                color = gradientForeground.copy(alpha = 0.85f),
                 textAlign = TextAlign.Center,
-                lineHeight = 24.sp
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(Spacing.md))
 
             // Currency badge
             Text(
                 text = stringResource(R.string.signin_currency_badge),
-                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold),
-                color = Color.White.copy(alpha = 0.7f)
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.SemiBold,
+                ),
+                color = gradientForeground.copy(alpha = 0.7f),
             )
 
             Spacer(modifier = Modifier.weight(0.3f))
@@ -176,29 +185,30 @@ fun SignInScreen(
                     Text(
                         text = error,
                         style = MaterialTheme.typography.bodyMedium,
-                        color = Color(0xFFFFCDD2),
+                        color = colorScheme.onErrorContainer,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(
-                                Color.Black.copy(alpha = 0.2f),
-                                RoundedCornerShape(8.dp)
+                                colorScheme.errorContainer.copy(alpha = 0.9f),
+                                RoundedCornerShape(CornerRadius.small),
                             )
-                            .padding(12.dp)
+                            .padding(Spacing.md),
                     )
                 }
             }
 
             if (signInError != null) {
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(Spacing.lg))
             }
 
             // Buttons
             when (authState) {
                 is AuthState.Loading -> {
-                    CircularProgressIndicator(color = Color.White)
+                    CircularProgressIndicator(color = gradientForeground)
                 }
                 else -> {
+                    // Google Sign-In button
                     Button(
                         onClick = {
                             viewModel.clearError()
@@ -208,50 +218,55 @@ fun SignInScreen(
                             .fillMaxWidth()
                             .height(52.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.White,
-                            contentColor = MaterialTheme.colorScheme.primary
+                            containerColor = gradientForeground,
+                            contentColor = colorScheme.primaryContainer,
                         ),
-                        shape = RoundedCornerShape(12.dp),
-                        enabled = !isSigningIn
+                        shape = RoundedCornerShape(CornerRadius.medium),
+                        enabled = !isSigningIn,
                     ) {
                         if (isSigningIn) {
                             CircularProgressIndicator(
                                 modifier = Modifier.size(24.dp),
-                                color = MaterialTheme.colorScheme.primary,
-                                strokeWidth = 2.dp
+                                color = colorScheme.primaryContainer,
+                                strokeWidth = 2.dp,
                             )
                         } else {
                             Text(
                                 stringResource(R.string.signin_google_button),
                                 style = MaterialTheme.typography.titleMedium.copy(
-                                    fontWeight = FontWeight.SemiBold
-                                )
+                                    fontWeight = FontWeight.SemiBold,
+                                ),
                             )
                         }
                     }
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(Spacing.md))
 
+                    // Guest button
                     OutlinedButton(
                         onClick = { viewModel.continueAsGuest() },
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(52.dp),
                         colors = ButtonDefaults.outlinedButtonColors(
-                            contentColor = Color.White
+                            contentColor = gradientForeground,
                         ),
-                        shape = RoundedCornerShape(12.dp),
-                        enabled = !isSigningIn
+                        border = BorderStroke(
+                            width = 1.dp,
+                            color = gradientForeground.copy(alpha = 0.5f),
+                        ),
+                        shape = RoundedCornerShape(CornerRadius.medium),
+                        enabled = !isSigningIn,
                     ) {
                         Text(
                             stringResource(R.string.signin_guest_button),
-                            style = MaterialTheme.typography.titleMedium
+                            style = MaterialTheme.typography.titleMedium,
                         )
                     }
                 }
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(Spacing.xxl))
         }
     }
 }

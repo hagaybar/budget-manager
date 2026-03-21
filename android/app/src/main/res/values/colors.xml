@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Deep Trust Blue primary palette for XML-based theming (splash screen, etc.) -->
+    <color name="primary">#FF2B5EA7</color>
+    <color name="primary_dark">#FF0E4483</color>
+    <color name="primary_container">#FFD4E3FF</color>
+
+    <!-- Surfaces -->
+    <color name="surface_light">#FFFAFCFF</color>
+    <color name="surface_dark">#FF1A1C20</color>
+    <color name="background_light">#FFFAFCFF</color>
+    <color name="background_dark">#FF111418</color>
+
+    <!-- Semantic finance colors for potential XML usage -->
+    <color name="income_green">#FF2E7D32</color>
+    <color name="expense_red">#FFC62828</color>
+    <color name="warning_amber">#FFF9A825</color>
+</resources>

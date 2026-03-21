@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.BudgetManager" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <!-- Base app theme (applied after splash completes) -->
+    <style name="Theme.BudgetManager" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/surface_light</item>
+        <item name="android:navigationBarColor">@color/surface_light</item>
+        <item name="android:windowBackground">@color/background_light</item>
+    </style>
+
+    <!--
+        Splash screen theme — applied via AndroidManifest on MainActivity.
+        Uses AndroidX SplashScreen compat library attributes so it works on API 24+.
+        On Android 12+ the system splash screen is used; on older versions
+        the compat library draws a similar splash before the Activity content.
+    -->
+    <style name="Theme.BudgetManager.Splash" parent="Theme.SplashScreen">
+        <!-- Background: Deep Trust Blue — matches the app icon background -->
+        <item name="windowSplashScreenBackground">@color/primary</item>
+        <!-- Animated icon: the adaptive launcher icon -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <!-- Post-splash theme that the Activity transitions into -->
+        <item name="postSplashScreenTheme">@style/Theme.BudgetManager</item>
+    </style>
+
 </resources>

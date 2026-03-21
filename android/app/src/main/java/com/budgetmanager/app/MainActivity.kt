@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.budgetmanager.app.ui.theme.BudgetManagerTheme
 import com.budgetmanager.app.ui.navigation.BudgetNavHost
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,6 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Install the splash screen — must be called before super.onCreate()
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContent {
             BudgetManagerTheme {

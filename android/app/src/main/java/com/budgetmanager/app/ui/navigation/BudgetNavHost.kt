@@ -1,5 +1,8 @@
 package com.budgetmanager.app.ui.navigation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -34,6 +37,8 @@ import com.budgetmanager.app.ui.screens.signin.SignInScreen
 import com.budgetmanager.app.ui.viewmodel.AuthViewModel
 import com.budgetmanager.app.ui.viewmodel.BudgetViewModel
 import com.budgetmanager.app.ui.viewmodel.MigrationViewModel
+
+private const val NAV_ANIM_DURATION = 200
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -105,7 +110,11 @@ fun BudgetNavHost() {
             NavHost(
                 navController = navController,
                 startDestination = Screen.Transactions.route,
-                modifier = Modifier.padding(innerPadding)
+                modifier = Modifier.padding(innerPadding),
+                enterTransition = { fadeIn(animationSpec = tween(NAV_ANIM_DURATION)) },
+                exitTransition = { fadeOut(animationSpec = tween(NAV_ANIM_DURATION)) },
+                popEnterTransition = { fadeIn(animationSpec = tween(NAV_ANIM_DURATION)) },
+                popExitTransition = { fadeOut(animationSpec = tween(NAV_ANIM_DURATION)) },
             ) {
                 composable(Screen.Transactions.route) {
                     TransactionListScreen(
