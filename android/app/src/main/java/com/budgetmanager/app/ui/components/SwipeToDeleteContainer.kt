@@ -85,6 +85,12 @@ fun SwipeToDeleteBackground(
         label = "swipe_icon_scale",
     )
 
+    val iconAlpha by animateFloatAsState(
+        targetValue = if (targetValue == SwipeToDismissBoxValue.EndToStart) 1f else 0f,
+        animationSpec = tween(durationMillis = 200),
+        label = "swipe_icon_alpha",
+    )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -93,11 +99,13 @@ fun SwipeToDeleteBackground(
             .padding(horizontal = Spacing.xl),
         contentAlignment = Alignment.CenterEnd,
     ) {
-        Icon(
-            imageVector = Icons.Default.Delete,
-            contentDescription = "Delete",
-            tint = Color.White,
-            modifier = Modifier.scale(iconScale),
-        )
+        if (iconAlpha > 0f) {
+            Icon(
+                imageVector = Icons.Default.Delete,
+                contentDescription = "Delete",
+                tint = Color.White.copy(alpha = iconAlpha),
+                modifier = Modifier.scale(iconScale),
+            )
+        }
     }
 }

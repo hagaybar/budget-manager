@@ -14,18 +14,24 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.BarChart
+import androidx.compose.material.icons.rounded.ArrowDownward
+import androidx.compose.material.icons.rounded.ArrowUpward
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,24 +40,25 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.budgetmanager.app.domain.model.CategoryBreakdown
+import com.budgetmanager.app.domain.model.MonthlySummary
 import com.budgetmanager.app.domain.model.TransactionType
-import com.budgetmanager.app.ui.components.AmountSize
-import com.budgetmanager.app.ui.components.AmountText
 import com.budgetmanager.app.ui.components.EmptyStateView
 import com.budgetmanager.app.ui.components.LoadingState
 import com.budgetmanager.app.ui.theme.CornerRadius
 import com.budgetmanager.app.ui.theme.LocalFinanceColors
 import com.budgetmanager.app.ui.theme.Spacing
 import com.budgetmanager.app.ui.viewmodel.MonthlySummaryViewModel
+import java.text.NumberFormat
 import java.time.Month
 import java.time.format.TextStyle
 import java.util.Locale
 
-private const val SUMMARY_ANIM_DURATION = 250
+private const val SUMMARY_ANIM_DURATION = 300
 
 @Composable
 fun MonthlySummaryScreen(
@@ -64,51 +71,20 @@ fun MonthlySummaryScreen(
             .fillMaxSize()
             .padding(horizontal = Spacing.lg)
     ) {
-        // ── Month navigation header ──
-        Spacer(modifier = Modifier.height(Spacing.lg))
+        // ── 1. MONTH HERO SECTION ──
+        Spacer(modifier = Modifier.height(Spacing.xl))
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            FilledIconButton(
-                onClick = { viewModel.previousMonth() },
-                colors = IconButtonDefaults.filledIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    contentColor = MaterialTheme.colorScheme.onSurface,
-                ),
-            ) {
-                Icon(
-                    Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                    contentDescription = "Previous month",
-                )
-            }
+        MonthHeroSection(
+            year = uiState.year,
+            month = uiState.month,
+            netBalance = uiState.summary?.netBalance,
+            onPrevious = { viewModel.previousMonth() },
+            onNext = { viewModel.nextMonth() },
+        )
 
-            Text(
-                text = "${Month.of(uiState.month).getDisplayName(TextStyle.FULL, Locale.getDefault())} ${uiState.year}",
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
+        Spacer(modifier = Modifier.height(Spacing.xl))
 
-            FilledIconButton(
-                onClick = { viewModel.nextMonth() },
-                colors = IconButtonDefaults.filledIconButtonColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    contentColor = MaterialTheme.colorScheme.onSurface,
-                ),
-            ) {
-                Icon(
-                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                    contentDescription = "Next month",
-                )
-            }
-        }
-
-        Spacer(modifier = Modifier.height(Spacing.lg))
-
-        // Crossfade when month changes for a smooth content transition
+        // ── Crossfade content on month change ──
         Crossfade(
             targetState = "${uiState.year}-${uiState.month}",
             animationSpec = tween(
@@ -117,204 +93,328 @@ fun MonthlySummaryScreen(
             ),
             label = "month-crossfade",
         ) { _ ->
-            Column {
-                when {
-                    uiState.isLoading -> {
-                        LoadingState(label = "Loading summary...")
-                    }
-                    uiState.summary == null -> {
-                        EmptyStateView(
-                            icon = Icons.Outlined.BarChart,
-                            title = "No data for this month",
-                            description = "Add transactions to see your monthly summary here.",
-                        )
-                    }
-                    else -> {
-                        val summary = uiState.summary!!
-
-                        // ── Summary cards row ──
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-                        ) {
-                            SummaryCard(
-                                label = "Income",
-                                amount = summary.totalIncome,
-                                type = TransactionType.INCOME,
-                                modifier = Modifier.weight(1f),
-                            )
-                            SummaryCard(
-                                label = "Expenses",
-                                amount = summary.totalExpenses,
-                                type = TransactionType.EXPENSE,
-                                modifier = Modifier.weight(1f),
-                            )
-                            SummaryCard(
-                                label = "Balance",
-                                amount = summary.netBalance,
-                                type = if (summary.netBalance >= 0) TransactionType.INCOME else TransactionType.EXPENSE,
-                                modifier = Modifier.weight(1f),
-                            )
-                        }
-
-                        // ── Transaction count ──
-                        Spacer(modifier = Modifier.height(Spacing.sm))
-                        Text(
-                            text = "${summary.transactionCount} transaction${if (summary.transactionCount != 1) "s" else ""}",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.outline,
-                            modifier = Modifier.padding(start = Spacing.xs),
-                        )
-
-                        Spacer(modifier = Modifier.height(Spacing.xl))
-
-                        // ── Category breakdown ──
-                        if (summary.categoryBreakdowns.isNotEmpty()) {
-                            Text(
-                                text = "Category Breakdown",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.SemiBold,
-                                color = MaterialTheme.colorScheme.onSurface,
-                            )
-                            Spacer(modifier = Modifier.height(Spacing.md))
-
-                            val maxAmount = summary.categoryBreakdowns.maxOfOrNull { it.total } ?: 1.0
-
-                            LazyColumn(
-                                verticalArrangement = Arrangement.spacedBy(Spacing.sm),
-                            ) {
-                                items(summary.categoryBreakdowns) { breakdown ->
-                                    CategoryBreakdownItem(
-                                        breakdown = breakdown,
-                                        maxAmount = maxAmount,
-                                    )
-                                }
-
-                                // Bottom spacing
-                                item {
-                                    Spacer(modifier = Modifier.height(Spacing.xxl))
-                                }
-                            }
-                        }
-                    }
+            when {
+                uiState.isLoading -> {
+                    LoadingState(label = "Loading summary...")
+                }
+                uiState.summary == null -> {
+                    EmptyStateView(
+                        icon = Icons.Outlined.BarChart,
+                        title = "No data for this month",
+                        description = "Add transactions to see your monthly summary here.",
+                    )
+                }
+                else -> {
+                    val summary = uiState.summary!!
+                    SummaryContent(summary = summary)
                 }
             }
         }
     }
 }
 
-/**
- * Individual summary card for income, expenses, or balance.
- */
+// ─────────────────────────────────────────────────────────────────────────────
+// 1. Month Hero Section
+// ─────────────────────────────────────────────────────────────────────────────
+
 @Composable
-private fun SummaryCard(
+private fun MonthHeroSection(
+    year: Int,
+    month: Int,
+    netBalance: Double?,
+    onPrevious: () -> Unit,
+    onNext: () -> Unit,
+) {
+    val financeColors = LocalFinanceColors.current
+
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        // Month/Year with navigation
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            IconButton(
+                onClick = onPrevious,
+                colors = IconButtonDefaults.iconButtonColors(
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                ),
+            ) {
+                Icon(
+                    Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                    contentDescription = "Previous month",
+                    modifier = Modifier.size(28.dp),
+                )
+            }
+
+            Text(
+                text = "${Month.of(month).getDisplayName(TextStyle.FULL, Locale.getDefault())} $year",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+
+            IconButton(
+                onClick = onNext,
+                colors = IconButtonDefaults.iconButtonColors(
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                ),
+            ) {
+                Icon(
+                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                    contentDescription = "Next month",
+                    modifier = Modifier.size(28.dp),
+                )
+            }
+        }
+
+        // Net balance displayed prominently below month
+        if (netBalance != null) {
+            Spacer(modifier = Modifier.height(Spacing.sm))
+
+            val balanceColor = if (netBalance >= 0) {
+                financeColors.balancePositive
+            } else {
+                financeColors.balanceNegative
+            }
+            val formatter = NumberFormat.getCurrencyInstance(Locale("he", "IL"))
+            val sign = if (netBalance >= 0) "+" else ""
+            val formattedBalance = "$sign${formatter.format(netBalance)}"
+
+            Text(
+                text = formattedBalance,
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.SemiBold,
+                color = balanceColor,
+            )
+            Text(
+                text = "Net Balance",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.outline,
+            )
+        }
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Summary Content (Income/Expense cards + Category breakdown)
+// ─────────────────────────────────────────────────────────────────────────────
+
+@Composable
+private fun SummaryContent(summary: MonthlySummary) {
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(Spacing.sm),
+    ) {
+        // ── 2. INCOME vs EXPENSE VISUAL ──
+        item {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.md),
+            ) {
+                IncomeExpenseCard(
+                    label = "Income",
+                    amount = summary.totalIncome,
+                    type = TransactionType.INCOME,
+                    modifier = Modifier.weight(1f),
+                )
+                IncomeExpenseCard(
+                    label = "Expenses",
+                    amount = summary.totalExpenses,
+                    type = TransactionType.EXPENSE,
+                    modifier = Modifier.weight(1f),
+                )
+            }
+        }
+
+        // ── 3. CATEGORY BREAKDOWN ──
+        if (summary.categoryBreakdowns.isNotEmpty()) {
+            item {
+                Spacer(modifier = Modifier.height(Spacing.md))
+                Text(
+                    text = "Spending by Category",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                Spacer(modifier = Modifier.height(Spacing.sm))
+            }
+
+            val maxAmount = summary.categoryBreakdowns.maxOfOrNull { it.total } ?: 1.0
+
+            items(summary.categoryBreakdowns) { breakdown ->
+                CategoryBreakdownRow(
+                    breakdown = breakdown,
+                    maxAmount = maxAmount,
+                )
+            }
+        }
+
+        // ── 4. Transaction count footer ──
+        item {
+            Spacer(modifier = Modifier.height(Spacing.md))
+            Text(
+                text = "${summary.transactionCount} transaction${if (summary.transactionCount != 1) "s" else ""} this month",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.outline,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Spacer(modifier = Modifier.height(Spacing.xxl))
+        }
+    }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 2. Income / Expense Card
+// ─────────────────────────────────────────────────────────────────────────────
+
+@Composable
+private fun IncomeExpenseCard(
     label: String,
     amount: Double,
     type: TransactionType,
     modifier: Modifier = Modifier,
 ) {
+    val financeColors = LocalFinanceColors.current
+    val accentColor = when (type) {
+        TransactionType.INCOME -> financeColors.income
+        TransactionType.EXPENSE -> financeColors.expense
+    }
+    val tintedBackground = accentColor.copy(alpha = 0.08f)
+    val icon = when (type) {
+        TransactionType.INCOME -> Icons.Rounded.ArrowUpward
+        TransactionType.EXPENSE -> Icons.Rounded.ArrowDownward
+    }
+
+    val formatter = NumberFormat.getCurrencyInstance(Locale("he", "IL"))
+    val formattedAmount = formatter.format(amount)
+
     Card(
         modifier = modifier,
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+            containerColor = tintedBackground,
         ),
         shape = RoundedCornerShape(CornerRadius.medium),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
     ) {
-        Column(modifier = Modifier.padding(Spacing.lg)) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(Spacing.lg),
+        ) {
+            // Icon badge
+            Box(
+                modifier = Modifier
+                    .size(36.dp)
+                    .clip(CircleShape)
+                    .background(accentColor.copy(alpha = 0.15f)),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    imageVector = icon,
+                    contentDescription = null,
+                    tint = accentColor,
+                    modifier = Modifier.size(20.dp),
+                )
+            }
+
+            Spacer(modifier = Modifier.height(Spacing.md))
+
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
-            Spacer(modifier = Modifier.height(Spacing.sm))
-            AmountText(
-                amount = amount,
-                type = type,
-                size = AmountSize.Small,
-                showSign = label == "Balance",
+
+            Spacer(modifier = Modifier.height(Spacing.xs))
+
+            Text(
+                text = formattedAmount,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold,
+                color = accentColor,
             )
         }
     }
 }
 
-/**
- * Styled category breakdown row with name, count, amount, and relative progress bar.
- */
+// ─────────────────────────────────────────────────────────────────────────────
+// 3. Category Breakdown Row
+// ─────────────────────────────────────────────────────────────────────────────
+
 @Composable
-private fun CategoryBreakdownItem(
+private fun CategoryBreakdownRow(
     breakdown: CategoryBreakdown,
     maxAmount: Double,
 ) {
-    val financeColors = LocalFinanceColors.current
-    val targetFraction = if (maxAmount > 0) (breakdown.total / maxAmount).toFloat().coerceIn(0f, 1f) else 0f
-    val fraction by animateFloatAsState(
+    val targetFraction = if (maxAmount > 0) {
+        (breakdown.total / maxAmount).toFloat().coerceIn(0f, 1f)
+    } else {
+        0f
+    }
+    val animatedFraction by animateFloatAsState(
         targetValue = targetFraction,
         animationSpec = tween(
-            durationMillis = 300,
-            easing = EaseInOutCubic
+            durationMillis = 400,
+            easing = EaseInOutCubic,
         ),
         label = "category-bar-${breakdown.category}",
     )
-    val barColor = when (breakdown.type) {
-        TransactionType.EXPENSE -> financeColors.expense
-        TransactionType.INCOME -> financeColors.income
-    }
 
-    Card(
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
-        ),
-        shape = RoundedCornerShape(CornerRadius.small),
+    val formatter = NumberFormat.getCurrencyInstance(Locale("he", "IL"))
+    val formattedAmount = formatter.format(breakdown.total)
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = Spacing.xs),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = Spacing.lg, vertical = Spacing.md),
+        // Top row: category name + count on left, amount on right
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.weight(1f),
             ) {
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = breakdown.category,
-                        style = MaterialTheme.typography.bodyLarge,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                    Spacer(modifier = Modifier.height(2.dp))
-                    Text(
-                        text = "${breakdown.count} transaction${if (breakdown.count != 1) "s" else ""}",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.outline,
-                    )
-                }
-                AmountText(
-                    amount = breakdown.total,
-                    type = breakdown.type,
-                    size = AmountSize.Small,
+                Text(
+                    text = breakdown.category,
+                    style = MaterialTheme.typography.bodyMedium,
+                    fontWeight = FontWeight.Medium,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+                Spacer(modifier = Modifier.width(Spacing.sm))
+                Text(
+                    text = "${breakdown.count} tx",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.outline,
                 )
             }
 
-            Spacer(modifier = Modifier.height(Spacing.sm))
-
-            // Relative spend progress bar
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(6.dp)
-                    .clip(RoundedCornerShape(CornerRadius.extraSmall))
-                    .background(MaterialTheme.colorScheme.surfaceContainerHigh),
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth(fraction)
-                        .height(6.dp)
-                        .clip(RoundedCornerShape(CornerRadius.extraSmall))
-                        .background(barColor),
-                )
-            }
+            Text(
+                text = formattedAmount,
+                style = MaterialTheme.typography.bodyMedium,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
         }
+
+        Spacer(modifier = Modifier.height(Spacing.xs))
+
+        // Progress bar showing relative spend
+        LinearProgressIndicator(
+            progress = { animatedFraction },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(6.dp)
+                .clip(RoundedCornerShape(CornerRadius.extraSmall)),
+            color = MaterialTheme.colorScheme.tertiary,
+            trackColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+            strokeCap = StrokeCap.Round,
+        )
     }
 }

@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalance
@@ -44,6 +45,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.budgetmanager.app.R
 import com.budgetmanager.app.auth.AuthState
@@ -123,31 +125,32 @@ fun SignInScreen(
         ) {
             Spacer(modifier = Modifier.weight(0.3f))
 
-            // App icon
+            // App icon — circular badge matching banking-app icon style
             Box(
                 modifier = Modifier
-                    .size(100.dp)
+                    .size(96.dp)
                     .background(
-                        gradientForeground.copy(alpha = 0.15f),
-                        RoundedCornerShape(CornerRadius.extraLarge),
+                        gradientForeground.copy(alpha = 0.12f),
+                        CircleShape,
                     ),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Default.AccountBalance,
                     contentDescription = null,
-                    modifier = Modifier.size(56.dp),
+                    modifier = Modifier.size(48.dp),
                     tint = gradientForeground,
                 )
             }
 
-            Spacer(modifier = Modifier.height(Spacing.xl))
+            Spacer(modifier = Modifier.height(Spacing.xxl))
 
             // App title
             Text(
                 text = stringResource(R.string.signin_app_title),
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.Bold,
+                    letterSpacing = (-0.5).sp,
                 ),
                 color = gradientForeground,
             )
@@ -162,16 +165,26 @@ fun SignInScreen(
                 textAlign = TextAlign.Center,
             )
 
-            Spacer(modifier = Modifier.height(Spacing.md))
+            Spacer(modifier = Modifier.height(Spacing.lg))
 
-            // Currency badge
-            Text(
-                text = stringResource(R.string.signin_currency_badge),
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontWeight = FontWeight.SemiBold,
-                ),
-                color = gradientForeground.copy(alpha = 0.7f),
-            )
+            // Currency badge — styled as subtle pill
+            Box(
+                modifier = Modifier
+                    .background(
+                        gradientForeground.copy(alpha = 0.08f),
+                        RoundedCornerShape(CornerRadius.extraLarge),
+                    )
+                    .padding(horizontal = Spacing.lg, vertical = Spacing.xs)
+            ) {
+                Text(
+                    text = stringResource(R.string.signin_currency_badge),
+                    style = MaterialTheme.typography.labelLarge.copy(
+                        fontWeight = FontWeight.SemiBold,
+                        letterSpacing = 0.5.sp,
+                    ),
+                    color = gradientForeground.copy(alpha = 0.7f),
+                )
+            }
 
             Spacer(modifier = Modifier.weight(0.3f))
 

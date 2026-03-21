@@ -1,9 +1,12 @@
 package com.budgetmanager.app.ui.screens.transactions
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.EaseInOutCubic
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,14 +16,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.AccountBalanceWallet
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -40,19 +47,22 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.budgetmanager.app.domain.model.Transaction
 import com.budgetmanager.app.domain.model.TransactionType
-import com.budgetmanager.app.ui.components.AmountText
-import com.budgetmanager.app.ui.components.AmountSize
 import com.budgetmanager.app.ui.components.EmptyStateView
 import com.budgetmanager.app.ui.components.FilterBar
 import com.budgetmanager.app.ui.components.LoadingState
 import com.budgetmanager.app.ui.components.SwipeToDeleteContainer
-import com.budgetmanager.app.ui.components.TransactionCard
-import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.EaseInOutCubic
 import com.budgetmanager.app.ui.theme.CornerRadius
+import com.budgetmanager.app.ui.theme.LocalFinanceColors
 import com.budgetmanager.app.ui.theme.Spacing
 import com.budgetmanager.app.ui.viewmodel.TransactionListViewModel
 
@@ -105,41 +115,34 @@ fun TransactionListScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
-                .animateContentSize(
-                    animationSpec = tween(
-                        durationMillis = LIST_ANIM_DURATION,
-                        easing = EaseInOutCubic
-                    )
-                )
         ) {
-            // Filter bar at top
-            FilterBar(
-                selectedType = uiState.filterType,
-                selectedCategory = uiState.filterCategory,
-                categories = uiState.availableCategories,
-                onTypeSelected = { type ->
-                    viewModel.setFilter(
-                        type = type,
-                        category = uiState.filterCategory,
-                        dateFrom = uiState.filterDateFrom,
-                        dateTo = uiState.filterDateTo
-                    )
-                },
-                onCategorySelected = { category ->
-                    viewModel.setFilter(
-                        type = uiState.filterType,
-                        category = category,
-                        dateFrom = uiState.filterDateFrom,
-                        dateTo = uiState.filterDateTo
-                    )
-                }
-            )
-
             when {
                 uiState.isLoading -> {
                     LoadingState(label = "Loading transactions...")
                 }
                 uiState.transactions.isEmpty() -> {
+                    // Show filter bar even when empty so user can clear filters
+                    FilterBar(
+                        selectedType = uiState.filterType,
+                        selectedCategory = uiState.filterCategory,
+                        categories = uiState.availableCategories,
+                        onTypeSelected = { type ->
+                            viewModel.setFilter(
+                                type = type,
+                                category = uiState.filterCategory,
+                                dateFrom = uiState.filterDateFrom,
+                                dateTo = uiState.filterDateTo
+                            )
+                        },
+                        onCategorySelected = { category ->
+                            viewModel.setFilter(
+                                type = uiState.filterType,
+                                category = category,
+                                dateFrom = uiState.filterDateFrom,
+                                dateTo = uiState.filterDateTo
+                            )
+                        }
+                    )
                     EmptyStateView(
                         icon = Icons.Outlined.AccountBalanceWallet,
                         title = "No transactions yet",
@@ -153,18 +156,58 @@ fun TransactionListScreen(
                             .nestedScroll(pullToRefreshState.nestedScrollConnection)
                     ) {
                         LazyColumn(modifier = Modifier.fillMaxSize()) {
-                            // Balance summary header
+                            // ── Hero Balance Card ────────────────────────────
                             item {
-                                BalanceSummaryRow(
+                                HeroBalanceCard(
                                     transactions = uiState.transactions,
+                                    modifier = Modifier.padding(
+                                        start = Spacing.lg,
+                                        end = Spacing.lg,
+                                        top = Spacing.lg,
+                                        bottom = Spacing.sm
+                                    )
+                                )
+                            }
+
+                            // ── Filter Bar (compact) ─────────────────────────
+                            item {
+                                FilterBar(
+                                    selectedType = uiState.filterType,
+                                    selectedCategory = uiState.filterCategory,
+                                    categories = uiState.availableCategories,
+                                    onTypeSelected = { type ->
+                                        viewModel.setFilter(
+                                            type = type,
+                                            category = uiState.filterCategory,
+                                            dateFrom = uiState.filterDateFrom,
+                                            dateTo = uiState.filterDateTo
+                                        )
+                                    },
+                                    onCategorySelected = { category ->
+                                        viewModel.setFilter(
+                                            type = uiState.filterType,
+                                            category = category,
+                                            dateFrom = uiState.filterDateFrom,
+                                            dateTo = uiState.filterDateTo
+                                        )
+                                    }
+                                )
+                            }
+
+                            // ── Section Header ───────────────────────────────
+                            item {
+                                Text(
+                                    text = "Recent Transactions",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    color = MaterialTheme.colorScheme.onSurface,
                                     modifier = Modifier.padding(
                                         horizontal = Spacing.lg,
                                         vertical = Spacing.sm
                                     )
                                 )
-                                Spacer(modifier = Modifier.height(Spacing.sm))
                             }
 
+                            // ── Transaction Rows ─────────────────────────────
                             items(uiState.transactions, key = { it.id }) { transaction ->
                                 var visible by remember { mutableStateOf(false) }
                                 LaunchedEffect(Unit) { visible = true }
@@ -187,15 +230,10 @@ fun TransactionListScreen(
                                     SwipeToDeleteContainer(
                                         onDelete = { viewModel.deleteTransaction(transaction.id) }
                                     ) {
-                                        TransactionCard(
+                                        TransactionRow(
                                             transaction = transaction,
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .padding(
-                                                    horizontal = Spacing.lg,
-                                                    vertical = Spacing.xs
-                                                ),
-                                            onClick = { onEditTransaction(transaction.id) }
+                                            onClick = { onEditTransaction(transaction.id) },
+                                            modifier = Modifier.fillMaxWidth()
                                         )
                                     }
                                 }
@@ -220,17 +258,17 @@ fun TransactionListScreen(
     }
 }
 
-/**
- * Horizontal row of three mini summary cards: Income, Expenses, and Net Balance.
- *
- * Computes totals from the current transaction list and uses semantic
- * [AmountText] coloring for each value.
- */
+// ═══════════════════════════════════════════════════════════════════════════════
+// Hero Balance Card — the first and biggest thing the user sees
+// ═══════════════════════════════════════════════════════════════════════════════
+
 @Composable
-private fun BalanceSummaryRow(
-    transactions: List<com.budgetmanager.app.domain.model.Transaction>,
+private fun HeroBalanceCard(
+    transactions: List<Transaction>,
     modifier: Modifier = Modifier,
 ) {
+    val financeColors = LocalFinanceColors.current
+
     val totalIncome = transactions
         .filter { it.type == TransactionType.INCOME }
         .sumOf { it.amount }
@@ -239,70 +277,213 @@ private fun BalanceSummaryRow(
         .sumOf { it.amount }
     val netBalance = totalIncome - totalExpense
 
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .animateContentSize(
-                animationSpec = tween(
-                    durationMillis = LIST_ANIM_DURATION,
-                    easing = EaseInOutCubic
-                )
-            ),
-        horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-    ) {
-        // Income card
-        SummaryMiniCard(
-            label = "Income",
-            amount = totalIncome,
-            type = TransactionType.INCOME,
-            modifier = Modifier.weight(1f),
-        )
-        // Expense card
-        SummaryMiniCard(
-            label = "Expenses",
-            amount = totalExpense,
-            type = TransactionType.EXPENSE,
-            modifier = Modifier.weight(1f),
-        )
-        // Balance card
-        SummaryMiniCard(
-            label = "Balance",
-            amount = netBalance,
-            type = if (netBalance >= 0) TransactionType.INCOME else TransactionType.EXPENSE,
-            modifier = Modifier.weight(1f),
-            showSign = true,
-        )
+    val balanceColor = if (netBalance >= 0) {
+        financeColors.balancePositive
+    } else {
+        financeColors.balanceNegative
     }
-}
 
-@Composable
-private fun SummaryMiniCard(
-    label: String,
-    amount: Double,
-    type: TransactionType,
-    modifier: Modifier = Modifier,
-    showSign: Boolean = false,
-) {
     Card(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+            containerColor = MaterialTheme.colorScheme.primaryContainer,
         ),
         shape = RoundedCornerShape(CornerRadius.medium),
     ) {
-        Column(modifier = Modifier.padding(Spacing.md)) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = Spacing.xl, vertical = Spacing.xl),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            // "Current Balance" label
             Text(
-                text = label,
-                style = MaterialTheme.typography.labelSmall,
+                text = "Current Balance",
+                style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
-            Spacer(modifier = Modifier.height(Spacing.xs))
-            AmountText(
-                amount = amount,
-                type = type,
-                size = AmountSize.Small,
-                showSign = showSign,
+
+            Spacer(modifier = Modifier.height(Spacing.sm))
+
+            // Large balance number — the hero element
+            val sign = if (netBalance >= 0) "" else "-"
+            val absBalance = kotlin.math.abs(netBalance)
+            Text(
+                text = "${sign}\u20AA${String.format("%.2f", absBalance)}",
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 38.sp,
+                    lineHeight = 44.sp,
+                    letterSpacing = (-0.5).sp,
+                ),
+                color = balanceColor,
             )
+
+            Spacer(modifier = Modifier.height(Spacing.lg))
+
+            // Income / Expense summary row
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                // Income total
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "\u25B2",
+                        color = financeColors.income,
+                        style = MaterialTheme.typography.labelSmall,
+                    )
+                    Spacer(modifier = Modifier.width(Spacing.xs))
+                    Column {
+                        Text(
+                            text = "Income",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                        Text(
+                            text = "\u20AA${String.format("%.2f", totalIncome)}",
+                            style = TextStyle(
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 15.sp,
+                                lineHeight = 20.sp,
+                            ),
+                            color = financeColors.income,
+                        )
+                    }
+                }
+
+                // Subtle vertical divider
+                Box(
+                    modifier = Modifier
+                        .height(32.dp)
+                        .width(1.dp)
+                        .background(MaterialTheme.colorScheme.outlineVariant)
+                )
+
+                // Expense total
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "\u25BC",
+                        color = financeColors.expense,
+                        style = MaterialTheme.typography.labelSmall,
+                    )
+                    Spacer(modifier = Modifier.width(Spacing.xs))
+                    Column {
+                        Text(
+                            text = "Expenses",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                        Text(
+                            text = "\u20AA${String.format("%.2f", totalExpense)}",
+                            style = TextStyle(
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 15.sp,
+                                lineHeight = 20.sp,
+                            ),
+                            color = financeColors.expense,
+                        )
+                    }
+                }
+            }
         }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// Transaction Row — clean, lightweight row with colored dot indicator
+// ═══════════════════════════════════════════════════════════════════════════════
+
+@Composable
+private fun TransactionRow(
+    transaction: Transaction,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val financeColors = LocalFinanceColors.current
+
+    val dotColor = when (transaction.type) {
+        TransactionType.INCOME -> financeColors.income
+        TransactionType.EXPENSE -> financeColors.expense
+    }
+
+    val amountColor = when (transaction.type) {
+        TransactionType.INCOME -> financeColors.income
+        TransactionType.EXPENSE -> financeColors.expense
+    }
+
+    val amountPrefix = when (transaction.type) {
+        TransactionType.INCOME -> "+"
+        TransactionType.EXPENSE -> "-"
+    }
+
+    Column(
+        modifier = modifier.clickable(onClick = onClick)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = Spacing.lg, vertical = Spacing.md),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            // Colored dot indicator
+            Box(
+                modifier = Modifier
+                    .size(10.dp)
+                    .clip(CircleShape)
+                    .background(dotColor)
+            )
+
+            Spacer(modifier = Modifier.width(Spacing.md))
+
+            // Category + description (center)
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = transaction.category,
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                if (transaction.description.isNotBlank()) {
+                    Text(
+                        text = transaction.description,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.width(Spacing.sm))
+
+            // Amount + date (right-aligned)
+            Column(horizontalAlignment = Alignment.End) {
+                Text(
+                    text = "$amountPrefix\u20AA${String.format("%.2f", transaction.amount)}",
+                    style = TextStyle(
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 14.sp,
+                        lineHeight = 20.sp,
+                        letterSpacing = 0.sp,
+                    ),
+                    color = amountColor,
+                )
+                Text(
+                    text = transaction.date,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.outline,
+                )
+            }
+        }
+
+        // Divider between items
+        Divider(
+            modifier = Modifier.padding(start = Spacing.lg + 10.dp + Spacing.md),
+            color = MaterialTheme.colorScheme.outlineVariant,
+            thickness = 0.5.dp,
+        )
     }
 }

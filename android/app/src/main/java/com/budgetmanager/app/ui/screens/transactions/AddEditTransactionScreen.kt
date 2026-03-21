@@ -1,5 +1,8 @@
 package com.budgetmanager.app.ui.screens.transactions
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,12 +13,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.rounded.ArrowDownward
+import androidx.compose.material.icons.rounded.ArrowUpward
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DatePicker
@@ -42,8 +47,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.budgetmanager.app.domain.model.TransactionType
 import com.budgetmanager.app.ui.components.DatePickerField
@@ -127,69 +135,106 @@ fun AddEditTransactionScreen(
                 .padding(horizontal = Spacing.lg, vertical = Spacing.lg)
                 .verticalScroll(rememberScrollState())
         ) {
-            // Type toggle — styled FilterChips with FinanceColors
+            // Type toggle — visual cards matching summary IncomeExpenseCard style
             Text(
                 text = "Transaction Type",
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(bottom = Spacing.sm)
             )
-            Row {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(Spacing.md)
+            ) {
+                // Expense toggle card
+                val expenseSelected = uiState.type == TransactionType.EXPENSE
+                val expenseColor = financeColors.expense
                 FilterChip(
-                    selected = uiState.type == TransactionType.EXPENSE,
+                    selected = expenseSelected,
                     onClick = { viewModel.setType(TransactionType.EXPENSE) },
-                    label = { Text("Expense") },
-                    leadingIcon = if (uiState.type == TransactionType.EXPENSE) {
-                        {
-                            Icon(
-                                imageVector = Icons.Default.Check,
-                                contentDescription = null,
-                                modifier = Modifier.size(FilterChipDefaults.IconSize)
-                            )
+                    label = {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .clip(CircleShape)
+                                    .background(
+                                        if (expenseSelected) expenseColor.copy(alpha = 0.15f)
+                                        else MaterialTheme.colorScheme.surfaceContainerHigh
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Rounded.ArrowDownward,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(14.dp),
+                                    tint = if (expenseSelected) expenseColor
+                                    else MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(Spacing.sm))
+                            Text("Expense")
                         }
-                    } else null,
-                    shape = MaterialTheme.shapes.small,
+                    },
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(CornerRadius.medium),
                     colors = FilterChipDefaults.filterChipColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
                         labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        selectedContainerColor = financeColors.expense.copy(alpha = 0.12f),
-                        selectedLabelColor = financeColors.expense,
-                        selectedLeadingIconColor = financeColors.expense
+                        selectedContainerColor = expenseColor.copy(alpha = 0.08f),
+                        selectedLabelColor = expenseColor,
                     ),
                     border = FilterChipDefaults.filterChipBorder(
                         borderColor = MaterialTheme.colorScheme.outlineVariant,
-                        selectedBorderColor = financeColors.expense.copy(alpha = 0.5f),
+                        selectedBorderColor = expenseColor.copy(alpha = 0.5f),
                         enabled = true,
-                        selected = uiState.type == TransactionType.EXPENSE
+                        selected = expenseSelected
                     )
                 )
-                Spacer(modifier = Modifier.width(Spacing.sm))
+
+                // Income toggle card
+                val incomeSelected = uiState.type == TransactionType.INCOME
+                val incomeColor = financeColors.income
                 FilterChip(
-                    selected = uiState.type == TransactionType.INCOME,
+                    selected = incomeSelected,
                     onClick = { viewModel.setType(TransactionType.INCOME) },
-                    label = { Text("Income") },
-                    leadingIcon = if (uiState.type == TransactionType.INCOME) {
-                        {
-                            Icon(
-                                imageVector = Icons.Default.Check,
-                                contentDescription = null,
-                                modifier = Modifier.size(FilterChipDefaults.IconSize)
-                            )
+                    label = {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(
+                                modifier = Modifier
+                                    .size(24.dp)
+                                    .clip(CircleShape)
+                                    .background(
+                                        if (incomeSelected) incomeColor.copy(alpha = 0.15f)
+                                        else MaterialTheme.colorScheme.surfaceContainerHigh
+                                    ),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Rounded.ArrowUpward,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(14.dp),
+                                    tint = if (incomeSelected) incomeColor
+                                    else MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(Spacing.sm))
+                            Text("Income")
                         }
-                    } else null,
-                    shape = MaterialTheme.shapes.small,
+                    },
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(CornerRadius.medium),
                     colors = FilterChipDefaults.filterChipColors(
                         containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
                         labelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        selectedContainerColor = financeColors.income.copy(alpha = 0.12f),
-                        selectedLabelColor = financeColors.income,
-                        selectedLeadingIconColor = financeColors.income
+                        selectedContainerColor = incomeColor.copy(alpha = 0.08f),
+                        selectedLabelColor = incomeColor,
                     ),
                     border = FilterChipDefaults.filterChipBorder(
                         borderColor = MaterialTheme.colorScheme.outlineVariant,
-                        selectedBorderColor = financeColors.income.copy(alpha = 0.5f),
+                        selectedBorderColor = incomeColor.copy(alpha = 0.5f),
                         enabled = true,
-                        selected = uiState.type == TransactionType.INCOME
+                        selected = incomeSelected
                     )
                 )
             }
@@ -257,10 +302,12 @@ fun AddEditTransactionScreen(
 
             Spacer(modifier = Modifier.height(Spacing.xl))
 
-            // Save button — full-width FilledButton
+            // Save button — full-width, tall, prominent
             Button(
                 onClick = { viewModel.save() },
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(52.dp),
                 enabled = !uiState.isSaving,
                 shape = RoundedCornerShape(CornerRadius.medium),
                 colors = ButtonDefaults.buttonColors(
@@ -270,17 +317,18 @@ fun AddEditTransactionScreen(
             ) {
                 Text(
                     text = if (uiState.isEditMode) "Save Changes" else "Add Transaction",
-                    style = MaterialTheme.typography.labelLarge,
-                    modifier = Modifier.padding(vertical = Spacing.xs)
+                    style = MaterialTheme.typography.titleMedium
                 )
             }
 
-            Spacer(modifier = Modifier.height(Spacing.sm))
+            Spacer(modifier = Modifier.height(Spacing.md))
 
             // Cancel button — outlined, secondary
             OutlinedButton(
                 onClick = onNavigateBack,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
                 shape = RoundedCornerShape(CornerRadius.medium),
                 colors = ButtonDefaults.outlinedButtonColors(
                     contentColor = MaterialTheme.colorScheme.onSurfaceVariant
@@ -288,8 +336,7 @@ fun AddEditTransactionScreen(
             ) {
                 Text(
                     text = "Cancel",
-                    style = MaterialTheme.typography.labelLarge,
-                    modifier = Modifier.padding(vertical = Spacing.xs)
+                    style = MaterialTheme.typography.labelLarge
                 )
             }
 

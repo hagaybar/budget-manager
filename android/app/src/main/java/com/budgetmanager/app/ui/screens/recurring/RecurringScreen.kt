@@ -1,5 +1,6 @@
 package com.budgetmanager.app.ui.screens.recurring
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
@@ -24,6 +26,9 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.outlined.Repeat
+import androidx.compose.material.icons.rounded.ArrowDownward
+import androidx.compose.material.icons.rounded.ArrowUpward
+import androidx.compose.material.icons.rounded.Schedule
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -53,8 +58,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.budgetmanager.app.domain.model.Frequency
 import com.budgetmanager.app.domain.model.RecurringTransaction
@@ -116,6 +123,11 @@ fun RecurringScreen(
                 ) {
                     item { Spacer(modifier = Modifier.height(Spacing.xs)) }
                     items(uiState.recurringTransactions, key = { it.id }) { recurring ->
+                        val typeColor = if (recurring.type == TransactionType.INCOME)
+                            financeColors.income else financeColors.expense
+                        val typeIcon = if (recurring.type == TransactionType.INCOME)
+                            Icons.Rounded.ArrowUpward else Icons.Rounded.ArrowDownward
+
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -125,113 +137,125 @@ fun RecurringScreen(
                             ),
                             shape = RoundedCornerShape(CornerRadius.medium)
                         ) {
-                            Row(
+                            Column(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(Spacing.lg),
-                                verticalAlignment = Alignment.CenterVertically
+                                    .padding(Spacing.lg)
                             ) {
-                                Column(modifier = Modifier.weight(1f)) {
-                                    // Category title
-                                    Text(
-                                        text = recurring.category,
-                                        style = MaterialTheme.typography.titleMedium,
-                                        fontWeight = FontWeight.SemiBold
-                                    )
-
-                                    Spacer(modifier = Modifier.height(Spacing.xs))
-
-                                    // Frequency badge as styled chip
-                                    Row(
-                                        horizontalArrangement = Arrangement.spacedBy(Spacing.sm),
-                                        verticalAlignment = Alignment.CenterVertically
+                                // Top row: icon + category + badges | amount + switch
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    // Type icon badge (matching TransactionRow dot style)
+                                    Box(
+                                        modifier = Modifier
+                                            .size(36.dp)
+                                            .clip(CircleShape)
+                                            .background(typeColor.copy(alpha = 0.12f)),
+                                        contentAlignment = Alignment.Center
                                     ) {
-                                        Surface(
-                                            color = MaterialTheme.colorScheme.secondaryContainer,
-                                            shape = MaterialTheme.shapes.extraSmall
-                                        ) {
-                                            Text(
-                                                text = recurring.frequency.value.replaceFirstChar { it.uppercase() },
-                                                style = MaterialTheme.typography.labelSmall,
-                                                color = MaterialTheme.colorScheme.onSecondaryContainer,
-                                                modifier = Modifier.padding(
-                                                    horizontal = Spacing.sm,
-                                                    vertical = Spacing.xs
-                                                )
-                                            )
-                                        }
-
-                                        // Type badge
-                                        Surface(
-                                            color = if (recurring.type == TransactionType.INCOME)
-                                                financeColors.income.copy(alpha = 0.12f)
-                                            else
-                                                financeColors.expense.copy(alpha = 0.12f),
-                                            shape = MaterialTheme.shapes.extraSmall
-                                        ) {
-                                            Text(
-                                                text = recurring.type.value.replaceFirstChar { it.uppercase() },
-                                                style = MaterialTheme.typography.labelSmall,
-                                                color = if (recurring.type == TransactionType.INCOME)
-                                                    financeColors.income
-                                                else
-                                                    financeColors.expense,
-                                                modifier = Modifier.padding(
-                                                    horizontal = Spacing.sm,
-                                                    vertical = Spacing.xs
-                                                )
-                                            )
-                                        }
-                                    }
-
-                                    if (recurring.description.isNotBlank()) {
-                                        Spacer(modifier = Modifier.height(Spacing.xs))
-                                        Text(
-                                            text = recurring.description,
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        Icon(
+                                            imageVector = typeIcon,
+                                            contentDescription = null,
+                                            tint = typeColor,
+                                            modifier = Modifier.size(20.dp)
                                         )
                                     }
 
-                                    Spacer(modifier = Modifier.height(Spacing.sm))
+                                    Spacer(modifier = Modifier.width(Spacing.md))
 
-                                    // Amount
-                                    AmountText(
-                                        amount = recurring.amount,
-                                        type = recurring.type,
-                                        size = AmountSize.Small
+                                    // Category + description
+                                    Column(modifier = Modifier.weight(1f)) {
+                                        Text(
+                                            text = recurring.category,
+                                            style = MaterialTheme.typography.titleMedium,
+                                            fontWeight = FontWeight.SemiBold
+                                        )
+                                        if (recurring.description.isNotBlank()) {
+                                            Text(
+                                                text = recurring.description,
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                                maxLines = 1
+                                            )
+                                        }
+                                    }
+
+                                    Spacer(modifier = Modifier.width(Spacing.sm))
+
+                                    // Amount on the right
+                                    Column(horizontalAlignment = Alignment.End) {
+                                        AmountText(
+                                            amount = recurring.amount,
+                                            type = recurring.type,
+                                            size = AmountSize.Small
+                                        )
+                                    }
+
+                                    Spacer(modifier = Modifier.width(Spacing.sm))
+
+                                    // Active/inactive toggle
+                                    Switch(
+                                        checked = recurring.isActive,
+                                        onCheckedChange = { viewModel.toggleActive(recurring.id) },
+                                        colors = SwitchDefaults.colors(
+                                            checkedThumbColor = MaterialTheme.colorScheme.primary,
+                                            checkedTrackColor = MaterialTheme.colorScheme.primaryContainer,
+                                            uncheckedThumbColor = MaterialTheme.colorScheme.outline,
+                                            uncheckedTrackColor = MaterialTheme.colorScheme.surfaceVariant
+                                        )
                                     )
+                                }
 
-                                    Spacer(modifier = Modifier.height(Spacing.xs))
+                                Spacer(modifier = Modifier.height(Spacing.md))
 
-                                    // Next occurrence
-                                    val nextDate = getNextOccurrence(recurring)
-                                    if (nextDate != null) {
+                                // Bottom row: frequency badge + next occurrence
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    // Frequency badge
+                                    Surface(
+                                        color = MaterialTheme.colorScheme.secondaryContainer,
+                                        shape = RoundedCornerShape(CornerRadius.extraSmall)
+                                    ) {
                                         Text(
-                                            text = "Next: ${formatNextOccurrence(nextDate)}",
+                                            text = recurring.frequency.value.replaceFirstChar { it.uppercase() },
                                             style = MaterialTheme.typography.labelSmall,
-                                            color = MaterialTheme.colorScheme.primary
+                                            color = MaterialTheme.colorScheme.onSecondaryContainer,
+                                            modifier = Modifier.padding(
+                                                horizontal = Spacing.sm,
+                                                vertical = Spacing.xs
+                                            )
                                         )
-                                    } else {
+                                    }
+
+                                    // Next occurrence — prominent display
+                                    val nextDate = getNextOccurrence(recurring)
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Icon(
+                                            imageVector = Icons.Rounded.Schedule,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(14.dp),
+                                            tint = if (nextDate != null)
+                                                MaterialTheme.colorScheme.primary
+                                            else MaterialTheme.colorScheme.outline
+                                        )
+                                        Spacer(modifier = Modifier.width(Spacing.xs))
                                         Text(
-                                            text = "Paused",
-                                            style = MaterialTheme.typography.labelSmall,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                            text = if (nextDate != null)
+                                                formatNextOccurrence(nextDate)
+                                            else "Paused",
+                                            style = MaterialTheme.typography.labelMedium,
+                                            fontWeight = FontWeight.Medium,
+                                            color = if (nextDate != null)
+                                                MaterialTheme.colorScheme.primary
+                                            else MaterialTheme.colorScheme.outline
                                         )
                                     }
                                 }
-
-                                // Active/inactive toggle
-                                Switch(
-                                    checked = recurring.isActive,
-                                    onCheckedChange = { viewModel.toggleActive(recurring.id) },
-                                    colors = SwitchDefaults.colors(
-                                        checkedThumbColor = MaterialTheme.colorScheme.primary,
-                                        checkedTrackColor = MaterialTheme.colorScheme.primaryContainer,
-                                        uncheckedThumbColor = MaterialTheme.colorScheme.outline,
-                                        uncheckedTrackColor = MaterialTheme.colorScheme.surfaceVariant
-                                    )
-                                )
                             }
                         }
                     }

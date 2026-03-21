@@ -50,6 +50,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.budgetmanager.app.R
 import com.budgetmanager.app.auth.AuthState
@@ -148,7 +149,8 @@ fun SettingsScreen(
             Text(
                 text = stringResource(R.string.settings_title),
                 style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Spacer(modifier = Modifier.height(Spacing.xl))
@@ -351,7 +353,9 @@ fun SettingsScreen(
                         onClick = {
                             exportLauncher.launch(viewModel.getSuggestedBackupFilename())
                         },
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(48.dp),
                         enabled = !uiState.isExporting && !uiState.isImporting,
                         shape = RoundedCornerShape(CornerRadius.medium),
                         colors = ButtonDefaults.buttonColors(
@@ -389,7 +393,9 @@ fun SettingsScreen(
                         onClick = {
                             importLauncher.launch(arrayOf("application/json"))
                         },
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(48.dp),
                         enabled = !uiState.isImporting && !uiState.isExporting,
                         shape = RoundedCornerShape(CornerRadius.medium)
                     ) {
@@ -468,8 +474,10 @@ fun SettingsScreen(
 @Composable
 private fun SectionHeader(title: String) {
     Text(
-        text = title,
-        style = MaterialTheme.typography.labelLarge,
+        text = title.uppercase(),
+        style = MaterialTheme.typography.labelMedium.copy(
+            letterSpacing = 1.2.sp
+        ),
         fontWeight = FontWeight.Bold,
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(start = Spacing.xs)
