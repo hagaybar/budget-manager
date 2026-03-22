@@ -1,0 +1,1 @@
+{"hasMoreIssues": false, "issues": [], "summary": "Verification PASSED. Migration FK constraints match entities exactly. runBlocking removed. Duplicate @Provides removed. No crash-severity issues remain. Minor: brief 0L window on init self-corrects via StateFlow observer."}

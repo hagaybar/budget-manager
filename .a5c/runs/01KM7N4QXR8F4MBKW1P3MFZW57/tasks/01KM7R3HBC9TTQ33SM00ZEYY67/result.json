@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7R3HBC9TTQ33SM00ZEYY67",
+  "taskId": "polish-dark-mode",
+  "invocationKey": "visual-redesign:S000017:polish-dark-mode",
+  "status": "ok",
+  "result": {
+    "filesModified": [
+      "SummaryChart.kt",
+      "DatePickerField.kt",
+      "SignInScreen.kt"
+    ],
+    "summary": "Fixed 3 dark mode issues: SummaryChart using isSystemInDarkTheme instead of FinanceColors, DatePickerField missing outline colors, SignInScreen gradient contrast in dark mode."
+  },
+  "startedAt": "2026-03-21T08:33:29.476Z",
+  "finishedAt": "2026-03-21T08:33:29.476Z",
+  "value": {
+    "filesModified": [
+      "SummaryChart.kt",
+      "DatePickerField.kt",
+      "SignInScreen.kt"
+    ],
+    "summary": "Fixed 3 dark mode issues: SummaryChart using isSystemInDarkTheme instead of FinanceColors, DatePickerField missing outline colors, SignInScreen gradient contrast in dark mode."
+  }
+}

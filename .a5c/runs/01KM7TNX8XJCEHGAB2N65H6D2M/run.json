@@ -1,0 +1,13 @@
+{
+  "runId": "01KM7TNX8XJCEHGAB2N65H6D2M",
+  "request": "fix-crash-on-launch",
+  "processId": "fix-crash-on-launch",
+  "entrypoint": {
+    "importPath": "../../processes/fix-crash-on-launch.js",
+    "exportName": "process"
+  },
+  "processPath": "../../processes/fix-crash-on-launch.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-03-21T09:12:35.365Z",
+  "completionProof": "fc43a327cedc3c082d222adf02330843"
+}

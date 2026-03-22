@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7WN65BRJRH8WME489STAHK",
+  "taskId": "create-branch",
+  "invocationKey": "incremental-fix:S000002:create-branch",
+  "stepId": "S000002",
+  "kind": "agent",
+  "title": "Step 2: Create clean branch from working version",
+  "labels": [
+    "git",
+    "setup"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7WN65BRJRH8WME489STAHK/input.json",
+    "outputJsonPath": "tasks/01KM7WN65BRJRH8WME489STAHK/result.json"
+  },
+  "inputs": {
+    "projectDir": "/home/ubuntu/projects/budget_manager",
+    "workingCommit": "549135d"
+  }
+}

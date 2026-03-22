@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:16:45.932Z",
+  "data": {
+    "effectId": "01KM7TXHYRAX0QE6Z1FTCHX22R",
+    "invocationKey": "fix-crash-on-launch:S000003:build-verify",
+    "invocationHash": "5d500d4b0013d46fd044a6431680460d4ee154bb8feb9e02ac2a7402d73e3eab",
+    "stepId": "S000003",
+    "taskId": "build-verify",
+    "kind": "agent",
+    "label": "build",
+    "taskDefRef": "tasks/01KM7TXHYRAX0QE6Z1FTCHX22R/task.json",
+    "labels": [
+      "build",
+      "crash-fix"
+    ]
+  },
+  "checksum": "0d5b86df0a4c79c320b56e8229f9c17a4c7947c0e53069e77c6cac7de7e67af9"
+}

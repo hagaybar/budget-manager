@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM876BW9KQAR396WY2W8FAM3",
+  "taskId": "redesign-main",
+  "invocationKey": "banking-ux-polish:S000001:redesign-main",
+  "status": "ok",
+  "result": {
+    "filesModified": [
+      "TransactionListScreen.kt"
+    ],
+    "summary": "Redesigned TransactionListScreen with hero balance card, lightweight transaction rows, income/expense summary."
+  },
+  "startedAt": "2026-03-21T12:53:40.405Z",
+  "finishedAt": "2026-03-21T12:53:40.405Z",
+  "value": {
+    "filesModified": [
+      "TransactionListScreen.kt"
+    ],
+    "summary": "Redesigned TransactionListScreen with hero balance card, lightweight transaction rows, income/expense summary."
+  }
+}

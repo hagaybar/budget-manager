@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7Q7X6FJXZX66F4FC39D59V",
+  "taskId": "implement-motion",
+  "invocationKey": "visual-redesign:S000013:implement-motion",
+  "status": "ok",
+  "result": {
+    "filesModified": [
+      "BudgetNavHost.kt",
+      "TransactionListScreen.kt",
+      "MonthlySummaryScreen.kt",
+      "TransactionCard.kt",
+      "BudgetManagementScreen.kt"
+    ],
+    "summary": "Added subtle animations: crossfade nav transitions, list item AnimatedVisibility, category progress bar animation, card animateContentSize, month Crossfade."
+  },
+  "startedAt": "2026-03-21T08:17:29.687Z",
+  "finishedAt": "2026-03-21T08:17:29.687Z",
+  "value": {
+    "filesModified": [
+      "BudgetNavHost.kt",
+      "TransactionListScreen.kt",
+      "MonthlySummaryScreen.kt",
+      "TransactionCard.kt",
+      "BudgetManagementScreen.kt"
+    ],
+    "summary": "Added subtle animations: crossfade nav transitions, list item AnimatedVisibility, category progress bar animation, card animateContentSize, month Crossfade."
+  }
+}

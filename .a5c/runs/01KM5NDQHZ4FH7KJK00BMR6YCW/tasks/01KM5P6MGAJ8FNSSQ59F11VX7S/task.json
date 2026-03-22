@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM5P6MGAJ8FNSSQ59F11VX7S",
+  "taskId": "run-backend-tests",
+  "invocationKey": "google-signin-drive-backup:S000007:run-backend-tests",
+  "stepId": "S000007",
+  "kind": "agent",
+  "title": "Run backend pytest tests for regression check",
+  "io": {
+    "inputJsonPath": "tasks/01KM5P6MGAJ8FNSSQ59F11VX7S/input.json",
+    "outputJsonPath": "tasks/01KM5P6MGAJ8FNSSQ59F11VX7S/output.json"
+  },
+  "inputs": {
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

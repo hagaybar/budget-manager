@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T13:16:31.557Z",
+  "data": {
+    "effectId": "01KM5P7VDHXVVESHRATMX84EN5",
+    "invocationKey": "google-signin-drive-backup:S000008:code-review",
+    "invocationHash": "98c97d84c0d3d9e328717fe9602cdcdfefe35c7287353a9c79e78106cb8eae61",
+    "stepId": "S000008",
+    "taskId": "code-review",
+    "kind": "agent",
+    "label": "Code review: Google Sign-In + backup/restore",
+    "taskDefRef": "tasks/01KM5P7VDHXVVESHRATMX84EN5/task.json"
+  },
+  "checksum": "198d26ba775293e97aa212325f362fe452dce99364793feb048634a0545104f5"
+}

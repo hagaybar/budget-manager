@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7H746332GK5J78XW2FSYE6",
+  "taskId": "fix-quality-issues",
+  "invocationKey": "multi-budget:S000016:fix-quality-issues",
+  "stepId": "S000016",
+  "kind": "agent",
+  "title": "Fix quality issues (iteration 1)",
+  "labels": [
+    "fix",
+    "quality"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7H746332GK5J78XW2FSYE6/input.json",
+    "outputJsonPath": "tasks/01KM7H746332GK5J78XW2FSYE6/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "qualityResult": {
+      "issues": [
+        {
+          "description": "After backup restore, ActiveBudgetManager not updated with restored budget ID",
+          "file": "SettingsViewModel.kt",
+          "severity": "high"
+        },
+        {
+          "description": "loadCategories() not scoped to active budget",
+          "file": "TransactionListViewModel.kt",
+          "severity": "medium"
+        },
+        {
+          "description": "ALTER TABLE cannot add FK constraints, need table recreation",
+          "file": "Migrations.kt",
+          "severity": "medium"
+        },
+        {
+          "description": "Per-row update in migration loop, should batch",
+          "file": "MigrationViewModel.kt",
+          "severity": "medium"
+        },
+        {
+          "description": "Race condition: getActiveBudgetId returns 0 before DataStore loads",
+          "file": "ActiveBudgetManager.kt",
+          "severity": "medium"
+        },
+        {
+          "description": "Duplicated currencySymbol function",
+          "file": "BudgetManagementScreen.kt",
+          "severity": "low"
+        }
+      ],
+      "passesQuality": false,
+      "summary": "Architecture sound, 2 high/medium issues need fixing before release"
+    }
+  }
+}

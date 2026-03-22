@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T08:01:37.160Z",
+  "data": {
+    "effectId": "01KM7PKYVCJERT7E54KMYM21BG",
+    "invocationKey": "visual-redesign:S000011:refine-secondary",
+    "invocationHash": "76be2dbd0f22a6522a0f9c9534d71bd8a6784c428ff3514384c4b2fb9896fb1b",
+    "stepId": "S000011",
+    "taskId": "refine-secondary",
+    "kind": "agent",
+    "label": "screens",
+    "taskDefRef": "tasks/01KM7PKYVCJERT7E54KMYM21BG/task.json",
+    "labels": [
+      "screens",
+      "secondary"
+    ]
+  },
+  "checksum": "ef213b720f7fa4610b55a3ec83cded2cd4675add7e09f2f00869611436655ebb"
+}

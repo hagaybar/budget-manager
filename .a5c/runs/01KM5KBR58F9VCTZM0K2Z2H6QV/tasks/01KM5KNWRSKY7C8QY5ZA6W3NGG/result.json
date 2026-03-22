@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5KNWRSKY7C8QY5ZA6W3NGG",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "fix-recurring-eager-generation:S000005:__sdk.breakpoint",
+  "status": "ok",
+  "result": {
+    "approved": true,
+    "response": "User approved the fix as-is. No additional changes requested."
+  },
+  "startedAt": "2026-03-20T12:35:44.841Z",
+  "finishedAt": "2026-03-20T12:35:44.841Z",
+  "value": {
+    "approved": true,
+    "response": "User approved the fix as-is. No additional changes requested."
+  }
+}

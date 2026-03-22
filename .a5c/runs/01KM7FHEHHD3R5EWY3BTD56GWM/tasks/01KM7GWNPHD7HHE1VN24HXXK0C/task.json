@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7GWNPHD7HHE1VN24HXXK0C",
+  "taskId": "build-and-verify",
+  "invocationKey": "multi-budget:S000012:build-and-verify",
+  "stepId": "S000012",
+  "kind": "agent",
+  "title": "Build & verify (ui-layer, iteration 2)",
+  "labels": [
+    "build",
+    "ui-layer",
+    "verification"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7GWNPHD7HHE1VN24HXXK0C/input.json",
+    "outputJsonPath": "tasks/01KM7GWNPHD7HHE1VN24HXXK0C/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 2,
+    "scope": "ui-layer"
+  }
+}

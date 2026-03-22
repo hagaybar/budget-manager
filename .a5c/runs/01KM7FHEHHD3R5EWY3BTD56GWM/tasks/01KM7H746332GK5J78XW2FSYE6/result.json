@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7H746332GK5J78XW2FSYE6",
+  "taskId": "fix-quality-issues",
+  "invocationKey": "multi-budget:S000016:fix-quality-issues",
+  "status": "ok",
+  "result": {
+    "filesModified": [
+      "SettingsViewModel.kt",
+      "TransactionListViewModel.kt",
+      "MigrationViewModel.kt",
+      "ActiveBudgetManager.kt",
+      "TransactionDao.kt",
+      "RecurringTransactionDao.kt",
+      "TransactionRepository.kt",
+      "TransactionRepositoryImpl.kt",
+      "RecurringRepository.kt",
+      "RecurringRepositoryImpl.kt",
+      "BudgetSelectorDropdown.kt",
+      "BudgetManagementScreen.kt",
+      "CurrencyUtils.kt"
+    ],
+    "fixesApplied": [
+      {
+        "file": "SettingsViewModel.kt",
+        "fix": "added",
+        "issue": "ActiveBudgetManager not synced after restore"
+      },
+      {
+        "file": "TransactionListViewModel.kt",
+        "fix": "use budget-scoped method",
+        "issue": "categories unscoped"
+      },
+      {
+        "file": "MigrationViewModel.kt",
+        "fix": "batch SQL",
+        "issue": "per-row loop"
+      },
+      {
+        "file": "ActiveBudgetManager.kt",
+        "fix": "runBlocking init",
+        "issue": "race condition"
+      },
+      {
+        "file": "CurrencyUtils.kt",
+        "fix": "extracted",
+        "issue": "duplicate function"
+      }
+    ],
+    "summary": "Fixed all 5 quality issues: SettingsVM restore sync, budget-scoped categories, batch migration, runBlocking init, extracted CurrencyUtils"
+  },
+  "startedAt": "2026-03-21T06:29:46.312Z",
+  "finishedAt": "2026-03-21T06:29:46.312Z",
+  "value": {
+    "filesModified": [
+      "SettingsViewModel.kt",
+      "TransactionListViewModel.kt",
+      "MigrationViewModel.kt",
+      "ActiveBudgetManager.kt",
+      "TransactionDao.kt",
+      "RecurringTransactionDao.kt",
+      "TransactionRepository.kt",
+      "TransactionRepositoryImpl.kt",
+      "RecurringRepository.kt",
+      "RecurringRepositoryImpl.kt",
+      "BudgetSelectorDropdown.kt",
+      "BudgetManagementScreen.kt",
+      "CurrencyUtils.kt"
+    ],
+    "fixesApplied": [
+      {
+        "file": "SettingsViewModel.kt",
+        "fix": "added",
+        "issue": "ActiveBudgetManager not synced after restore"
+      },
+      {
+        "file": "TransactionListViewModel.kt",
+        "fix": "use budget-scoped method",
+        "issue": "categories unscoped"
+      },
+      {
+        "file": "MigrationViewModel.kt",
+        "fix": "batch SQL",
+        "issue": "per-row loop"
+      },
+      {
+        "file": "ActiveBudgetManager.kt",
+        "fix": "runBlocking init",
+        "issue": "race condition"
+      },
+      {
+        "file": "CurrencyUtils.kt",
+        "fix": "extracted",
+        "issue": "duplicate function"
+      }
+    ],
+    "summary": "Fixed all 5 quality issues: SettingsVM restore sync, budget-scoped categories, batch migration, runBlocking init, extracted CurrencyUtils"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T07:54:47.675Z",
+  "data": {
+    "effectId": "01KM7P7EZ7924VWM0ZMNHSCS81",
+    "invocationKey": "visual-redesign:S000009:refine-high-impact",
+    "invocationHash": "6c0a41996717239ed2cf9596aa464162e520eac459031be06c58e8a5a20a4723",
+    "stepId": "S000009",
+    "taskId": "refine-high-impact",
+    "kind": "agent",
+    "label": "screens",
+    "taskDefRef": "tasks/01KM7P7EZ7924VWM0ZMNHSCS81/task.json",
+    "labels": [
+      "screens",
+      "high-impact"
+    ]
+  },
+  "checksum": "69a733edd2223754327634e7d434e195993680d8d7d5f2df143b914756aec5e0"
+}

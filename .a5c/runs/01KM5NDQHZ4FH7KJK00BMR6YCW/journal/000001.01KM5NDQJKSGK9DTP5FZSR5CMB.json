@@ -1,0 +1,14 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-03-20T13:02:15.636Z",
+  "data": {
+    "runId": "01KM5NDQHZ4FH7KJK00BMR6YCW",
+    "processId": "google-signin-drive-backup",
+    "entrypoint": {
+      "importPath": "../../processes/google-signin-drive-backup.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json"
+  },
+  "checksum": "ca4c5275e2423e7b69db25330bbfc0d36721327d77310c17558a45149594a82e"
+}

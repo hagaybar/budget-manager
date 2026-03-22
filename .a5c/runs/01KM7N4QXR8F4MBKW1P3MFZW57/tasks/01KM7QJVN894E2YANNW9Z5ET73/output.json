@@ -1,0 +1,1 @@
+{"allPassing": false, "errors": [{"file": "TransactionListScreen.kt", "line": 172, "message": "AnimatedVisibility can't be called by implicit receiver in ColumnScope context", "type": "scope_conflict"}], "buildOutput": "BUILD FAILED - AnimatedVisibility scope conflict"}

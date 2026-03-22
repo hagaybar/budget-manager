@@ -1,0 +1,1 @@
+{"summary":"Refined TransactionListScreen (balance summary row, EmptyStateView, LoadingState, FAB styling), MonthlySummaryScreen (styled cards, category progress bars, FilledIconButtons), SignInScreen (design system colors, no hardcoded whites).","filesModified":["TransactionListScreen.kt","MonthlySummaryScreen.kt","SignInScreen.kt"]}

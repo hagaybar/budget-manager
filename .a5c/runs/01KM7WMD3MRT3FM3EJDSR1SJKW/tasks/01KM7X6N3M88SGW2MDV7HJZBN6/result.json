@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7X6N3M88SGW2MDV7HJZBN6",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "incremental-fix:S000011:__sdk.breakpoint",
+  "status": "ok",
+  "result": {
+    "approved": true,
+    "feedback": "Works. No visible changes expected yet — all backend. UI layer is next and likely contains the crash."
+  },
+  "startedAt": "2026-03-21T09:59:48.269Z",
+  "finishedAt": "2026-03-21T09:59:48.269Z",
+  "value": {
+    "approved": true,
+    "feedback": "Works. No visible changes expected yet — all backend. UI layer is next and likely contains the crash."
+  }
+}

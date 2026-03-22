@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7TXHYRAX0QE6Z1FTCHX22R",
+  "taskId": "build-verify",
+  "invocationKey": "fix-crash-on-launch:S000003:build-verify",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "buildOutput": "BUILD SUCCESSFUL in 12s",
+    "errors": []
+  },
+  "startedAt": "2026-03-21T09:17:11.505Z",
+  "finishedAt": "2026-03-21T09:17:11.505Z",
+  "value": {
+    "allPassing": true,
+    "buildOutput": "BUILD SUCCESSFUL in 12s",
+    "errors": []
+  }
+}

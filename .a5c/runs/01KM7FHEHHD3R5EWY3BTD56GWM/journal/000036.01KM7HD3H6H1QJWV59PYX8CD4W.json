@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T06:30:29.671Z",
+  "data": {
+    "effectId": "01KM7HD3GMKD6TDHBZNZT9J2Z0",
+    "invocationKey": "multi-budget:S000018:build-apk",
+    "invocationHash": "62256ae8af5611f2d87ff919d66bc4ab2a00c0a631b6e3b5976adddde60b3d9e",
+    "stepId": "S000018",
+    "taskId": "build-apk",
+    "kind": "agent",
+    "label": "build",
+    "taskDefRef": "tasks/01KM7HD3GMKD6TDHBZNZT9J2Z0/task.json",
+    "labels": [
+      "build",
+      "apk"
+    ]
+  },
+  "checksum": "84985d74ea1e09e5b372d3a74bcc7d639761579212193523993dd4470314d21f"
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5PHR4JWBED4S2C4ARBG03B",
+  "taskId": "build-and-release",
+  "invocationKey": "google-signin-drive-backup:S000010:build-and-release",
+  "status": "ok",
+  "result": {
+    "apkPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+    "releaseUrl": "https://github.com/hagaybar/budget-manager/releases/tag/v1.3.0",
+    "success": true
+  },
+  "startedAt": "2026-03-20T13:23:26.365Z",
+  "finishedAt": "2026-03-20T13:23:26.365Z",
+  "value": {
+    "apkPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+    "releaseUrl": "https://github.com/hagaybar/budget-manager/releases/tag/v1.3.0",
+    "success": true
+  }
+}

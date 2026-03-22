@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7G1VY11T7R2270YMF6KTS3",
+  "taskId": "implement-domain-layer",
+  "invocationKey": "multi-budget:S000005:implement-domain-layer",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "filesCreated": [
+      "Budget.kt",
+      "BudgetRepository.kt",
+      "BudgetRepositoryImpl.kt",
+      "ActiveBudgetManager.kt"
+    ],
+    "filesModified": [
+      "Transaction.kt",
+      "RecurringTransaction.kt",
+      "BackupData.kt",
+      "TransactionRepository.kt",
+      "TransactionRepositoryImpl.kt",
+      "RecurringRepository.kt",
+      "RecurringRepositoryImpl.kt",
+      "BackupRepositoryImpl.kt",
+      "GenerateRecurringTransactionsUseCase.kt",
+      "AppModule.kt",
+      "RepositoryModule.kt"
+    ],
+    "summary": "Implemented domain layer: Budget model, BudgetRepository/Impl, ActiveBudgetManager with DataStore, updated Transaction/RecurringTransaction models with budgetId, added budget-scoped repo methods, updated BackupData, GenerateRecurringTransactionsUseCase, and DI modules."
+  },
+  "startedAt": "2026-03-21T06:10:22.188Z",
+  "finishedAt": "2026-03-21T06:10:22.188Z",
+  "value": {
+    "allPassing": true,
+    "filesCreated": [
+      "Budget.kt",
+      "BudgetRepository.kt",
+      "BudgetRepositoryImpl.kt",
+      "ActiveBudgetManager.kt"
+    ],
+    "filesModified": [
+      "Transaction.kt",
+      "RecurringTransaction.kt",
+      "BackupData.kt",
+      "TransactionRepository.kt",
+      "TransactionRepositoryImpl.kt",
+      "RecurringRepository.kt",
+      "RecurringRepositoryImpl.kt",
+      "BackupRepositoryImpl.kt",
+      "GenerateRecurringTransactionsUseCase.kt",
+      "AppModule.kt",
+      "RepositoryModule.kt"
+    ],
+    "summary": "Implemented domain layer: Budget model, BudgetRepository/Impl, ActiveBudgetManager with DataStore, updated Transaction/RecurringTransaction models with budgetId, added budget-scoped repo methods, updated BackupData, GenerateRecurringTransactionsUseCase, and DI modules."
+  }
+}

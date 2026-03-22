@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7NYARC5XP3AW7GSTC0DHAC",
+  "taskId": "global-components",
+  "invocationKey": "visual-redesign:S000007:global-components",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "LoadingState.kt"
+    ],
+    "filesModified": [
+      "EmptyStateView.kt",
+      "AmountText.kt",
+      "TransactionCard.kt",
+      "SwipeToDeleteContainer.kt",
+      "FilterBar.kt",
+      "CategoryChip.kt",
+      "BottomNavBar.kt",
+      "BudgetSelectorDropdown.kt",
+      "BudgetManagementScreen.kt",
+      "TransactionListScreen.kt",
+      "RecurringScreen.kt"
+    ],
+    "summary": "Polished all global components with design system tokens. Created LoadingState, updated EmptyStateView, AmountText (FinanceColors), TransactionCard, SwipeToDeleteContainer, FilterBar, BottomNavBar, BudgetSelectorDropdown."
+  },
+  "startedAt": "2026-03-21T07:54:08.980Z",
+  "finishedAt": "2026-03-21T07:54:08.980Z",
+  "value": {
+    "filesCreated": [
+      "LoadingState.kt"
+    ],
+    "filesModified": [
+      "EmptyStateView.kt",
+      "AmountText.kt",
+      "TransactionCard.kt",
+      "SwipeToDeleteContainer.kt",
+      "FilterBar.kt",
+      "CategoryChip.kt",
+      "BottomNavBar.kt",
+      "BudgetSelectorDropdown.kt",
+      "BudgetManagementScreen.kt",
+      "TransactionListScreen.kt",
+      "RecurringScreen.kt"
+    ],
+    "summary": "Polished all global components with design system tokens. Created LoadingState, updated EmptyStateView, AmountText (FinanceColors), TransactionCard, SwipeToDeleteContainer, FilterBar, BottomNavBar, BudgetSelectorDropdown."
+  }
+}

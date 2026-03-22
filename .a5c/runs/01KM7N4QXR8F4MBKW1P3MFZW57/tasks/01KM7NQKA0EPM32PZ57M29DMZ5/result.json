@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7NQKA0EPM32PZ57M29DMZ5",
+  "taskId": "app-icon-splash",
+  "invocationKey": "visual-redesign:S000005:app-icon-splash",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "ic_launcher_round.xml"
+    ],
+    "filesModified": [
+      "ic_launcher_foreground.xml",
+      "ic_launcher_background.xml",
+      "ic_launcher.xml",
+      "themes.xml",
+      "themes-night.xml",
+      "AndroidManifest.xml",
+      "build.gradle.kts",
+      "MainActivity.kt"
+    ],
+    "summary": "Implemented premium app icon (wallet with ascending bars on Trust Blue) and splash screen with AndroidX SplashScreen compat. Updated manifest, MainActivity, and build.gradle."
+  },
+  "startedAt": "2026-03-21T07:48:51.714Z",
+  "finishedAt": "2026-03-21T07:48:51.714Z",
+  "value": {
+    "filesCreated": [
+      "ic_launcher_round.xml"
+    ],
+    "filesModified": [
+      "ic_launcher_foreground.xml",
+      "ic_launcher_background.xml",
+      "ic_launcher.xml",
+      "themes.xml",
+      "themes-night.xml",
+      "AndroidManifest.xml",
+      "build.gradle.kts",
+      "MainActivity.kt"
+    ],
+    "summary": "Implemented premium app icon (wallet with ascending bars on Trust Blue) and splash screen with AndroidX SplashScreen compat. Updated manifest, MainActivity, and build.gradle."
+  }
+}

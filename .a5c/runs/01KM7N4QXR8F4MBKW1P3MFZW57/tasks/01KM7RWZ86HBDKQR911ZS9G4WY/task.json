@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7RWZ86HBDKQR911ZS9G4WY",
+  "taskId": "build-and-verify",
+  "invocationKey": "visual-redesign:S000020:build-and-verify",
+  "stepId": "S000020",
+  "kind": "agent",
+  "title": "Build & verify (polish-pass, iteration 1)",
+  "labels": [
+    "build",
+    "polish-pass",
+    "verification"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7RWZ86HBDKQR911ZS9G4WY/input.json",
+    "outputJsonPath": "tasks/01KM7RWZ86HBDKQR911ZS9G4WY/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "scope": "polish-pass"
+  }
+}

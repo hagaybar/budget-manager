@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM87FDC81WTTM2Q4T121K8J1",
+  "taskId": "build",
+  "invocationKey": "banking-ux-polish:S000004:build",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "buildOutput": "BUILD SUCCESSFUL in 5s",
+    "errors": []
+  },
+  "startedAt": "2026-03-21T12:56:41.863Z",
+  "finishedAt": "2026-03-21T12:56:41.863Z",
+  "value": {
+    "allPassing": true,
+    "buildOutput": "BUILD SUCCESSFUL in 5s",
+    "errors": []
+  }
+}

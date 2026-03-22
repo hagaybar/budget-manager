@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T12:30:32.531Z",
+  "data": {
+    "effectId": "01KM5KKN1ZFWSDVC2NZN0BP699",
+    "invocationKey": "fix-recurring-eager-generation:S000004:verify-fix-logic",
+    "invocationHash": "50a882b272d0bc72c53827486456a5009c13dc447fcbaccef053f6b7cf597a5c",
+    "stepId": "S000004",
+    "taskId": "verify-fix-logic",
+    "kind": "agent",
+    "label": "Code review: verify the fix is correct and complete",
+    "taskDefRef": "tasks/01KM5KKN1ZFWSDVC2NZN0BP699/task.json"
+  },
+  "checksum": "438124c73bd632a942d48555ebdaad83b3cf6e87d2888b0717d710fc6fc97307"
+}

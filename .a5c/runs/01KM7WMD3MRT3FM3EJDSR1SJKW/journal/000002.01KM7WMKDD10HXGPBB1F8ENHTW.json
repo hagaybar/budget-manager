@@ -1,0 +1,18 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:46:49.645Z",
+  "data": {
+    "effectId": "01KM7WMKCQ1NTXJPZ16Y672310",
+    "invocationKey": "incremental-fix:S000001:analyze-diff",
+    "invocationHash": "4a931d920b8289e97c6117d3d357261e7ef72073564a473d39baad7724f1cf07",
+    "stepId": "S000001",
+    "taskId": "analyze-diff",
+    "kind": "agent",
+    "label": "analysis",
+    "taskDefRef": "tasks/01KM7WMKCQ1NTXJPZ16Y672310/task.json",
+    "labels": [
+      "analysis"
+    ]
+  },
+  "checksum": "2b07c08b0ad892d9064d02b30d2a66c20e2df43a0d880328f079d1a55e3f3639"
+}

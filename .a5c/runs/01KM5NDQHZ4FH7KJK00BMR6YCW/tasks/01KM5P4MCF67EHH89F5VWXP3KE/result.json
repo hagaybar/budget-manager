@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5P4MCF67EHH89F5VWXP3KE",
+  "taskId": "build-and-verify",
+  "invocationKey": "google-signin-drive-backup:S000006:build-and-verify",
+  "status": "ok",
+  "result": {
+    "buildSuccess": true,
+    "errors": []
+  },
+  "startedAt": "2026-03-20T13:15:43.581Z",
+  "finishedAt": "2026-03-20T13:15:43.581Z",
+  "value": {
+    "buildSuccess": true,
+    "errors": []
+  }
+}

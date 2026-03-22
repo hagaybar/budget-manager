@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7HD3GMKD6TDHBZNZT9J2Z0",
+  "taskId": "build-apk",
+  "invocationKey": "multi-budget:S000018:build-apk",
+  "stepId": "S000018",
+  "kind": "agent",
+  "title": "Build debug APK",
+  "labels": [
+    "apk",
+    "build"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7HD3GMKD6TDHBZNZT9J2Z0/input.json",
+    "outputJsonPath": "tasks/01KM7HD3GMKD6TDHBZNZT9J2Z0/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android"
+  }
+}

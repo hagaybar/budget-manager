@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5NPN9TNWAS99RMZ8KY2GXA",
+  "taskId": "implement-backup-restore",
+  "invocationKey": "google-signin-drive-backup:S000003:implement-backup-restore",
+  "status": "ok",
+  "result": {
+    "filesCreated": [],
+    "filesModified": [
+      "app/src/main/java/com/budgetmanager/app/ui/viewmodel/SettingsViewModel.kt",
+      "app/src/main/java/com/budgetmanager/app/ui/screens/settings/SettingsScreen.kt"
+    ],
+    "implemented": true,
+    "summary": "Wired SAF file pickers for export/import with confirmation dialog. Polished Settings screen with account info, backup section with last backup date, and Material 3 design."
+  },
+  "startedAt": "2026-03-20T13:09:35.751Z",
+  "finishedAt": "2026-03-20T13:09:35.751Z",
+  "value": {
+    "filesCreated": [],
+    "filesModified": [
+      "app/src/main/java/com/budgetmanager/app/ui/viewmodel/SettingsViewModel.kt",
+      "app/src/main/java/com/budgetmanager/app/ui/screens/settings/SettingsScreen.kt"
+    ],
+    "implemented": true,
+    "summary": "Wired SAF file pickers for export/import with confirmation dialog. Polished Settings screen with account info, backup section with last backup date, and Material 3 design."
+  }
+}

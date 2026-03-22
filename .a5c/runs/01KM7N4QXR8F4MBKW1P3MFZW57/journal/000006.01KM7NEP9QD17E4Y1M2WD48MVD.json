@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T07:41:15.959Z",
+  "data": {
+    "effectId": "01KM7NEP93KJTK56J6A900GMHN",
+    "invocationKey": "visual-redesign:S000003:create-design-system",
+    "invocationHash": "c7bdbc07f6cde83cccedf6184306850e96218146cc2eda94773a789255dc3f94",
+    "stepId": "S000003",
+    "taskId": "create-design-system",
+    "kind": "agent",
+    "label": "design-system",
+    "taskDefRef": "tasks/01KM7NEP93KJTK56J6A900GMHN/task.json",
+    "labels": [
+      "design-system",
+      "theme"
+    ]
+  },
+  "checksum": "df894742b7d9ca45644389a1e712b71bfcc18a6180c28103cd23327c07a5eb5a"
+}

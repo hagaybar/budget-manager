@@ -1,0 +1,18 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T13:21:25.194Z",
+  "data": {
+    "effectId": "01KM5PGT5PHPAHXYD8MPCG9B6E",
+    "invocationKey": "google-signin-drive-backup:S000009:__sdk.breakpoint",
+    "invocationHash": "58c2f24c55a9bba94976fc25192d8d4086853eb103e92860b45134da367d1722",
+    "stepId": "S000009",
+    "taskId": "__sdk.breakpoint",
+    "kind": "breakpoint",
+    "label": "breakpoint",
+    "taskDefRef": "tasks/01KM5PGT5PHPAHXYD8MPCG9B6E/task.json",
+    "labels": [
+      "breakpoint"
+    ]
+  },
+  "checksum": "080923056f197209dd5cbbb739971856658ec66d4233b712719daa1b0ca5bc07"
+}

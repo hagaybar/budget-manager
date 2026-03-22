@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7QRBC8QYDW42KW1ZMSNW8R",
+  "taskId": "fix-build-failures",
+  "invocationKey": "visual-redesign:S000015:fix-build-failures",
+  "stepId": "S000015",
+  "kind": "agent",
+  "title": "Fix build failures (motion, iteration 1)",
+  "labels": [
+    "debugging",
+    "fix",
+    "motion"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7QRBC8QYDW42KW1ZMSNW8R/input.json",
+    "outputJsonPath": "tasks/01KM7QRBC8QYDW42KW1ZMSNW8R/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "buildResult": {
+      "allPassing": false,
+      "buildOutput": "BUILD FAILED - AnimatedVisibility scope conflict",
+      "errors": [
+        {
+          "file": "TransactionListScreen.kt",
+          "line": 172,
+          "message": "AnimatedVisibility can't be called by implicit receiver in ColumnScope context",
+          "type": "scope_conflict"
+        }
+      ]
+    },
+    "iteration": 1,
+    "scope": "motion"
+  }
+}

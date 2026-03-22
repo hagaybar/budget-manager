@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T06:21:31.252Z",
+  "data": {
+    "effectId": "01KM7GWNPHD7HHE1VN24HXXK0C",
+    "invocationKey": "multi-budget:S000012:build-and-verify",
+    "invocationHash": "a8b60b53e8f20e4525c1b8fb83e69092e3b7a065b0309648ccffb1de5ad9848f",
+    "stepId": "S000012",
+    "taskId": "build-and-verify",
+    "kind": "agent",
+    "label": "build",
+    "taskDefRef": "tasks/01KM7GWNPHD7HHE1VN24HXXK0C/task.json",
+    "labels": [
+      "build",
+      "verification",
+      "ui-layer"
+    ]
+  },
+  "checksum": "5a0c490139d7c750a98409f4b5012e396f9da150ee3172daec0c42040e811a62"
+}

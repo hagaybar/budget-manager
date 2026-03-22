@@ -1,0 +1,13 @@
+{
+  "runId": "01KM5KBR58F9VCTZM0K2Z2H6QV",
+  "request": "fix-recurring-eager-generation",
+  "processId": "fix-recurring-eager-generation",
+  "entrypoint": {
+    "importPath": "../../processes/fix-recurring-eager-generation.js",
+    "exportName": "process"
+  },
+  "processPath": "../../processes/fix-recurring-eager-generation.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-03-20T12:26:13.553Z",
+  "completionProof": "7b181f9df02cd33394a50b70d6c3284e"
+}

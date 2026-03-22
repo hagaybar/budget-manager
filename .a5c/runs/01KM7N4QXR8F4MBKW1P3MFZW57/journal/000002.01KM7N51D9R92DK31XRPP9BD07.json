@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T07:35:59.657Z",
+  "data": {
+    "effectId": "01KM7N51CJKA87JTK15KYH3Z4R",
+    "invocationKey": "visual-redesign:S000001:audit-ui",
+    "invocationHash": "6c4610702faee6f0918161f8d49add35f395529ce4e618ed5af4e937e4db1d5d",
+    "stepId": "S000001",
+    "taskId": "audit-ui",
+    "kind": "agent",
+    "label": "audit",
+    "taskDefRef": "tasks/01KM7N51CJKA87JTK15KYH3Z4R/task.json",
+    "labels": [
+      "audit",
+      "design"
+    ]
+  },
+  "checksum": "8382e16bd50696e0945dab8fd9489b935882a3ea0f970a445296cc660241256d"
+}

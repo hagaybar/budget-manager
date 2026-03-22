@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7WT8ND8ZFEW0HADP2WPPXN",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "incremental-fix:S000005:__sdk.breakpoint",
+  "status": "ok",
+  "result": {
+    "approved": true,
+    "feedback": "App launches fine with database layer only. Crash is in a later layer."
+  },
+  "startedAt": "2026-03-21T09:51:41.358Z",
+  "finishedAt": "2026-03-21T09:51:41.358Z",
+  "value": {
+    "approved": true,
+    "feedback": "App launches fine with database layer only. Crash is in a later layer."
+  }
+}

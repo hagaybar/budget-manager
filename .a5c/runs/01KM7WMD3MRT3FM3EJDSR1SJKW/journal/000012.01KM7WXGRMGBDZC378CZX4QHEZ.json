@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:51:41.844Z",
+  "data": {
+    "effectId": "01KM7WXGR1GWDE39FRVBSJ4BQ4",
+    "invocationKey": "incremental-fix:S000006:apply-domain",
+    "invocationHash": "3d3abd715983a6e4a7b92711aeedd344e7d643e979f0a78a667ded213fcdd33c",
+    "stepId": "S000006",
+    "taskId": "apply-domain",
+    "kind": "agent",
+    "label": "domain",
+    "taskDefRef": "tasks/01KM7WXGR1GWDE39FRVBSJ4BQ4/task.json",
+    "labels": [
+      "domain",
+      "incremental"
+    ]
+  },
+  "checksum": "f1efdd4e000de8ba5eec0a188ebed2bc6ad561c998211fb3f7c2451b165d6560"
+}

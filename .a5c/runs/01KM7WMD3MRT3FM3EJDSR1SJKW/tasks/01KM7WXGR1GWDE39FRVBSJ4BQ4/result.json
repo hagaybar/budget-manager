@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7WXGR1GWDE39FRVBSJ4BQ4",
+  "taskId": "apply-domain",
+  "invocationKey": "incremental-fix:S000006:apply-domain",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "Budget.kt",
+      "ActiveBudgetManager.kt",
+      "CurrencyUtils.kt",
+      "BudgetRepository.kt",
+      "BudgetRepositoryImpl.kt"
+    ],
+    "filesModified": [
+      "Transaction.kt",
+      "RecurringTransaction.kt",
+      "BackupData.kt",
+      "GenerateRecurringTransactionsUseCase.kt",
+      "TransactionRepository.kt",
+      "TransactionRepositoryImpl.kt",
+      "RecurringRepository.kt",
+      "RecurringRepositoryImpl.kt",
+      "BackupRepositoryImpl.kt",
+      "RepositoryModule.kt"
+    ],
+    "summary": "Applied 15 domain layer files from master. Build passes."
+  },
+  "startedAt": "2026-03-21T09:53:01.620Z",
+  "finishedAt": "2026-03-21T09:53:01.620Z",
+  "value": {
+    "filesCreated": [
+      "Budget.kt",
+      "ActiveBudgetManager.kt",
+      "CurrencyUtils.kt",
+      "BudgetRepository.kt",
+      "BudgetRepositoryImpl.kt"
+    ],
+    "filesModified": [
+      "Transaction.kt",
+      "RecurringTransaction.kt",
+      "BackupData.kt",
+      "GenerateRecurringTransactionsUseCase.kt",
+      "TransactionRepository.kt",
+      "TransactionRepositoryImpl.kt",
+      "RecurringRepository.kt",
+      "RecurringRepositoryImpl.kt",
+      "BackupRepositoryImpl.kt",
+      "RepositoryModule.kt"
+    ],
+    "summary": "Applied 15 domain layer files from master. Build passes."
+  }
+}

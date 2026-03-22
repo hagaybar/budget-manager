@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:12:44.593Z",
+  "data": {
+    "effectId": "01KM7TP68T68RSSMA7PESXZ0G3",
+    "invocationKey": "fix-crash-on-launch:S000001:diagnose-crash",
+    "invocationHash": "0ca50f858c5fcc598ecfb09094ed8125c7ae7ade8dbac1a292d9a18cd682f9de",
+    "stepId": "S000001",
+    "taskId": "diagnose-crash",
+    "kind": "agent",
+    "label": "diagnosis",
+    "taskDefRef": "tasks/01KM7TP68T68RSSMA7PESXZ0G3/task.json",
+    "labels": [
+      "diagnosis",
+      "crash"
+    ]
+  },
+  "checksum": "90d40e5c3bceedfac288e5bc6795716cf5fe94fe0322e97a6da6f4d7c5162883"
+}

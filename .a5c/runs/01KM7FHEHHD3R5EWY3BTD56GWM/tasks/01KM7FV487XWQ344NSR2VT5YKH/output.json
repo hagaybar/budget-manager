@@ -1,0 +1,6 @@
+{
+  "summary": "Implemented database layer: BudgetEntity, BudgetDao, Migrations.kt (MIGRATION_1_2), modified TransactionEntity and RecurringTransactionEntity with budgetId FK, added budget-scoped query variants to both DAOs, bumped BudgetDatabase to v2.",
+  "filesCreated": ["BudgetEntity.kt", "BudgetDao.kt", "Migrations.kt"],
+  "filesModified": ["TransactionEntity.kt", "RecurringTransactionEntity.kt", "TransactionDao.kt", "RecurringTransactionDao.kt", "BudgetDatabase.kt"],
+  "allPassing": true
+}

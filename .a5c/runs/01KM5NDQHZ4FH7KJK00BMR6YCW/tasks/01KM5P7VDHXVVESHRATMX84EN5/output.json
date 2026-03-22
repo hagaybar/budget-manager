@@ -1,0 +1,14 @@
+{
+  "approved": false,
+  "issues": [
+    "PII logging in GoogleSignInManager (Log.d with email/name)",
+    "Import not wrapped in Room transaction (data loss risk on crash)",
+    "exportToUri silent failure when outputStream is null",
+    "Nav start destination always Transactions regardless of auth state"
+  ],
+  "suggestions": [
+    "Consider EncryptedSharedPreferences for auth PII",
+    "Add file size check before import (reject >50MB)",
+    "Use navigateToSignIn as LaunchedEffect key in SettingsScreen"
+  ]
+}

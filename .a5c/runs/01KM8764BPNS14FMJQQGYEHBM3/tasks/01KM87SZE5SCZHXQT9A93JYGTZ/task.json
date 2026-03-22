@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM87SZE5SCZHXQT9A93JYGTZ",
+  "taskId": "build",
+  "invocationKey": "banking-ux-polish:S000007:build",
+  "stepId": "S000007",
+  "kind": "agent",
+  "title": "Build (final, iteration 1)",
+  "labels": [
+    "build",
+    "final"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM87SZE5SCZHXQT9A93JYGTZ/input.json",
+    "outputJsonPath": "tasks/01KM87SZE5SCZHXQT9A93JYGTZ/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "step": "final"
+  }
+}

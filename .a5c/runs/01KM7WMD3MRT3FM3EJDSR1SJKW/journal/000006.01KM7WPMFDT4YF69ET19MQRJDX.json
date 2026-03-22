@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:47:56.269Z",
+  "data": {
+    "effectId": "01KM7WPMETA22YSPTAVGPJ0219",
+    "invocationKey": "incremental-fix:S000003:apply-database",
+    "invocationHash": "a6410d44fa88e185810e6a9af82901da1bd4d0afe6c4b694bdb058d8a2f3ad36",
+    "stepId": "S000003",
+    "taskId": "apply-database",
+    "kind": "agent",
+    "label": "database",
+    "taskDefRef": "tasks/01KM7WPMETA22YSPTAVGPJ0219/task.json",
+    "labels": [
+      "database",
+      "incremental"
+    ]
+  },
+  "checksum": "fb606496ace913852ea2d97e26c3d897f0ac6542964ba5d3849426c2c9100015"
+}

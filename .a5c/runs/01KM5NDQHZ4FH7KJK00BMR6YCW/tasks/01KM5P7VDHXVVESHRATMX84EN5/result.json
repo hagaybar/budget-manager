@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5P7VDHXVVESHRATMX84EN5",
+  "taskId": "code-review",
+  "invocationKey": "google-signin-drive-backup:S000008:code-review",
+  "status": "ok",
+  "result": {
+    "approved": false,
+    "issues": [
+      "PII logging in GoogleSignInManager (Log.d with email/name)",
+      "Import not wrapped in Room transaction (data loss risk on crash)",
+      "exportToUri silent failure when outputStream is null",
+      "Nav start destination always Transactions regardless of auth state"
+    ],
+    "suggestions": [
+      "Consider EncryptedSharedPreferences for auth PII",
+      "Add file size check before import (reject >50MB)",
+      "Use navigateToSignIn as LaunchedEffect key in SettingsScreen"
+    ]
+  },
+  "startedAt": "2026-03-20T13:18:56.151Z",
+  "finishedAt": "2026-03-20T13:18:56.151Z",
+  "value": {
+    "approved": false,
+    "issues": [
+      "PII logging in GoogleSignInManager (Log.d with email/name)",
+      "Import not wrapped in Room transaction (data loss risk on crash)",
+      "exportToUri silent failure when outputStream is null",
+      "Nav start destination always Transactions regardless of auth state"
+    ],
+    "suggestions": [
+      "Consider EncryptedSharedPreferences for auth PII",
+      "Add file size check before import (reject >50MB)",
+      "Use navigateToSignIn as LaunchedEffect key in SettingsScreen"
+    ]
+  }
+}

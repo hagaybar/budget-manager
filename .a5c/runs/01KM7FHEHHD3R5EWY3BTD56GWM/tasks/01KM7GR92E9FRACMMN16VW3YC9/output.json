@@ -1,0 +1,13 @@
+{
+  "allPassing": false,
+  "errors": [
+    {"file": "BudgetSelectorDropdown.kt", "line": 20, "message": "Unresolved reference: MenuAnchorType", "type": "unresolved_reference"},
+    {"file": "BudgetSelectorDropdown.kt", "line": 66, "message": "Too many arguments for menuAnchor()", "type": "api_mismatch"},
+    {"file": "BudgetFormDialog.kt", "line": 14, "message": "Unresolved reference: MenuAnchorType", "type": "unresolved_reference"},
+    {"file": "BudgetFormDialog.kt", "line": 107, "message": "Too many arguments for menuAnchor()", "type": "api_mismatch"},
+    {"file": "MigrationScreen.kt", "line": 29, "message": "Unresolved reference: MenuAnchorType", "type": "unresolved_reference"},
+    {"file": "MigrationScreen.kt", "line": 113, "message": "'return' is not allowed here", "type": "syntax_error"},
+    {"file": "MigrationScreen.kt", "line": 182, "message": "Too many arguments for menuAnchor()", "type": "api_mismatch"}
+  ],
+  "buildOutput": "BUILD FAILED - MenuAnchorType not available in this Material3 version, use menuAnchor() without params. Also return not allowed in composable lambda."
+}

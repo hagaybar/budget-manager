@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7WT0VB96Y790GF8S7MJN6C",
+  "taskId": "build",
+  "invocationKey": "incremental-fix:S000004:build",
+  "stepId": "S000004",
+  "kind": "agent",
+  "title": "Build (database, iteration 1)",
+  "labels": [
+    "build",
+    "database"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7WT0VB96Y790GF8S7MJN6C/input.json",
+    "outputJsonPath": "tasks/01KM7WT0VB96Y790GF8S7MJN6C/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "step": "database"
+  }
+}

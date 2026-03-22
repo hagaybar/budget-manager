@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM5P7VDHXVVESHRATMX84EN5",
+  "taskId": "code-review",
+  "invocationKey": "google-signin-drive-backup:S000008:code-review",
+  "stepId": "S000008",
+  "kind": "agent",
+  "title": "Code review: Google Sign-In + backup/restore",
+  "io": {
+    "inputJsonPath": "tasks/01KM5P7VDHXVVESHRATMX84EN5/input.json",
+    "outputJsonPath": "tasks/01KM5P7VDHXVVESHRATMX84EN5/output.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "packageName": "com.budgetmanager.app"
+  }
+}

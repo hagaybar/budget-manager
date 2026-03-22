@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7FT6K0ZWY5YAMGKNZ10BH5",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "multi-budget:S000002:__sdk.breakpoint",
+  "status": "ok",
+  "result": {
+    "approved": true,
+    "feedback": "Plan looks comprehensive. Proceed with implementation."
+  },
+  "startedAt": "2026-03-21T06:03:08.371Z",
+  "finishedAt": "2026-03-21T06:03:08.371Z",
+  "value": {
+    "approved": true,
+    "feedback": "Plan looks comprehensive. Proceed with implementation."
+  }
+}

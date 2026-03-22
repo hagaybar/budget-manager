@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T06:24:28.296Z",
+  "data": {
+    "effectId": "01KM7H22K1HVE3MTHQN586KF2T",
+    "invocationKey": "multi-budget:S000015:quality-review",
+    "invocationHash": "486ab5771038be0f110b9182d1d3bfb5f18dc3caa4757bc38a9c212bb6fdb41f",
+    "stepId": "S000015",
+    "taskId": "quality-review",
+    "kind": "agent",
+    "label": "quality",
+    "taskDefRef": "tasks/01KM7H22K1HVE3MTHQN586KF2T/task.json",
+    "labels": [
+      "quality",
+      "review"
+    ]
+  },
+  "checksum": "1cdfd98a449a5d5d311d4422c4b5cdf6a96b24a9fbe0c7c44e8d2c5fe5c8ec19"
+}

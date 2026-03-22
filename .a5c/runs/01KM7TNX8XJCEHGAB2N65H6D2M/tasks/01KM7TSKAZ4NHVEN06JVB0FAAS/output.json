@@ -1,0 +1,1 @@
+{"fixes":[{"file":"Migrations.kt","issue":"FK schema mismatch","fix":"Table recreation pattern"},{"file":"ActiveBudgetManager.kt","issue":"runBlocking on main thread","fix":"Async scope.launch"},{"file":"AppModule.kt","issue":"Duplicate @Provides","fix":"Removed"}],"summary":"Fixed all 3 crash causes","filesModified":["Migrations.kt","ActiveBudgetManager.kt","AppModule.kt"]}

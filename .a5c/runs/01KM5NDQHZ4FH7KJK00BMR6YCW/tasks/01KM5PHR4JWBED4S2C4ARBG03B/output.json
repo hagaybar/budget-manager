@@ -1,0 +1,5 @@
+{
+  "success": true,
+  "apkPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+  "releaseUrl": "https://github.com/hagaybar/budget-manager/releases/tag/v1.3.0"
+}

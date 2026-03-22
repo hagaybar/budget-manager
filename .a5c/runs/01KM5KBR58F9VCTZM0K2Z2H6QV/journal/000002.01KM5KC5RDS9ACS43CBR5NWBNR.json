@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T12:26:27.469Z",
+  "data": {
+    "effectId": "01KM5KC5QMN3G479SQKSCXPD73",
+    "invocationKey": "fix-recurring-eager-generation:S000001:implement-eager-generation",
+    "invocationHash": "821757cc87ef75632f03267a0998b90c36f589631fcc11beab13e5a885c29d5d",
+    "stepId": "S000001",
+    "taskId": "implement-eager-generation",
+    "kind": "agent",
+    "label": "Implement eager recurring transaction generation on app open",
+    "taskDefRef": "tasks/01KM5KC5QMN3G479SQKSCXPD73/task.json"
+  },
+  "checksum": "0553aac78af1a4b1017a659c43a6331dafa34a5ec4ab195f970ad2a0a7d058e6"
+}

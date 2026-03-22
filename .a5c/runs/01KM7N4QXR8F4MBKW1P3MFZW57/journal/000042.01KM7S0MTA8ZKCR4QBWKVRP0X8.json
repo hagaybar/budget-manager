@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T08:43:29.995Z",
+  "data": {
+    "effectId": "01KM7S0MSQ02Y5AQDVZVWJCM50",
+    "invocationKey": "visual-redesign:S000021:design-quality-review",
+    "invocationHash": "27cc1979090fa29281f86af5d1d720dae3f6e62c7357daaa7d672425d477a9cb",
+    "stepId": "S000021",
+    "taskId": "design-quality-review",
+    "kind": "agent",
+    "label": "quality",
+    "taskDefRef": "tasks/01KM7S0MSQ02Y5AQDVZVWJCM50/task.json",
+    "labels": [
+      "quality",
+      "review"
+    ]
+  },
+  "checksum": "c93f04a70d08825ff93727f35b12d214389c56bc359fba9ec8424ec9623dea37"
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5P6MGAJ8FNSSQ59F11VX7S",
+  "taskId": "run-backend-tests",
+  "invocationKey": "google-signin-drive-backup:S000007:run-backend-tests",
+  "status": "ok",
+  "result": {
+    "allPassed": true,
+    "errors": [],
+    "failed": 0,
+    "passed": 71,
+    "totalTests": 71
+  },
+  "startedAt": "2026-03-20T13:16:22.744Z",
+  "finishedAt": "2026-03-20T13:16:22.744Z",
+  "value": {
+    "allPassed": true,
+    "errors": [],
+    "failed": 0,
+    "passed": 71,
+    "totalTests": 71
+  }
+}

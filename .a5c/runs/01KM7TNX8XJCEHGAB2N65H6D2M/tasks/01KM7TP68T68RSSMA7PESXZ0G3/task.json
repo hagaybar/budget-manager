@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7TP68T68RSSMA7PESXZ0G3",
+  "taskId": "diagnose-crash",
+  "invocationKey": "fix-crash-on-launch:S000001:diagnose-crash",
+  "stepId": "S000001",
+  "kind": "agent",
+  "title": "Phase 1: Diagnose all crash-on-launch causes",
+  "labels": [
+    "crash",
+    "diagnosis"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7TP68T68RSSMA7PESXZ0G3/input.json",
+    "outputJsonPath": "tasks/01KM7TP68T68RSSMA7PESXZ0G3/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android"
+  }
+}

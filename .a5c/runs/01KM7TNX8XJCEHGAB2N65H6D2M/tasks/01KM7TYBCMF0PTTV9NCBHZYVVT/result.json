@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7TYBCMF0PTTV9NCBHZYVVT",
+  "taskId": "second-pass-audit",
+  "invocationKey": "fix-crash-on-launch:S000004:second-pass-audit",
+  "status": "ok",
+  "result": {
+    "hasMoreIssues": false,
+    "issues": [],
+    "summary": "Verification PASSED. Migration FK constraints match entities exactly. runBlocking removed. Duplicate @Provides removed. No crash-severity issues remain. Minor: brief 0L window on init self-corrects via StateFlow observer."
+  },
+  "startedAt": "2026-03-21T09:19:38.693Z",
+  "finishedAt": "2026-03-21T09:19:38.693Z",
+  "value": {
+    "hasMoreIssues": false,
+    "issues": [],
+    "summary": "Verification PASSED. Migration FK constraints match entities exactly. runBlocking removed. Duplicate @Provides removed. No crash-severity issues remain. Minor: brief 0L window on init self-corrects via StateFlow observer."
+  }
+}

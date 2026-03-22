@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7H22K1HVE3MTHQN586KF2T",
+  "taskId": "quality-review",
+  "invocationKey": "multi-budget:S000015:quality-review",
+  "status": "ok",
+  "result": {
+    "issues": [
+      {
+        "description": "After backup restore, ActiveBudgetManager not updated with restored budget ID",
+        "file": "SettingsViewModel.kt",
+        "severity": "high"
+      },
+      {
+        "description": "loadCategories() not scoped to active budget",
+        "file": "TransactionListViewModel.kt",
+        "severity": "medium"
+      },
+      {
+        "description": "ALTER TABLE cannot add FK constraints, need table recreation",
+        "file": "Migrations.kt",
+        "severity": "medium"
+      },
+      {
+        "description": "Per-row update in migration loop, should batch",
+        "file": "MigrationViewModel.kt",
+        "severity": "medium"
+      },
+      {
+        "description": "Race condition: getActiveBudgetId returns 0 before DataStore loads",
+        "file": "ActiveBudgetManager.kt",
+        "severity": "medium"
+      },
+      {
+        "description": "Duplicated currencySymbol function",
+        "file": "BudgetManagementScreen.kt",
+        "severity": "low"
+      }
+    ],
+    "passesQuality": false,
+    "summary": "Architecture sound, 2 high/medium issues need fixing before release"
+  },
+  "startedAt": "2026-03-21T06:27:08.035Z",
+  "finishedAt": "2026-03-21T06:27:08.035Z",
+  "value": {
+    "issues": [
+      {
+        "description": "After backup restore, ActiveBudgetManager not updated with restored budget ID",
+        "file": "SettingsViewModel.kt",
+        "severity": "high"
+      },
+      {
+        "description": "loadCategories() not scoped to active budget",
+        "file": "TransactionListViewModel.kt",
+        "severity": "medium"
+      },
+      {
+        "description": "ALTER TABLE cannot add FK constraints, need table recreation",
+        "file": "Migrations.kt",
+        "severity": "medium"
+      },
+      {
+        "description": "Per-row update in migration loop, should batch",
+        "file": "MigrationViewModel.kt",
+        "severity": "medium"
+      },
+      {
+        "description": "Race condition: getActiveBudgetId returns 0 before DataStore loads",
+        "file": "ActiveBudgetManager.kt",
+        "severity": "medium"
+      },
+      {
+        "description": "Duplicated currencySymbol function",
+        "file": "BudgetManagementScreen.kt",
+        "severity": "low"
+      }
+    ],
+    "passesQuality": false,
+    "summary": "Architecture sound, 2 high/medium issues need fixing before release"
+  }
+}

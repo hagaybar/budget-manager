@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T13:02:33.576Z",
+  "data": {
+    "effectId": "01KM5NE92HN4NATR0YJMTBRQ8E",
+    "invocationKey": "google-signin-drive-backup:S000001:implement-google-sign-in",
+    "invocationHash": "26b3b79f799ecd0150922cc5409d16517398a84519023c99708c6b4c19603c06",
+    "stepId": "S000001",
+    "taskId": "implement-google-sign-in",
+    "kind": "agent",
+    "label": "Implement real Google Sign-In with Credential Manager",
+    "taskDefRef": "tasks/01KM5NE92HN4NATR0YJMTBRQ8E/task.json"
+  },
+  "checksum": "0cb46703b1dd928478e0c2fe57d9e65991ca832d79fe38b5f5c2e2bce1a67049"
+}

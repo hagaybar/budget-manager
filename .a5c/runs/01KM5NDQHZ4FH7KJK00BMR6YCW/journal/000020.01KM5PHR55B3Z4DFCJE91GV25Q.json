@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T13:21:55.878Z",
+  "data": {
+    "effectId": "01KM5PHR4JWBED4S2C4ARBG03B",
+    "invocationKey": "google-signin-drive-backup:S000010:build-and-release",
+    "invocationHash": "09676e556017c8c16a25c6e1db309f5cc1cdc468ab90e15789e0ca8f2cdf470d",
+    "stepId": "S000010",
+    "taskId": "build-and-release",
+    "kind": "agent",
+    "label": "Version bump, build APK, commit, push, and create GitHub release",
+    "taskDefRef": "tasks/01KM5PHR4JWBED4S2C4ARBG03B/task.json"
+  },
+  "checksum": "7e68ea25e93464c0f5b89ce26a215cef0207e46f631956c82b18c046336ebf18"
+}

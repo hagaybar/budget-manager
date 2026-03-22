@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T06:22:11.916Z",
+  "data": {
+    "effectId": "01KM7GXXD1VQC9C5291S7QJZGZ",
+    "invocationKey": "multi-budget:S000013:implement-integration",
+    "invocationHash": "a91cafe84e1a2361ea208eedd25f6cc2b9deba14d2302fcf2cabeaf59ce8d9f8",
+    "stepId": "S000013",
+    "taskId": "implement-integration",
+    "kind": "agent",
+    "label": "integration",
+    "taskDefRef": "tasks/01KM7GXXD1VQC9C5291S7QJZGZ/task.json",
+    "labels": [
+      "integration",
+      "wiring"
+    ]
+  },
+  "checksum": "5de207c72c240cd108df4d3aa530d23f1077e235541d5ba6ff9498b954727652"
+}

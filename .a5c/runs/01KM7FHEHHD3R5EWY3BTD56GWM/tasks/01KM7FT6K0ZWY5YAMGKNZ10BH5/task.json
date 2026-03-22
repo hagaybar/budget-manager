@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7FT6K0ZWY5YAMGKNZ10BH5",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "multi-budget:S000002:__sdk.breakpoint",
+  "stepId": "S000002",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "context": {
+        "files": [
+          {
+            "format": "markdown",
+            "path": "artifacts/multi-budget-plan.md"
+          }
+        ]
+      },
+      "question": "Review the multi-budget implementation plan. Approve to proceed with implementation?",
+      "title": "Multi-Budget Plan Review"
+    },
+    "requestedAt": "2026-03-21T06:02:41.632Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "context": {
+        "files": [
+          {
+            "format": "markdown",
+            "path": "artifacts/multi-budget-plan.md"
+          }
+        ]
+      },
+      "question": "Review the multi-budget implementation plan. Approve to proceed with implementation?",
+      "title": "Multi-Budget Plan Review"
+    },
+    "requestedAt": "2026-03-21T06:02:41.632Z"
+  }
+}

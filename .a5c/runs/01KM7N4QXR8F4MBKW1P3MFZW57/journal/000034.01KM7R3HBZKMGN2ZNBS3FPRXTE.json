@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T08:27:36.191Z",
+  "data": {
+    "effectId": "01KM7R3HBC9TTQ33SM00ZEYY67",
+    "invocationKey": "visual-redesign:S000017:polish-dark-mode",
+    "invocationHash": "fc4357b2fa5451151d71cfb76e2f9f024a4400eab34bcd115261485052f49f2c",
+    "stepId": "S000017",
+    "taskId": "polish-dark-mode",
+    "kind": "agent",
+    "label": "dark-mode",
+    "taskDefRef": "tasks/01KM7R3HBC9TTQ33SM00ZEYY67/task.json",
+    "labels": [
+      "dark-mode",
+      "polish"
+    ]
+  },
+  "checksum": "cd75a1c4822c04b4d7f0fdf1900a2dd9528017bcf1a5000a995e1c2ff5a0ced3"
+}

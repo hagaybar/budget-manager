@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7FZF3CW2AFZTPN5W14W398",
+  "taskId": "build-and-verify",
+  "invocationKey": "multi-budget:S000004:build-and-verify",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "buildOutput": "BUILD SUCCESSFUL in 53s, 38 actionable tasks: 11 executed, 27 up-to-date",
+    "errors": []
+  },
+  "startedAt": "2026-03-21T06:06:48.902Z",
+  "finishedAt": "2026-03-21T06:06:48.902Z",
+  "value": {
+    "allPassing": true,
+    "buildOutput": "BUILD SUCCESSFUL in 53s, 38 actionable tasks: 11 executed, 27 up-to-date",
+    "errors": []
+  }
+}

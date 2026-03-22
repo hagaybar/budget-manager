@@ -1,0 +1,18 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T13:02:08.351Z",
+  "data": {
+    "effectId": "01KM87T7ECY4FR25EE7R72DYXV",
+    "invocationKey": "banking-ux-polish:S000008:__sdk.breakpoint",
+    "invocationHash": "3553ac68fc5c8c5654b9b5d36d73f3c6dc06ac7e736252ff1126a78103ed46e0",
+    "stepId": "S000008",
+    "taskId": "__sdk.breakpoint",
+    "kind": "breakpoint",
+    "label": "breakpoint",
+    "taskDefRef": "tasks/01KM87T7ECY4FR25EE7R72DYXV/task.json",
+    "labels": [
+      "breakpoint"
+    ]
+  },
+  "checksum": "8caa6d1f0efb006ec8965a137d7361ffc1d2d7c637015e79ea488cce951994f3"
+}

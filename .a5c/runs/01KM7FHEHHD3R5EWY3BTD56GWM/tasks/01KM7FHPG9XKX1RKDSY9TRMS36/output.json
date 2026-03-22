@@ -1,0 +1,26 @@
+{
+  "summary": "Detailed implementation plan for adding multiple named budgets (wallets) to the Android budget manager app, covering database migration, new BudgetEntity/DAO/Repository/ViewModel layers, ActiveBudgetManager singleton for budget switching via DataStore-backed StateFlow, budget-scoped filtering across all existing DAOs and ViewModels, top-bar dropdown UI, budget management screen, migration dialog for existing users, and backup/restore compatibility.",
+  "filesCreated": [
+    "BudgetEntity.kt", "BudgetDao.kt", "Migrations.kt", "BudgetRepository.kt", "BudgetRepositoryImpl.kt",
+    "Budget.kt", "ActiveBudgetManager.kt", "BudgetViewModel.kt", "BudgetDropdown.kt",
+    "BudgetManagementScreen.kt", "BudgetFormDialog.kt", "MigrationDialog.kt"
+  ],
+  "filesModified": [
+    "TransactionEntity.kt", "RecurringTransactionEntity.kt", "BudgetDatabase.kt",
+    "TransactionDao.kt", "RecurringTransactionDao.kt", "TransactionRepository.kt",
+    "TransactionRepositoryImpl.kt", "RecurringRepository.kt", "RecurringRepositoryImpl.kt",
+    "BackupRepositoryImpl.kt", "Transaction.kt", "RecurringTransaction.kt", "BackupData.kt",
+    "GenerateRecurringTransactionsUseCase.kt", "AppModule.kt", "RepositoryModule.kt",
+    "TransactionListViewModel.kt", "AddEditTransactionViewModel.kt", "MonthlySummaryViewModel.kt",
+    "RecurringViewModel.kt", "Screen.kt", "BudgetNavHost.kt"
+  ],
+  "newEntities": ["BudgetEntity", "Budget", "BudgetDao", "BudgetRepository", "ActiveBudgetManager", "BudgetViewModel", "MIGRATION_1_2"],
+  "modifiedEntities": ["TransactionEntity", "RecurringTransactionEntity", "BudgetDatabase", "TransactionDao", "RecurringTransactionDao"],
+  "migrationSteps": [
+    "Create budgets table",
+    "Insert default 'My Budget' if existing data exists",
+    "Add budget_id to transactions with DEFAULT 0",
+    "Add budget_id to recurring_transactions with DEFAULT 0",
+    "Update all existing rows to reference default budget"
+  ]
+}

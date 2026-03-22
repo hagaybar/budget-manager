@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM87T7ECY4FR25EE7R72DYXV",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "banking-ux-polish:S000008:__sdk.breakpoint",
+  "status": "ok",
+  "result": {
+    "approved": true
+  },
+  "startedAt": "2026-03-21T13:12:40.500Z",
+  "finishedAt": "2026-03-21T13:12:40.500Z",
+  "value": {
+    "approved": true
+  }
+}

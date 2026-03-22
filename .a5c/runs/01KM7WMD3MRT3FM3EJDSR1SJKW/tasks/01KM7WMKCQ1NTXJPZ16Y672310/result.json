@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7WMKCQ1NTXJPZ16Y672310",
+  "taskId": "analyze-diff",
+  "invocationKey": "incremental-fix:S000001:analyze-diff",
+  "status": "ok",
+  "result": {
+    "categories": {
+      "build": 3,
+      "database": 8,
+      "di": 2,
+      "domain": 10,
+      "resources": 6,
+      "ui": 25,
+      "viewmodel": 7
+    },
+    "summary": "62 files changed: 19 new, 43 modified. Database: 8 files. Domain: 10 files. DI: 2 files. ViewModels: 7 files. UI: 25 files. Resources: 6 files. Build: 3 files.",
+    "totalFiles": 62
+  },
+  "startedAt": "2026-03-21T09:47:08.393Z",
+  "finishedAt": "2026-03-21T09:47:08.393Z",
+  "value": {
+    "categories": {
+      "build": 3,
+      "database": 8,
+      "di": 2,
+      "domain": 10,
+      "resources": 6,
+      "ui": 25,
+      "viewmodel": 7
+    },
+    "summary": "62 files changed: 19 new, 43 modified. Database: 8 files. Domain: 10 files. DI: 2 files. ViewModels: 7 files. UI: 25 files. Resources: 6 files. Build: 3 files.",
+    "totalFiles": 62
+  }
+}

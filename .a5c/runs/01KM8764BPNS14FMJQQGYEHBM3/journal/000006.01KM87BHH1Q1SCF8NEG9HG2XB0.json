@@ -1,0 +1,18 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T12:54:07.137Z",
+  "data": {
+    "effectId": "01KM87BHGDXB5HAQ6396KV4R29",
+    "invocationKey": "banking-ux-polish:S000003:redesign-summary",
+    "invocationHash": "4c3cbbae9d42d82323968d36fdb646874c2e8d74c712cc4d64fbf70d1062e5d1",
+    "stepId": "S000003",
+    "taskId": "redesign-summary",
+    "kind": "agent",
+    "label": "summary-screen",
+    "taskDefRef": "tasks/01KM87BHGDXB5HAQ6396KV4R29/task.json",
+    "labels": [
+      "summary-screen"
+    ]
+  },
+  "checksum": "b539289ad4fc7530458bbf3c806e04a1f2b9cd037b944c1338e685d6f7bd7f51"
+}

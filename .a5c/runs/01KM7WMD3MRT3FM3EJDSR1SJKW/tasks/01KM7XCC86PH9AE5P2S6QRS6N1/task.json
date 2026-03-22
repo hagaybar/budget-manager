@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7XCC86PH9AE5P2S6QRS6N1",
+  "taskId": "apply-ui",
+  "invocationKey": "incremental-fix:S000012:apply-ui",
+  "stepId": "S000012",
+  "kind": "agent",
+  "title": "Step 6: Apply UI changes (screens, components, navigation, theme, resources)",
+  "labels": [
+    "incremental",
+    "ui"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7XCC86PH9AE5P2S6QRS6N1/input.json",
+    "outputJsonPath": "tasks/01KM7XCC86PH9AE5P2S6QRS6N1/result.json"
+  },
+  "inputs": {
+    "analysis": {
+      "categories": {
+        "build": 3,
+        "database": 8,
+        "di": 2,
+        "domain": 10,
+        "resources": 6,
+        "ui": 25,
+        "viewmodel": 7
+      },
+      "summary": "62 files changed: 19 new, 43 modified. Database: 8 files. Domain: 10 files. DI: 2 files. ViewModels: 7 files. UI: 25 files. Resources: 6 files. Build: 3 files.",
+      "totalFiles": 62
+    },
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

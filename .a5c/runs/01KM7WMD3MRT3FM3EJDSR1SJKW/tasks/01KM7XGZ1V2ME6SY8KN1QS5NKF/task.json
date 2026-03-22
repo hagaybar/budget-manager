@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7XGZ1V2ME6SY8KN1QS5NKF",
+  "taskId": "build",
+  "invocationKey": "incremental-fix:S000013:build",
+  "stepId": "S000013",
+  "kind": "agent",
+  "title": "Build (ui, iteration 1)",
+  "labels": [
+    "build",
+    "ui"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7XGZ1V2ME6SY8KN1QS5NKF/input.json",
+    "outputJsonPath": "tasks/01KM7XGZ1V2ME6SY8KN1QS5NKF/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "step": "ui"
+  }
+}

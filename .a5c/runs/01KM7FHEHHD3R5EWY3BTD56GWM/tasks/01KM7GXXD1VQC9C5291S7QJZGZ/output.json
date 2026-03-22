@@ -1,0 +1,1 @@
+{"summary": "Integration verified. Fixed: MIGRATION_1_2 not wired in AppModule Room builder. All other integration points correct.", "filesModified": ["AppModule.kt"], "integrationIssuesFixed": ["Added MIGRATION_1_2 to Room.databaseBuilder in AppModule"], "allPassing": true}

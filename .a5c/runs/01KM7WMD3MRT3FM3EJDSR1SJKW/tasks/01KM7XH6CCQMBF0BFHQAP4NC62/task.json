@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7XH6CCQMBF0BFHQAP4NC62",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "incremental-fix:S000014:__sdk.breakpoint",
+  "stepId": "S000014",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Full UI layer applied (screens, components, navigation, theme, splash). Build passes. Please test the APK — does it launch?",
+      "title": "Test: Full UI Applied"
+    },
+    "requestedAt": "2026-03-21T10:02:26.571Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Full UI layer applied (screens, components, navigation, theme, splash). Build passes. Please test the APK — does it launch?",
+      "title": "Test: Full UI Applied"
+    },
+    "requestedAt": "2026-03-21T10:02:26.571Z"
+  }
+}

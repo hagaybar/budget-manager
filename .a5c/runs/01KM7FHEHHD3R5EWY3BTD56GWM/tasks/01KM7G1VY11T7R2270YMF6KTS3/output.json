@@ -1,0 +1,6 @@
+{
+  "summary": "Implemented domain layer: Budget model, BudgetRepository/Impl, ActiveBudgetManager with DataStore, updated Transaction/RecurringTransaction models with budgetId, added budget-scoped repo methods, updated BackupData, GenerateRecurringTransactionsUseCase, and DI modules.",
+  "filesCreated": ["Budget.kt", "BudgetRepository.kt", "BudgetRepositoryImpl.kt", "ActiveBudgetManager.kt"],
+  "filesModified": ["Transaction.kt", "RecurringTransaction.kt", "BackupData.kt", "TransactionRepository.kt", "TransactionRepositoryImpl.kt", "RecurringRepository.kt", "RecurringRepositoryImpl.kt", "BackupRepositoryImpl.kt", "GenerateRecurringTransactionsUseCase.kt", "AppModule.kt", "RepositoryModule.kt"],
+  "allPassing": true
+}

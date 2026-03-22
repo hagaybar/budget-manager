@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:59:48.762Z",
+  "data": {
+    "effectId": "01KM7XCC86PH9AE5P2S6QRS6N1",
+    "invocationKey": "incremental-fix:S000012:apply-ui",
+    "invocationHash": "2c203811a9249909078ae06c88a4ac9a25ce2bec3c1bc63fdfb6a4a7ab6191d8",
+    "stepId": "S000012",
+    "taskId": "apply-ui",
+    "kind": "agent",
+    "label": "ui",
+    "taskDefRef": "tasks/01KM7XCC86PH9AE5P2S6QRS6N1/task.json",
+    "labels": [
+      "ui",
+      "incremental"
+    ]
+  },
+  "checksum": "1daeca10415dddaa33b1d215ec98c042b660263087c91b5513b89c1258452428"
+}

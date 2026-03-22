@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM5NWMEXZDS4PX53VD922EK2",
+  "taskId": "integration-polish",
+  "invocationKey": "google-signin-drive-backup:S000005:integration-polish",
+  "stepId": "S000005",
+  "kind": "agent",
+  "title": "Integration testing and UI polish",
+  "io": {
+    "inputJsonPath": "tasks/01KM5NWMEXZDS4PX53VD922EK2/input.json",
+    "outputJsonPath": "tasks/01KM5NWMEXZDS4PX53VD922EK2/output.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "packageName": "com.budgetmanager.app"
+  }
+}

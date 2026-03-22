@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7X6N3M88SGW2MDV7HJZBN6",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "incremental-fix:S000011:__sdk.breakpoint",
+  "stepId": "S000011",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "ViewModel layer applied. Build passes. Please test the APK — does it launch?",
+      "title": "Test: ViewModel Layer Added"
+    },
+    "requestedAt": "2026-03-21T09:56:41.204Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "ViewModel layer applied. Build passes. Please test the APK — does it launch?",
+      "title": "Test: ViewModel Layer Added"
+    },
+    "requestedAt": "2026-03-21T09:56:41.204Z"
+  }
+}

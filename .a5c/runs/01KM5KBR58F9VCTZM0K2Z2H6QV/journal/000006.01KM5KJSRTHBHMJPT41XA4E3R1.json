@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T12:30:04.570Z",
+  "data": {
+    "effectId": "01KM5KJSR89R97JWGMHDPPYT7Q",
+    "invocationKey": "fix-recurring-eager-generation:S000003:run-backend-tests",
+    "invocationHash": "f37aa027805aefb71693da718f02e35f717a4272df4a79203b267bfa9d3841f8",
+    "stepId": "S000003",
+    "taskId": "run-backend-tests",
+    "kind": "agent",
+    "label": "Run backend pytest tests for regression check",
+    "taskDefRef": "tasks/01KM5KJSR89R97JWGMHDPPYT7Q/task.json"
+  },
+  "checksum": "0c774aae48eac276d161255f711e615ec8bc07b36248ff1c518d0a1c0dbcdeb2"
+}

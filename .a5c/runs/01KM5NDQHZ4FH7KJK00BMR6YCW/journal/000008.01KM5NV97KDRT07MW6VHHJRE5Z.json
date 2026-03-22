@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T13:09:39.700Z",
+  "data": {
+    "effectId": "01KM5NV971MXY2B5SMFG8RAHS6",
+    "invocationKey": "google-signin-drive-backup:S000004:build-and-verify",
+    "invocationHash": "93819691b170ea54c40f47e84a8fc3ff40276fa8873906c4cdb53efa0d8d8204",
+    "stepId": "S000004",
+    "taskId": "build-and-verify",
+    "kind": "agent",
+    "label": "Build and verify (backup-restore - iteration 1)",
+    "taskDefRef": "tasks/01KM5NV971MXY2B5SMFG8RAHS6/task.json"
+  },
+  "checksum": "5b15f3f285c535805cefd291564233a7faf04964faaf7bc77cac217c63c8b9d7"
+}

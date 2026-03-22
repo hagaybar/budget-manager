@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:17:11.976Z",
+  "data": {
+    "effectId": "01KM7TYBCMF0PTTV9NCBHZYVVT",
+    "invocationKey": "fix-crash-on-launch:S000004:second-pass-audit",
+    "invocationHash": "21aad2f2590b049a49c127ceb019c5ad47a729ca7b667c82dce50cfc25a9855d",
+    "stepId": "S000004",
+    "taskId": "second-pass-audit",
+    "kind": "agent",
+    "label": "audit",
+    "taskDefRef": "tasks/01KM7TYBCMF0PTTV9NCBHZYVVT/task.json",
+    "labels": [
+      "audit",
+      "second-pass"
+    ]
+  },
+  "checksum": "41bd4799f3149ed7137443546420fd22945524a73260d4f1916275286b46399a"
+}

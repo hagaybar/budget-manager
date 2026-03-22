@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7WN65BRJRH8WME489STAHK",
+  "taskId": "create-branch",
+  "invocationKey": "incremental-fix:S000002:create-branch",
+  "status": "ok",
+  "result": {
+    "branch": "incremental-rebuild",
+    "buildPasses": true,
+    "commit": "549135d",
+    "success": true
+  },
+  "startedAt": "2026-03-21T09:47:55.783Z",
+  "finishedAt": "2026-03-21T09:47:55.783Z",
+  "value": {
+    "branch": "incremental-rebuild",
+    "buildPasses": true,
+    "commit": "549135d",
+    "success": true
+  }
+}

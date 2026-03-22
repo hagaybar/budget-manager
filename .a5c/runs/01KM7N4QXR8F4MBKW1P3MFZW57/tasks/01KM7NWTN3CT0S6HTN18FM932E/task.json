@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7NWTN3CT0S6HTN18FM932E",
+  "taskId": "build-and-verify",
+  "invocationKey": "visual-redesign:S000006:build-and-verify",
+  "stepId": "S000006",
+  "kind": "agent",
+  "title": "Build & verify (brand-identity, iteration 1)",
+  "labels": [
+    "brand-identity",
+    "build",
+    "verification"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7NWTN3CT0S6HTN18FM932E/input.json",
+    "outputJsonPath": "tasks/01KM7NWTN3CT0S6HTN18FM932E/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "scope": "brand-identity"
+  }
+}

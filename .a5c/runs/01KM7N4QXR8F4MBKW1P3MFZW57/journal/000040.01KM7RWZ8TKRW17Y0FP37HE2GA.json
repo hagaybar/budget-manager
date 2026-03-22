@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T08:41:29.626Z",
+  "data": {
+    "effectId": "01KM7RWZ86HBDKQR911ZS9G4WY",
+    "invocationKey": "visual-redesign:S000020:build-and-verify",
+    "invocationHash": "3d0b6f7e9d1b8e2cdae929e51bc7897c711d95d319527400b6592e7304081b2c",
+    "stepId": "S000020",
+    "taskId": "build-and-verify",
+    "kind": "agent",
+    "label": "build",
+    "taskDefRef": "tasks/01KM7RWZ86HBDKQR911ZS9G4WY/task.json",
+    "labels": [
+      "build",
+      "verification",
+      "polish-pass"
+    ]
+  },
+  "checksum": "ea6a5a6ef133e481ca328678c569486d90262c5c0f8bff1ea94212d5b506dda7"
+}

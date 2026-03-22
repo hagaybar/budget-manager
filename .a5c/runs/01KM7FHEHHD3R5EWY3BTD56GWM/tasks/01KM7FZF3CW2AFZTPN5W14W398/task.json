@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7FZF3CW2AFZTPN5W14W398",
+  "taskId": "build-and-verify",
+  "invocationKey": "multi-budget:S000004:build-and-verify",
+  "stepId": "S000004",
+  "kind": "agent",
+  "title": "Build & verify (database-layer, iteration 1)",
+  "labels": [
+    "build",
+    "database-layer",
+    "verification"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7FZF3CW2AFZTPN5W14W398/input.json",
+    "outputJsonPath": "tasks/01KM7FZF3CW2AFZTPN5W14W398/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "scope": "database-layer"
+  }
+}

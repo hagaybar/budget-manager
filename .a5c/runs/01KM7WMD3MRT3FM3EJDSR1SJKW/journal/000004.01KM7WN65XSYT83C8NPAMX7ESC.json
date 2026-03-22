@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:47:08.862Z",
+  "data": {
+    "effectId": "01KM7WN65BRJRH8WME489STAHK",
+    "invocationKey": "incremental-fix:S000002:create-branch",
+    "invocationHash": "2050927298a3f420cd04a46e41b97c6075402a0888137783fb38d0a79c4f5564",
+    "stepId": "S000002",
+    "taskId": "create-branch",
+    "kind": "agent",
+    "label": "git",
+    "taskDefRef": "tasks/01KM7WN65BRJRH8WME489STAHK/task.json",
+    "labels": [
+      "git",
+      "setup"
+    ]
+  },
+  "checksum": "0fe410baf49679289a6f673bdbd94a03c09e1fa89a6c25f40f9c8c33e884106a"
+}

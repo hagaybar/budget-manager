@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM5PGT5PHPAHXYD8MPCG9B6E",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "google-signin-drive-backup:S000009:__sdk.breakpoint",
+  "stepId": "S000009",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Google Sign-In + SAF backup/restore implemented.\n\nBuild: SUCCESS\nBackend tests: ALL PASSED\nCode review: CONCERNS\n\nReview issues: [\"PII logging in GoogleSignInManager (Log.d with email/name)\",\"Import not wrapped in Room transaction (data loss risk on crash)\",\"exportToUri silent failure when outputStream is null\",\"Nav start destination always Transactions regardless of auth state\"]\n\nApprove to version bump, build APK, and release?",
+      "title": "Google Sign-In + Drive Backup Review"
+    },
+    "requestedAt": "2026-03-20T13:21:25.174Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Google Sign-In + SAF backup/restore implemented.\n\nBuild: SUCCESS\nBackend tests: ALL PASSED\nCode review: CONCERNS\n\nReview issues: [\"PII logging in GoogleSignInManager (Log.d with email/name)\",\"Import not wrapped in Room transaction (data loss risk on crash)\",\"exportToUri silent failure when outputStream is null\",\"Nav start destination always Transactions regardless of auth state\"]\n\nApprove to version bump, build APK, and release?",
+      "title": "Google Sign-In + Drive Backup Review"
+    },
+    "requestedAt": "2026-03-20T13:21:25.174Z"
+  }
+}

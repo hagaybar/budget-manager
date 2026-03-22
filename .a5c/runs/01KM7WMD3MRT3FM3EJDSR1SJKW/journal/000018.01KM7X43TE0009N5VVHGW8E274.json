@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:55:17.967Z",
+  "data": {
+    "effectId": "01KM7X43SVKJ5H4CQSGYC61WW7",
+    "invocationKey": "incremental-fix:S000009:apply-viewmodel",
+    "invocationHash": "8750e0b22d5e90e733209d9419a6b3ca360879ffbd71dc906766d5c9a98a5a36",
+    "stepId": "S000009",
+    "taskId": "apply-viewmodel",
+    "kind": "agent",
+    "label": "viewmodel",
+    "taskDefRef": "tasks/01KM7X43SVKJ5H4CQSGYC61WW7/task.json",
+    "labels": [
+      "viewmodel",
+      "incremental"
+    ]
+  },
+  "checksum": "cbfce2db6891013a258c82617951e366ba6fe42b2e892bdaea01234aaf307c57"
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7TSKAZ4NHVEN06JVB0FAAS",
+  "taskId": "apply-fixes",
+  "invocationKey": "fix-crash-on-launch:S000002:apply-fixes",
+  "status": "ok",
+  "result": {
+    "filesModified": [
+      "Migrations.kt",
+      "ActiveBudgetManager.kt",
+      "AppModule.kt"
+    ],
+    "fixes": [
+      {
+        "file": "Migrations.kt",
+        "fix": "Table recreation pattern",
+        "issue": "FK schema mismatch"
+      },
+      {
+        "file": "ActiveBudgetManager.kt",
+        "fix": "Async scope.launch",
+        "issue": "runBlocking on main thread"
+      },
+      {
+        "file": "AppModule.kt",
+        "fix": "Removed",
+        "issue": "Duplicate @Provides"
+      }
+    ],
+    "summary": "Fixed all 3 crash causes"
+  },
+  "startedAt": "2026-03-21T09:16:45.446Z",
+  "finishedAt": "2026-03-21T09:16:45.446Z",
+  "value": {
+    "filesModified": [
+      "Migrations.kt",
+      "ActiveBudgetManager.kt",
+      "AppModule.kt"
+    ],
+    "fixes": [
+      {
+        "file": "Migrations.kt",
+        "fix": "Table recreation pattern",
+        "issue": "FK schema mismatch"
+      },
+      {
+        "file": "ActiveBudgetManager.kt",
+        "fix": "Async scope.launch",
+        "issue": "runBlocking on main thread"
+      },
+      {
+        "file": "AppModule.kt",
+        "fix": "Removed",
+        "issue": "Duplicate @Provides"
+      }
+    ],
+    "summary": "Fixed all 3 crash causes"
+  }
+}

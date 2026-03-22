@@ -1,0 +1,1 @@
+{"summary":"Added subtle animations: crossfade nav transitions, list item AnimatedVisibility, category progress bar animation, card animateContentSize, month Crossfade.","filesModified":["BudgetNavHost.kt","TransactionListScreen.kt","MonthlySummaryScreen.kt","TransactionCard.kt","BudgetManagementScreen.kt"]}

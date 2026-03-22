@@ -1,0 +1,1 @@
+{"summary":"Applied 9 database files from master. Build passes.","filesCreated":["BudgetEntity.kt","BudgetDao.kt","Migrations.kt"],"filesModified":["TransactionEntity.kt","RecurringTransactionEntity.kt","TransactionDao.kt","RecurringTransactionDao.kt","BudgetDatabase.kt","AppModule.kt"]}

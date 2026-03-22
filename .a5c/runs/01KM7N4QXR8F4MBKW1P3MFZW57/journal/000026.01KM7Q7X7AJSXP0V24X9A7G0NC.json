@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T08:12:30.826Z",
+  "data": {
+    "effectId": "01KM7Q7X6FJXZX66F4FC39D59V",
+    "invocationKey": "visual-redesign:S000013:implement-motion",
+    "invocationHash": "1aebf6e374f8d524525e8fecbfa0644c9dafd1f77fb10eff7652b5e8b02a2c18",
+    "stepId": "S000013",
+    "taskId": "implement-motion",
+    "kind": "agent",
+    "label": "motion",
+    "taskDefRef": "tasks/01KM7Q7X6FJXZX66F4FC39D59V/task.json",
+    "labels": [
+      "motion",
+      "animation"
+    ]
+  },
+  "checksum": "cd31772d276917e41965fa6d0af65e767972aae3acd63a75c996db3c2e93cf1b"
+}

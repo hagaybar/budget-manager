@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM87BHGDXB5HAQ6396KV4R29",
+  "taskId": "redesign-summary",
+  "invocationKey": "banking-ux-polish:S000003:redesign-summary",
+  "stepId": "S000003",
+  "kind": "agent",
+  "title": "Phase 2: Redesign MonthlySummaryScreen — visual analytics",
+  "labels": [
+    "summary-screen"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM87BHGDXB5HAQ6396KV4R29/input.json",
+    "outputJsonPath": "tasks/01KM87BHGDXB5HAQ6396KV4R29/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7SDEM5SYC8PZCYYBXDA2ZD",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "visual-redesign:S000023:__sdk.breakpoint",
+  "stepId": "S000023",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "context": {
+        "files": [
+          {
+            "format": "markdown",
+            "path": "artifacts/ui-audit.md"
+          }
+        ]
+      },
+      "question": "Visual redesign complete. APK built: true. Approve final result?",
+      "title": "Visual Redesign Complete"
+    },
+    "requestedAt": "2026-03-21T08:50:29.637Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "context": {
+        "files": [
+          {
+            "format": "markdown",
+            "path": "artifacts/ui-audit.md"
+          }
+        ]
+      },
+      "question": "Visual redesign complete. APK built: true. Approve final result?",
+      "title": "Visual Redesign Complete"
+    },
+    "requestedAt": "2026-03-21T08:50:29.637Z"
+  }
+}

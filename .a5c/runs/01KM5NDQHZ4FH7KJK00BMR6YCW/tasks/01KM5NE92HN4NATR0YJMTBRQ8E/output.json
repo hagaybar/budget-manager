@@ -1,0 +1,12 @@
+{
+  "implemented": true,
+  "filesCreated": [],
+  "filesModified": [
+    "android/app/build.gradle.kts",
+    "android/app/src/main/res/values/strings.xml",
+    "android/app/src/main/java/com/budgetmanager/app/auth/GoogleSignInManager.kt",
+    "android/app/src/main/java/com/budgetmanager/app/ui/viewmodel/AuthViewModel.kt",
+    "android/app/src/main/java/com/budgetmanager/app/ui/screens/signin/SignInScreen.kt"
+  ],
+  "summary": "Replaced demo Google Sign-In with Credential Manager API. Added credentials dependencies. GoogleSignInManager now uses CredentialManager.getCredential() with GetGoogleIdOption. Error handling for cancellation, no credentials, Play Services missing. Guest mode preserved."
+}

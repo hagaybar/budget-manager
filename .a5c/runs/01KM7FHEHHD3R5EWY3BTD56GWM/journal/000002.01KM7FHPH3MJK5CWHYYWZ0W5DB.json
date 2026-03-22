@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T05:58:03.043Z",
+  "data": {
+    "effectId": "01KM7FHPG9XKX1RKDSY9TRMS36",
+    "invocationKey": "multi-budget:S000001:analysis-planning",
+    "invocationHash": "01d709fc9085b7c7c9916043aed5f1be6e4677e5f749a05ba495e1a87f57bf00",
+    "stepId": "S000001",
+    "taskId": "analysis-planning",
+    "kind": "agent",
+    "label": "planning",
+    "taskDefRef": "tasks/01KM7FHPG9XKX1RKDSY9TRMS36/task.json",
+    "labels": [
+      "planning",
+      "architecture"
+    ]
+  },
+  "checksum": "edcd2b7867be9331203b8fa2b715faf5e42dc26749989d034201f3806c8b6879"
+}

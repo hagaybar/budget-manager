@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T12:56:13.980Z",
+  "data": {
+    "effectId": "01KM87FDC81WTTM2Q4T121K8J1",
+    "invocationKey": "banking-ux-polish:S000004:build",
+    "invocationHash": "7357c4893e87645f45cecab2d5db9104b3a84e94cba5f0be1abe721cac0c1e87",
+    "stepId": "S000004",
+    "taskId": "build",
+    "kind": "agent",
+    "label": "build",
+    "taskDefRef": "tasks/01KM87FDC81WTTM2Q4T121K8J1/task.json",
+    "labels": [
+      "build",
+      "summary"
+    ]
+  },
+  "checksum": "d232d37527a436de66a4cbf22e4df463e07f8d8720773306533fcc5a63f0249e"
+}

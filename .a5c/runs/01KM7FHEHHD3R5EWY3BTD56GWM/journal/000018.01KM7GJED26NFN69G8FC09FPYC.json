@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T06:15:56.066Z",
+  "data": {
+    "effectId": "01KM7GJEC6HRE9XVQTGX7YMWDC",
+    "invocationKey": "multi-budget:S000009:implement-ui-layer",
+    "invocationHash": "6d50b68205501d069f24901cb86aa5f3d8a7024fb9ea84612c97ba5ee22641bb",
+    "stepId": "S000009",
+    "taskId": "implement-ui-layer",
+    "kind": "agent",
+    "label": "ui",
+    "taskDefRef": "tasks/01KM7GJEC6HRE9XVQTGX7YMWDC/task.json",
+    "labels": [
+      "ui",
+      "compose",
+      "implementation"
+    ]
+  },
+  "checksum": "80e5d17f4557226733de823abd245bb69f3eb2ba0fb8b1e6c693d46089f55e7e"
+}

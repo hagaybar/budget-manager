@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7P6G0V8M2101BKDH11H5C4",
+  "taskId": "build-and-verify",
+  "invocationKey": "visual-redesign:S000008:build-and-verify",
+  "stepId": "S000008",
+  "kind": "agent",
+  "title": "Build & verify (global-components, iteration 1)",
+  "labels": [
+    "build",
+    "global-components",
+    "verification"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7P6G0V8M2101BKDH11H5C4/input.json",
+    "outputJsonPath": "tasks/01KM7P6G0V8M2101BKDH11H5C4/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "scope": "global-components"
+  }
+}

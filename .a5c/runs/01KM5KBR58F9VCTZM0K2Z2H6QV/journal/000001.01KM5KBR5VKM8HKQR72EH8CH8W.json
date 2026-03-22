@@ -1,0 +1,14 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-03-20T12:26:13.563Z",
+  "data": {
+    "runId": "01KM5KBR58F9VCTZM0K2Z2H6QV",
+    "processId": "fix-recurring-eager-generation",
+    "entrypoint": {
+      "importPath": "../../processes/fix-recurring-eager-generation.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json"
+  },
+  "checksum": "25232a25478dffccefb4f93e95d7ab37669a4b226804256ddd633964afc9ccce"
+}

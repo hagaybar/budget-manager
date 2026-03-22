@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5KKN1ZFWSDVC2NZN0BP699",
+  "taskId": "verify-fix-logic",
+  "invocationKey": "fix-recurring-eager-generation:S000004:verify-fix-logic",
+  "status": "ok",
+  "result": {
+    "approved": true,
+    "issues": [
+      "RACE CONDITION (low severity): generateRecurringTransactionsEagerly() and loadTransactions() launch as separate coroutines - brief window where list may be stale before Room re-emits. Self-healing via Room invalidation tracker.",
+      "NO COMPOSITE INDEX on (recurring_id, date) for countByRecurringAndDate query. Works but less efficient."
+    ],
+    "suggestions": [
+      "Add composite index on TransactionEntity for (recurring_id, date).",
+      "Consider awaiting eager generation before subscribing to transaction Flow.",
+      "Inject Clock for unit testability of date-dependent logic.",
+      "Add retry limit to WorkManager worker to avoid infinite silent retries."
+    ]
+  },
+  "startedAt": "2026-03-20T12:31:42.413Z",
+  "finishedAt": "2026-03-20T12:31:42.413Z",
+  "value": {
+    "approved": true,
+    "issues": [
+      "RACE CONDITION (low severity): generateRecurringTransactionsEagerly() and loadTransactions() launch as separate coroutines - brief window where list may be stale before Room re-emits. Self-healing via Room invalidation tracker.",
+      "NO COMPOSITE INDEX on (recurring_id, date) for countByRecurringAndDate query. Works but less efficient."
+    ],
+    "suggestions": [
+      "Add composite index on TransactionEntity for (recurring_id, date).",
+      "Consider awaiting eager generation before subscribing to transaction Flow.",
+      "Inject Clock for unit testability of date-dependent logic.",
+      "Add retry limit to WorkManager worker to avoid infinite silent retries."
+    ]
+  }
+}

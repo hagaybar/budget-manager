@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7XGZ1V2ME6SY8KN1QS5NKF",
+  "taskId": "build",
+  "invocationKey": "incremental-fix:S000013:build",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "buildOutput": "BUILD SUCCESSFUL in 28s",
+    "errors": []
+  },
+  "startedAt": "2026-03-21T10:02:26.065Z",
+  "finishedAt": "2026-03-21T10:02:26.065Z",
+  "value": {
+    "allPassing": true,
+    "buildOutput": "BUILD SUCCESSFUL in 28s",
+    "errors": []
+  }
+}

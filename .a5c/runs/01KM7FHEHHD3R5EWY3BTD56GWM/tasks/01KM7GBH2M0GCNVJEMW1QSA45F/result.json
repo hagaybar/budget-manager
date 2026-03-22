@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7GBH2M0GCNVJEMW1QSA45F",
+  "taskId": "implement-viewmodel-layer",
+  "invocationKey": "multi-budget:S000007:implement-viewmodel-layer",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "filesCreated": [
+      "BudgetViewModel.kt",
+      "MigrationViewModel.kt"
+    ],
+    "filesModified": [
+      "TransactionListViewModel.kt",
+      "AddEditTransactionViewModel.kt",
+      "MonthlySummaryViewModel.kt",
+      "RecurringViewModel.kt"
+    ],
+    "summary": "Implemented ViewModel layer: BudgetViewModel, MigrationViewModel, modified TransactionListViewModel, AddEditTransactionViewModel, MonthlySummaryViewModel, RecurringViewModel to use ActiveBudgetManager and budget-scoped queries."
+  },
+  "startedAt": "2026-03-21T06:14:50.691Z",
+  "finishedAt": "2026-03-21T06:14:50.691Z",
+  "value": {
+    "allPassing": true,
+    "filesCreated": [
+      "BudgetViewModel.kt",
+      "MigrationViewModel.kt"
+    ],
+    "filesModified": [
+      "TransactionListViewModel.kt",
+      "AddEditTransactionViewModel.kt",
+      "MonthlySummaryViewModel.kt",
+      "RecurringViewModel.kt"
+    ],
+    "summary": "Implemented ViewModel layer: BudgetViewModel, MigrationViewModel, modified TransactionListViewModel, AddEditTransactionViewModel, MonthlySummaryViewModel, RecurringViewModel to use ActiveBudgetManager and budget-scoped queries."
+  }
+}

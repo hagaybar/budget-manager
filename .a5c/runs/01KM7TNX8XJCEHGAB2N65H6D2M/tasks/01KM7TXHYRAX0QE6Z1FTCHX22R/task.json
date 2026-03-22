@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7TXHYRAX0QE6Z1FTCHX22R",
+  "taskId": "build-verify",
+  "invocationKey": "fix-crash-on-launch:S000003:build-verify",
+  "stepId": "S000003",
+  "kind": "agent",
+  "title": "Build & verify (crash-fix, iteration 1)",
+  "labels": [
+    "build",
+    "crash-fix"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7TXHYRAX0QE6Z1FTCHX22R/input.json",
+    "outputJsonPath": "tasks/01KM7TXHYRAX0QE6Z1FTCHX22R/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "scope": "crash-fix"
+  }
+}

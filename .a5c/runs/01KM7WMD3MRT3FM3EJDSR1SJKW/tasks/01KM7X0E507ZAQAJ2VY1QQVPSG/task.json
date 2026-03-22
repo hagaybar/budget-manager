@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7X0E507ZAQAJ2VY1QQVPSG",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "incremental-fix:S000008:__sdk.breakpoint",
+  "stepId": "S000008",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Domain layer applied (Budget model, repos, ActiveBudgetManager). Build passes. Please test the APK — does it launch?",
+      "title": "Test: Domain Layer Added"
+    },
+    "requestedAt": "2026-03-21T09:53:17.472Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Domain layer applied (Budget model, repos, ActiveBudgetManager). Build passes. Please test the APK — does it launch?",
+      "title": "Test: Domain Layer Added"
+    },
+    "requestedAt": "2026-03-21T09:53:17.472Z"
+  }
+}

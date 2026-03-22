@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7X43SVKJ5H4CQSGYC61WW7",
+  "taskId": "apply-viewmodel",
+  "invocationKey": "incremental-fix:S000009:apply-viewmodel",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "BudgetViewModel.kt",
+      "MigrationViewModel.kt"
+    ],
+    "filesModified": [
+      "TransactionListViewModel.kt",
+      "AddEditTransactionViewModel.kt",
+      "MonthlySummaryViewModel.kt",
+      "RecurringViewModel.kt",
+      "SettingsViewModel.kt"
+    ],
+    "summary": "Applied 7 ViewModel files from master. Build passes."
+  },
+  "startedAt": "2026-03-21T09:56:24.976Z",
+  "finishedAt": "2026-03-21T09:56:24.976Z",
+  "value": {
+    "filesCreated": [
+      "BudgetViewModel.kt",
+      "MigrationViewModel.kt"
+    ],
+    "filesModified": [
+      "TransactionListViewModel.kt",
+      "AddEditTransactionViewModel.kt",
+      "MonthlySummaryViewModel.kt",
+      "RecurringViewModel.kt",
+      "SettingsViewModel.kt"
+    ],
+    "summary": "Applied 7 ViewModel files from master. Build passes."
+  }
+}

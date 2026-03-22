@@ -1,0 +1,1 @@
+{"summary":"Applied 7 ViewModel files from master. Build passes.","filesCreated":["BudgetViewModel.kt","MigrationViewModel.kt"],"filesModified":["TransactionListViewModel.kt","AddEditTransactionViewModel.kt","MonthlySummaryViewModel.kt","RecurringViewModel.kt","SettingsViewModel.kt"]}

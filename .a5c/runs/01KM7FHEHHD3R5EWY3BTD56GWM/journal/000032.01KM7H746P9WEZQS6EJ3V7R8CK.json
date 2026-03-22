@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T06:27:13.750Z",
+  "data": {
+    "effectId": "01KM7H746332GK5J78XW2FSYE6",
+    "invocationKey": "multi-budget:S000016:fix-quality-issues",
+    "invocationHash": "19b16c8dfc24525402eec06c4475f729886f67d401840d9d0fabb192e13c0180",
+    "stepId": "S000016",
+    "taskId": "fix-quality-issues",
+    "kind": "agent",
+    "label": "quality",
+    "taskDefRef": "tasks/01KM7H746332GK5J78XW2FSYE6/task.json",
+    "labels": [
+      "quality",
+      "fix"
+    ]
+  },
+  "checksum": "be06080f338a6a86a2bf97c75b26cf6912b6e81a31ac6af71f826daa9aaccf3d"
+}

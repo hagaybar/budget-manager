@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7QJVN894E2YANNW9Z5ET73",
+  "taskId": "build-and-verify",
+  "invocationKey": "visual-redesign:S000014:build-and-verify",
+  "status": "ok",
+  "result": {
+    "allPassing": false,
+    "buildOutput": "BUILD FAILED - AnimatedVisibility scope conflict",
+    "errors": [
+      {
+        "file": "TransactionListScreen.kt",
+        "line": 172,
+        "message": "AnimatedVisibility can't be called by implicit receiver in ColumnScope context",
+        "type": "scope_conflict"
+      }
+    ]
+  },
+  "startedAt": "2026-03-21T08:20:36.583Z",
+  "finishedAt": "2026-03-21T08:20:36.583Z",
+  "value": {
+    "allPassing": false,
+    "buildOutput": "BUILD FAILED - AnimatedVisibility scope conflict",
+    "errors": [
+      {
+        "file": "TransactionListScreen.kt",
+        "line": 172,
+        "message": "AnimatedVisibility can't be called by implicit receiver in ColumnScope context",
+        "type": "scope_conflict"
+      }
+    ]
+  }
+}

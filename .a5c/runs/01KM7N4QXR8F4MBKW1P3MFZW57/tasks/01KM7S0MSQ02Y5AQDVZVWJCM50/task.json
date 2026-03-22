@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7S0MSQ02Y5AQDVZVWJCM50",
+  "taskId": "design-quality-review",
+  "invocationKey": "visual-redesign:S000021:design-quality-review",
+  "stepId": "S000021",
+  "kind": "agent",
+  "title": "Phase 9: Design quality review",
+  "labels": [
+    "quality",
+    "review"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7S0MSQ02Y5AQDVZVWJCM50/input.json",
+    "outputJsonPath": "tasks/01KM7S0MSQ02Y5AQDVZVWJCM50/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "designBrief": {
+      "avoid": "random styles, too many accents, cluttered dashboards, overused shadows/gradients, inconsistent corner radii, template look, breaking flows",
+      "communicate": "clarity, control, confidence, simplicity, financial awareness, reduced stress",
+      "feel": "trustworthy, modern, clean, pleasant, slightly premium, calm, efficient, visually memorable, finance/productivity"
+    },
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

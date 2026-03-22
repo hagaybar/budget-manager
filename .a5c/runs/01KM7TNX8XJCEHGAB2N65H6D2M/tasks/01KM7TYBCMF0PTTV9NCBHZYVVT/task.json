@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7TYBCMF0PTTV9NCBHZYVVT",
+  "taskId": "second-pass-audit",
+  "invocationKey": "fix-crash-on-launch:S000004:second-pass-audit",
+  "stepId": "S000004",
+  "kind": "agent",
+  "title": "Phase 4: Second pass — check for remaining runtime crash risks",
+  "labels": [
+    "audit",
+    "second-pass"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7TYBCMF0PTTV9NCBHZYVVT/input.json",
+    "outputJsonPath": "tasks/01KM7TYBCMF0PTTV9NCBHZYVVT/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "previousFixes": {
+      "filesModified": [
+        "Migrations.kt",
+        "ActiveBudgetManager.kt",
+        "AppModule.kt"
+      ],
+      "fixes": [
+        {
+          "file": "Migrations.kt",
+          "fix": "Table recreation pattern",
+          "issue": "FK schema mismatch"
+        },
+        {
+          "file": "ActiveBudgetManager.kt",
+          "fix": "Async scope.launch",
+          "issue": "runBlocking on main thread"
+        },
+        {
+          "file": "AppModule.kt",
+          "fix": "Removed",
+          "issue": "Duplicate @Provides"
+        }
+      ],
+      "summary": "Fixed all 3 crash causes"
+    }
+  }
+}

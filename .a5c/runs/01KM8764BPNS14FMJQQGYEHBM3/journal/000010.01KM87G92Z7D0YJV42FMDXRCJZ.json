@@ -1,0 +1,18 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T12:56:42.335Z",
+  "data": {
+    "effectId": "01KM87G92DDE8RP3SDJ15TF0WY",
+    "invocationKey": "banking-ux-polish:S000005:polish-remaining",
+    "invocationHash": "1603b0d20621728f668ecf6d2928ed020d3344c03aef37a8cf06bddf01e698a9",
+    "stepId": "S000005",
+    "taskId": "polish-remaining",
+    "kind": "agent",
+    "label": "polish",
+    "taskDefRef": "tasks/01KM87G92DDE8RP3SDJ15TF0WY/task.json",
+    "labels": [
+      "polish"
+    ]
+  },
+  "checksum": "b705d33220f9302e24b797accfa31f94b6c588b3993bf837fba75cfd0ca8b15a"
+}

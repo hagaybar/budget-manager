@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:49:47.262Z",
+  "data": {
+    "effectId": "01KM7WT0VB96Y790GF8S7MJN6C",
+    "invocationKey": "incremental-fix:S000004:build",
+    "invocationHash": "21e7f19945aef1640640fedd9abc644aab51cf6e3e03b4673b48bdb322b2233d",
+    "stepId": "S000004",
+    "taskId": "build",
+    "kind": "agent",
+    "label": "build",
+    "taskDefRef": "tasks/01KM7WT0VB96Y790GF8S7MJN6C/task.json",
+    "labels": [
+      "build",
+      "database"
+    ]
+  },
+  "checksum": "318ec9eb34dbc2fa880a4f5d4701c3431248238d6aeb69c9e9ff0ef15514b72a"
+}

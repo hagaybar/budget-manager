@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7GWNPHD7HHE1VN24HXXK0C",
+  "taskId": "build-and-verify",
+  "invocationKey": "multi-budget:S000012:build-and-verify",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "buildOutput": "BUILD SUCCESSFUL in 24s",
+    "errors": []
+  },
+  "startedAt": "2026-03-21T06:22:05.636Z",
+  "finishedAt": "2026-03-21T06:22:05.636Z",
+  "value": {
+    "allPassing": true,
+    "buildOutput": "BUILD SUCCESSFUL in 24s",
+    "errors": []
+  }
+}

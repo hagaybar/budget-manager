@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T06:03:12.027Z",
+  "data": {
+    "effectId": "01KM7FV487XWQ344NSR2VT5YKH",
+    "invocationKey": "multi-budget:S000003:implement-database-layer",
+    "invocationHash": "474fa721554037e7f41f05df9bf49c2a7ce59087cc3eb14f801d727a4916aac9",
+    "stepId": "S000003",
+    "taskId": "implement-database-layer",
+    "kind": "agent",
+    "label": "database",
+    "taskDefRef": "tasks/01KM7FV487XWQ344NSR2VT5YKH/task.json",
+    "labels": [
+      "database",
+      "implementation"
+    ]
+  },
+  "checksum": "87f6dd1182e13170cdaaed301400319c0007ebf78194fb1e6230421db1b7cf3e"
+}

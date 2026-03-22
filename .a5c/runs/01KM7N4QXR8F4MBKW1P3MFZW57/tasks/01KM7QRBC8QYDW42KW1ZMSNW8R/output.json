@@ -1,0 +1,1 @@
+{"summary":"Fixed AnimatedVisibility scope conflict by using fully qualified call","fixesApplied":[{"file":"TransactionListScreen.kt","issue":"ColumnScope implicit receiver conflict","fix":"Used androidx.compose.animation.AnimatedVisibility FQN"}],"filesModified":["TransactionListScreen.kt"]}

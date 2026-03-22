@@ -1,0 +1,13 @@
+{
+  "runId": "01KM8764BPNS14FMJQQGYEHBM3",
+  "request": "banking-ux-polish",
+  "processId": "banking-ux-polish",
+  "entrypoint": {
+    "importPath": "../../processes/banking-ux-polish.js",
+    "exportName": "process"
+  },
+  "processPath": "../../processes/banking-ux-polish.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-03-21T12:51:09.823Z",
+  "completionProof": "db6e28db5c01d7875d3acd22ac183d6e"
+}

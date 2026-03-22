@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM87G92DDE8RP3SDJ15TF0WY",
+  "taskId": "polish-remaining",
+  "invocationKey": "banking-ux-polish:S000005:polish-remaining",
+  "status": "ok",
+  "result": {
+    "filesModified": [
+      "AddEditTransactionScreen.kt",
+      "RecurringScreen.kt",
+      "SettingsScreen.kt",
+      "SignInScreen.kt"
+    ],
+    "summary": "Polished AddEditTransaction (type toggle cards, prominent save), RecurringScreen (next occurrence, type badges), SettingsScreen (section headers), SignInScreen (circle icon, premium feel)."
+  },
+  "startedAt": "2026-03-21T13:01:31.085Z",
+  "finishedAt": "2026-03-21T13:01:31.085Z",
+  "value": {
+    "filesModified": [
+      "AddEditTransactionScreen.kt",
+      "RecurringScreen.kt",
+      "SettingsScreen.kt",
+      "SignInScreen.kt"
+    ],
+    "summary": "Polished AddEditTransaction (type toggle cards, prominent save), RecurringScreen (next occurrence, type badges), SettingsScreen (section headers), SignInScreen (circle icon, premium feel)."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM5NPN9TNWAS99RMZ8KY2GXA",
+  "taskId": "implement-backup-restore",
+  "invocationKey": "google-signin-drive-backup:S000003:implement-backup-restore",
+  "stepId": "S000003",
+  "kind": "agent",
+  "title": "Implement SAF-based backup/restore with Settings UI",
+  "io": {
+    "inputJsonPath": "tasks/01KM5NPN9TNWAS99RMZ8KY2GXA/input.json",
+    "outputJsonPath": "tasks/01KM5NPN9TNWAS99RMZ8KY2GXA/output.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "packageName": "com.budgetmanager.app",
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

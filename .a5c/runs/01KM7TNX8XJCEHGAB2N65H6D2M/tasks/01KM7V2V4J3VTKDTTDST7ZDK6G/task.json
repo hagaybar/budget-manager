@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7V2V4J3VTKDTTDST7ZDK6G",
+  "taskId": "build-apk",
+  "invocationKey": "fix-crash-on-launch:S000005:build-apk",
+  "stepId": "S000005",
+  "kind": "agent",
+  "title": "Build final APK",
+  "labels": [
+    "apk",
+    "build"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7V2V4J3VTKDTTDST7ZDK6G/input.json",
+    "outputJsonPath": "tasks/01KM7V2V4J3VTKDTTDST7ZDK6G/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android"
+  }
+}

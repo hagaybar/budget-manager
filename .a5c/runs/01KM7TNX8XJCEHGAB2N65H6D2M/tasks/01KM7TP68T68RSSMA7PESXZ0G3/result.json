@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7TP68T68RSSMA7PESXZ0G3",
+  "taskId": "diagnose-crash",
+  "invocationKey": "fix-crash-on-launch:S000001:diagnose-crash",
+  "status": "ok",
+  "result": {
+    "issues": [
+      {
+        "description": "ALTER TABLE cannot add FK constraints. Room schema mismatch crashes app.",
+        "file": "Migrations.kt",
+        "fix": "Recreate tables with FK constraints",
+        "severity": "critical"
+      },
+      {
+        "description": "runBlocking on main thread during Hilt init",
+        "file": "ActiveBudgetManager.kt",
+        "fix": "Async init with default 0L",
+        "severity": "high"
+      },
+      {
+        "description": "Duplicate ActiveBudgetManager instances via @Provides + @Inject",
+        "file": "AppModule.kt",
+        "fix": "Remove @Provides method",
+        "severity": "medium"
+      }
+    ],
+    "summary": "Primary crash: Room FK schema mismatch in migration. Secondary: runBlocking ANR. Tertiary: duplicate singleton risk."
+  },
+  "startedAt": "2026-03-21T09:14:35.792Z",
+  "finishedAt": "2026-03-21T09:14:35.792Z",
+  "value": {
+    "issues": [
+      {
+        "description": "ALTER TABLE cannot add FK constraints. Room schema mismatch crashes app.",
+        "file": "Migrations.kt",
+        "fix": "Recreate tables with FK constraints",
+        "severity": "critical"
+      },
+      {
+        "description": "runBlocking on main thread during Hilt init",
+        "file": "ActiveBudgetManager.kt",
+        "fix": "Async init with default 0L",
+        "severity": "high"
+      },
+      {
+        "description": "Duplicate ActiveBudgetManager instances via @Provides + @Inject",
+        "file": "AppModule.kt",
+        "fix": "Remove @Provides method",
+        "severity": "medium"
+      }
+    ],
+    "summary": "Primary crash: Room FK schema mismatch in migration. Secondary: runBlocking ANR. Tertiary: duplicate singleton risk."
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7NEP93KJTK56J6A900GMHN",
+  "taskId": "create-design-system",
+  "invocationKey": "visual-redesign:S000003:create-design-system",
+  "stepId": "S000003",
+  "kind": "agent",
+  "title": "Phase 2: Create and implement design system foundation",
+  "labels": [
+    "design-system",
+    "theme"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7NEP93KJTK56J6A900GMHN/input.json",
+    "outputJsonPath": "tasks/01KM7NEP93KJTK56J6A900GMHN/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "audit": {
+      "designDirection": {
+        "primaryColor": "#2B5EA7",
+        "secondaryColor": "#526070",
+        "style": "Calm Finance trust blue"
+      },
+      "executionPlan": [
+        "Fix color bugs and create semantic system",
+        "Implement typography and spacing tokens",
+        "Polish global components",
+        "Refine high-impact screens",
+        "Refine secondary screens",
+        "Add motion and animations",
+        "Dark mode polish",
+        "Final consistency pass"
+      ],
+      "summary": "Comprehensive UI audit completed. App has functional foundation but suffers from hardcoded colors, inconsistent patterns, generic aesthetic, and purple-tinted neutrals. Proposed: Deep Trust Blue palette (#2B5EA7), cool grey neutrals, Inter font, semantic color system, tonal elevation, 4dp spacing grid.",
+      "weaknesses": [
+        "Hardcoded colors bypassing theme",
+        "Inconsistent delete patterns across screens",
+        "No date grouping in transaction list",
+        "Generic default Material look",
+        "Purple-tinted neutrals clashing with blue primary",
+        "No custom font family",
+        "Nested Scaffolds anti-pattern"
+      ]
+    },
+    "designBrief": {
+      "avoid": "random styles, too many accents, cluttered dashboards, overused shadows/gradients, inconsistent corner radii, template look, breaking flows",
+      "communicate": "clarity, control, confidence, simplicity, financial awareness, reduced stress",
+      "feel": "trustworthy, modern, clean, pleasant, slightly premium, calm, efficient, visually memorable, finance/productivity"
+    },
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

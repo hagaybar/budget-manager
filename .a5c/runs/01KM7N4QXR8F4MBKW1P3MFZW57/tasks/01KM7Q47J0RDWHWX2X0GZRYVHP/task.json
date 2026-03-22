@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7Q47J0RDWHWX2X0GZRYVHP",
+  "taskId": "build-and-verify",
+  "invocationKey": "visual-redesign:S000012:build-and-verify",
+  "stepId": "S000012",
+  "kind": "agent",
+  "title": "Build & verify (secondary-screens, iteration 1)",
+  "labels": [
+    "build",
+    "secondary-screens",
+    "verification"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7Q47J0RDWHWX2X0GZRYVHP/input.json",
+    "outputJsonPath": "tasks/01KM7Q47J0RDWHWX2X0GZRYVHP/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "scope": "secondary-screens"
+  }
+}

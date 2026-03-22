@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7V2V4J3VTKDTTDST7ZDK6G",
+  "taskId": "build-apk",
+  "invocationKey": "fix-crash-on-launch:S000005:build-apk",
+  "status": "ok",
+  "result": {
+    "apkBuilt": true,
+    "apkPath": "android/app/build/outputs/apk/debug/app-debug.apk"
+  },
+  "startedAt": "2026-03-21T09:19:50.904Z",
+  "finishedAt": "2026-03-21T09:19:50.904Z",
+  "value": {
+    "apkBuilt": true,
+    "apkPath": "android/app/build/outputs/apk/debug/app-debug.apk"
+  }
+}

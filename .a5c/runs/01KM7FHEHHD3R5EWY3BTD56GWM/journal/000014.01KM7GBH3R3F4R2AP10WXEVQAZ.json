@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T06:12:09.465Z",
+  "data": {
+    "effectId": "01KM7GBH2M0GCNVJEMW1QSA45F",
+    "invocationKey": "multi-budget:S000007:implement-viewmodel-layer",
+    "invocationHash": "376dc418219fd609371e80efafdc089ab44fb33d07f5bc1b894f27cbb7c883eb",
+    "stepId": "S000007",
+    "taskId": "implement-viewmodel-layer",
+    "kind": "agent",
+    "label": "viewmodel",
+    "taskDefRef": "tasks/01KM7GBH2M0GCNVJEMW1QSA45F/task.json",
+    "labels": [
+      "viewmodel",
+      "implementation"
+    ]
+  },
+  "checksum": "694c8a11156aa3078a6c52f411c87ca4a99660d735d47d29f20e6dfb9011d9e9"
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM5KNWRSKY7C8QY5ZA6W3NGG",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "fix-recurring-eager-generation:S000005:__sdk.breakpoint",
+  "stepId": "S000005",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Fix implemented and build succeeds. The eager generation logic runs when the app opens to ensure recurring transactions are always up-to-date. Backend tests: ALL PASSED. Code review: APPROVED. Approve to finalize?",
+      "title": "Recurring Transaction Fix Review"
+    },
+    "requestedAt": "2026-03-20T12:31:45.944Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Fix implemented and build succeeds. The eager generation logic runs when the app opens to ensure recurring transactions are always up-to-date. Backend tests: ALL PASSED. Code review: APPROVED. Approve to finalize?",
+      "title": "Recurring Transaction Fix Review"
+    },
+    "requestedAt": "2026-03-20T12:31:45.944Z"
+  }
+}

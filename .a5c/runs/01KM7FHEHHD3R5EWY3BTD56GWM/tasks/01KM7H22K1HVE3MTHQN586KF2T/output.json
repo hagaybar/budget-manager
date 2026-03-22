@@ -1,0 +1,12 @@
+{
+  "passesQuality": false,
+  "issues": [
+    {"file": "SettingsViewModel.kt", "severity": "high", "description": "After backup restore, ActiveBudgetManager not updated with restored budget ID"},
+    {"file": "TransactionListViewModel.kt", "severity": "medium", "description": "loadCategories() not scoped to active budget"},
+    {"file": "Migrations.kt", "severity": "medium", "description": "ALTER TABLE cannot add FK constraints, need table recreation"},
+    {"file": "MigrationViewModel.kt", "severity": "medium", "description": "Per-row update in migration loop, should batch"},
+    {"file": "ActiveBudgetManager.kt", "severity": "medium", "description": "Race condition: getActiveBudgetId returns 0 before DataStore loads"},
+    {"file": "BudgetManagementScreen.kt", "severity": "low", "description": "Duplicated currencySymbol function"}
+  ],
+  "summary": "Architecture sound, 2 high/medium issues need fixing before release"
+}

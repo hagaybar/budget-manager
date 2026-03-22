@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7FHPG9XKX1RKDSY9TRMS36",
+  "taskId": "analysis-planning",
+  "invocationKey": "multi-budget:S000001:analysis-planning",
+  "stepId": "S000001",
+  "kind": "agent",
+  "title": "Phase 1: Analyze codebase and plan multi-budget implementation",
+  "labels": [
+    "architecture",
+    "planning"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7FHPG9XKX1RKDSY9TRMS36/input.json",
+    "outputJsonPath": "tasks/01KM7FHPG9XKX1RKDSY9TRMS36/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "featureSpec": {
+      "budgetFields": {
+        "currency": "string, default ILS (₪)",
+        "description": "optional, string",
+        "monthlyTarget": "optional, number, monthly spending target/limit",
+        "name": "required, string, unique"
+      },
+      "concept": "Separate wallets - each budget is an independent container with its own transactions, recurring transactions, and summary",
+      "defaultBehavior": "After migration or fresh install, user can create additional budgets. All screens filter by active budget.",
+      "migration": "On first launch after update, if existing data exists, show a prompt to import existing budget into a named budget. User fills a budget details card (name, description, currency, target) to migrate their existing data.",
+      "navigation": "Top bar dropdown for quick budget switching, always visible"
+    },
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

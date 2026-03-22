@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7NECQPRH1J377K00CW37NP",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "visual-redesign:S000002:__sdk.breakpoint",
+  "stepId": "S000002",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "context": {
+        "files": [
+          {
+            "format": "markdown",
+            "path": "artifacts/ui-audit.md"
+          }
+        ]
+      },
+      "question": "Review the UI audit and proposed design direction. Approve to proceed with design system creation?",
+      "title": "Visual Redesign Audit Review"
+    },
+    "requestedAt": "2026-03-21T07:41:06.165Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "context": {
+        "files": [
+          {
+            "format": "markdown",
+            "path": "artifacts/ui-audit.md"
+          }
+        ]
+      },
+      "question": "Review the UI audit and proposed design direction. Approve to proceed with design system creation?",
+      "title": "Visual Redesign Audit Review"
+    },
+    "requestedAt": "2026-03-21T07:41:06.165Z"
+  }
+}

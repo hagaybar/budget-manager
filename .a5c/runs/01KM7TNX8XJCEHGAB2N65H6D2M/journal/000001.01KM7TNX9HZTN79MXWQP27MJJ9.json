@@ -1,0 +1,14 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-03-21T09:12:35.377Z",
+  "data": {
+    "runId": "01KM7TNX8XJCEHGAB2N65H6D2M",
+    "processId": "fix-crash-on-launch",
+    "entrypoint": {
+      "importPath": "../../processes/fix-crash-on-launch.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json"
+  },
+  "checksum": "02175198f37f7061a45dd3531cca37e60d4612492f588c3c421191e054ffb411"
+}

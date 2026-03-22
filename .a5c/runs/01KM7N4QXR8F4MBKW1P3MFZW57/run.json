@@ -1,0 +1,13 @@
+{
+  "runId": "01KM7N4QXR8F4MBKW1P3MFZW57",
+  "request": "visual-redesign",
+  "processId": "visual-redesign",
+  "entrypoint": {
+    "importPath": "../../processes/visual-redesign.js",
+    "exportName": "process"
+  },
+  "processPath": "../../processes/visual-redesign.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-03-21T07:35:49.955Z",
+  "completionProof": "8310f8d33e9204409698161da40253dd"
+}

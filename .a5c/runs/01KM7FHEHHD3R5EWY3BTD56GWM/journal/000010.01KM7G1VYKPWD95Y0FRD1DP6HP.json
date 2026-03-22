@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T06:06:52.884Z",
+  "data": {
+    "effectId": "01KM7G1VY11T7R2270YMF6KTS3",
+    "invocationKey": "multi-budget:S000005:implement-domain-layer",
+    "invocationHash": "4cc3ff403f684046ed2c0886d661238cd3769e96c9da74d9846414b774422642",
+    "stepId": "S000005",
+    "taskId": "implement-domain-layer",
+    "kind": "agent",
+    "label": "domain",
+    "taskDefRef": "tasks/01KM7G1VY11T7R2270YMF6KTS3/task.json",
+    "labels": [
+      "domain",
+      "repository",
+      "implementation"
+    ]
+  },
+  "checksum": "9bbb24809bf1a747b7119085e80cf211cf42920853dabe3257a185f443789d50"
+}

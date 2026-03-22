@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7GJEC6HRE9XVQTGX7YMWDC",
+  "taskId": "implement-ui-layer",
+  "invocationKey": "multi-budget:S000009:implement-ui-layer",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "filesCreated": [
+      "BudgetSelectorDropdown.kt",
+      "BudgetManagementScreen.kt",
+      "BudgetFormDialog.kt",
+      "MigrationScreen.kt"
+    ],
+    "filesModified": [
+      "Screen.kt",
+      "BudgetNavHost.kt"
+    ],
+    "summary": "Implemented UI layer: BudgetSelectorDropdown, BudgetManagementScreen, BudgetFormDialog, MigrationScreen, modified Screen.kt and BudgetNavHost.kt."
+  },
+  "startedAt": "2026-03-21T06:19:00.365Z",
+  "finishedAt": "2026-03-21T06:19:00.365Z",
+  "value": {
+    "allPassing": true,
+    "filesCreated": [
+      "BudgetSelectorDropdown.kt",
+      "BudgetManagementScreen.kt",
+      "BudgetFormDialog.kt",
+      "MigrationScreen.kt"
+    ],
+    "filesModified": [
+      "Screen.kt",
+      "BudgetNavHost.kt"
+    ],
+    "summary": "Implemented UI layer: BudgetSelectorDropdown, BudgetManagementScreen, BudgetFormDialog, MigrationScreen, modified Screen.kt and BudgetNavHost.kt."
+  }
+}

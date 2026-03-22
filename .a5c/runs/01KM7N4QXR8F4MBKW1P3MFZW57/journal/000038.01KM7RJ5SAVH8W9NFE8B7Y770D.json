@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T08:35:35.850Z",
+  "data": {
+    "effectId": "01KM7RJ5RQ0HXYQEPV8ZTWE4Q5",
+    "invocationKey": "visual-redesign:S000019:premium-polish",
+    "invocationHash": "9e54d29b5c7ed1c096aadba359929f648043cf771f6260d04232c94757781518",
+    "stepId": "S000019",
+    "taskId": "premium-polish",
+    "kind": "agent",
+    "label": "polish",
+    "taskDefRef": "tasks/01KM7RJ5RQ0HXYQEPV8ZTWE4Q5/task.json",
+    "labels": [
+      "polish",
+      "consistency"
+    ]
+  },
+  "checksum": "e337a24cceb0ea24d342f72f6f97ebb49dc05ae8d38622844f6a525ab6cf00a9"
+}

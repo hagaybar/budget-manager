@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7WMKCQ1NTXJPZ16Y672310",
+  "taskId": "analyze-diff",
+  "invocationKey": "incremental-fix:S000001:analyze-diff",
+  "stepId": "S000001",
+  "kind": "agent",
+  "title": "Step 1: Analyze diff from working version",
+  "labels": [
+    "analysis"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7WMKCQ1NTXJPZ16Y672310/input.json",
+    "outputJsonPath": "tasks/01KM7WMKCQ1NTXJPZ16Y672310/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "projectDir": "/home/ubuntu/projects/budget_manager",
+    "workingCommit": "549135d"
+  }
+}

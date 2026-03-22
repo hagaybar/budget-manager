@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T12:28:33.986Z",
+  "data": {
+    "effectId": "01KM5KG19E1NJFARBPRHJZP1CB",
+    "invocationKey": "fix-recurring-eager-generation:S000002:build-and-verify",
+    "invocationHash": "adbf5ca2ffd51f68df284583e2bf1a1a5fdbcd3c2ed56d60279b335c730f9d20",
+    "stepId": "S000002",
+    "taskId": "build-and-verify",
+    "kind": "agent",
+    "label": "Build and verify Android project (iteration 1)",
+    "taskDefRef": "tasks/01KM5KG19E1NJFARBPRHJZP1CB/task.json"
+  },
+  "checksum": "46483c29bfefdd422883e8b0aef8e385c1479fb70411539d3dbf53c1ed03d136"
+}

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7FV487XWQ344NSR2VT5YKH",
+  "taskId": "implement-database-layer",
+  "invocationKey": "multi-budget:S000003:implement-database-layer",
+  "status": "ok",
+  "result": {
+    "allPassing": true,
+    "filesCreated": [
+      "BudgetEntity.kt",
+      "BudgetDao.kt",
+      "Migrations.kt"
+    ],
+    "filesModified": [
+      "TransactionEntity.kt",
+      "RecurringTransactionEntity.kt",
+      "TransactionDao.kt",
+      "RecurringTransactionDao.kt",
+      "BudgetDatabase.kt"
+    ],
+    "summary": "Implemented database layer: BudgetEntity, BudgetDao, Migrations.kt (MIGRATION_1_2), modified TransactionEntity and RecurringTransactionEntity with budgetId FK, added budget-scoped query variants to both DAOs, bumped BudgetDatabase to v2."
+  },
+  "startedAt": "2026-03-21T06:05:30.612Z",
+  "finishedAt": "2026-03-21T06:05:30.612Z",
+  "value": {
+    "allPassing": true,
+    "filesCreated": [
+      "BudgetEntity.kt",
+      "BudgetDao.kt",
+      "Migrations.kt"
+    ],
+    "filesModified": [
+      "TransactionEntity.kt",
+      "RecurringTransactionEntity.kt",
+      "TransactionDao.kt",
+      "RecurringTransactionDao.kt",
+      "BudgetDatabase.kt"
+    ],
+    "summary": "Implemented database layer: BudgetEntity, BudgetDao, Migrations.kt (MIGRATION_1_2), modified TransactionEntity and RecurringTransactionEntity with budgetId FK, added budget-scoped query variants to both DAOs, bumped BudgetDatabase to v2."
+  }
+}

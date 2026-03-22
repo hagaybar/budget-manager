@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5KG19E1NJFARBPRHJZP1CB",
+  "taskId": "build-and-verify",
+  "invocationKey": "fix-recurring-eager-generation:S000002:build-and-verify",
+  "status": "ok",
+  "result": {
+    "buildSuccess": true,
+    "errors": []
+  },
+  "startedAt": "2026-03-20T12:29:59.571Z",
+  "finishedAt": "2026-03-20T12:29:59.571Z",
+  "value": {
+    "buildSuccess": true,
+    "errors": []
+  }
+}

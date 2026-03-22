@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7WPMETA22YSPTAVGPJ0219",
+  "taskId": "apply-database",
+  "invocationKey": "incremental-fix:S000003:apply-database",
+  "stepId": "S000003",
+  "kind": "agent",
+  "title": "Step 3: Apply database layer changes only",
+  "labels": [
+    "database",
+    "incremental"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7WPMETA22YSPTAVGPJ0219/input.json",
+    "outputJsonPath": "tasks/01KM7WPMETA22YSPTAVGPJ0219/result.json"
+  },
+  "inputs": {
+    "analysis": {
+      "categories": {
+        "build": 3,
+        "database": 8,
+        "di": 2,
+        "domain": 10,
+        "resources": 6,
+        "ui": 25,
+        "viewmodel": 7
+      },
+      "summary": "62 files changed: 19 new, 43 modified. Database: 8 files. Domain: 10 files. DI: 2 files. ViewModels: 7 files. UI: 25 files. Resources: 6 files. Build: 3 files.",
+      "totalFiles": 62
+    },
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

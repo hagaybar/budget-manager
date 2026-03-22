@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM5KKN1ZFWSDVC2NZN0BP699",
+  "taskId": "verify-fix-logic",
+  "invocationKey": "fix-recurring-eager-generation:S000004:verify-fix-logic",
+  "stepId": "S000004",
+  "kind": "agent",
+  "title": "Code review: verify the fix is correct and complete",
+  "io": {
+    "inputJsonPath": "tasks/01KM5KKN1ZFWSDVC2NZN0BP699/input.json",
+    "outputJsonPath": "tasks/01KM5KKN1ZFWSDVC2NZN0BP699/output.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "packageName": "com.budgetmanager.app"
+  }
+}

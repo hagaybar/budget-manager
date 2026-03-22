@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM5KJSR89R97JWGMHDPPYT7Q",
+  "taskId": "run-backend-tests",
+  "invocationKey": "fix-recurring-eager-generation:S000003:run-backend-tests",
+  "stepId": "S000003",
+  "kind": "agent",
+  "title": "Run backend pytest tests for regression check",
+  "io": {
+    "inputJsonPath": "tasks/01KM5KJSR89R97JWGMHDPPYT7Q/input.json",
+    "outputJsonPath": "tasks/01KM5KJSR89R97JWGMHDPPYT7Q/output.json"
+  },
+  "inputs": {
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

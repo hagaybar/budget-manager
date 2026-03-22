@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:14:36.274Z",
+  "data": {
+    "effectId": "01KM7TSKAZ4NHVEN06JVB0FAAS",
+    "invocationKey": "fix-crash-on-launch:S000002:apply-fixes",
+    "invocationHash": "c03df698e1462246dca03628968ce36f253f4ea72ee49a6e294513505d287a09",
+    "stepId": "S000002",
+    "taskId": "apply-fixes",
+    "kind": "agent",
+    "label": "fix",
+    "taskDefRef": "tasks/01KM7TSKAZ4NHVEN06JVB0FAAS/task.json",
+    "labels": [
+      "fix",
+      "crash"
+    ]
+  },
+  "checksum": "47428674274a2a6e8a3a0ccae28d12493c2d4c066f5a8bcd7dbc5ce4bd4400f7"
+}

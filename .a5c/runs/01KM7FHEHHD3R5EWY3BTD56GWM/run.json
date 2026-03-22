@@ -1,0 +1,13 @@
+{
+  "runId": "01KM7FHEHHD3R5EWY3BTD56GWM",
+  "request": "multi-budget",
+  "processId": "multi-budget",
+  "entrypoint": {
+    "importPath": "../../processes/multi-budget.js",
+    "exportName": "process"
+  },
+  "processPath": "../../processes/multi-budget.js",
+  "layoutVersion": "2026.01-storage-preview",
+  "createdAt": "2026-03-21T05:57:54.878Z",
+  "completionProof": "90477c1a23219e6c14772f685f2b786d"
+}

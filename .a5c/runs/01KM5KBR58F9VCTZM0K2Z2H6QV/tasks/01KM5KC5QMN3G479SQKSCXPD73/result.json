@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5KC5QMN3G479SQKSCXPD73",
+  "taskId": "implement-eager-generation",
+  "invocationKey": "fix-recurring-eager-generation:S000001:implement-eager-generation",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "app/src/main/java/com/budgetmanager/app/domain/usecase/GenerateRecurringTransactionsUseCase.kt"
+    ],
+    "filesModified": [
+      "app/src/main/java/com/budgetmanager/app/worker/RecurringTransactionWorker.kt",
+      "app/src/main/java/com/budgetmanager/app/ui/viewmodel/TransactionListViewModel.kt"
+    ],
+    "implemented": true,
+    "summary": "Extracted recurring transaction generation logic from RecurringTransactionWorker into a shared GenerateRecurringTransactionsUseCase. The worker now delegates to the use case. TransactionListViewModel triggers the use case eagerly in init{} via viewModelScope. The operation is idempotent. Room Flow-based observation automatically picks up newly inserted rows. WorkManager remains as background fallback."
+  },
+  "startedAt": "2026-03-20T12:28:28.767Z",
+  "finishedAt": "2026-03-20T12:28:28.767Z",
+  "value": {
+    "filesCreated": [
+      "app/src/main/java/com/budgetmanager/app/domain/usecase/GenerateRecurringTransactionsUseCase.kt"
+    ],
+    "filesModified": [
+      "app/src/main/java/com/budgetmanager/app/worker/RecurringTransactionWorker.kt",
+      "app/src/main/java/com/budgetmanager/app/ui/viewmodel/TransactionListViewModel.kt"
+    ],
+    "implemented": true,
+    "summary": "Extracted recurring transaction generation logic from RecurringTransactionWorker into a shared GenerateRecurringTransactionsUseCase. The worker now delegates to the use case. TransactionListViewModel triggers the use case eagerly in init{} via viewModelScope. The operation is idempotent. Room Flow-based observation automatically picks up newly inserted rows. WorkManager remains as background fallback."
+  }
+}

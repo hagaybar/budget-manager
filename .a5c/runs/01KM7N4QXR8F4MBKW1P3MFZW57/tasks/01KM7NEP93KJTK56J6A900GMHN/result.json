@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7NEP93KJTK56J6A900GMHN",
+  "taskId": "create-design-system",
+  "invocationKey": "visual-redesign:S000003:create-design-system",
+  "status": "ok",
+  "result": {
+    "colorPalette": {
+      "primary": "#2B5EA7",
+      "secondary": "#526070",
+      "tertiary": "#4A7A6F"
+    },
+    "filesCreated": [
+      "Dimensions.kt",
+      "colors.xml",
+      "values-night/themes.xml"
+    ],
+    "filesModified": [
+      "Color.kt",
+      "Type.kt",
+      "Theme.kt",
+      "themes.xml"
+    ],
+    "summary": "Implemented Deep Trust Blue design system: Color.kt rewritten with full M3 palette, Type.kt with refined scale + amount styles, Dimensions.kt with spacing/radius/elevation tokens, Theme.kt with FinanceColors CompositionLocal, XML resources for splash/dark mode."
+  },
+  "startedAt": "2026-03-21T07:45:30.420Z",
+  "finishedAt": "2026-03-21T07:45:30.420Z",
+  "value": {
+    "colorPalette": {
+      "primary": "#2B5EA7",
+      "secondary": "#526070",
+      "tertiary": "#4A7A6F"
+    },
+    "filesCreated": [
+      "Dimensions.kt",
+      "colors.xml",
+      "values-night/themes.xml"
+    ],
+    "filesModified": [
+      "Color.kt",
+      "Type.kt",
+      "Theme.kt",
+      "themes.xml"
+    ],
+    "summary": "Implemented Deep Trust Blue design system: Color.kt rewritten with full M3 palette, Type.kt with refined scale + amount styles, Dimensions.kt with spacing/radius/elevation tokens, Theme.kt with FinanceColors CompositionLocal, XML resources for splash/dark mode."
+  }
+}

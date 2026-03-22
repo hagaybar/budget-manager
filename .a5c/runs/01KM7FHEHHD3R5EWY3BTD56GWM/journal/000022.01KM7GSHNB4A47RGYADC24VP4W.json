@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T06:19:48.780Z",
+  "data": {
+    "effectId": "01KM7GSHME3WTVTJW6Y33M796X",
+    "invocationKey": "multi-budget:S000011:fix-build-failures",
+    "invocationHash": "67ad1781eac90a88e4340fab7df137fa799dc85d2e9e868a4cccbc73e050c967",
+    "stepId": "S000011",
+    "taskId": "fix-build-failures",
+    "kind": "agent",
+    "label": "fix",
+    "taskDefRef": "tasks/01KM7GSHME3WTVTJW6Y33M796X/task.json",
+    "labels": [
+      "fix",
+      "debugging",
+      "ui-layer"
+    ]
+  },
+  "checksum": "f75517a7f359ef6e9244f56bfccc70cb2088f3411c0ca7b1a1e29652571292ca"
+}

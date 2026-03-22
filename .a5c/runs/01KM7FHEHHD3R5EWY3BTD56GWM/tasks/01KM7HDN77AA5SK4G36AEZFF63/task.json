@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7HDN77AA5SK4G36AEZFF63",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "multi-budget:S000019:__sdk.breakpoint",
+  "stepId": "S000019",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "context": {
+        "files": [
+          {
+            "format": "markdown",
+            "path": "artifacts/multi-budget-plan.md"
+          }
+        ]
+      },
+      "question": "Multi-budget feature implementation complete. DB: 1 iterations, Domain: 1, VM: 1, UI: 2, Integration: 1. APK built: true. Approve final result?",
+      "title": "Multi-Budget Feature Complete"
+    },
+    "requestedAt": "2026-03-21T06:30:47.783Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "context": {
+        "files": [
+          {
+            "format": "markdown",
+            "path": "artifacts/multi-budget-plan.md"
+          }
+        ]
+      },
+      "question": "Multi-budget feature implementation complete. DB: 1 iterations, Domain: 1, VM: 1, UI: 2, Integration: 1. APK built: true. Approve final result?",
+      "title": "Multi-Budget Feature Complete"
+    },
+    "requestedAt": "2026-03-21T06:30:47.783Z"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "implemented": true,
+  "filesCreated": [
+    "app/src/main/java/com/budgetmanager/app/domain/usecase/GenerateRecurringTransactionsUseCase.kt"
+  ],
+  "filesModified": [
+    "app/src/main/java/com/budgetmanager/app/worker/RecurringTransactionWorker.kt",
+    "app/src/main/java/com/budgetmanager/app/ui/viewmodel/TransactionListViewModel.kt"
+  ],
+  "summary": "Extracted recurring transaction generation logic from RecurringTransactionWorker into a shared GenerateRecurringTransactionsUseCase. The worker now delegates to the use case. TransactionListViewModel triggers the use case eagerly in init{} via viewModelScope. The operation is idempotent. Room Flow-based observation automatically picks up newly inserted rows. WorkManager remains as background fallback."
+}

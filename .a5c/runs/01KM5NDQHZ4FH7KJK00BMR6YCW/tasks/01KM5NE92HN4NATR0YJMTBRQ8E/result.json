@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5NE92HN4NATR0YJMTBRQ8E",
+  "taskId": "implement-google-sign-in",
+  "invocationKey": "google-signin-drive-backup:S000001:implement-google-sign-in",
+  "status": "ok",
+  "result": {
+    "filesCreated": [],
+    "filesModified": [
+      "android/app/build.gradle.kts",
+      "android/app/src/main/res/values/strings.xml",
+      "android/app/src/main/java/com/budgetmanager/app/auth/GoogleSignInManager.kt",
+      "android/app/src/main/java/com/budgetmanager/app/ui/viewmodel/AuthViewModel.kt",
+      "android/app/src/main/java/com/budgetmanager/app/ui/screens/signin/SignInScreen.kt"
+    ],
+    "implemented": true,
+    "summary": "Replaced demo Google Sign-In with Credential Manager API. Added credentials dependencies. GoogleSignInManager now uses CredentialManager.getCredential() with GetGoogleIdOption. Error handling for cancellation, no credentials, Play Services missing. Guest mode preserved."
+  },
+  "startedAt": "2026-03-20T13:04:43.203Z",
+  "finishedAt": "2026-03-20T13:04:43.203Z",
+  "value": {
+    "filesCreated": [],
+    "filesModified": [
+      "android/app/build.gradle.kts",
+      "android/app/src/main/res/values/strings.xml",
+      "android/app/src/main/java/com/budgetmanager/app/auth/GoogleSignInManager.kt",
+      "android/app/src/main/java/com/budgetmanager/app/ui/viewmodel/AuthViewModel.kt",
+      "android/app/src/main/java/com/budgetmanager/app/ui/screens/signin/SignInScreen.kt"
+    ],
+    "implemented": true,
+    "summary": "Replaced demo Google Sign-In with Credential Manager API. Added credentials dependencies. GoogleSignInManager now uses CredentialManager.getCredential() with GetGoogleIdOption. Error handling for cancellation, no credentials, Play Services missing. Guest mode preserved."
+  }
+}

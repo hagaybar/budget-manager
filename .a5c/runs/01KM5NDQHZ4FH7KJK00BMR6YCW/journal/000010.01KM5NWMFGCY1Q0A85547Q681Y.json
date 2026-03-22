@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T13:10:23.985Z",
+  "data": {
+    "effectId": "01KM5NWMEXZDS4PX53VD922EK2",
+    "invocationKey": "google-signin-drive-backup:S000005:integration-polish",
+    "invocationHash": "8c02addfee6d39c2dfb749ad01e098c0d2e4c6a2fe44046d481c15e1f73a4555",
+    "stepId": "S000005",
+    "taskId": "integration-polish",
+    "kind": "agent",
+    "label": "Integration testing and UI polish",
+    "taskDefRef": "tasks/01KM5NWMEXZDS4PX53VD922EK2/task.json"
+  },
+  "checksum": "480de4eca8c6886102d7167285827c00c5264184745e90201701379e8ee75ee2"
+}

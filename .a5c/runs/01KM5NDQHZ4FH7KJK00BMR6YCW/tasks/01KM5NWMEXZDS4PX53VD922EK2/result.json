@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM5NWMEXZDS4PX53VD922EK2",
+  "taskId": "integration-polish",
+  "invocationKey": "google-signin-drive-backup:S000005:integration-polish",
+  "status": "ok",
+  "result": {
+    "filesModified": [
+      "strings.xml",
+      "SettingsScreen.kt",
+      "SettingsViewModel.kt",
+      "SignInScreen.kt",
+      "GoogleSignInManager.kt",
+      "BudgetNavHost.kt",
+      "BackupRepositoryImpl.kt"
+    ],
+    "issuesFixed": [
+      "Settings shows Sign In button for guests instead of Sign Out",
+      "Sign-out navigates to Sign-In screen",
+      "Bottom nav hidden on Sign-In screen",
+      "BackupRepositoryImpl validates JSON before wiping data",
+      "~40 hardcoded strings extracted to strings.xml",
+      "GoogleSignInManager.restoreAuthState has error handling"
+    ],
+    "polished": true,
+    "summary": "Polished integration across 7 files. Guest vs signed-in UX, nav fixes, import validation, string extraction, error handling."
+  },
+  "startedAt": "2026-03-20T13:14:41.321Z",
+  "finishedAt": "2026-03-20T13:14:41.321Z",
+  "value": {
+    "filesModified": [
+      "strings.xml",
+      "SettingsScreen.kt",
+      "SettingsViewModel.kt",
+      "SignInScreen.kt",
+      "GoogleSignInManager.kt",
+      "BudgetNavHost.kt",
+      "BackupRepositoryImpl.kt"
+    ],
+    "issuesFixed": [
+      "Settings shows Sign In button for guests instead of Sign Out",
+      "Sign-out navigates to Sign-In screen",
+      "Bottom nav hidden on Sign-In screen",
+      "BackupRepositoryImpl validates JSON before wiping data",
+      "~40 hardcoded strings extracted to strings.xml",
+      "GoogleSignInManager.restoreAuthState has error handling"
+    ],
+    "polished": true,
+    "summary": "Polished integration across 7 files. Guest vs signed-in UX, nav fixes, import validation, string extraction, error handling."
+  }
+}

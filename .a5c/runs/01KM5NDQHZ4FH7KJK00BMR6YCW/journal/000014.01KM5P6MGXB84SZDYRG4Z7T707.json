@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T13:15:51.710Z",
+  "data": {
+    "effectId": "01KM5P6MGAJ8FNSSQ59F11VX7S",
+    "invocationKey": "google-signin-drive-backup:S000007:run-backend-tests",
+    "invocationHash": "78551b7b98466ee177edfb9cfee7c21141e7cf65aadb375844a3689c48793262",
+    "stepId": "S000007",
+    "taskId": "run-backend-tests",
+    "kind": "agent",
+    "label": "Run backend pytest tests for regression check",
+    "taskDefRef": "tasks/01KM5P6MGAJ8FNSSQ59F11VX7S/task.json"
+  },
+  "checksum": "d53ea3309fbe10aba9e2b278cdd5068875060c24fab892d3cd0079bf5620da5a"
+}

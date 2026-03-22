@@ -1,0 +1,15 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-20T13:07:08.248Z",
+  "data": {
+    "effectId": "01KM5NPN9TNWAS99RMZ8KY2GXA",
+    "invocationKey": "google-signin-drive-backup:S000003:implement-backup-restore",
+    "invocationHash": "eca39fcc34a4d8d5962741ee2dd550b71ffbbb46af7f755b7668be6a6c60d645",
+    "stepId": "S000003",
+    "taskId": "implement-backup-restore",
+    "kind": "agent",
+    "label": "Implement SAF-based backup/restore with Settings UI",
+    "taskDefRef": "tasks/01KM5NPN9TNWAS99RMZ8KY2GXA/task.json"
+  },
+  "checksum": "b9b70aac0d2f530ffff22a9ef36e2c24e8437ed4df1220344b4bbba7f39c4f13"
+}

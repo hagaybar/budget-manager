@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:19:39.175Z",
+  "data": {
+    "effectId": "01KM7V2V4J3VTKDTTDST7ZDK6G",
+    "invocationKey": "fix-crash-on-launch:S000005:build-apk",
+    "invocationHash": "d7215310227f4d09d22b4d7d651e498aa2767d50c81d629f8c81aabb38d19a77",
+    "stepId": "S000005",
+    "taskId": "build-apk",
+    "kind": "agent",
+    "label": "build",
+    "taskDefRef": "tasks/01KM7V2V4J3VTKDTTDST7ZDK6G/task.json",
+    "labels": [
+      "build",
+      "apk"
+    ]
+  },
+  "checksum": "35d8b4155acf4aa3604ad20397c8dd1bc9fb02974205359c69d9e590cdc067df"
+}

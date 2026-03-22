@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7RJ5RQ0HXYQEPV8ZTWE4Q5",
+  "taskId": "premium-polish",
+  "invocationKey": "visual-redesign:S000019:premium-polish",
+  "stepId": "S000019",
+  "kind": "agent",
+  "title": "Phase 8: Final premium polish pass",
+  "labels": [
+    "consistency",
+    "polish"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7RJ5RQ0HXYQEPV8ZTWE4Q5/input.json",
+    "outputJsonPath": "tasks/01KM7RJ5RQ0HXYQEPV8ZTWE4Q5/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "designBrief": {
+      "avoid": "random styles, too many accents, cluttered dashboards, overused shadows/gradients, inconsistent corner radii, template look, breaking flows",
+      "communicate": "clarity, control, confidence, simplicity, financial awareness, reduced stress",
+      "feel": "trustworthy, modern, clean, pleasant, slightly premium, calm, efficient, visually memorable, finance/productivity"
+    },
+    "designSystem": {
+      "colorPalette": {
+        "primary": "#2B5EA7",
+        "secondary": "#526070",
+        "tertiary": "#4A7A6F"
+      },
+      "filesCreated": [
+        "Dimensions.kt",
+        "colors.xml",
+        "values-night/themes.xml"
+      ],
+      "filesModified": [
+        "Color.kt",
+        "Type.kt",
+        "Theme.kt",
+        "themes.xml"
+      ],
+      "summary": "Implemented Deep Trust Blue design system: Color.kt rewritten with full M3 palette, Type.kt with refined scale + amount styles, Dimensions.kt with spacing/radius/elevation tokens, Theme.kt with FinanceColors CompositionLocal, XML resources for splash/dark mode."
+    },
+    "projectDir": "/home/ubuntu/projects/budget_manager"
+  }
+}

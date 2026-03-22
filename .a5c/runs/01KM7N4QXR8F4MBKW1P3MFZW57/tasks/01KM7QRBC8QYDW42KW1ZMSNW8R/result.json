@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7QRBC8QYDW42KW1ZMSNW8R",
+  "taskId": "fix-build-failures",
+  "invocationKey": "visual-redesign:S000015:fix-build-failures",
+  "status": "ok",
+  "result": {
+    "filesModified": [
+      "TransactionListScreen.kt"
+    ],
+    "fixesApplied": [
+      {
+        "file": "TransactionListScreen.kt",
+        "fix": "Used androidx.compose.animation.AnimatedVisibility FQN",
+        "issue": "ColumnScope implicit receiver conflict"
+      }
+    ],
+    "summary": "Fixed AnimatedVisibility scope conflict by using fully qualified call"
+  },
+  "startedAt": "2026-03-21T08:25:37.650Z",
+  "finishedAt": "2026-03-21T08:25:37.650Z",
+  "value": {
+    "filesModified": [
+      "TransactionListScreen.kt"
+    ],
+    "fixesApplied": [
+      {
+        "file": "TransactionListScreen.kt",
+        "fix": "Used androidx.compose.animation.AnimatedVisibility FQN",
+        "issue": "ColumnScope implicit receiver conflict"
+      }
+    ],
+    "summary": "Fixed AnimatedVisibility scope conflict by using fully qualified call"
+  }
+}

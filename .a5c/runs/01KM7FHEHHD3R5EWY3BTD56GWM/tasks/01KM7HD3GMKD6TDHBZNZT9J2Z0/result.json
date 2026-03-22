@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7HD3GMKD6TDHBZNZT9J2Z0",
+  "taskId": "build-apk",
+  "invocationKey": "multi-budget:S000018:build-apk",
+  "status": "ok",
+  "result": {
+    "apkBuilt": true,
+    "apkPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+    "buildOutput": "BUILD SUCCESSFUL, APK 18.4MB"
+  },
+  "startedAt": "2026-03-21T06:30:42.827Z",
+  "finishedAt": "2026-03-21T06:30:42.827Z",
+  "value": {
+    "apkBuilt": true,
+    "apkPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+    "buildOutput": "BUILD SUCCESSFUL, APK 18.4MB"
+  }
+}

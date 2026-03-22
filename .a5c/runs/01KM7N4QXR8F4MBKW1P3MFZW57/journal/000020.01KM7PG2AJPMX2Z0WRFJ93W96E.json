@@ -1,0 +1,20 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T07:59:29.619Z",
+  "data": {
+    "effectId": "01KM7PG29ZBE00ZDN38RDPNTPA",
+    "invocationKey": "visual-redesign:S000010:build-and-verify",
+    "invocationHash": "7a4abef1d7b777ff6d3bfbf4938f53f15b754eb32e987c56dba1d497de9c0f64",
+    "stepId": "S000010",
+    "taskId": "build-and-verify",
+    "kind": "agent",
+    "label": "build",
+    "taskDefRef": "tasks/01KM7PG29ZBE00ZDN38RDPNTPA/task.json",
+    "labels": [
+      "build",
+      "verification",
+      "high-impact-screens"
+    ]
+  },
+  "checksum": "d889a8a5351d6ff87250f2f7174e72cc834c7315977c849291324d36a8a9ded6"
+}

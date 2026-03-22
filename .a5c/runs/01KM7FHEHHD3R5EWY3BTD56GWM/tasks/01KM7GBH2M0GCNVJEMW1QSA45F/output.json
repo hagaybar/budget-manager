@@ -1,0 +1,6 @@
+{
+  "summary": "Implemented ViewModel layer: BudgetViewModel, MigrationViewModel, modified TransactionListViewModel, AddEditTransactionViewModel, MonthlySummaryViewModel, RecurringViewModel to use ActiveBudgetManager and budget-scoped queries.",
+  "filesCreated": ["BudgetViewModel.kt", "MigrationViewModel.kt"],
+  "filesModified": ["TransactionListViewModel.kt", "AddEditTransactionViewModel.kt", "MonthlySummaryViewModel.kt", "RecurringViewModel.kt"],
+  "allPassing": true
+}

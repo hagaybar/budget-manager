@@ -1,0 +1,14 @@
+{
+  "type": "RUN_CREATED",
+  "recordedAt": "2026-03-21T05:57:54.891Z",
+  "data": {
+    "runId": "01KM7FHEHHD3R5EWY3BTD56GWM",
+    "processId": "multi-budget",
+    "entrypoint": {
+      "importPath": "../../processes/multi-budget.js",
+      "exportName": "process"
+    },
+    "inputsRef": "inputs.json"
+  },
+  "checksum": "b7dda491a282aa870ec9cbba59bc698e349499f347e5181434cbf40c2144a630"
+}

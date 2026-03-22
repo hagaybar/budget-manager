@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7GSHME3WTVTJW6Y33M796X",
+  "taskId": "fix-build-failures",
+  "invocationKey": "multi-budget:S000011:fix-build-failures",
+  "status": "ok",
+  "result": {
+    "filesModified": [
+      "BudgetSelectorDropdown.kt",
+      "BudgetFormDialog.kt",
+      "MigrationScreen.kt"
+    ],
+    "fixesApplied": [
+      {
+        "file": "BudgetSelectorDropdown.kt",
+        "fix": "removed import, use menuAnchor() without params",
+        "issue": "MenuAnchorType"
+      },
+      {
+        "file": "BudgetFormDialog.kt",
+        "fix": "same",
+        "issue": "MenuAnchorType"
+      },
+      {
+        "file": "MigrationScreen.kt",
+        "fix": "removed import, replaced return with if/else",
+        "issue": "MenuAnchorType + return"
+      }
+    ],
+    "summary": "Fixed MenuAnchorType references and return in composable lambda across 3 files"
+  },
+  "startedAt": "2026-03-21T06:21:25.362Z",
+  "finishedAt": "2026-03-21T06:21:25.362Z",
+  "value": {
+    "filesModified": [
+      "BudgetSelectorDropdown.kt",
+      "BudgetFormDialog.kt",
+      "MigrationScreen.kt"
+    ],
+    "fixesApplied": [
+      {
+        "file": "BudgetSelectorDropdown.kt",
+        "fix": "removed import, use menuAnchor() without params",
+        "issue": "MenuAnchorType"
+      },
+      {
+        "file": "BudgetFormDialog.kt",
+        "fix": "same",
+        "issue": "MenuAnchorType"
+      },
+      {
+        "file": "MigrationScreen.kt",
+        "fix": "removed import, replaced return with if/else",
+        "issue": "MenuAnchorType + return"
+      }
+    ],
+    "summary": "Fixed MenuAnchorType references and return in composable lambda across 3 files"
+  }
+}

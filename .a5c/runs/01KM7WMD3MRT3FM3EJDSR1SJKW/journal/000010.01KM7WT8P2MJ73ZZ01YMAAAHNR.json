@@ -1,0 +1,18 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T09:49:55.266Z",
+  "data": {
+    "effectId": "01KM7WT8ND8ZFEW0HADP2WPPXN",
+    "invocationKey": "incremental-fix:S000005:__sdk.breakpoint",
+    "invocationHash": "e63acceb0cffbf2b00e78e26aee856d6669a0086bbaf2d96891d052533a56c30",
+    "stepId": "S000005",
+    "taskId": "__sdk.breakpoint",
+    "kind": "breakpoint",
+    "label": "breakpoint",
+    "taskDefRef": "tasks/01KM7WT8ND8ZFEW0HADP2WPPXN/task.json",
+    "labels": [
+      "breakpoint"
+    ]
+  },
+  "checksum": "881cfcb06c167065c8b815cabf07981975644f4db6aad3e0f1b89280112c76d2"
+}

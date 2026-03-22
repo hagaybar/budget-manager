@@ -1,0 +1,19 @@
+{
+  "type": "EFFECT_REQUESTED",
+  "recordedAt": "2026-03-21T07:49:48.448Z",
+  "data": {
+    "effectId": "01KM7NYARC5XP3AW7GSTC0DHAC",
+    "invocationKey": "visual-redesign:S000007:global-components",
+    "invocationHash": "2ca7f19f3104cc667150ceb2cb1c51e926ce2eef930d068365caf816db0fa68d",
+    "stepId": "S000007",
+    "taskId": "global-components",
+    "kind": "agent",
+    "label": "components",
+    "taskDefRef": "tasks/01KM7NYARC5XP3AW7GSTC0DHAC/task.json",
+    "labels": [
+      "components",
+      "ui"
+    ]
+  },
+  "checksum": "ae1333383c1aca52355605d6de143d83a554a8b9feccb0a9bce95dee98724cfd"
+}

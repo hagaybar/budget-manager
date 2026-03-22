@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7QJVN894E2YANNW9Z5ET73",
+  "taskId": "build-and-verify",
+  "invocationKey": "visual-redesign:S000014:build-and-verify",
+  "stepId": "S000014",
+  "kind": "agent",
+  "title": "Build & verify (motion, iteration 1)",
+  "labels": [
+    "build",
+    "motion",
+    "verification"
+  ],
+  "io": {
+    "inputJsonPath": "tasks/01KM7QJVN894E2YANNW9Z5ET73/input.json",
+    "outputJsonPath": "tasks/01KM7QJVN894E2YANNW9Z5ET73/result.json"
+  },
+  "inputs": {
+    "androidDir": "/home/ubuntu/projects/budget_manager/android",
+    "iteration": 1,
+    "scope": "motion"
+  }
+}

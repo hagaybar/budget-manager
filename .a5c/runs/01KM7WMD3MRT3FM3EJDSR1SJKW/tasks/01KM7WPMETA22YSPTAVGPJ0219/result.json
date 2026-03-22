@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "2026.01.results-v1",
+  "effectId": "01KM7WPMETA22YSPTAVGPJ0219",
+  "taskId": "apply-database",
+  "invocationKey": "incremental-fix:S000003:apply-database",
+  "status": "ok",
+  "result": {
+    "filesCreated": [
+      "BudgetEntity.kt",
+      "BudgetDao.kt",
+      "Migrations.kt"
+    ],
+    "filesModified": [
+      "TransactionEntity.kt",
+      "RecurringTransactionEntity.kt",
+      "TransactionDao.kt",
+      "RecurringTransactionDao.kt",
+      "BudgetDatabase.kt",
+      "AppModule.kt"
+    ],
+    "summary": "Applied 9 database files from master. Build passes."
+  },
+  "startedAt": "2026-03-21T09:49:46.793Z",
+  "finishedAt": "2026-03-21T09:49:46.793Z",
+  "value": {
+    "filesCreated": [
+      "BudgetEntity.kt",
+      "BudgetDao.kt",
+      "Migrations.kt"
+    ],
+    "filesModified": [
+      "TransactionEntity.kt",
+      "RecurringTransactionEntity.kt",
+      "TransactionDao.kt",
+      "RecurringTransactionDao.kt",
+      "BudgetDatabase.kt",
+      "AppModule.kt"
+    ],
+    "summary": "Applied 9 database files from master. Build passes."
+  }
+}

@@ -1,0 +1,1 @@
+{"summary":"Fixed 3 dark mode issues: SummaryChart using isSystemInDarkTheme instead of FinanceColors, DatePickerField missing outline colors, SignInScreen gradient contrast in dark mode.","filesModified":["SummaryChart.kt","DatePickerField.kt","SignInScreen.kt"]}

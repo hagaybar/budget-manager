@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "2026.01.tasks-v1",
+  "effectId": "01KM7WT8ND8ZFEW0HADP2WPPXN",
+  "taskId": "__sdk.breakpoint",
+  "invocationKey": "incremental-fix:S000005:__sdk.breakpoint",
+  "stepId": "S000005",
+  "kind": "breakpoint",
+  "title": "breakpoint",
+  "metadata": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Database layer applied. Build passes. Please install the APK and test. Does the app launch without crashing?",
+      "title": "Test: Database Layer Only"
+    },
+    "requestedAt": "2026-03-21T09:49:55.245Z"
+  },
+  "inputs": {
+    "label": "breakpoint",
+    "payload": {
+      "question": "Database layer applied. Build passes. Please install the APK and test. Does the app launch without crashing?",
+      "title": "Test: Database Layer Only"
+    },
+    "requestedAt": "2026-03-21T09:49:55.245Z"
+  }
+}
