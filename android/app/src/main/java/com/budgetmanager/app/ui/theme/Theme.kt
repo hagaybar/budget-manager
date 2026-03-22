@@ -150,6 +150,8 @@ data class FinanceColors(
     val balancePositive: Color,
     val balanceNegative: Color,
     val swipeDelete: Color,
+    val glassBackground: Color,
+    val glassBorder: Color,
 )
 
 /** Light mode finance colors. */
@@ -160,6 +162,8 @@ val LightFinanceColors = FinanceColors(
     balancePositive = BalancePositive,
     balanceNegative = BalanceNegative,
     swipeDelete = SwipeDeleteRed,
+    glassBackground = GlassLightBackground,
+    glassBorder = GlassLightBorder,
 )
 
 /** Dark mode finance colors. */
@@ -170,6 +174,8 @@ val DarkFinanceColors = FinanceColors(
     balancePositive = BalancePositiveDark,
     balanceNegative = BalanceNegativeDark,
     swipeDelete = SwipeDeleteRedDark,
+    glassBackground = GlassDarkBackground,
+    glassBorder = GlassDarkBorder,
 )
 
 /**

@@ -137,6 +137,14 @@ val SwipeDeleteRed = Color(0xFFD32F2F)
 val SwipeDeleteRedDark = Color(0xFFEF5350)
 
 // ============================================================================
+// Glassmorphism — semi-transparent hero card
+// ============================================================================
+val GlassLightBackground = Color(0x40D4E3FF)   // primaryContainer @ 25% alpha
+val GlassLightBorder = Color(0x33FFFFFF)        // white @ 20% alpha
+val GlassDarkBackground = Color(0x330E4483)     // dark primaryContainer @ 20% alpha
+val GlassDarkBorder = Color(0x26FFFFFF)         // white @ 15% alpha
+
+// ============================================================================
 // Chart / Category Colors — 10 distinguishable hues, WCAG AA on white/dark
 // ============================================================================
 val ChartColors = listOf(

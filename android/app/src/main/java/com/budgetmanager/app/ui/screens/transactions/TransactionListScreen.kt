@@ -1,11 +1,15 @@
 package com.budgetmanager.app.ui.screens.transactions
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.EaseInOutCubic
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -50,6 +54,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -290,41 +296,94 @@ private fun HeroBalanceCard(
         .sumOf { it.amount }
     val netBalance = totalIncome - totalExpense
 
-    val balanceColor = if (netBalance >= 0) {
-        financeColors.balancePositive
-    } else {
-        financeColors.balanceNegative
-    }
+    // ── Animated counter ───────────────────────────────────────────────
+    val animatedBalance by animateFloatAsState(
+        targetValue = netBalance.toFloat(),
+        animationSpec = tween(durationMillis = 600, easing = EaseInOutCubic),
+        label = "hero-balance",
+    )
+    val animatedIncome by animateFloatAsState(
+        targetValue = totalIncome.toFloat(),
+        animationSpec = tween(durationMillis = 600, easing = EaseInOutCubic),
+        label = "hero-income",
+    )
+    val animatedExpense by animateFloatAsState(
+        targetValue = totalExpense.toFloat(),
+        animationSpec = tween(durationMillis = 600, easing = EaseInOutCubic),
+        label = "hero-expense",
+    )
 
-    Card(
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-        ),
-        shape = RoundedCornerShape(CornerRadius.medium),
+    val balanceColor by animateColorAsState(
+        targetValue = if (netBalance >= 0) financeColors.balancePositive
+                      else financeColors.balanceNegative,
+        animationSpec = tween(durationMillis = 600, easing = EaseInOutCubic),
+        label = "hero-balance-color",
+    )
+
+    // ── Glassmorphism card ─────────────────────────────────────────────
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(CornerRadius.medium))
+            .border(
+                width = 1.dp,
+                brush = Brush.linearGradient(
+                    colors = listOf(
+                        financeColors.glassBorder,
+                        financeColors.glassBorder.copy(
+                            alpha = financeColors.glassBorder.alpha * 0.3f
+                        ),
+                    ),
+                ),
+                shape = RoundedCornerShape(CornerRadius.medium),
+            )
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        financeColors.glassBackground,
+                        financeColors.glassBackground.copy(
+                            alpha = financeColors.glassBackground.alpha * 0.6f
+                        ),
+                    ),
+                ),
+                shape = RoundedCornerShape(CornerRadius.medium),
+            ),
     ) {
-        Box(modifier = Modifier.fillMaxWidth()) {
-            // Share button — top right
-            IconButton(
-                onClick = onShareClick,
-                modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(Spacing.xs),
-            ) {
-                Icon(
-                    Icons.Default.Share,
-                    contentDescription = "Share",
-                    tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.6f),
-                    modifier = Modifier.size(20.dp),
-                )
-            }
+        // Decorative inner glow
+        Canvas(modifier = Modifier.matchParentSize()) {
+            drawCircle(
+                color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.05f),
+                radius = size.width * 0.4f,
+                center = Offset(size.width * 0.2f, size.height * 0.1f),
+            )
+            drawCircle(
+                color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.03f),
+                radius = size.width * 0.3f,
+                center = Offset(size.width * 0.85f, size.height * 0.8f),
+            )
+        }
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = Spacing.xl, vertical = Spacing.xl),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
+        // Share button — top right
+        IconButton(
+            onClick = onShareClick,
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(Spacing.xs),
+        ) {
+            Icon(
+                Icons.Default.Share,
+                contentDescription = "Share",
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
+                modifier = Modifier.size(20.dp),
+            )
+        }
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = Spacing.xl, vertical = Spacing.xl),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
             // "Current Balance" label
             Text(
                 text = "Current Balance",
@@ -334,9 +393,9 @@ private fun HeroBalanceCard(
 
             Spacer(modifier = Modifier.height(Spacing.sm))
 
-            // Large balance number — the hero element
-            val sign = if (netBalance >= 0) "" else "-"
-            val absBalance = kotlin.math.abs(netBalance)
+            // Large balance number — animated hero element
+            val sign = if (animatedBalance >= 0) "" else "-"
+            val absBalance = kotlin.math.abs(animatedBalance)
             Text(
                 text = "${sign}\u20AA${String.format("%.2f", absBalance)}",
                 style = TextStyle(
@@ -371,7 +430,7 @@ private fun HeroBalanceCard(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         Text(
-                            text = "\u20AA${String.format("%.2f", totalIncome)}",
+                            text = "\u20AA${String.format("%.2f", animatedIncome)}",
                             style = TextStyle(
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = 15.sp,
@@ -405,7 +464,7 @@ private fun HeroBalanceCard(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         Text(
-                            text = "\u20AA${String.format("%.2f", totalExpense)}",
+                            text = "\u20AA${String.format("%.2f", animatedExpense)}",
                             style = TextStyle(
                                 fontWeight = FontWeight.SemiBold,
                                 fontSize = 15.sp,
@@ -417,7 +476,6 @@ private fun HeroBalanceCard(
                 }
             }
         }
-        } // Box
     }
 }
 
