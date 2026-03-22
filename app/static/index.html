@@ -517,6 +517,284 @@
         .toast.error {
             background: #c53030;
         }
+
+        /* ===== SHARE MODAL ===== */
+        .share-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .share-overlay.active {
+            display: flex;
+        }
+
+        .share-modal {
+            background: #fff;
+            border-radius: 16px;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .share-card {
+            padding: 2rem 1.5rem 1.5rem;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .share-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .share-card::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(34,211,238,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .share-card-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .share-account-name {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            opacity: 0.7;
+            margin-bottom: 0.25rem;
+        }
+
+        .share-account-label {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+
+        .share-balance-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.6;
+            margin-bottom: 0.15rem;
+        }
+
+        .share-balance {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .share-balance.positive {
+            color: #6ee7b7;
+        }
+
+        .share-balance.negative {
+            color: #fca5a5;
+        }
+
+        .share-summary-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .share-summary-item {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 0.6rem 0.75rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .share-summary-item .label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.7;
+            margin-bottom: 0.15rem;
+        }
+
+        .share-summary-item .value {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .share-summary-item .value.inc {
+            color: #6ee7b7;
+        }
+
+        .share-summary-item .value.exp {
+            color: #fca5a5;
+        }
+
+        .share-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            margin: 0.75rem 0;
+        }
+
+        .share-tx-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .share-tx-list {
+            list-style: none;
+        }
+
+        .share-tx-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.35rem 0;
+            font-size: 0.82rem;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .share-tx-item:last-child {
+            border-bottom: none;
+        }
+
+        .share-tx-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .share-tx-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .share-tx-dot.inc {
+            background: #6ee7b7;
+        }
+
+        .share-tx-dot.exp {
+            background: #fca5a5;
+        }
+
+        .share-tx-cat {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            opacity: 0.9;
+        }
+
+        .share-tx-amt {
+            font-weight: 600;
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+        }
+
+        .share-tx-amt.inc {
+            color: #6ee7b7;
+        }
+
+        .share-tx-amt.exp {
+            color: #fca5a5;
+        }
+
+        .share-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.65rem;
+            opacity: 0.5;
+            letter-spacing: 0.04em;
+        }
+
+        .share-empty-tx {
+            font-size: 0.82rem;
+            opacity: 0.5;
+            font-style: italic;
+            padding: 0.5rem 0;
+        }
+
+        /* Share modal actions bar */
+        .share-actions {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            background: #fff;
+        }
+
+        .share-action-btn {
+            flex: 1;
+            padding: 0.65rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .share-action-btn:hover {
+            opacity: 0.85;
+        }
+
+        .share-action-btn.primary {
+            background: linear-gradient(135deg, #2b6cb0 0%, #3182ce 100%);
+            color: #fff;
+        }
+
+        .share-action-btn.secondary {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+
+        .share-name-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px dashed rgba(255,255,255,0.4);
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-family: inherit;
+            width: 100%;
+            padding: 0.1rem 0;
+            outline: none;
+        }
+
+        .share-name-input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
     </style>
 </head>
 <body>
@@ -533,6 +811,7 @@
                 Import JSON
                 <input type="file" accept=".json" onchange="importData(event)" style="display:none">
             </label>
+            <button class="header-btn" onclick="openShareCard()" data-testid="share-btn">Share</button>
         </div>
     </header>
 
@@ -681,6 +960,43 @@
             </div>
         </div>
 
+    </div>
+
+    <!-- SHARE MODAL -->
+    <div class="share-overlay" id="shareOverlay" data-testid="share-overlay">
+        <div class="share-modal">
+            <div class="share-card" id="shareCard">
+                <div class="share-card-inner" id="shareCardInner">
+                    <div class="share-account-name">Account Overview</div>
+                    <input class="share-name-input" id="shareNameInput" data-testid="share-name-input"
+                           placeholder="My Budget" maxlength="40">
+                    <div class="share-balance-label">Current Balance</div>
+                    <div class="share-balance" id="shareBalance"></div>
+                    <div class="share-summary-row">
+                        <div class="share-summary-item">
+                            <div class="label">Income</div>
+                            <div class="value inc" id="shareIncome"></div>
+                        </div>
+                        <div class="share-summary-item">
+                            <div class="label">Expenses</div>
+                            <div class="value exp" id="shareExpenses"></div>
+                        </div>
+                    </div>
+                    <hr class="share-divider">
+                    <div class="share-tx-title">Recent Transactions</div>
+                    <ul class="share-tx-list" id="shareTxList"></ul>
+                    <div class="share-footer">
+                        <span>Budget Manager</span>
+                        <span id="shareDate"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="share-actions">
+                <button class="share-action-btn primary" onclick="downloadShareCard()" data-testid="share-download-btn">Download Image</button>
+                <button class="share-action-btn primary" onclick="nativeShare()" id="nativeShareBtn" data-testid="share-native-btn" style="display:none">Share</button>
+                <button class="share-action-btn secondary" onclick="closeShareCard()" data-testid="share-close-btn">Close</button>
+            </div>
+        </div>
     </div>
 
     <!-- TOAST -->
@@ -1186,6 +1502,320 @@
                     });
                 }
             });
+        }
+
+        /* ===== SHARE CARD ===== */
+        const shareOverlay = document.getElementById('shareOverlay');
+        const shareCard = document.getElementById('shareCard');
+        const shareNameInput = document.getElementById('shareNameInput');
+        const shareBalance = document.getElementById('shareBalance');
+        const shareIncome = document.getElementById('shareIncome');
+        const shareExpenses = document.getElementById('shareExpenses');
+        const shareTxList = document.getElementById('shareTxList');
+        const shareDate = document.getElementById('shareDate');
+        const nativeShareBtn = document.getElementById('nativeShareBtn');
+
+        // Show native share button if Web Share API is available
+        if (navigator.share && navigator.canShare) {
+            nativeShareBtn.style.display = '';
+        }
+
+        async function openShareCard() {
+            try {
+                // Fetch summary and transactions in parallel
+                const [summaryRes, txRes] = await Promise.all([
+                    fetch(`${API_BASE}/summary/monthly?year=${currentYear}&month=${currentMonth}`),
+                    fetch(`${API_BASE}/transactions/`)
+                ]);
+
+                if (!summaryRes.ok || !txRes.ok) throw new Error('Failed to load data');
+
+                const summary = await summaryRes.json();
+                const transactions = await txRes.json();
+
+                // Populate card
+                const balance = summary.net_balance;
+                shareBalance.textContent = `\u20aa${formatAmount(Math.abs(balance))}`;
+                if (balance < 0) shareBalance.textContent = `-${shareBalance.textContent}`;
+                shareBalance.className = 'share-balance ' + (balance >= 0 ? 'positive' : 'negative');
+
+                shareIncome.textContent = `\u20aa${formatAmount(summary.total_income)}`;
+                shareExpenses.textContent = `\u20aa${formatAmount(summary.total_expenses)}`;
+
+                // Last 10 transactions
+                const recent = transactions.slice(0, 10);
+                if (recent.length === 0) {
+                    shareTxList.innerHTML = '<div class="share-empty-tx">No transactions yet</div>';
+                } else {
+                    shareTxList.innerHTML = recent.map(tx => `
+                        <li class="share-tx-item">
+                            <span class="share-tx-left">
+                                <span class="share-tx-dot ${tx.type === 'income' ? 'inc' : 'exp'}"></span>
+                                <span class="share-tx-cat">${escapeHtml(tx.category)}</span>
+                            </span>
+                            <span class="share-tx-amt ${tx.type === 'income' ? 'inc' : 'exp'}">
+                                ${tx.type === 'income' ? '+' : '-'}\u20aa${formatAmount(tx.amount)}
+                            </span>
+                        </li>
+                    `).join('');
+                }
+
+                // Date
+                const monthNames = [
+                    'January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'
+                ];
+                shareDate.textContent = `${monthNames[currentMonth - 1]} ${currentYear}`;
+
+                // Show modal
+                shareOverlay.classList.add('active');
+            } catch (err) {
+                showToast('Failed to generate share card', true);
+                console.error(err);
+            }
+        }
+
+        function closeShareCard() {
+            shareOverlay.classList.remove('active');
+        }
+
+        // Close on overlay click (not card click)
+        shareOverlay.addEventListener('click', (e) => {
+            if (e.target === shareOverlay) closeShareCard();
+        });
+
+        function renderShareCardToCanvas() {
+            return new Promise((resolve) => {
+                const card = shareCard;
+                const rect = card.getBoundingClientRect();
+                const scale = 2; // retina
+                const canvas = document.createElement('canvas');
+                canvas.width = rect.width * scale;
+                canvas.height = rect.height * scale;
+                const ctx = canvas.getContext('2d');
+                ctx.scale(scale, scale);
+
+                // Background gradient
+                const grad = ctx.createLinearGradient(0, 0, rect.width, rect.height);
+                grad.addColorStop(0, '#1a1a2e');
+                grad.addColorStop(0.4, '#16213e');
+                grad.addColorStop(1, '#0f3460');
+                ctx.fillStyle = grad;
+                roundRect(ctx, 0, 0, rect.width, rect.height, 16);
+                ctx.fill();
+
+                // Decorative circles
+                ctx.save();
+                const radGrad1 = ctx.createRadialGradient(rect.width * 0.8, rect.height * 0.1, 0, rect.width * 0.8, rect.height * 0.1, 150);
+                radGrad1.addColorStop(0, 'rgba(99,102,241,0.3)');
+                radGrad1.addColorStop(1, 'transparent');
+                ctx.fillStyle = radGrad1;
+                ctx.fillRect(0, 0, rect.width, rect.height);
+                const radGrad2 = ctx.createRadialGradient(rect.width * 0.15, rect.height * 0.85, 0, rect.width * 0.15, rect.height * 0.85, 125);
+                radGrad2.addColorStop(0, 'rgba(34,211,238,0.2)');
+                radGrad2.addColorStop(1, 'transparent');
+                ctx.fillStyle = radGrad2;
+                ctx.fillRect(0, 0, rect.width, rect.height);
+                ctx.restore();
+
+                const px = 24; // left padding
+                let y = 32;
+
+                // Account Overview label
+                ctx.fillStyle = 'rgba(255,255,255,0.7)';
+                ctx.font = '600 11px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                ctx.letterSpacing = '1.5px';
+                ctx.fillText('ACCOUNT OVERVIEW', px, y);
+                y += 24;
+
+                // Account name
+                const accountName = shareNameInput.value.trim() || 'My Budget';
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '700 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                ctx.letterSpacing = '0px';
+                ctx.fillText(accountName, px, y);
+                y += 30;
+
+                // Balance label
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.font = '600 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                ctx.fillText('CURRENT BALANCE', px, y);
+                y += 8;
+
+                // Balance value
+                const balText = shareBalance.textContent;
+                const isNeg = shareBalance.classList.contains('negative');
+                ctx.fillStyle = isNeg ? '#fca5a5' : '#6ee7b7';
+                ctx.font = '800 34px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                ctx.fillText(balText, px, y + 30);
+                y += 46;
+
+                // Income/Expense boxes
+                const boxW = (rect.width - px * 2 - 12) / 2;
+                const boxH = 52;
+                const boxY = y;
+
+                // Income box
+                ctx.fillStyle = 'rgba(255,255,255,0.1)';
+                roundRect(ctx, px, boxY, boxW, boxH, 10);
+                ctx.fill();
+                ctx.fillStyle = 'rgba(255,255,255,0.7)';
+                ctx.font = '600 9px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                ctx.fillText('INCOME', px + 12, boxY + 20);
+                ctx.fillStyle = '#6ee7b7';
+                ctx.font = '700 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                ctx.fillText(shareIncome.textContent, px + 12, boxY + 40);
+
+                // Expense box
+                const box2X = px + boxW + 12;
+                ctx.fillStyle = 'rgba(255,255,255,0.1)';
+                roundRect(ctx, box2X, boxY, boxW, boxH, 10);
+                ctx.fill();
+                ctx.fillStyle = 'rgba(255,255,255,0.7)';
+                ctx.font = '600 9px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                ctx.fillText('EXPENSES', box2X + 12, boxY + 20);
+                ctx.fillStyle = '#fca5a5';
+                ctx.font = '700 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                ctx.fillText(shareExpenses.textContent, box2X + 12, boxY + 40);
+
+                y = boxY + boxH + 18;
+
+                // Divider
+                ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(px, y);
+                ctx.lineTo(rect.width - px, y);
+                ctx.stroke();
+                y += 18;
+
+                // Recent Transactions title
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.font = '600 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                ctx.fillText('RECENT TRANSACTIONS', px, y);
+                y += 14;
+
+                // Transaction items
+                const txItems = shareTxList.querySelectorAll('.share-tx-item');
+                if (txItems.length === 0) {
+                    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                    ctx.font = 'italic 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                    ctx.fillText('No transactions yet', px, y + 14);
+                    y += 28;
+                } else {
+                    txItems.forEach(item => {
+                        const dot = item.querySelector('.share-tx-dot');
+                        const cat = item.querySelector('.share-tx-cat');
+                        const amt = item.querySelector('.share-tx-amt');
+                        const isIncome = dot.classList.contains('inc');
+
+                        // Dot
+                        ctx.fillStyle = isIncome ? '#6ee7b7' : '#fca5a5';
+                        ctx.beginPath();
+                        ctx.arc(px + 4, y + 8, 3, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        // Category
+                        ctx.fillStyle = 'rgba(255,255,255,0.9)';
+                        ctx.font = '400 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                        const catText = cat.textContent;
+                        const maxCatW = rect.width - px * 2 - 120;
+                        let displayCat = catText;
+                        if (ctx.measureText(catText).width > maxCatW) {
+                            while (ctx.measureText(displayCat + '...').width > maxCatW && displayCat.length > 0) {
+                                displayCat = displayCat.slice(0, -1);
+                            }
+                            displayCat += '...';
+                        }
+                        ctx.fillText(displayCat, px + 16, y + 12);
+
+                        // Amount
+                        ctx.fillStyle = isIncome ? '#6ee7b7' : '#fca5a5';
+                        ctx.font = '600 13px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                        const amtText = amt.textContent.trim();
+                        const amtW = ctx.measureText(amtText).width;
+                        ctx.fillText(amtText, rect.width - px - amtW, y + 12);
+
+                        y += 24;
+                    });
+                }
+
+                // Footer divider
+                y += 4;
+                ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+                ctx.beginPath();
+                ctx.moveTo(px, y);
+                ctx.lineTo(rect.width - px, y);
+                ctx.stroke();
+                y += 16;
+
+                // Footer
+                ctx.fillStyle = 'rgba(255,255,255,0.5)';
+                ctx.font = '400 10px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                ctx.fillText('Budget Manager', px, y);
+                const dateText = shareDate.textContent;
+                const dateW = ctx.measureText(dateText).width;
+                ctx.fillText(dateText, rect.width - px - dateW, y);
+
+                resolve(canvas);
+            });
+        }
+
+        function roundRect(ctx, x, y, w, h, r) {
+            ctx.beginPath();
+            ctx.moveTo(x + r, y);
+            ctx.lineTo(x + w - r, y);
+            ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+            ctx.lineTo(x + w, y + h - r);
+            ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            ctx.lineTo(x + r, y + h);
+            ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+            ctx.lineTo(x, y + r);
+            ctx.quadraticCurveTo(x, y, x + r, y);
+            ctx.closePath();
+        }
+
+        async function downloadShareCard() {
+            try {
+                const canvas = await renderShareCardToCanvas();
+                const link = document.createElement('a');
+                link.download = `budget_card_${new Date().toISOString().slice(0,10)}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showToast('Card image downloaded!');
+            } catch (err) {
+                showToast('Failed to download image', true);
+                console.error(err);
+            }
+        }
+
+        async function nativeShare() {
+            try {
+                const canvas = await renderShareCardToCanvas();
+                canvas.toBlob(async (blob) => {
+                    const file = new File([blob], 'budget_card.png', { type: 'image/png' });
+                    const shareData = {
+                        title: 'My Budget Summary',
+                        text: `Balance: ${shareBalance.textContent} | Income: ${shareIncome.textContent} | Expenses: ${shareExpenses.textContent}`,
+                        files: [file]
+                    };
+
+                    if (navigator.canShare && navigator.canShare(shareData)) {
+                        await navigator.share(shareData);
+                    } else {
+                        // Fallback: share without file
+                        await navigator.share({
+                            title: 'My Budget Summary',
+                            text: `Balance: ${shareBalance.textContent} | Income: ${shareIncome.textContent} | Expenses: ${shareExpenses.textContent}`
+                        });
+                    }
+                }, 'image/png');
+            } catch (err) {
+                if (err.name !== 'AbortError') {
+                    showToast('Sharing failed', true);
+                    console.error(err);
+                }
+            }
         }
 
         /* ===== START ===== */
