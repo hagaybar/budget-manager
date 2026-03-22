@@ -1,0 +1,279 @@
+You are acting as a senior Android product designer + senior Android UI engineer.
+
+Your mission is to transform my Android budget manager app into a polished, modern, premium-feeling app with a cohesive visual identity across the entire experience — starting from the app icon and splash/startup screen, through onboarding and main screens, and down to micro-details such as spacing, typography hierarchy, empty states, cards, buttons, icons, animations, dividers, form fields, feedback states, and loading states.
+
+You must not make random cosmetic changes. You must produce a coherent design system and then apply it consistently throughout the app.
+
+## Product context
+This is a budget manager app. The app should feel:
+- trustworthy
+- modern
+- clean
+- pleasant
+- slightly premium
+- calm rather than flashy
+- efficient for daily use
+- visually memorable but not childish
+- suitable for finance/productivity usage
+
+The design should communicate:
+- clarity
+- control
+- confidence
+- simplicity
+- financial awareness
+- reduced stress
+
+## Main objective
+Redesign the app’s look and feel so it no longer feels generic or developer-made, but instead feels like a carefully designed consumer Android app.
+
+The work should include:
+1. App icon redesign
+2. Splash / startup screen redesign
+3. Global theme and design system
+4. All primary screens
+5. All secondary/detail screens
+6. Reusable components
+7. Micro-interactions and motion
+8. Dark mode and light mode polish
+9. Small visual details that make the app feel premium
+10. Final consistency pass across the whole app
+
+## Important constraints
+- Preserve the app’s existing core functionality unless a UI change clearly improves usability.
+- Do not break flows or logic.
+- Prefer modern Android best practices.
+- If the app uses Jetpack Compose, stay consistent with Compose patterns.
+- If it uses XML Views, stay consistent unless a migration is clearly scoped and safe.
+- Keep performance in mind.
+- Keep accessibility in mind.
+- Avoid visual clutter.
+- Avoid over-decoration.
+- Avoid gimmicky gradients everywhere.
+- Avoid excessive neon/glassmorphism unless it truly fits the app.
+- Design for a real production app, not a Dribbble shot.
+
+## Required design direction
+Create a visual language with:
+- a well-chosen primary color palette
+- supporting neutrals
+- semantic colors for positive / warning / danger / info
+- consistent corner radius system
+- consistent elevation/shadow strategy
+- spacing scale
+- typography hierarchy
+- icon style rules
+- card/list item style rules
+- input field style rules
+- button system
+- top app bar / bottom nav / tabs styling
+- empty/loading/error/success state styling
+- subtle motion language
+
+The result should feel comparable in polish to top-tier modern finance/productivity apps.
+
+## Deliverables you must create in the codebase
+You must implement as much as possible directly in the codebase, not just describe ideas.
+
+### 1. Design system foundation
+Create or improve:
+- color tokens
+- typography tokens
+- spacing/dimension constants if appropriate
+- shape/corner tokens
+- elevation/shadow rules
+- reusable component styles
+- theme support for light/dark mode
+- consistent icon usage strategy
+
+If missing, introduce a small internal design system layer.
+
+### 2. App icon
+Design a more distinctive, premium app icon that fits a budget manager app.
+Requirements:
+- simple and recognizable at small sizes
+- modern and clean
+- not overly detailed
+- visually balanced
+- suitable for Android launcher icons
+- adaptive icon friendly if applicable
+- related to budgeting/finance/control without using cliché ugly dollar-sign-only design unless done tastefully
+
+Implement the icon assets or the best possible asset structure supported by the project.
+
+### 3. Splash / startup experience
+Improve the startup screen so it feels intentional and branded.
+Requirements:
+- elegant and minimal
+- visually connected to the app icon and overall theme
+- proper background, logo placement, spacing, and possibly a subtle branded accent
+- if animation is used, it must be subtle and fast
+- should not feel slow or ornamental
+
+### 4. Main screens
+Review and visually improve every major screen, including likely areas such as:
+- dashboard / home
+- transaction list
+- add/edit transaction
+- budgets overview
+- categories
+- reports / analytics
+- settings
+- account/profile if present
+- onboarding / welcome / permissions if present
+
+For each screen:
+- improve hierarchy
+- improve spacing
+- improve alignment
+- improve card/list design
+- improve CTA emphasis
+- improve legibility
+- improve empty states
+- improve visual grouping
+- reduce clutter
+- make important information stand out
+
+### 5. Small details
+This is critical.
+Improve the tiny details that separate average UI from polished UI:
+- padding consistency
+- corner radii consistency
+- icon sizes
+- text contrast
+- divider usage
+- row heights
+- list density
+- pressed/disabled/focused states
+- ripple/interaction feedback
+- loaders/progress indicators
+- success/error messages
+- dialogs
+- bottom sheets
+- chips/tags
+- switches/checkboxes/radios
+- form validation appearance
+- keyboard-related polish
+- skeleton/loading placeholders if appropriate
+- empty states with tasteful messaging and visuals if appropriate
+
+### 6. Motion
+Add tasteful motion where it improves perceived quality:
+- screen transitions if already supported
+- component state transitions
+- button feedback
+- list/item animations if subtle
+- loading/success transitions if appropriate
+
+Motion must be:
+- subtle
+- quick
+- meaningful
+- not distracting
+
+### 7. Accessibility and usability
+While improving visuals, also ensure:
+- sufficient contrast
+- touch targets are large enough
+- readable text sizes
+- good hierarchy in both light and dark mode
+- no information hidden behind weak contrast or overly decorative UI
+
+### 8. Dark mode
+Dark mode must not be an afterthought.
+Ensure:
+- elegant dark palette
+- no muddy contrast
+- no harsh pure black unless it is a deliberate choice
+- cards/surfaces/elevations look intentional
+- accent colors still feel refined
+
+## Workflow you must follow
+You must work in this order:
+
+### Phase 1: Audit
+Inspect the current codebase and identify:
+- UI architecture
+- theme structure
+- navigation structure
+- reusable UI components
+- all main screens
+- obvious design inconsistencies
+- low-effort, high-impact polish opportunities
+- bigger structural design improvements
+
+Then summarize:
+1. the current UI stack
+2. the weaknesses in the current visual design
+3. the design direction you will implement
+4. a concrete execution plan
+
+### Phase 2: Design system plan
+Before making widespread UI changes, define:
+- color palette
+- typography hierarchy
+- spacing rules
+- shape rules
+- component style principles
+- iconography direction
+- light/dark theme approach
+
+Then implement the foundations first.
+
+### Phase 3: Global implementation
+Apply the design system to shared components and app-wide theme areas first.
+
+### Phase 4: Screen-by-screen refinement
+Then improve screens one by one, prioritizing the most visible/high-impact screens first.
+
+### Phase 5: Premium polish pass
+Do a final pass focused only on refinement:
+- alignment
+- spacing
+- state consistency
+- animation polish
+- dark mode polish
+- visual cleanup
+- removing anything that looks amateurish
+
+## Decision-making rules
+When making design decisions:
+- prefer clarity over decoration
+- prefer consistency over one-off cleverness
+- prefer premium restraint over loud visual effects
+- prefer maintainable code over hacks
+- prefer reusable components over duplicated styling
+- prefer polished defaults over excessive customization
+
+## What to avoid
+Do not:
+- introduce random styles per screen
+- use too many accent colors
+- add cluttered dashboards
+- overuse shadows
+- overuse gradients
+- use inconsistent corner radii
+- use tiny text
+- use weak contrast
+- create a “template app” look
+- break existing user flows
+- leave the icon/splash disconnected from the rest of the app identity
+
+## Output expectations
+As you work, provide:
+1. a concise audit summary
+2. the design system direction
+3. the implementation plan
+4. progress updates by phase
+5. a final summary of what changed
+6. a list of files modified
+7. any follow-up recommendations
+
+## Execution rule
+Use the /babysitter plugin to carry out the work in manageable steps until the redesign is fully implemented.
+
+Do not stop at high-level suggestions. Actually apply the redesign in code, review the result, refine inconsistencies, and continue until the visual system feels cohesive and polished.
+
+If you encounter ambiguity, choose the most tasteful, modern, maintainable solution aligned with a premium Android finance app.
+
+Start now with Phase 1: audit the project and produce the visual redesign plan, then proceed through implementation with /babysitter.
