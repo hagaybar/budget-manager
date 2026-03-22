@@ -24,6 +24,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.AccountBalanceWallet
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -31,6 +32,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -62,6 +64,7 @@ import com.budgetmanager.app.ui.components.FilterBar
 import com.budgetmanager.app.ui.components.LoadingState
 import com.budgetmanager.app.ui.components.SwipeToDeleteContainer
 import com.budgetmanager.app.ui.theme.CornerRadius
+import com.budgetmanager.app.ui.screens.share.ShareCardDialog
 import com.budgetmanager.app.ui.theme.LocalFinanceColors
 import com.budgetmanager.app.ui.theme.Spacing
 import com.budgetmanager.app.ui.viewmodel.TransactionListViewModel
@@ -78,6 +81,14 @@ fun TransactionListScreen(
     val uiState by viewModel.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
     val pullToRefreshState = rememberPullToRefreshState()
+    var showShareDialog by remember { mutableStateOf(false) }
+
+    if (showShareDialog) {
+        ShareCardDialog(
+            transactions = uiState.transactions,
+            onDismiss = { showShareDialog = false },
+        )
+    }
 
     LaunchedEffect(uiState.error) {
         uiState.error?.let { error ->
@@ -165,7 +176,8 @@ fun TransactionListScreen(
                                         end = Spacing.lg,
                                         top = Spacing.lg,
                                         bottom = Spacing.sm
-                                    )
+                                    ),
+                                    onShareClick = { showShareDialog = true },
                                 )
                             }
 
@@ -266,6 +278,7 @@ fun TransactionListScreen(
 private fun HeroBalanceCard(
     transactions: List<Transaction>,
     modifier: Modifier = Modifier,
+    onShareClick: () -> Unit = {},
 ) {
     val financeColors = LocalFinanceColors.current
 
@@ -290,12 +303,28 @@ private fun HeroBalanceCard(
         ),
         shape = RoundedCornerShape(CornerRadius.medium),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = Spacing.xl, vertical = Spacing.xl),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+        Box(modifier = Modifier.fillMaxWidth()) {
+            // Share button — top right
+            IconButton(
+                onClick = onShareClick,
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(Spacing.xs),
+            ) {
+                Icon(
+                    Icons.Default.Share,
+                    contentDescription = "Share",
+                    tint = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.6f),
+                    modifier = Modifier.size(20.dp),
+                )
+            }
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = Spacing.xl, vertical = Spacing.xl),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
             // "Current Balance" label
             Text(
                 text = "Current Balance",
@@ -388,6 +417,7 @@ private fun HeroBalanceCard(
                 }
             }
         }
+        } // Box
     }
 }
 
