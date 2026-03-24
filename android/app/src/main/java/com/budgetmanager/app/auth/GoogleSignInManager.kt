@@ -15,6 +15,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.budgetmanager.app.R
+import com.google.android.gms.auth.GoogleAuthUtil
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -26,6 +27,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -45,6 +47,9 @@ class GoogleSignInManager @Inject constructor(
 
     private val _isSigningIn = MutableStateFlow(false)
     val isSigningIn: StateFlow<Boolean> = _isSigningIn.asStateFlow()
+
+    private val _accessToken = MutableStateFlow<String?>(null)
+    val accessToken: StateFlow<String?> = _accessToken.asStateFlow()
 
     private object Keys {
         val NAME = stringPreferencesKey("auth_name")
@@ -201,11 +206,36 @@ class GoogleSignInManager @Inject constructor(
     fun signOut() {
         _authState.value = AuthState.SignedOut
         _signInError.value = null
+        _accessToken.value = null
         scope.launch { clearAuthState() }
     }
 
     fun clearError() {
         _signInError.value = null
+    }
+
+    /**
+     * Retrieves an OAuth2 access token with the drive.appdata scope.
+     * Uses GoogleAuthUtil which works with any Google account on the device.
+     * Will automatically show a consent screen on first use.
+     */
+    suspend fun getDriveAccessToken(): String? = withContext(Dispatchers.IO) {
+        try {
+            val email = (_authState.value as? AuthState.SignedIn)?.email ?: return@withContext null
+            if (email == "guest@local") return@withContext null
+            val account = android.accounts.Account(email, "com.google")
+            val token = GoogleAuthUtil.getToken(
+                context,
+                account,
+                "oauth2:https://www.googleapis.com/auth/drive.appdata"
+            )
+            _accessToken.value = token
+            token
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to get Drive access token", e)
+            _accessToken.value = null
+            null
+        }
     }
 
     private suspend fun persistAuthState(state: AuthState.SignedIn) {

@@ -19,7 +19,7 @@
     <string name="settings_export_data">Export Data</string>
     <string name="settings_importing">Importing…</string>
     <string name="settings_import_data">Import Data</string>
-    <string name="settings_app_version">Version 1.2.0</string>
+    <string name="settings_app_version">Version 2.3.0</string>
 
     <!-- Import confirmation dialog -->
     <string name="import_dialog_title">Replace All Data?</string>
@@ -46,6 +46,19 @@
     <string name="error_import_generic">Import failed: %1$s</string>
     <string name="error_import_validation">The backup file is missing required data (transactions or recurring transactions).</string>
     <string name="error_unknown">Unknown error</string>
+
+    <!-- Cloud Sync -->
+    <string name="settings_section_cloud_sync">Cloud Sync</string>
+    <string name="settings_sync_description">Sync your data with Google Drive to access it from the web app and other devices.</string>
+    <string name="settings_last_sync">Last synced: %1$s</string>
+    <string name="settings_syncing">Syncing\u2026</string>
+    <string name="settings_sync_now">Sync Now</string>
+    <string name="settings_upload">Upload</string>
+    <string name="sync_success">Synced with Google Drive</string>
+    <string name="sync_error_sign_in">Sign in with Google to sync</string>
+    <string name="sync_error_generic">Sync failed: %1$s</string>
+    <string name="upload_success">Uploaded to Google Drive</string>
+    <string name="upload_error_generic">Upload failed: %1$s</string>
 
     <!-- Auth error messages -->
     <string name="auth_error_not_configured">Google Sign-In is not configured yet. Please set up a Web Client ID in the Google Cloud Console, then update the default_web_client_id string resource.</string>

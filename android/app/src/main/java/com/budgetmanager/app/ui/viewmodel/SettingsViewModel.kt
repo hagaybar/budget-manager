@@ -14,6 +14,8 @@ import com.budgetmanager.app.auth.AuthState
 import com.budgetmanager.app.auth.GoogleSignInManager
 import com.budgetmanager.app.data.repository.BackupRepository
 import com.budgetmanager.app.data.repository.BudgetRepository
+import com.budgetmanager.app.data.sync.GoogleDriveSyncManager
+import com.budgetmanager.app.data.sync.SyncStatus
 import com.budgetmanager.app.domain.manager.ActiveBudgetManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -38,7 +40,8 @@ class SettingsViewModel @Inject constructor(
     private val backupRepository: BackupRepository,
     private val googleSignInManager: GoogleSignInManager,
     private val budgetRepository: BudgetRepository,
-    private val activeBudgetManager: ActiveBudgetManager
+    private val activeBudgetManager: ActiveBudgetManager,
+    private val driveSyncManager: GoogleDriveSyncManager
 ) : ViewModel() {
 
     data class UiState(
@@ -48,7 +51,10 @@ class SettingsViewModel @Inject constructor(
         val pendingImportUri: Uri? = null,
         val lastBackupDate: String? = null,
         val authState: AuthState = AuthState.Loading,
-        val navigateToSignIn: Boolean = false
+        val navigateToSignIn: Boolean = false,
+        val isSyncing: Boolean = false,
+        val syncStatus: SyncStatus = SyncStatus.IDLE,
+        val lastSyncDate: String? = null
     )
 
     sealed class SnackbarEvent {
@@ -58,6 +64,7 @@ class SettingsViewModel @Inject constructor(
 
     private object Keys {
         val LAST_BACKUP_DATE = stringPreferencesKey("last_backup_date")
+        val LAST_SYNC_DATE = stringPreferencesKey("last_sync_date")
     }
 
     private val _uiState = MutableStateFlow(UiState())
@@ -73,7 +80,15 @@ class SettingsViewModel @Inject constructor(
             }
         }
         viewModelScope.launch {
+            driveSyncManager.syncStatus.collect { status ->
+                _uiState.update { it.copy(syncStatus = status) }
+            }
+        }
+        viewModelScope.launch {
             loadLastBackupDate()
+        }
+        viewModelScope.launch {
+            loadLastSyncDate()
         }
     }
 
@@ -95,6 +110,112 @@ class SettingsViewModel @Inject constructor(
             _uiState.update { it.copy(lastBackupDate = date) }
         } catch (_: Exception) {
             // Ignore DataStore write errors
+        }
+    }
+
+    private suspend fun loadLastSyncDate() {
+        try {
+            val prefs = context.backupDataStore.data.first()
+            val date = prefs[Keys.LAST_SYNC_DATE]
+            _uiState.update { it.copy(lastSyncDate = date) }
+        } catch (_: Exception) {
+            // Ignore DataStore read errors
+        }
+    }
+
+    private suspend fun saveLastSyncDate(date: String) {
+        try {
+            context.backupDataStore.edit { prefs ->
+                prefs[Keys.LAST_SYNC_DATE] = date
+            }
+            _uiState.update { it.copy(lastSyncDate = date) }
+        } catch (_: Exception) {
+            // Ignore DataStore write errors
+        }
+    }
+
+    fun syncWithDrive() {
+        viewModelScope.launch {
+            val token = googleSignInManager.getDriveAccessToken()
+            if (token == null) {
+                _snackbarEvents.emit(SnackbarEvent.Error(
+                    context.getString(R.string.sync_error_sign_in)
+                ))
+                return@launch
+            }
+
+            _uiState.update { it.copy(isSyncing = true) }
+
+            try {
+                // Download from Drive
+                val driveData = driveSyncManager.downloadFromDrive(token)
+
+                if (driveData != null) {
+                    // Import Drive data into local DB
+                    backupRepository.importFromJson(driveData)
+
+                    // Sync active budget
+                    val activeBudget = budgetRepository.getActiveBudget()
+                    if (activeBudget != null) {
+                        activeBudgetManager.setActiveBudgetId(activeBudget.id)
+                    } else {
+                        val allBudgets = budgetRepository.getAll()
+                        val firstBudget = allBudgets.firstOrNull()
+                        if (firstBudget != null) {
+                            budgetRepository.setActiveBudget(firstBudget.id)
+                            activeBudgetManager.setActiveBudgetId(firstBudget.id)
+                        } else {
+                            activeBudgetManager.setActiveBudgetId(0L)
+                        }
+                    }
+                } else {
+                    // No data on Drive yet, upload local data
+                    val localData = backupRepository.exportToJson()
+                    driveSyncManager.uploadToDrive(token, localData)
+                }
+
+                val today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
+                saveLastSyncDate(today)
+                _uiState.update { it.copy(isSyncing = false) }
+                _snackbarEvents.emit(SnackbarEvent.Success(
+                    context.getString(R.string.sync_success)
+                ))
+            } catch (e: Exception) {
+                _uiState.update { it.copy(isSyncing = false) }
+                _snackbarEvents.emit(SnackbarEvent.Error(
+                    context.getString(R.string.sync_error_generic, e.message ?: context.getString(R.string.error_unknown))
+                ))
+            }
+        }
+    }
+
+    fun uploadToDrive() {
+        viewModelScope.launch {
+            val token = googleSignInManager.getDriveAccessToken()
+            if (token == null) {
+                _snackbarEvents.emit(SnackbarEvent.Error(
+                    context.getString(R.string.sync_error_sign_in)
+                ))
+                return@launch
+            }
+
+            _uiState.update { it.copy(isSyncing = true) }
+
+            try {
+                val data = backupRepository.exportToJson()
+                driveSyncManager.uploadToDrive(token, data)
+                val today = LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE)
+                saveLastSyncDate(today)
+                _uiState.update { it.copy(isSyncing = false) }
+                _snackbarEvents.emit(SnackbarEvent.Success(
+                    context.getString(R.string.upload_success)
+                ))
+            } catch (e: Exception) {
+                _uiState.update { it.copy(isSyncing = false) }
+                _snackbarEvents.emit(SnackbarEvent.Error(
+                    context.getString(R.string.upload_error_generic, e.message ?: context.getString(R.string.error_unknown))
+                ))
+            }
         }
     }
 

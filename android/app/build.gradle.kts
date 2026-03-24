@@ -14,8 +14,8 @@ android {
         applicationId = "com.budgetmanager.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 5
-        versionName = "2.2.0"
+        versionCode = 6
+        versionName = "2.3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -100,6 +100,9 @@ dependencies {
     implementation("androidx.credentials:credentials:1.3.0")
     implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+
+    // Google Auth (for Drive access token via GoogleAuthUtil)
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
 
     // Core KTX
     implementation("androidx.core:core-ktx:1.12.0")
