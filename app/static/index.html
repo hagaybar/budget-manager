@@ -2495,6 +2495,17 @@
         });
 
         async function handleDeleteTransaction(id) {
+            var tx = appData.transactions.find(function(t) { return t.id === id; });
+            if (!tx) return;
+
+            var sym = getActiveCurrencySymbol();
+            var label = tx.category + (tx.description ? ' — ' + tx.description : '');
+            var msg = 'Delete this transaction?\n\n' +
+                      tx.type.toUpperCase() + ' ' + sym + formatAmount(tx.amount) + '\n' +
+                      label + '\n' +
+                      tx.date;
+            if (!confirm(msg)) return;
+
             try {
                 await deleteTransactionFromData(id);
                 showToast('Transaction deleted');
@@ -2556,6 +2567,17 @@
         });
 
         async function handleDeleteRecurring(id) {
+            var rec = appData.recurring_transactions.find(function(r) { return r.id === id; });
+            if (!rec) return;
+
+            var sym = getActiveCurrencySymbol();
+            var label = rec.category + (rec.description ? ' — ' + rec.description : '');
+            var msg = 'Delete this recurring transaction?\n\n' +
+                      rec.type.toUpperCase() + ' ' + sym + formatAmount(rec.amount) + '\n' +
+                      label + '\n' +
+                      'Frequency: ' + rec.frequency;
+            if (!confirm(msg)) return;
+
             try {
                 await deleteRecurringFromData(id);
                 showToast('Recurring transaction deleted');
