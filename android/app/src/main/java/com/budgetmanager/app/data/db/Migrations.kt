@@ -167,3 +167,61 @@ val MIGRATION_2_3 = object : Migration(2, 3) {
         """)
     }
 }
+
+/**
+ * MIGRATION_3_4: Cleans up the duplicate-recurring-transactions corruption caused
+ * by two pre-existing bugs:
+ *   1. AddEditTransactionViewModel previously rebuilt Transaction without
+ *      recurringId on edit, so editing an auto-generated row stripped its FK.
+ *   2. GenerateRecurringTransactionsUseCase deduped only by recurring_id+date,
+ *      so any orphaned row got a fresh duplicate inserted on the next backfill.
+ *
+ * Two-step repair, both non-destructive when there is no corruption to fix:
+ *   (a) Backfill recurring_id on orphan rows whose (type, amount, category,
+ *       budget_id) matches exactly one active recurring whose [start_date,
+ *       end_date] window contains the row's date. Ambiguous matches (two
+ *       recurring with the same value pattern) are intentionally left alone.
+ *   (b) Collapse duplicates: for each (recurring_id, date) keep the lowest id
+ *       and delete the rest. Only affects rows where recurring_id IS NOT NULL,
+ *       so user-added rows with NULL FK (intentional or otherwise) are
+ *       preserved.
+ */
+val MIGRATION_3_4 = object : Migration(3, 4) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        // (a) Backfill recurring_id on unambiguous orphans.
+        db.execSQL("""
+            UPDATE `transactions`
+            SET `recurring_id` = (
+                SELECT r.id FROM `recurring_transactions` r
+                WHERE r.type = `transactions`.type
+                  AND r.amount = `transactions`.amount
+                  AND r.category = `transactions`.category
+                  AND r.budget_id = `transactions`.budget_id
+                  AND r.start_date <= `transactions`.date
+                  AND (r.end_date IS NULL OR r.end_date >= `transactions`.date)
+                LIMIT 1
+            )
+            WHERE `recurring_id` IS NULL
+              AND (
+                SELECT COUNT(*) FROM `recurring_transactions` r
+                WHERE r.type = `transactions`.type
+                  AND r.amount = `transactions`.amount
+                  AND r.category = `transactions`.category
+                  AND r.budget_id = `transactions`.budget_id
+                  AND r.start_date <= `transactions`.date
+                  AND (r.end_date IS NULL OR r.end_date >= `transactions`.date)
+              ) = 1
+        """)
+
+        // (b) Collapse (recurring_id, date) duplicates, keeping the lowest id.
+        db.execSQL("""
+            DELETE FROM `transactions`
+            WHERE `recurring_id` IS NOT NULL
+              AND `id` NOT IN (
+                SELECT MIN(`id`) FROM `transactions`
+                WHERE `recurring_id` IS NOT NULL
+                GROUP BY `recurring_id`, `date`
+              )
+        """)
+    }
+}

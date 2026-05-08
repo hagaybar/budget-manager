@@ -16,7 +16,7 @@ import com.budgetmanager.app.data.entity.TransactionEntity
         RecurringTransactionEntity::class,
         BudgetEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

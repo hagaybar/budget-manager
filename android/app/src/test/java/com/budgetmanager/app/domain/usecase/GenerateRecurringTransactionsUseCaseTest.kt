@@ -39,6 +39,9 @@ class GenerateRecurringTransactionsUseCaseTest {
         // Default: no pre-existing transactions; record every insert the use case
         // performs so tests can assert on the exact rows that would be written.
         coEvery { transactionDao.countByRecurringAndDate(any(), any()) } returns 0
+        coEvery {
+            transactionDao.findOrphanIdByValueOnDate(any(), any(), any(), any(), any())
+        } returns null
         coEvery { transactionDao.insert(any()) } answers {
             val tx = firstArg<TransactionEntity>()
             insertedTransactions.add(tx)
@@ -233,6 +236,63 @@ class GenerateRecurringTransactionsUseCaseTest {
 
         assertEquals(0, created)
         coVerify(exactly = 0) { transactionDao.insert(any()) }
+    }
+
+    // ── orphan relink (recurring_id stripped by edit / pre-FK app) ──────
+
+    @Test
+    fun `relinks orphan transaction by value match instead of inserting duplicate`() = runTest {
+        val today = LocalDate.of(2026, 4, 11)
+        val recurring = RecurringTransactionEntity(
+            id = 7,
+            type = "income",
+            amount = 5000.0,
+            category = "Salary",
+            description = "",
+            frequency = "weekly",
+            dayOfWeek = 4, // Friday
+            startDate = "2026-04-01",
+            isActive = 1,
+            budgetId = 2
+        )
+        coEvery { recurringDao.getActive() } returns listOf(recurring)
+
+        // 2026-04-10 (the missed Friday) has an orphan row matching the
+        // recurring's value pattern. The use case must relink, not duplicate.
+        coEvery {
+            transactionDao.findOrphanIdByValueOnDate(
+                date = "2026-04-10",
+                type = "income",
+                amount = 5000.0,
+                category = "Salary",
+                budgetId = 2
+            )
+        } returns 99L
+
+        useCase.execute(today)
+
+        coVerify(exactly = 1) { transactionDao.setRecurringId(99L, 7L) }
+        // No new row inserted for the date that had a relinkable orphan.
+        assertTrue(
+            "must not insert a duplicate when an orphan was relinked: ${capturedInsertDates()}",
+            "2026-04-10" !in capturedInsertDates()
+        )
+    }
+
+    @Test
+    fun `inserts when no orphan match exists for a date`() = runTest {
+        val today = LocalDate.of(2026, 4, 11)
+        val recurring = weeklyFriday(startDate = "2026-04-01")
+        coEvery { recurringDao.getActive() } returns listOf(recurring)
+        // Default mock returns null for findOrphanIdByValueOnDate (no match).
+
+        useCase.execute(today)
+
+        coVerify(exactly = 0) { transactionDao.setRecurringId(any(), any()) }
+        assertTrue(
+            "missed Friday must still be inserted when no orphan exists",
+            "2026-04-10" in capturedInsertDates()
+        )
     }
 
     // ── return value plumbing through the entity ─────────────────────────

@@ -180,6 +180,34 @@ interface TransactionDao {
     @Query("UPDATE transactions SET recurring_id = NULL WHERE recurring_id = :recurringId")
     suspend fun nullifyRecurringId(recurringId: Long)
 
+    /**
+     * Finds an orphaned transaction (recurring_id IS NULL) on [date] whose
+     * (type, amount, category, budget_id) matches the given recurring pattern.
+     * Used by the recurring-generation pipeline to relink orphans created by
+     * older bugs (edit-strips-FK, ON DELETE SET NULL after recurring deletion,
+     * pre-FK app versions) instead of inserting a new duplicate row.
+     */
+    @Query("""
+        SELECT id FROM transactions
+        WHERE recurring_id IS NULL
+          AND date = :date
+          AND type = :type
+          AND amount = :amount
+          AND category = :category
+          AND budget_id = :budgetId
+        LIMIT 1
+    """)
+    suspend fun findOrphanIdByValueOnDate(
+        date: String,
+        type: String,
+        amount: Double,
+        category: String,
+        budgetId: Long
+    ): Long?
+
+    @Query("UPDATE transactions SET recurring_id = :recurringId WHERE id = :id")
+    suspend fun setRecurringId(id: Long, recurringId: Long)
+
     @Query("UPDATE transactions SET budget_id = :budgetId WHERE budget_id = 0")
     suspend fun assignOrphanedToBudget(budgetId: Long): Int
 }

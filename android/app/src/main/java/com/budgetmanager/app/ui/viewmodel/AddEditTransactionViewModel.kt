@@ -32,6 +32,8 @@ class AddEditTransactionViewModel @Inject constructor(
         val description: String = "",
         val date: LocalDate = LocalDate.now(),
         val budgetId: Long = 0,
+        val recurringId: Long? = null,
+        val createdAt: String = "",
         val isSaving: Boolean = false,
         val saveSuccess: Boolean = false,
         val error: String? = null
@@ -58,7 +60,9 @@ class AddEditTransactionViewModel @Inject constructor(
                     category = transaction.category,
                     description = transaction.description,
                     date = LocalDate.parse(transaction.date),
-                    budgetId = transaction.budgetId
+                    budgetId = transaction.budgetId,
+                    recurringId = transaction.recurringId,
+                    createdAt = transaction.createdAt
                 )
             }
         }
@@ -99,6 +103,8 @@ class AddEditTransactionViewModel @Inject constructor(
                     category = state.category.trim(),
                     description = state.description.trim(),
                     date = state.date.toString(),
+                    createdAt = state.createdAt,
+                    recurringId = state.recurringId,
                     budgetId = budgetId
                 )
                 if (state.isEditMode) {

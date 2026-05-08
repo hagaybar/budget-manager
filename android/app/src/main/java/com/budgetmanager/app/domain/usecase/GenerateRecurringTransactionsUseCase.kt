@@ -96,6 +96,25 @@ class GenerateRecurringTransactionsUseCase @Inject constructor(
             val alreadyExists = transactionDao.countByRecurringAndDate(recurring.id, dateStr) > 0
             if (alreadyExists) continue
 
+            // Before inserting, look for an orphan (recurring_id IS NULL) that
+            // matches this recurring's value pattern on this date. Such rows
+            // exist when older bugs stripped the FK — most commonly the
+            // edit-transaction flow that didn't preserve recurringId, but also
+            // ON DELETE SET NULL when a recurring was deleted and re-added.
+            // Relinking the orphan keeps the user's history intact and prevents
+            // a duplicate from being created on every subsequent app open.
+            val orphanId = transactionDao.findOrphanIdByValueOnDate(
+                date = dateStr,
+                type = recurring.type,
+                amount = recurring.amount,
+                category = recurring.category,
+                budgetId = recurring.budgetId
+            )
+            if (orphanId != null) {
+                transactionDao.setRecurringId(orphanId, recurring.id)
+                continue
+            }
+
             val transaction = TransactionEntity(
                 type = recurring.type,
                 amount = recurring.amount,

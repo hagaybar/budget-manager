@@ -8,6 +8,7 @@ import com.budgetmanager.app.data.dao.TransactionDao
 import com.budgetmanager.app.data.db.BudgetDatabase
 import com.budgetmanager.app.data.db.MIGRATION_1_2
 import com.budgetmanager.app.data.db.MIGRATION_2_3
+import com.budgetmanager.app.data.db.MIGRATION_3_4
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,7 +28,7 @@ object AppModule {
             BudgetDatabase::class.java,
             "budget_manager.db"
         )
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
             .fallbackToDestructiveMigration()
             .build()
     }
