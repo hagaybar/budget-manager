@@ -139,7 +139,8 @@ class SettingsViewModel @Inject constructor(
             val token = googleSignInManager.getDriveAccessToken()
             if (token == null) {
                 _snackbarEvents.emit(SnackbarEvent.Error(
-                    context.getString(R.string.sync_error_sign_in)
+                    googleSignInManager.lastDriveTokenError
+                        ?: context.getString(R.string.sync_error_sign_in)
                 ))
                 return@launch
             }
@@ -194,7 +195,8 @@ class SettingsViewModel @Inject constructor(
             val token = googleSignInManager.getDriveAccessToken()
             if (token == null) {
                 _snackbarEvents.emit(SnackbarEvent.Error(
-                    context.getString(R.string.sync_error_sign_in)
+                    googleSignInManager.lastDriveTokenError
+                        ?: context.getString(R.string.sync_error_sign_in)
                 ))
                 return@launch
             }

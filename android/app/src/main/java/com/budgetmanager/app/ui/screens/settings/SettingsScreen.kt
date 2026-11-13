@@ -77,7 +77,13 @@ fun SettingsScreen(
             }
             snackbarHostState.showSnackbar(
                 message = message,
-                duration = SnackbarDuration.Short
+                // Errors stay up until dismissed so the reason can be read.
+                withDismissAction = event is SettingsViewModel.SnackbarEvent.Error,
+                duration = if (event is SettingsViewModel.SnackbarEvent.Error) {
+                    SnackbarDuration.Indefinite
+                } else {
+                    SnackbarDuration.Short
+                }
             )
         }
     }

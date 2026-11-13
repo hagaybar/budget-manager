@@ -15,7 +15,9 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.budgetmanager.app.R
+import com.google.android.gms.auth.GoogleAuthException
 import com.google.android.gms.auth.GoogleAuthUtil
+import com.google.android.gms.auth.UserRecoverableAuthException
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
@@ -50,6 +52,14 @@ class GoogleSignInManager @Inject constructor(
 
     private val _accessToken = MutableStateFlow<String?>(null)
     val accessToken: StateFlow<String?> = _accessToken.asStateFlow()
+
+    /**
+     * Why the last [getDriveAccessToken] call returned null, in words the user can
+     * act on (or pass on when reporting a problem). Null if it succeeded.
+     */
+    @Volatile
+    var lastDriveTokenError: String? = null
+        private set
 
     private object Keys {
         val NAME = stringPreferencesKey("auth_name")
@@ -220,6 +230,7 @@ class GoogleSignInManager @Inject constructor(
      * Will automatically show a consent screen on first use.
      */
     suspend fun getDriveAccessToken(): String? = withContext(Dispatchers.IO) {
+        lastDriveTokenError = null
         try {
             val email = (_authState.value as? AuthState.SignedIn)?.email ?: return@withContext null
             if (email == "guest@local") return@withContext null
@@ -231,8 +242,23 @@ class GoogleSignInManager @Inject constructor(
             )
             _accessToken.value = token
             token
+        } catch (e: UserRecoverableAuthException) {
+            // Google needs the user to (re)approve Drive access.
+            Log.e(TAG, "Drive access needs user approval", e)
+            lastDriveTokenError = "Google needs you to approve Google Drive access again. " +
+                "Sign out, sign in again, then retry. (${e.message})"
+            _accessToken.value = null
+            null
+        } catch (e: GoogleAuthException) {
+            // Typically UNREGISTERED_ON_API_CONSOLE: this build's package name / signing
+            // key (SHA-1) doesn't match an Android OAuth client in the Cloud project.
+            Log.e(TAG, "Failed to get Drive access token", e)
+            lastDriveTokenError = "Google refused Drive access: ${e.message}"
+            _accessToken.value = null
+            null
         } catch (e: Exception) {
             Log.e(TAG, "Failed to get Drive access token", e)
+            lastDriveTokenError = "Couldn't reach Google Drive: ${e.message ?: e.javaClass.simpleName}"
             _accessToken.value = null
             null
         }
