@@ -1,6 +1,7 @@
 package com.budgetmanager.app.auth
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
@@ -60,6 +61,18 @@ class GoogleSignInManager @Inject constructor(
     @Volatile
     var lastDriveTokenError: String? = null
         private set
+
+    /**
+     * Set when Google needs the user to (re)approve Google Drive access. The UI
+     * must launch this intent (it shows Google's consent screen) and then call
+     * [onDriveConsentHandled].
+     */
+    private val _driveConsentIntent = MutableStateFlow<Intent?>(null)
+    val driveConsentIntent: StateFlow<Intent?> = _driveConsentIntent.asStateFlow()
+
+    fun onDriveConsentHandled() {
+        _driveConsentIntent.value = null
+    }
 
     private object Keys {
         val NAME = stringPreferencesKey("auth_name")
@@ -245,8 +258,14 @@ class GoogleSignInManager @Inject constructor(
         } catch (e: UserRecoverableAuthException) {
             // Google needs the user to (re)approve Drive access.
             Log.e(TAG, "Drive access needs user approval", e)
-            lastDriveTokenError = "Google needs you to approve Google Drive access again. " +
-                "Sign out, sign in again, then retry. (${e.message})"
+            val consent = e.intent
+            _driveConsentIntent.value = consent
+            // With an intent the consent screen is shown instead of an error.
+            lastDriveTokenError = if (consent == null) {
+                "Google needs you to approve Google Drive access (${e.message})"
+            } else {
+                null
+            }
             _accessToken.value = null
             null
         } catch (e: GoogleAuthException) {

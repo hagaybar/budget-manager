@@ -1,5 +1,6 @@
 package com.budgetmanager.app.ui.screens.settings
 
+import android.app.Activity
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -67,6 +68,17 @@ fun SettingsScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
+
+    // Google's "allow access to Google Drive" screen, shown when Google asks for it.
+    val driveConsentIntent by viewModel.driveConsentIntent.collectAsState()
+    val driveConsentLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        viewModel.onDriveConsentResult(result.resultCode == Activity.RESULT_OK)
+    }
+    LaunchedEffect(driveConsentIntent) {
+        driveConsentIntent?.let { driveConsentLauncher.launch(it) }
+    }
 
     // Collect snackbar events
     LaunchedEffect(Unit) {
