@@ -14,8 +14,8 @@ android {
         applicationId = "com.budgetmanager.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 9
-        versionName = "2.3.3"
+        versionCode = 10
+        versionName = "2.4.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

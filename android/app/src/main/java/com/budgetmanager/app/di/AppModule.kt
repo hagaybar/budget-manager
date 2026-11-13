@@ -3,12 +3,14 @@ package com.budgetmanager.app.di
 import android.content.Context
 import androidx.room.Room
 import com.budgetmanager.app.data.dao.BudgetDao
+import com.budgetmanager.app.data.dao.DeletedTransactionDao
 import com.budgetmanager.app.data.dao.RecurringTransactionDao
 import com.budgetmanager.app.data.dao.TransactionDao
 import com.budgetmanager.app.data.db.BudgetDatabase
 import com.budgetmanager.app.data.db.MIGRATION_1_2
 import com.budgetmanager.app.data.db.MIGRATION_2_3
 import com.budgetmanager.app.data.db.MIGRATION_3_4
+import com.budgetmanager.app.data.db.MIGRATION_4_5
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +30,7 @@ object AppModule {
             BudgetDatabase::class.java,
             "budget_manager.db"
         )
-            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+            .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
             .fallbackToDestructiveMigration()
             .build()
     }
@@ -46,6 +48,11 @@ object AppModule {
     @Provides
     fun provideBudgetDao(database: BudgetDatabase): BudgetDao {
         return database.budgetDao()
+    }
+
+    @Provides
+    fun provideDeletedTransactionDao(database: BudgetDatabase): DeletedTransactionDao {
+        return database.deletedTransactionDao()
     }
 
 }

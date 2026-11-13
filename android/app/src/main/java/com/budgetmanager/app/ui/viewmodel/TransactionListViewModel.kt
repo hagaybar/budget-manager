@@ -3,14 +3,18 @@ package com.budgetmanager.app.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import android.util.Log
+import com.budgetmanager.app.data.repository.RecycleBinRepository
 import com.budgetmanager.app.data.repository.TransactionRepository
 import com.budgetmanager.app.domain.manager.ActiveBudgetManager
 import com.budgetmanager.app.domain.model.Transaction
 import com.budgetmanager.app.domain.usecase.GenerateRecurringTransactionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.update
@@ -20,6 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TransactionListViewModel @Inject constructor(
     private val repository: TransactionRepository,
+    private val recycleBin: RecycleBinRepository,
     private val generateRecurringTransactions: GenerateRecurringTransactionsUseCase,
     private val activeBudgetManager: ActiveBudgetManager
 ) : ViewModel() {
@@ -33,11 +38,17 @@ class TransactionListViewModel @Inject constructor(
         val filterDateFrom: String? = null,
         val filterDateTo: String? = null,
         val availableCategories: List<String> = emptyList(),
+        /** Transaction awaiting "are you sure?" confirmation, if any. */
+        val pendingDelete: Transaction? = null,
         val error: String? = null
     )
 
     private val _uiState = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> = _uiState.asStateFlow()
+
+    /** Emits the id of each transaction moved to the recycle bin (drives the Undo snackbar). */
+    private val _movedToBin = MutableSharedFlow<Long>(extraBufferCapacity = 1)
+    val movedToBin: SharedFlow<Long> = _movedToBin.asSharedFlow()
 
     private var transactionJob: Job? = null
     private var categoriesJob: Job? = null
@@ -135,10 +146,35 @@ class TransactionListViewModel @Inject constructor(
         loadTransactions()
     }
 
-    fun deleteTransaction(id: Long) {
+    /** Asks the user to confirm before deleting [transaction]. */
+    fun requestDelete(transaction: Transaction) {
+        _uiState.update { it.copy(pendingDelete = transaction) }
+    }
+
+    fun cancelDelete() {
+        _uiState.update { it.copy(pendingDelete = null) }
+    }
+
+    /** Confirmed: moves the pending transaction to the recycle bin. */
+    fun confirmDelete() {
+        val transaction = _uiState.value.pendingDelete ?: return
+        _uiState.update { it.copy(pendingDelete = null) }
         viewModelScope.launch {
             try {
-                repository.delete(id)
+                if (recycleBin.moveToBin(transaction.id)) {
+                    _movedToBin.emit(transaction.id)
+                }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(error = e.message) }
+            }
+        }
+    }
+
+    /** Undo from the snackbar: restores the transaction from the recycle bin. */
+    fun undoDelete(id: Long) {
+        viewModelScope.launch {
+            try {
+                recycleBin.restore(id)
             } catch (e: Exception) {
                 _uiState.update { it.copy(error = e.message) }
             }

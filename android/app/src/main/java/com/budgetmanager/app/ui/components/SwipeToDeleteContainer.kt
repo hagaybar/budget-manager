@@ -16,7 +16,7 @@ import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -29,27 +29,34 @@ import com.budgetmanager.app.ui.theme.Spacing
 /**
  * Swipe-to-delete wrapper with smooth animation and semantic coloring.
  *
+ * A completed swipe does not delete anything by itself: the row springs back
+ * and [onDeleteRequest] is invoked so the caller can ask for confirmation.
+ *
  * Uses [FinanceColors.swipeDelete] from [LocalFinanceColors] so the
  * background adapts correctly to light / dark / dynamic themes.
  *
- * @param onDelete  invoked when the user completes a right-to-left swipe
- * @param modifier  outer modifier
- * @param content   the composable content that can be swiped away
+ * @param onDeleteRequest  invoked when the user completes a right-to-left swipe
+ * @param modifier         outer modifier
+ * @param content          the composable content that can be swiped
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SwipeToDeleteContainer(
-    onDelete: () -> Unit,
+    onDeleteRequest: () -> Unit,
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
-    val dismissState = rememberSwipeToDismissBoxState()
-
-    LaunchedEffect(dismissState.currentValue) {
-        if (dismissState.currentValue == SwipeToDismissBoxValue.EndToStart) {
-            onDelete()
+    val currentOnDeleteRequest by rememberUpdatedState(onDeleteRequest)
+    val dismissState = rememberSwipeToDismissBoxState(
+        confirmValueChange = { value ->
+            if (value == SwipeToDismissBoxValue.EndToStart) {
+                currentOnDeleteRequest()
+                false // stay settled; the caller decides after confirmation
+            } else {
+                true
+            }
         }
-    }
+    )
 
     SwipeToDismissBox(
         state = dismissState,

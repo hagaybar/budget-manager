@@ -327,6 +327,55 @@
             color: #fff;
         }
 
+        .restore-btn {
+            padding: 0.35rem 0.65rem;
+            background: #f0fff4;
+            color: #276749;
+            border: 1.5px solid #9ae6b4;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            flex-shrink: 0;
+        }
+
+        .restore-btn:hover {
+            background: #276749;
+            color: #fff;
+        }
+
+        .bin-row {
+            opacity: 0.85;
+        }
+
+        .bin-row .tx-date {
+            text-align: right;
+            line-height: 1.3;
+        }
+
+        .bin-actions {
+            display: flex;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        .bin-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.8rem;
+            color: #718096;
+        }
+
+        .bin-count {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #a0aec0;
+        }
+
         .empty-state {
             text-align: center;
             padding: 2rem 1rem;
@@ -1371,6 +1420,20 @@
             </div>
         </div>
 
+        <!-- RECYCLE BIN -->
+        <div class="card" data-testid="recycle-bin-section">
+            <div class="card-title">Recycle Bin <span class="bin-count" id="binCount" data-testid="bin-count"></span> <span class="collapse-toggle" data-testid="collapse-toggle">&#9660;</span></div>
+            <div data-testid="card-body-recycle-bin" class="card-body">
+            <div class="bin-toolbar">
+                <span>Deleted transactions are kept here for 30 days.</span>
+                <button class="delete-btn" data-testid="empty-bin-btn" id="emptyBinBtn" onclick="handleEmptyBin()" style="display:none;">Empty bin</button>
+            </div>
+            <div data-testid="recycle-bin-list" id="recycleBinList">
+                <div class="empty-state">The recycle bin is empty.</div>
+            </div>
+            </div>
+        </div>
+
         <!-- MONTHLY SUMMARY -->
         <div class="card" data-testid="summary-section" id="summarySection">
             <div class="card-title" id="summaryTitle">Monthly Summary <span class="collapse-toggle" data-testid="collapse-toggle">&#9660;</span></div>
@@ -1585,9 +1648,13 @@
         let appData = {
             transactions: [],
             recurring_transactions: [],
+            deleted_transactions: [],
             budgets: [],
             last_modified: null
         };
+
+        // Deleted transactions stay in the recycle bin this long before being purged.
+        const RECYCLE_BIN_DAYS = 30;
 
         const now = new Date();
         let currentYear = now.getFullYear();
@@ -1603,6 +1670,9 @@
         const descriptionInput = document.getElementById('description-input');
         const dateInput = document.getElementById('date-input');
         const transactionList = document.getElementById('transactionList');
+        const recycleBinList = document.getElementById('recycleBinList');
+        const binCount = document.getElementById('binCount');
+        const emptyBinBtn = document.getElementById('emptyBinBtn');
         const totalIncomeEl = document.getElementById('totalIncome');
         const totalExpensesEl = document.getElementById('totalExpenses');
         const netBalanceEl = document.getElementById('netBalance');
@@ -1848,10 +1918,26 @@
             var normalized = {
                 transactions: Array.isArray(data.transactions) ? data.transactions : [],
                 recurring_transactions: Array.isArray(data.recurring_transactions) ? data.recurring_transactions : [],
+                deleted_transactions: Array.isArray(data.deleted_transactions) ? data.deleted_transactions : [],
                 budgets: Array.isArray(data.budgets) ? data.budgets : [],
                 last_modified: data.last_modified || null
             };
+            normalized.deleted_transactions = purgeExpiredFromBin(normalized.deleted_transactions);
             return normalized;
+        }
+
+        /** Drops recycle-bin entries older than RECYCLE_BIN_DAYS. */
+        function purgeExpiredFromBin(binItems) {
+            var cutoff = Date.now() - RECYCLE_BIN_DAYS * 24 * 60 * 60 * 1000;
+            return binItems.filter(function(t) {
+                var deletedAt = Date.parse(t.deleted_at || '');
+                return isNaN(deletedAt) || deletedAt >= cutoff;
+            });
+        }
+
+        /** Next free transaction id, never reusing an id that is in the recycle bin. */
+        function nextTransactionId() {
+            return nextId(appData.transactions.concat(appData.deleted_transactions));
         }
 
         function nextId(collection) {
@@ -1917,6 +2003,7 @@
         function deleteBudgetById(id) {
             appData.budgets = appData.budgets.filter(function(b) { return b.id !== id; });
             appData.transactions = appData.transactions.filter(function(t) { return t.budget_id !== id; });
+            appData.deleted_transactions = appData.deleted_transactions.filter(function(t) { return t.budget_id !== id; });
             appData.recurring_transactions = appData.recurring_transactions.filter(function(r) { return r.budget_id !== id; });
         }
 
@@ -1973,6 +2060,11 @@
                     r.budget_id = defaultId;
                 }
             });
+            appData.deleted_transactions.forEach(function(t) {
+                if (!t.budget_id || t.budget_id === 0) {
+                    t.budget_id = defaultId;
+                }
+            });
         }
 
         /* =============================================================
@@ -2007,7 +2099,7 @@
            ============================================================= */
         async function addTransactionToData(txData) {
             var tx = {
-                id: nextId(appData.transactions),
+                id: nextTransactionId(),
                 type: txData.type,
                 amount: txData.amount,
                 category: txData.category,
@@ -2022,8 +2114,41 @@
             return tx;
         }
 
+        /** Moves a transaction to the recycle bin (it can be restored later). */
         async function deleteTransactionFromData(id) {
+            var tx = appData.transactions.find(function(t) { return t.id === id; });
+            if (!tx) return;
             appData.transactions = appData.transactions.filter(function(t) { return t.id !== id; });
+            var binned = Object.assign({}, tx, { deleted_at: new Date().toISOString() });
+            appData.deleted_transactions = appData.deleted_transactions.filter(function(t) { return t.id !== id; });
+            appData.deleted_transactions.push(binned);
+            await saveData();
+        }
+
+        /** Moves a transaction from the recycle bin back into the transaction list. */
+        async function restoreTransactionFromBin(id) {
+            var binned = appData.deleted_transactions.find(function(t) { return t.id === id; });
+            if (!binned) return null;
+            appData.deleted_transactions = appData.deleted_transactions.filter(function(t) { return t.id !== id; });
+            var tx = Object.assign({}, binned);
+            delete tx.deleted_at;
+            if (appData.transactions.some(function(t) { return t.id === tx.id; })) {
+                tx.id = nextTransactionId();
+            }
+            if (tx.recurring_id != null &&
+                !appData.recurring_transactions.some(function(r) { return r.id === tx.recurring_id; })) {
+                tx.recurring_id = null;
+            }
+            appData.transactions.push(tx);
+            await saveData();
+            return tx;
+        }
+
+        /** Permanently removes the given recycle-bin entries. */
+        async function purgeFromBin(ids) {
+            appData.deleted_transactions = appData.deleted_transactions.filter(function(t) {
+                return ids.indexOf(t.id) === -1;
+            });
             await saveData();
         }
 
@@ -2164,6 +2289,56 @@
                     '</div>' +
                     '<span class="tx-date">' + tx.date + '</span>' +
                     '<button class="delete-btn" data-testid="delete-btn" onclick="handleDeleteTransaction(' + tx.id + ')">Delete</button>' +
+                '</div>';
+            }).join('');
+        }
+
+        /* =============================================================
+           RENDER RECYCLE BIN
+           ============================================================= */
+        function getBinItemsForActiveBudget() {
+            var activeBudget = getActiveBudget();
+            var activeBudgetId = activeBudget ? activeBudget.id : null;
+            return appData.deleted_transactions.filter(function(t) {
+                return activeBudgetId === null || t.budget_id === activeBudgetId;
+            }).sort(function(a, b) {
+                return (b.deleted_at || '').localeCompare(a.deleted_at || '');
+            });
+        }
+
+        function formatDeletedAt(iso) {
+            var d = new Date(iso);
+            if (isNaN(d.getTime())) return '';
+            return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+        }
+
+        function renderRecycleBin() {
+            var items = getBinItemsForActiveBudget();
+            var sym = getActiveCurrencySymbol();
+
+            binCount.textContent = items.length ? '(' + items.length + ')' : '';
+            emptyBinBtn.style.display = items.length ? '' : 'none';
+
+            if (items.length === 0) {
+                recycleBinList.innerHTML = '<div class="empty-state">The recycle bin is empty.</div>';
+                return;
+            }
+
+            recycleBinList.innerHTML = items.map(function(tx) {
+                var deletedOn = formatDeletedAt(tx.deleted_at);
+                return '<div class="transaction-row bin-row" data-testid="bin-row" data-id="' + tx.id + '">' +
+                    '<span class="type-badge ' + tx.type + '">' + tx.type + '</span>' +
+                    '<span class="tx-amount ' + tx.type + '">' + sym + formatAmount(tx.amount) + '</span>' +
+                    '<div class="tx-details">' +
+                        '<div class="tx-category">' + escapeHtml(tx.category) + '</div>' +
+                        '<div class="tx-description">' + escapeHtml(tx.description || '') + '</div>' +
+                    '</div>' +
+                    '<span class="tx-date">' + tx.date +
+                        (deletedOn ? '<br>deleted ' + deletedOn : '') + '</span>' +
+                    '<div class="bin-actions">' +
+                        '<button class="restore-btn" data-testid="restore-btn" onclick="handleRestoreTransaction(' + tx.id + ')">Restore</button>' +
+                        '<button class="delete-btn" data-testid="purge-btn" onclick="handlePurgeTransaction(' + tx.id + ')">Delete forever</button>' +
+                    '</div>' +
                 '</div>';
             }).join('');
         }
@@ -2459,6 +2634,7 @@
         function refreshAll() {
             renderBudgetSelector();
             renderTransactions();
+            renderRecycleBin();
             renderSummary();
             renderRecurring();
         }
@@ -2500,15 +2676,66 @@
 
             var sym = getActiveCurrencySymbol();
             var label = tx.category + (tx.description ? ' — ' + tx.description : '');
-            var msg = 'Delete this transaction?\n\n' +
+            var msg = 'Are you sure you want to delete this transaction?\n\n' +
                       tx.type.toUpperCase() + ' ' + sym + formatAmount(tx.amount) + '\n' +
                       label + '\n' +
-                      tx.date;
+                      tx.date + '\n\n' +
+                      'It will be moved to the Recycle Bin, where you can restore it for ' +
+                      RECYCLE_BIN_DAYS + ' days.';
             if (!confirm(msg)) return;
 
             try {
                 await deleteTransactionFromData(id);
-                showToast('Transaction deleted');
+                showToast('Moved to Recycle Bin');
+                refreshAll();
+            } catch (err) {
+                showToast(err.message, true);
+                console.error(err);
+            }
+        }
+
+        async function handleRestoreTransaction(id) {
+            try {
+                var tx = await restoreTransactionFromBin(id);
+                if (tx) showToast('Transaction restored');
+                refreshAll();
+            } catch (err) {
+                showToast(err.message, true);
+                console.error(err);
+            }
+        }
+
+        async function handlePurgeTransaction(id) {
+            var tx = appData.deleted_transactions.find(function(t) { return t.id === id; });
+            if (!tx) return;
+            var sym = getActiveCurrencySymbol();
+            var msg = 'Permanently delete this transaction?\n\n' +
+                      tx.type.toUpperCase() + ' ' + sym + formatAmount(tx.amount) + '\n' +
+                      tx.category + (tx.description ? ' — ' + tx.description : '') + '\n' +
+                      tx.date + '\n\n' +
+                      'This cannot be undone.';
+            if (!confirm(msg)) return;
+
+            try {
+                await purgeFromBin([id]);
+                showToast('Transaction permanently deleted');
+                refreshAll();
+            } catch (err) {
+                showToast(err.message, true);
+                console.error(err);
+            }
+        }
+
+        async function handleEmptyBin() {
+            var items = getBinItemsForActiveBudget();
+            if (items.length === 0) return;
+            var msg = 'Permanently delete all ' + items.length + ' transaction(s) in the Recycle Bin?\n\n' +
+                      'This cannot be undone.';
+            if (!confirm(msg)) return;
+
+            try {
+                await purgeFromBin(items.map(function(t) { return t.id; }));
+                showToast('Recycle Bin emptied');
                 refreshAll();
             } catch (err) {
                 showToast(err.message, true);
@@ -2596,6 +2823,7 @@
                 created_at: new Date().toISOString(),
                 transactions: appData.transactions,
                 recurring_transactions: appData.recurring_transactions,
+                deleted_transactions: appData.deleted_transactions,
                 budgets: appData.budgets
             };
             var blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });

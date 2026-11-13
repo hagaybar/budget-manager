@@ -30,6 +30,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.AccountBalanceWallet
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
@@ -41,7 +42,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.pulltorefresh.PullToRefreshContainer
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
@@ -94,6 +97,27 @@ fun TransactionListScreen(
             transactions = uiState.transactions,
             onDismiss = { showShareDialog = false },
         )
+    }
+
+    uiState.pendingDelete?.let { pending ->
+        ConfirmDeleteDialog(
+            transaction = pending,
+            onConfirm = { viewModel.confirmDelete() },
+            onDismiss = { viewModel.cancelDelete() },
+        )
+    }
+
+    LaunchedEffect(Unit) {
+        viewModel.movedToBin.collect { id ->
+            val result = snackbarHostState.showSnackbar(
+                message = "Moved to Recycle Bin",
+                actionLabel = "Undo",
+                withDismissAction = true,
+            )
+            if (result == SnackbarResult.ActionPerformed) {
+                viewModel.undoDelete(id)
+            }
+        }
     }
 
     LaunchedEffect(uiState.error) {
@@ -246,7 +270,7 @@ fun TransactionListScreen(
                                     ),
                                 ) {
                                     SwipeToDeleteContainer(
-                                        onDelete = { viewModel.deleteTransaction(transaction.id) }
+                                        onDeleteRequest = { viewModel.requestDelete(transaction) }
                                     ) {
                                         TransactionRow(
                                             transaction = transaction,
@@ -274,6 +298,52 @@ fun TransactionListScreen(
             }
         }
     }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// "Are you sure?" dialog shown after a swipe-to-delete
+// ═══════════════════════════════════════════════════════════════════════════════
+
+@Composable
+private fun ConfirmDeleteDialog(
+    transaction: Transaction,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+) {
+    val sign = if (transaction.type == TransactionType.INCOME) "+" else "-"
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Delete this transaction?") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(Spacing.xs)) {
+                Text(
+                    text = "$sign\u20AA${String.format("%.2f", transaction.amount)} · ${transaction.category}",
+                    style = MaterialTheme.typography.titleSmall,
+                )
+                if (transaction.description.isNotBlank()) {
+                    Text(transaction.description, style = MaterialTheme.typography.bodyMedium)
+                }
+                Text(
+                    text = transaction.date,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                Spacer(modifier = Modifier.height(Spacing.sm))
+                Text(
+                    text = "It will be moved to the Recycle Bin, where you can restore it for 30 days.",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+        },
+        confirmButton = {
+            TextButton(onClick = onConfirm) {
+                Text("Delete", color = MaterialTheme.colorScheme.error)
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text("Cancel") }
+        },
+    )
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════

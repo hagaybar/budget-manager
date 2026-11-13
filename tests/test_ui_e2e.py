@@ -146,10 +146,112 @@ class TestTransactionList:
         _add_transaction(page, "expense", 30, "Coffee", "Latte", "2026-03-01")
         rows = page.locator('[data-testid="transaction-row"]')
         expect(rows).to_have_count(1)
+        page.once("dialog", lambda d: d.accept())
         page.click('[data-testid="delete-btn"]')
         page.wait_for_timeout(1000)
         rows = page.locator('[data-testid="transaction-row"]')
         expect(rows).to_have_count(0)
+
+
+class TestRecycleBin:
+    """Deleting asks for confirmation and moves the transaction to a recycle bin."""
+
+    def _delete_first(self, page, accept=True):
+        messages = []
+
+        def _handle(dialog):
+            messages.append(dialog.message)
+            dialog.accept() if accept else dialog.dismiss()
+
+        page.once("dialog", _handle)
+        page.click('[data-testid="delete-btn"]')
+        page.wait_for_timeout(300)
+        return messages
+
+    def test_cancel_confirmation_keeps_transaction(self, page):
+        page.goto(BASE_URL)
+        _add_transaction(page, "expense", 30, "Coffee", "Latte", "2026-03-01")
+        messages = self._delete_first(page, accept=False)
+        assert "Are you sure" in messages[0]
+        expect(page.locator('[data-testid="transaction-row"]')).to_have_count(1)
+        expect(page.locator('[data-testid="bin-row"]')).to_have_count(0)
+
+    def test_deleted_transaction_goes_to_bin_and_restores(self, page):
+        page.goto(BASE_URL)
+        _add_transaction(page, "expense", 30, "Coffee", "Latte", "2026-03-01")
+        self._delete_first(page)
+        expect(page.locator('[data-testid="transaction-row"]')).to_have_count(0)
+        bin_rows = page.locator('[data-testid="bin-row"]')
+        expect(bin_rows).to_have_count(1)
+        expect(bin_rows.first).to_contain_text("Coffee")
+        expect(page.locator('[data-testid="bin-count"]')).to_have_text("(1)")
+
+        page.click('[data-testid="restore-btn"]')
+        page.wait_for_timeout(300)
+        expect(page.locator('[data-testid="bin-row"]')).to_have_count(0)
+        rows = page.locator('[data-testid="transaction-row"]')
+        expect(rows).to_have_count(1)
+        expect(rows.first).to_contain_text("Coffee")
+
+    def test_bin_survives_reload(self, page):
+        page.goto(BASE_URL)
+        _add_transaction(page, "expense", 30, "Coffee", "Latte", "2026-03-01")
+        self._delete_first(page)
+        page.reload()
+        expect(page.locator('[data-testid="bin-row"]')).to_have_count(1)
+
+    def test_delete_forever_and_empty_bin(self, page):
+        page.goto(BASE_URL)
+        _add_transaction(page, "expense", 30, "Coffee", "Latte", "2026-03-01")
+        _add_transaction(page, "expense", 12, "Bakery", "Bread", "2026-03-02")
+        _add_transaction(page, "expense", 99, "Books", "Novel", "2026-03-03")
+        self._delete_first(page)
+        self._delete_first(page)
+        self._delete_first(page)
+        expect(page.locator('[data-testid="bin-row"]')).to_have_count(3)
+
+        page.once("dialog", lambda d: d.accept())
+        page.locator('[data-testid="purge-btn"]').first.click()
+        page.wait_for_timeout(300)
+        expect(page.locator('[data-testid="bin-row"]')).to_have_count(2)
+
+        page.once("dialog", lambda d: d.accept())
+        page.click('[data-testid="empty-bin-btn"]')
+        page.wait_for_timeout(300)
+        expect(page.locator('[data-testid="bin-row"]')).to_have_count(0)
+        expect(page.locator('[data-testid="transaction-row"]')).to_have_count(0)
+
+    def test_new_transaction_does_not_reuse_binned_id(self, page):
+        page.goto(BASE_URL)
+        _add_transaction(page, "expense", 30, "Coffee", "Latte", "2026-03-01")
+        self._delete_first(page)
+        _add_transaction(page, "expense", 12, "Bakery", "Bread", "2026-03-02")
+        page.click('[data-testid="restore-btn"]')
+        page.wait_for_timeout(300)
+        ids = page.locator('[data-testid="transaction-row"]').evaluate_all(
+            "rows => rows.map(r => r.dataset.id)"
+        )
+        assert len(ids) == 2 and len(set(ids)) == 2
+
+    def test_old_bin_entries_are_purged(self, page):
+        page.goto(BASE_URL)
+        page.evaluate("""() => {
+            const old = new Date(Date.now() - 31 * 864e5).toISOString();
+            const recent = new Date().toISOString();
+            localStorage.setItem('budget_data', JSON.stringify({
+                transactions: [], recurring_transactions: [], budgets: [],
+                deleted_transactions: [
+                    {id: 1, type: 'expense', amount: 5, category: 'Old', description: '',
+                     date: '2026-01-01', budget_id: 0, deleted_at: old},
+                    {id: 2, type: 'expense', amount: 6, category: 'Recent', description: '',
+                     date: '2026-01-02', budget_id: 0, deleted_at: recent}
+                ]
+            }));
+        }""")
+        page.reload()
+        bin_rows = page.locator('[data-testid="bin-row"]')
+        expect(bin_rows).to_have_count(1)
+        expect(bin_rows.first).to_contain_text("Recent")
 
 
 class TestMonthlySummary:

@@ -225,3 +225,31 @@ val MIGRATION_3_4 = object : Migration(3, 4) {
         """)
     }
 }
+
+/**
+ * MIGRATION_4_5: Adds the `deleted_transactions` table backing the recycle bin.
+ * Purely additive; existing data is untouched.
+ */
+val MIGRATION_4_5 = object : Migration(4, 5) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS `deleted_transactions` (
+                `id` INTEGER NOT NULL,
+                `type` TEXT NOT NULL,
+                `amount` REAL NOT NULL,
+                `category` TEXT NOT NULL,
+                `description` TEXT NOT NULL DEFAULT '',
+                `date` TEXT NOT NULL,
+                `created_at` TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                `recurring_id` INTEGER,
+                `budget_id` INTEGER NOT NULL DEFAULT 0,
+                `deleted_at` TEXT NOT NULL,
+                PRIMARY KEY(`id`),
+                FOREIGN KEY(`budget_id`) REFERENCES `budgets`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+            )
+        """)
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_deleted_transactions_budget_id` ON `deleted_transactions` (`budget_id`)")
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_deleted_transactions_recurring_id_date` ON `deleted_transactions` (`recurring_id`, `date`)")
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_deleted_transactions_deleted_at` ON `deleted_transactions` (`deleted_at`)")
+    }
+}
