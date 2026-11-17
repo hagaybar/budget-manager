@@ -1,0 +1,7 @@
+[INFO] 2026-11-17T11:37:49.568Z handleHookRunStop started
+[INFO] 2026-11-17T11:37:49.588Z Hook input received
+[INFO] 2026-11-17T11:37:49.591Z [session=84a81918-29ea-4809-83de-5304a8fa1707] Session ID: 84a81918-29ea-4809-83de-5304a8fa1707
+[INFO] 2026-11-17T11:37:49.591Z [session=84a81918-29ea-4809-83de-5304a8fa1707] Resolved pluginRoot: /home/ubuntu/.claude/plugins/cache/a5c-ai/babysitter/4.0.157
+[INFO] 2026-11-17T11:37:49.591Z [session=84a81918-29ea-4809-83de-5304a8fa1707] Resolved stateDir: /home/ubuntu/.a5c/state
+[INFO] 2026-11-17T11:37:49.592Z [session=84a81918-29ea-4809-83de-5304a8fa1707] Checking session file at: /home/ubuntu/.a5c/state/84a81918-29ea-4809-83de-5304a8fa1707.md
+[INFO] 2026-11-17T11:37:49.593Z [session=84a81918-29ea-4809-83de-5304a8fa1707] No active loop found for session 84a81918-29ea-4809-83de-5304a8fa1707 — allowing exit
