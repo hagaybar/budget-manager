@@ -4,14 +4,17 @@ import android.content.Context
 import android.net.Uri
 import androidx.room.withTransaction
 import com.budgetmanager.app.data.dao.BudgetDao
+import com.budgetmanager.app.data.dao.DeletedTransactionDao
 import com.budgetmanager.app.data.dao.RecurringTransactionDao
 import com.budgetmanager.app.data.dao.TransactionDao
 import com.budgetmanager.app.data.db.BudgetDatabase
 import com.budgetmanager.app.data.entity.BudgetEntity
+import com.budgetmanager.app.data.entity.DeletedTransactionEntity
 import com.budgetmanager.app.data.entity.RecurringTransactionEntity
 import com.budgetmanager.app.data.entity.TransactionEntity
 import com.budgetmanager.app.domain.model.BackupBudget
 import com.budgetmanager.app.domain.model.BackupData
+import com.budgetmanager.app.domain.model.BackupDeletedTransaction
 import com.budgetmanager.app.domain.model.BackupRecurringTransaction
 import com.budgetmanager.app.domain.model.BackupTransaction
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -27,7 +30,8 @@ class BackupRepositoryImpl @Inject constructor(
     private val database: BudgetDatabase,
     private val transactionDao: TransactionDao,
     private val recurringDao: RecurringTransactionDao,
-    private val budgetDao: BudgetDao
+    private val budgetDao: BudgetDao,
+    private val deletedTransactionDao: DeletedTransactionDao
 ) : BackupRepository {
 
     private val json = Json { prettyPrint = true; ignoreUnknownKeys = true }
@@ -36,18 +40,21 @@ class BackupRepositoryImpl @Inject constructor(
         val transactions = transactionDao.getAll()
         val recurring = recurringDao.getAll()
         val budgets = budgetDao.getAll()
+        val deleted = deletedTransactionDao.getAll()
 
         return BackupData(
             createdAt = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
             transactions = transactions.map { it.toBackup() },
             recurringTransactions = recurring.map { it.toBackup() },
-            budgets = budgets.map { it.toBackup() }
+            budgets = budgets.map { it.toBackup() },
+            deletedTransactions = deleted.map { it.toBackup() }
         )
     }
 
     override suspend fun importFromJson(data: BackupData) {
         database.withTransaction {
             transactionDao.deleteAll()
+            deletedTransactionDao.deleteAll()
             recurringDao.deleteAll()
             budgetDao.deleteAll()
 
@@ -58,6 +65,16 @@ class BackupRepositoryImpl @Inject constructor(
 
             recurringDao.insertAll(data.recurringTransactions.map { it.toEntity() })
             transactionDao.insertAll(data.transactions.map { it.toEntity() })
+
+            // Recycle bin: skip entries whose budget is missing (would violate the FK)
+            // and any whose id is now a live transaction.
+            val budgetIds = budgetDao.getAll().map { it.id }.toSet()
+            val liveIds = data.transactions.map { it.id }.toSet()
+            deletedTransactionDao.insertAll(
+                data.deletedTransactions
+                    .filter { it.budgetId in budgetIds && it.id !in liveIds }
+                    .map { it.toEntity() }
+            )
         }
     }
 
@@ -119,6 +136,19 @@ class BackupRepositoryImpl @Inject constructor(
         id = id, type = type, amount = amount, category = category,
         description = description, date = date, createdAt = createdAt,
         recurringId = recurringId, budgetId = budgetId
+    )
+
+    private fun DeletedTransactionEntity.toBackup() = BackupDeletedTransaction(
+        id = id, type = type, amount = amount, category = category,
+        description = description, date = date, createdAt = createdAt,
+        recurringId = recurringId, budgetId = budgetId, deletedAt = deletedAt
+    )
+
+    private fun BackupDeletedTransaction.toEntity() = DeletedTransactionEntity(
+        id = id, type = type, amount = amount, category = category,
+        description = description, date = date, createdAt = createdAt,
+        recurringId = recurringId, budgetId = budgetId,
+        deletedAt = deletedAt.ifBlank { java.time.Instant.now().toString() }
     )
 
     private fun RecurringTransactionEntity.toBackup() = BackupRecurringTransaction(

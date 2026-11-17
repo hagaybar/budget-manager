@@ -10,7 +10,28 @@ data class BackupData(
     val transactions: List<BackupTransaction>,
     @SerialName("recurring_transactions")
     val recurringTransactions: List<BackupRecurringTransaction>,
-    val budgets: List<BackupBudget> = emptyList()
+    val budgets: List<BackupBudget> = emptyList(),
+    @SerialName("deleted_transactions")
+    val deletedTransactions: List<BackupDeletedTransaction> = emptyList()
+)
+
+/** A recycle-bin entry; same fields as [BackupTransaction] plus [deletedAt]. */
+@Serializable
+data class BackupDeletedTransaction(
+    val id: Long,
+    val type: String,
+    val amount: Double,
+    val category: String,
+    val description: String = "",
+    val date: String,
+    @SerialName("created_at")
+    val createdAt: String = "",
+    @SerialName("recurring_id")
+    val recurringId: Long? = null,
+    @SerialName("budget_id")
+    val budgetId: Long = 0,
+    @SerialName("deleted_at")
+    val deletedAt: String = ""
 )
 
 @Serializable

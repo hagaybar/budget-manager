@@ -44,6 +44,28 @@ class SettingsViewModel @Inject constructor(
     private val driveSyncManager: GoogleDriveSyncManager
 ) : ViewModel() {
 
+    /** Google's Drive consent screen to show, when Google asks for (re)approval. */
+    val driveConsentIntent = googleSignInManager.driveConsentIntent
+
+    /** The Drive action to retry once the user approves access. */
+    private var pendingDriveAction: (() -> Unit)? = null
+
+    /** Called with the result of the consent screen launched from [driveConsentIntent]. */
+    fun onDriveConsentResult(approved: Boolean) {
+        googleSignInManager.onDriveConsentHandled()
+        val retry = pendingDriveAction
+        pendingDriveAction = null
+        if (approved) {
+            retry?.invoke()
+        } else {
+            viewModelScope.launch {
+                _snackbarEvents.emit(SnackbarEvent.Error(
+                    "Google Drive access was not approved, so sync can't run."
+                ))
+            }
+        }
+    }
+
     data class UiState(
         val isExporting: Boolean = false,
         val isImporting: Boolean = false,
@@ -138,8 +160,14 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             val token = googleSignInManager.getDriveAccessToken()
             if (token == null) {
+                if (googleSignInManager.driveConsentIntent.value != null) {
+                    // The screen shows Google's consent page; retry after approval.
+                    pendingDriveAction = { syncWithDrive() }
+                    return@launch
+                }
                 _snackbarEvents.emit(SnackbarEvent.Error(
-                    context.getString(R.string.sync_error_sign_in)
+                    googleSignInManager.lastDriveTokenError
+                        ?: context.getString(R.string.sync_error_sign_in)
                 ))
                 return@launch
             }
@@ -193,8 +221,14 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             val token = googleSignInManager.getDriveAccessToken()
             if (token == null) {
+                if (googleSignInManager.driveConsentIntent.value != null) {
+                    // The screen shows Google's consent page; retry after approval.
+                    pendingDriveAction = { uploadToDrive() }
+                    return@launch
+                }
                 _snackbarEvents.emit(SnackbarEvent.Error(
-                    context.getString(R.string.sync_error_sign_in)
+                    googleSignInManager.lastDriveTokenError
+                        ?: context.getString(R.string.sync_error_sign_in)
                 ))
                 return@launch
             }

@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.BarChart
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Receipt
 import androidx.compose.material.icons.filled.Repeat
 import androidx.compose.material.icons.filled.Settings
@@ -17,6 +18,7 @@ sealed class Screen(val route: String, val label: String, val icon: ImageVector)
     data object AddEditTransaction : Screen("transactions/add_edit?id={id}", "Add/Edit", Icons.Default.Add)
     data object SignIn : Screen("sign_in", "Sign In", Icons.Default.Settings)
     data object BudgetManagement : Screen("budget_management", "Manage Budgets", Icons.Default.AccountBalance)
+    data object RecycleBin : Screen("recycle_bin", "Recycle Bin", Icons.Default.Delete)
 
     companion object {
         val bottomNavItems by lazy { listOf(Transactions, Summary, Recurring, Settings) }

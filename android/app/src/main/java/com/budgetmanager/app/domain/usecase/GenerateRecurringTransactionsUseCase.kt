@@ -1,5 +1,6 @@
 package com.budgetmanager.app.domain.usecase
 
+import com.budgetmanager.app.data.dao.DeletedTransactionDao
 import com.budgetmanager.app.data.dao.RecurringTransactionDao
 import com.budgetmanager.app.data.dao.TransactionDao
 import com.budgetmanager.app.data.entity.RecurringTransactionEntity
@@ -32,7 +33,8 @@ import javax.inject.Singleton
 @Singleton
 class GenerateRecurringTransactionsUseCase @Inject constructor(
     private val recurringTransactionDao: RecurringTransactionDao,
-    private val transactionDao: TransactionDao
+    private val transactionDao: TransactionDao,
+    private val deletedTransactionDao: DeletedTransactionDao
 ) {
 
     companion object {
@@ -95,6 +97,11 @@ class GenerateRecurringTransactionsUseCase @Inject constructor(
             val dateStr = occurrence.format(DATE_FORMATTER)
             val alreadyExists = transactionDao.countByRecurringAndDate(recurring.id, dateStr) > 0
             if (alreadyExists) continue
+
+            // The user deleted this occurrence (it is in the recycle bin):
+            // don't bring it back behind their back.
+            val inRecycleBin = deletedTransactionDao.countByRecurringAndDate(recurring.id, dateStr) > 0
+            if (inRecycleBin) continue
 
             // Before inserting, look for an orphan (recurring_id IS NULL) that
             // matches this recurring's value pattern on this date. Such rows

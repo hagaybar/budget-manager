@@ -4,6 +4,8 @@ import com.budgetmanager.app.data.repository.BackupRepository
 import com.budgetmanager.app.data.repository.BackupRepositoryImpl
 import com.budgetmanager.app.data.repository.BudgetRepository
 import com.budgetmanager.app.data.repository.BudgetRepositoryImpl
+import com.budgetmanager.app.data.repository.RecycleBinRepository
+import com.budgetmanager.app.data.repository.RecycleBinRepositoryImpl
 import com.budgetmanager.app.data.repository.RecurringRepository
 import com.budgetmanager.app.data.repository.RecurringRepositoryImpl
 import com.budgetmanager.app.data.repository.TransactionRepository
@@ -41,4 +43,10 @@ abstract class RepositoryModule {
     abstract fun bindBudgetRepository(
         impl: BudgetRepositoryImpl
     ): BudgetRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindRecycleBinRepository(
+        impl: RecycleBinRepositoryImpl
+    ): RecycleBinRepository
 }

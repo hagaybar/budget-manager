@@ -6,7 +6,11 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.DeleteOutline
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -28,6 +32,7 @@ import com.budgetmanager.app.auth.AuthState
 import com.budgetmanager.app.ui.components.BudgetSelectorDropdown
 import com.budgetmanager.app.ui.screens.budget.BudgetManagementScreen
 import com.budgetmanager.app.ui.screens.migration.MigrationScreen
+import com.budgetmanager.app.ui.screens.recyclebin.RecycleBinScreen
 import com.budgetmanager.app.ui.screens.transactions.TransactionListScreen
 import com.budgetmanager.app.ui.screens.transactions.AddEditTransactionScreen
 import com.budgetmanager.app.ui.screens.summary.MonthlySummaryScreen
@@ -76,7 +81,8 @@ fun BudgetNavHost() {
     // Hide bottom nav bar on sign-in, add/edit, and budget management screens
     val showBottomBar = currentRoute != Screen.SignIn.route &&
         currentRoute != "transactions/add_edit?id={id}" &&
-        currentRoute != Screen.BudgetManagement.route
+        currentRoute != Screen.BudgetManagement.route &&
+        currentRoute != Screen.RecycleBin.route
 
     // Show migration screen as an overlay if needed
     val showMigration = migrationUiState.needsMigration && !migrationDismissed
@@ -97,6 +103,18 @@ fun BudgetNavHost() {
                                     navController.navigate(Screen.BudgetManagement.route)
                                 }
                             )
+                        },
+                        actions = {
+                            if (currentRoute == Screen.Transactions.route) {
+                                IconButton(onClick = {
+                                    navController.navigate(Screen.RecycleBin.route)
+                                }) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.DeleteOutline,
+                                        contentDescription = "Recycle Bin"
+                                    )
+                                }
+                            }
                         }
                     )
                 }
@@ -167,6 +185,12 @@ fun BudgetNavHost() {
 
                 composable(Screen.BudgetManagement.route) {
                     BudgetManagementScreen(
+                        onNavigateBack = { navController.popBackStack() }
+                    )
+                }
+
+                composable(Screen.RecycleBin.route) {
+                    RecycleBinScreen(
                         onNavigateBack = { navController.popBackStack() }
                     )
                 }

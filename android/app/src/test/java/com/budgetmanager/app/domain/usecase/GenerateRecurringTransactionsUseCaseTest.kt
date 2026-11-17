@@ -1,5 +1,6 @@
 package com.budgetmanager.app.domain.usecase
 
+import com.budgetmanager.app.data.dao.DeletedTransactionDao
 import com.budgetmanager.app.data.dao.RecurringTransactionDao
 import com.budgetmanager.app.data.dao.TransactionDao
 import com.budgetmanager.app.data.entity.RecurringTransactionEntity
@@ -26,6 +27,7 @@ class GenerateRecurringTransactionsUseCaseTest {
 
     private lateinit var recurringDao: RecurringTransactionDao
     private lateinit var transactionDao: TransactionDao
+    private lateinit var deletedDao: DeletedTransactionDao
     private lateinit var useCase: GenerateRecurringTransactionsUseCase
     private val insertedTransactions = mutableListOf<TransactionEntity>()
 
@@ -33,12 +35,14 @@ class GenerateRecurringTransactionsUseCaseTest {
     fun setUp() {
         recurringDao = mockk(relaxed = true)
         transactionDao = mockk(relaxed = true)
-        useCase = GenerateRecurringTransactionsUseCase(recurringDao, transactionDao)
+        deletedDao = mockk(relaxed = true)
+        useCase = GenerateRecurringTransactionsUseCase(recurringDao, transactionDao, deletedDao)
         insertedTransactions.clear()
 
         // Default: no pre-existing transactions; record every insert the use case
         // performs so tests can assert on the exact rows that would be written.
         coEvery { transactionDao.countByRecurringAndDate(any(), any()) } returns 0
+        coEvery { deletedDao.countByRecurringAndDate(any(), any()) } returns 0
         coEvery {
             transactionDao.findOrphanIdByValueOnDate(any(), any(), any(), any(), any())
         } returns null
@@ -47,6 +51,25 @@ class GenerateRecurringTransactionsUseCaseTest {
             insertedTransactions.add(tx)
             (insertedTransactions.size).toLong()
         }
+    }
+
+    // ── Recycle bin ──────────────────────────────────────────────────────
+
+    @Test
+    fun `does not regenerate an occurrence the user moved to the recycle bin`() = runTest {
+        val today = LocalDate.of(2026, 4, 11)
+        val recurring = weeklyFriday(startDate = "2026-04-01")
+        coEvery { recurringDao.getActive() } returns listOf(recurring)
+        coEvery { deletedDao.countByRecurringAndDate(recurring.id, "2026-04-10") } returns 1
+
+        val created = useCase.execute(today)
+
+        val insertedDates = capturedInsertDates()
+        assertTrue("binned Friday must not be re-created, got: $insertedDates",
+            !insertedDates.contains("2026-04-10"))
+        assertTrue("other Fridays are still generated, got: $insertedDates",
+            insertedDates.contains("2026-04-03"))
+        assertEquals(1, created)
     }
 
     // ── Core backfill behaviour ──────────────────────────────────────────
