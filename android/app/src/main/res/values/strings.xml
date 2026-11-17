@@ -55,6 +55,14 @@
     <string name="settings_sync_now">Sync Now</string>
     <string name="settings_upload">Upload</string>
     <string name="sync_success">Synced with Google Drive</string>
+    <string name="sync_up_to_date">Already up to date with Google Drive</string>
+    <string name="sync_uploaded">Phone changes sent to Google Drive</string>
+    <string name="sync_downloaded">Updated from Google Drive. Your previous phone data was saved: Settings → Restore data from before last sync</string>
+    <string name="sync_conflict_title">Changed on both phone and web</string>
+    <string name="sync_conflict_message">Your data changed on this phone and on the web app since the last sync. Sync can\'t combine them yet, so pick which one to keep. The other side\'s changes will be replaced.\n\nIf you keep the web version, a copy of this phone\'s data is saved first and can be restored from Settings.</string>
+    <string name="sync_conflict_keep_phone">Keep phone</string>
+    <string name="sync_conflict_keep_web">Keep web</string>
+    <string name="settings_restore_safety_copy">Restore data from before last sync</string>
     <string name="sync_error_sign_in">Sign in with Google to sync</string>
     <string name="sync_error_generic">Sync failed: %1$s</string>
     <string name="upload_success">Uploaded to Google Drive</string>

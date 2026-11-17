@@ -5,8 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class BackupData(
+    /** Export time. Absent in files the web app writes to Drive (it uses last_modified). */
     @SerialName("created_at")
-    val createdAt: String,
+    val createdAt: String = "",
     val transactions: List<BackupTransaction>,
     @SerialName("recurring_transactions")
     val recurringTransactions: List<BackupRecurringTransaction>,

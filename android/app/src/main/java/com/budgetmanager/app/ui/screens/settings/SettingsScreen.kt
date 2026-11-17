@@ -156,6 +156,31 @@ fun SettingsScreen(
         )
     }
 
+    // Sync conflict: both phone and Drive changed since the last sync
+    if (uiState.showSyncConflict) {
+        AlertDialog(
+            onDismissRequest = { viewModel.dismissSyncConflict() },
+            shape = RoundedCornerShape(CornerRadius.large),
+            title = { Text(stringResource(R.string.sync_conflict_title)) },
+            text = { Text(stringResource(R.string.sync_conflict_message)) },
+            confirmButton = {
+                TextButton(onClick = { viewModel.resolveSyncConflict(keepPhone = true) }) {
+                    Text(stringResource(R.string.sync_conflict_keep_phone))
+                }
+            },
+            dismissButton = {
+                Row {
+                    TextButton(onClick = { viewModel.dismissSyncConflict() }) {
+                        Text(stringResource(R.string.import_dialog_cancel))
+                    }
+                    TextButton(onClick = { viewModel.resolveSyncConflict(keepPhone = false) }) {
+                        Text(stringResource(R.string.sync_conflict_keep_web))
+                    }
+                }
+            }
+        )
+    }
+
     Scaffold(
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { padding ->
@@ -555,6 +580,23 @@ fun SettingsScreen(
                             Spacer(modifier = Modifier.width(Spacing.sm))
                             Text(
                                 text = stringResource(R.string.settings_import_data),
+                                style = MaterialTheme.typography.labelLarge
+                            )
+                        }
+                    }
+
+                    // Restore the copy saved before the last sync replaced phone data
+                    if (uiState.hasSafetyCopy) {
+                        OutlinedButton(
+                            onClick = { viewModel.requestRestoreSafetyCopy() },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(48.dp),
+                            enabled = !uiState.isImporting && !uiState.isExporting,
+                            shape = RoundedCornerShape(CornerRadius.medium)
+                        ) {
+                            Text(
+                                text = stringResource(R.string.settings_restore_safety_copy),
                                 style = MaterialTheme.typography.labelLarge
                             )
                         }
